@@ -7,9 +7,13 @@
 *.mode2v3
 *.perspectivev3
 *.xcuserstate
+*.hmap
+*.ipa
+*.xccheckout
 project.xcworkspace/
 xcuserdata/
- 
+build/
+
 # Generated files
 *.o
 *.pyc
