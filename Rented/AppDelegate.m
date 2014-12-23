@@ -7,7 +7,17 @@
 //
 
 #import "AppDelegate.h"
-#import <Parse/Parse.h>
+
+#pragma mark - FB and Parse dependecies
+
+#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <FacebookSDK.h>
+#import "AuthenticationViewController.h"
+
+
+#pragma mark - Other Dependecies
+
+#import "HomeViewController.h"
 
 @interface AppDelegate ()
 
@@ -18,7 +28,29 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [self setupParse];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[HomeViewController new]];
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
+}
+
+- (void)setupParse
+{
+#pragma warning - Check the warning with enableLocalDatastore and initializeFacebook
+    [Parse enableLocalDatastore];
+    [PFFacebookUtils initializeFacebook];
+    [Parse setApplicationId:ParseApplicationID
+                  clientKey:ParseCliendKey];
+}
+
+- (void)setGeneralStyle
+{
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -35,12 +67,23 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
+#pragma mark - Facebook Authentication Delegates
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [FBAppCall handleOpenURL:url
+                  sourceApplication:sourceApplication
+                        withSession:[PFFacebookUtils session]];
+}
+
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[PFFacebookUtils session] close];
 }
 
 @end

@@ -259,6 +259,10 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 See https://www.parse.com/about/terms
 
+## ParseFacebookUtils
+
+See https://www.parse.com/about/terms
+
 ## Reachability
 
 Copyright (c) 2011, Tony Million.
