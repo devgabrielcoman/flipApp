@@ -12,12 +12,12 @@
 
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <FacebookSDK.h>
-#import "AuthenticationViewController.h"
-
 
 #pragma mark - Other Dependecies
-
+#import "RentedPanelController.h"
 #import "HomeViewController.h"
+#import "AuthenticationViewController.h"
+#import "DashboardViewController.h"
 
 @interface AppDelegate ()
 
@@ -32,7 +32,19 @@
     [self setupParse];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[HomeViewController new]];
+    
+    _rootViewController = [RentedPanelController new];
+    _rootViewController.allowRightSwipe = NO;
+    _rootViewController.bounceOnCenterPanelChange = NO;
+    _rootViewController.bounceOnSidePanelClose = NO;
+    _rootViewController.bounceOnSidePanelOpen = NO;
+    _rootViewController.shouldDelegateAutorotateToVisiblePanel = NO;
+    _rootViewController.leftFixedWidth = 260.0f;
+    _rootViewController.leftPanel = [DashboardViewController new];
+    _rootViewController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:[HomeViewController new]];
+    _rootViewController.rightPanel = nil;
+    
+    self.window.rootViewController = _rootViewController;
     
     [self.window makeKeyAndVisible];
     
@@ -43,9 +55,9 @@
 {
 #pragma warning - Check the warning with enableLocalDatastore and initializeFacebook
     [Parse enableLocalDatastore];
-    [PFFacebookUtils initializeFacebook];
     [Parse setApplicationId:ParseApplicationID
                   clientKey:ParseCliendKey];
+    [PFFacebookUtils initializeFacebook];
 }
 
 - (void)setGeneralStyle

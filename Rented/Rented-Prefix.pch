@@ -15,5 +15,6 @@
 #import <Parse/Parse.h>
 #import "DependencyContainer.h"
 #import "logger.h"
+#import "RentedNavigationController.h"
 
 #endif

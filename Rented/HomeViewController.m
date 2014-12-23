@@ -24,14 +24,14 @@
 {
     if(![DEP.api.userApi userIsAuthenticated])
     {
-        UIViewController *vc = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-        [vc presentViewController:[AuthenticationViewController new] animated:NO completion:nil];
+        UIViewController *rootViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+        [rootViewController presentViewController:[AuthenticationViewController new] animated:NO completion:nil];
     }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    //[self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
 - (void)didReceiveMemoryWarning {
