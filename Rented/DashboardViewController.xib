@@ -7,6 +7,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DashboardViewController">
             <connections>
+                <outlet property="likesBtn" destination="GV1-C5-20o" id="XF3-3M-RI3"/>
+                <outlet property="locationLbl" destination="Hau-uL-PRG" id="uXm-cn-gqo"/>
+                <outlet property="myPlaceBtn" destination="5XU-4b-rGK" id="atj-U7-hOs"/>
+                <outlet property="otherPlacesBtn" destination="nAT-3n-Pqg" id="yj4-a7-PtO"/>
+                <outlet property="preferencesBtn" destination="rD0-Yl-Dk8" id="wm1-Cf-CQ3"/>
+                <outlet property="profileImgView" destination="kyS-2F-gWU" id="fBf-Sm-yhb"/>
+                <outlet property="saySomethingBtn" destination="8eC-Fu-3p6" id="YlI-jn-Gfx"/>
+                <outlet property="usernameLbl" destination="Ld8-gQ-pY3" id="oOb-kW-LxR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,15 +23,111 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Morena" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XzW-IS-dq8">
-                    <rect key="frame" x="33" y="243" width="73" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P12-rz-z7t" userLabel="Container">
+                    <rect key="frame" x="0.0" y="0.0" width="260" height="568"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default-profile" translatesAutoresizingMaskIntoConstraints="NO" id="kyS-2F-gWU" userLabel="Profile Image View">
+                            <rect key="frame" x="90" y="42" width="80" height="80"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alexandra Jones" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ld8-gQ-pY3" userLabel="Username">
+                            <rect key="frame" x="8" y="130" width="244" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hau-uL-PRG">
+                            <rect key="frame" x="8" y="159" width="244" height="20"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="Location" image="map-marker-small-icon">
+                                <color key="titleColor" red="0.14901960780000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rD0-Yl-Dk8">
+                            <rect key="frame" x="8" y="510" width="122" height="50"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <inset key="titleEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="-20"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="-20" maxX="-65" maxY="0.0"/>
+                            <state key="normal" title="Preferences" image="gear-icon">
+                                <color key="titleColor" red="0.14901960780000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="showPreferences:" destination="-1" eventType="touchUpInside" id="SPO-qJ-Ui6"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8eC-Fu-3p6">
+                            <rect key="frame" x="130" y="510" width="122" height="50"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <inset key="titleEdgeInsets" minX="-20" minY="20" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="-20" maxX="-80" maxY="0.0"/>
+                            <state key="normal" title="Say Something" image="envelope-icon">
+                                <color key="titleColor" red="0.14901960780000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="sendEmail:" destination="-1" eventType="touchUpInside" id="RcR-zD-sqD"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5XU-4b-rGK">
+                            <rect key="frame" x="13" y="239" width="234" height="60"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <inset key="titleEdgeInsets" minX="15" minY="3" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="MY PLACE" image="map-marker-icon">
+                                <color key="titleColor" red="0.14901960784313725" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="openMyPlace:" destination="-1" eventType="touchUpInside" id="Mun-XE-nds"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nAT-3n-Pqg">
+                            <rect key="frame" x="13" y="307" width="234" height="60"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <inset key="titleEdgeInsets" minX="15" minY="3" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="OTHER PLACES" image="compass-icon">
+                                <color key="titleColor" red="0.14901960780000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="openOtherPlaces:" destination="-1" eventType="touchUpInside" id="h53-2h-Ibo"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GV1-C5-20o">
+                            <rect key="frame" x="13" y="375" width="234" height="60"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <inset key="titleEdgeInsets" minX="15" minY="3" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="LIKES" image="heart-icon">
+                                <color key="titleColor" red="0.14901960780000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="openMyLikes:" destination="-1" eventType="touchUpInside" id="QRy-oh-CoT"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pCJ-2D-WaR" userLabel="Separator">
+                            <rect key="frame" x="13" y="302" width="234" height="2"/>
+                            <color key="backgroundColor" red="0.75294117647058822" green="0.75686274509803919" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uor-Nv-ado" userLabel="Separator">
+                            <rect key="frame" x="13" y="370" width="234" height="2"/>
+                            <color key="backgroundColor" red="0.75294117650000003" green="0.75686274509999996" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="compass-icon" width="20" height="20"/>
+        <image name="default-profile" width="100" height="100"/>
+        <image name="envelope-icon" width="20" height="20"/>
+        <image name="gear-icon" width="20" height="20"/>
+        <image name="heart-icon" width="20" height="20"/>
+        <image name="map-marker-icon" width="20" height="20"/>
+        <image name="map-marker-small-icon" width="8" height="8"/>
+    </resources>
 </document>

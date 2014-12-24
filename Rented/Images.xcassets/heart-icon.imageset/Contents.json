@@ -3,11 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "Flip logo.png"
+      "filename" : "heart-icon.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "heart-icon@2X.png"
     },
     {
       "idiom" : "universal",

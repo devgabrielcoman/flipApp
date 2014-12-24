@@ -22,18 +22,12 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginBackground" translatesAutoresizingMaskIntoConstraints="NO" id="kov-EX-liX" userLabel="Background Image View">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flip logo" translatesAutoresizingMaskIntoConstraints="NO" id="hZQ-Xw-w8f" userLabel="Logo">
-                    <rect key="frame" x="118" y="38" width="85" height="50"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Lp-8i-cy7">
+                    <rect key="frame" x="20" y="495" width="280" height="34"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="85" id="ULO-Uc-JSz"/>
-                        <constraint firstAttribute="height" constant="50" id="inL-fQ-Sv1"/>
+                        <constraint firstAttribute="height" constant="34" id="5Cx-gr-Me8"/>
                     </constraints>
-                </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Lp-8i-cy7">
-                    <rect key="frame" x="20" y="498" width="280" height="34"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="34" id="Z9F-De-E8Z"/>
-                    </constraints>
+                    <inset key="imageEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="LOGIN VIA FACEBOOK">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -45,27 +39,34 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find a new place to live through the people who live there now." lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTj-vu-Fyv" userLabel="Message Lbl">
                     <rect key="frame" x="8" y="174" width="150" height="154"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="150" id="f9W-zz-DM8"/>
-                        <constraint firstAttribute="height" constant="154" id="uMy-Io-HKo"/>
+                        <constraint firstAttribute="height" constant="154" id="cLR-Ja-cbV"/>
+                        <constraint firstAttribute="width" constant="150" id="eHR-Os-lAi"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flip logo" translatesAutoresizingMaskIntoConstraints="NO" id="hZQ-Xw-w8f" userLabel="Logo">
+                    <rect key="frame" x="118" y="39" width="85" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="85" id="3fd-bn-p7G"/>
+                        <constraint firstAttribute="height" constant="50" id="Spi-Ma-7px"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="kov-EX-liX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6bZ-Pb-r5t"/>
-                <constraint firstItem="kov-EX-liX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="UiI-l3-a8n"/>
-                <constraint firstItem="8Lp-8i-cy7" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="cNz-5v-OjQ"/>
-                <constraint firstAttribute="bottom" secondItem="8Lp-8i-cy7" secondAttribute="bottom" constant="36" id="cVq-S8-LWJ"/>
-                <constraint firstItem="tTj-vu-Fyv" firstAttribute="top" secondItem="hZQ-Xw-w8f" secondAttribute="bottom" constant="86" id="eBw-Np-KYR"/>
-                <constraint firstItem="8Lp-8i-cy7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="eJA-Cu-J5H"/>
-                <constraint firstItem="8Lp-8i-cy7" firstAttribute="centerX" secondItem="hZQ-Xw-w8f" secondAttribute="centerX" id="kfy-8i-Rfw"/>
-                <constraint firstAttribute="bottom" secondItem="kov-EX-liX" secondAttribute="bottom" id="qfN-t6-H0e"/>
-                <constraint firstItem="8Lp-8i-cy7" firstAttribute="centerX" secondItem="kov-EX-liX" secondAttribute="centerX" id="tnN-4D-65h"/>
-                <constraint firstItem="tTj-vu-Fyv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="v5T-EJ-ntW"/>
-                <constraint firstItem="hZQ-Xw-w8f" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="38" id="vRX-RV-UIk"/>
+                <constraint firstItem="hZQ-Xw-w8f" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="39" id="9ie-Fh-R2M"/>
+                <constraint firstItem="kov-EX-liX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="AWC-i8-rEM"/>
+                <constraint firstItem="8Lp-8i-cy7" firstAttribute="centerX" secondItem="kov-EX-liX" secondAttribute="centerX" id="Ai8-c0-qPo"/>
+                <constraint firstItem="tTj-vu-Fyv" firstAttribute="top" secondItem="hZQ-Xw-w8f" secondAttribute="bottom" constant="85" id="GcZ-zu-6d5"/>
+                <constraint firstItem="kov-EX-liX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Xey-9e-2KX"/>
+                <constraint firstAttribute="bottom" secondItem="8Lp-8i-cy7" secondAttribute="bottom" constant="39" id="enI-bS-z8i"/>
+                <constraint firstAttribute="bottom" secondItem="kov-EX-liX" secondAttribute="bottom" id="nFZ-YL-y8Q"/>
+                <constraint firstItem="8Lp-8i-cy7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="upY-fb-zMu"/>
+                <constraint firstItem="tTj-vu-Fyv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="vFV-mg-IAx"/>
+                <constraint firstItem="hZQ-Xw-w8f" firstAttribute="centerX" secondItem="8Lp-8i-cy7" secondAttribute="centerX" id="y5Q-hY-4Zg"/>
+                <constraint firstAttribute="trailing" secondItem="kov-EX-liX" secondAttribute="trailing" id="yze-2R-WB4"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

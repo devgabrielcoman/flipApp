@@ -40,6 +40,7 @@
 		CD39D6481A4A0A6C0006F7B7 /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD39D6461A4A0A6C0006F7B7 /* DashboardViewController.m */; };
 		CD39D6491A4A0A6C0006F7B7 /* DashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD39D6471A4A0A6C0006F7B7 /* DashboardViewController.xib */; };
 		CD39D64C1A4A0C580006F7B7 /* RentedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD39D64B1A4A0C580006F7B7 /* RentedNavigationController.m */; };
+		CD5BBEE21A4A32250058E79B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5BBEE11A4A32250058E79B /* CoreText.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,7 @@
 		CD39D6471A4A0A6C0006F7B7 /* DashboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DashboardViewController.xib; sourceTree = "<group>"; };
 		CD39D64A1A4A0C580006F7B7 /* RentedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RentedNavigationController.h; sourceTree = "<group>"; };
 		CD39D64B1A4A0C580006F7B7 /* RentedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RentedNavigationController.m; sourceTree = "<group>"; };
+		CD5BBEE11A4A32250058E79B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		D88ADE80C6E025ADD79716C1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		E9E5B27B64FD02829D64CDBC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -114,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD5BBEE21A4A32250058E79B /* CoreText.framework in Frameworks */,
 				CD307ABB1A485E3400D4BE2B /* libsqlite3.dylib in Frameworks */,
 				CD307AB91A485E2800D4BE2B /* libz.dylib in Frameworks */,
 				CD307AB71A485E2000D4BE2B /* SystemConfiguration.framework in Frameworks */,
@@ -151,6 +154,7 @@
 		76483CDB66ACFC63E3E7263A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CD5BBEE11A4A32250058E79B /* CoreText.framework */,
 				CD307ABA1A485E3400D4BE2B /* libsqlite3.dylib */,
 				CD307AB81A485E2800D4BE2B /* libz.dylib */,
 				CD307AB61A485E2000D4BE2B /* SystemConfiguration.framework */,
