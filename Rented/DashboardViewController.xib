@@ -12,7 +12,7 @@
                 <outlet property="myPlaceBtn" destination="5XU-4b-rGK" id="atj-U7-hOs"/>
                 <outlet property="otherPlacesBtn" destination="nAT-3n-Pqg" id="yj4-a7-PtO"/>
                 <outlet property="preferencesBtn" destination="rD0-Yl-Dk8" id="wm1-Cf-CQ3"/>
-                <outlet property="profileImgView" destination="kyS-2F-gWU" id="fBf-Sm-yhb"/>
+                <outlet property="profileImgView" destination="kyS-2F-gWU" id="4FS-W6-r15"/>
                 <outlet property="saySomethingBtn" destination="8eC-Fu-3p6" id="YlI-jn-Gfx"/>
                 <outlet property="usernameLbl" destination="Ld8-gQ-pY3" id="oOb-kW-LxR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -26,7 +26,7 @@
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P12-rz-z7t" userLabel="Container">
                     <rect key="frame" x="0.0" y="0.0" width="260" height="568"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default-profile" translatesAutoresizingMaskIntoConstraints="NO" id="kyS-2F-gWU" userLabel="Profile Image View">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default-profile" translatesAutoresizingMaskIntoConstraints="NO" id="kyS-2F-gWU" userLabel="Profile Image View" customClass="AsyncImageView">
                             <rect key="frame" x="90" y="42" width="80" height="80"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alexandra Jones" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ld8-gQ-pY3" userLabel="Username">
@@ -36,8 +36,9 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hau-uL-PRG">
-                            <rect key="frame" x="8" y="159" width="244" height="20"/>
+                            <rect key="frame" x="8" y="159" width="244" height="25"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
                             <state key="normal" title="Location" image="map-marker-small-icon">
                                 <color key="titleColor" red="0.14901960780000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -128,6 +129,6 @@
         <image name="gear-icon" width="20" height="20"/>
         <image name="heart-icon" width="20" height="20"/>
         <image name="map-marker-icon" width="20" height="20"/>
-        <image name="map-marker-small-icon" width="8" height="8"/>
+        <image name="map-marker-small-icon" width="10" height="10"/>
     </resources>
 </document>

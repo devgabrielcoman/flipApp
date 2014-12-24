@@ -7,10 +7,12 @@
 //
 
 #import "DashboardViewController.h"
+#import <AsyncImageView.h>
+#import "UIImage+ProportionalFill.h"
 
 @interface DashboardViewController ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *profileImgView;
+@property (weak, nonatomic) IBOutlet AsyncImageView *profileImgView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLbl;
 @property (weak, nonatomic) IBOutlet UIButton *myPlaceBtn;
 @property (weak, nonatomic) IBOutlet UIButton *otherPlacesBtn;
@@ -28,6 +30,16 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setVisualDetails];
+    [self setProfileData];
+}
+
+- (void)setProfileData
+{
+    _usernameLbl.text = DEP.authenticatedUser.username;
+    [_locationLbl setTitle:DEP.authenticatedUser[@"location"] forState:UIControlStateNormal];
+    
+    _profileImgView.showActivityIndicator = YES;
+    _profileImgView.imageURL = [NSURL URLWithString:DEP.authenticatedUser[@"profilePictureUrl"]];
 }
 
 - (void)setVisualDetails
@@ -46,8 +58,22 @@
     _usernameLbl.font = [UIFont fontWithName:@"GothamRounded-Bold" size:13.0];
     _locationLbl.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Light" size:10.0];
     
+    [_profileImgView removeFromSuperview];
+    
     _profileImgView.layer.cornerRadius = _profileImgView.frame.size.width/2;
-    _profileImgView.clipsToBounds = YES;
+    _profileImgView.layer.masksToBounds = YES;
+    
+    CALayer *shadowContainerLayer = [CALayer layer];
+    shadowContainerLayer.shadowColor = [UIColor blackColor].CGColor;
+    shadowContainerLayer.shadowRadius = 1.5f;
+    shadowContainerLayer.shadowOffset = CGSizeMake(0.f, 1.f);
+    shadowContainerLayer.shadowOpacity = 1.f;
+    
+    [shadowContainerLayer addSublayer:_profileImgView.layer];
+    
+    [self.view.layer addSublayer:shadowContainerLayer];
+    
+    [_locationLbl setImage:[[UIImage imageNamed:@"map-marker-icon"] imageScaledToFitSize:CGSizeMake(12, 12)] forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {
