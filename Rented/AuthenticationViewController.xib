@@ -16,14 +16,14 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginBackground" translatesAutoresizingMaskIntoConstraints="NO" id="kov-EX-liX" userLabel="Background Image View">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Lp-8i-cy7">
-                    <rect key="frame" x="20" y="495" width="280" height="34"/>
+                    <rect key="frame" x="20" y="663" width="374" height="34"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="34" id="5Cx-gr-Me8"/>
                     </constraints>
@@ -47,7 +47,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flip logo" translatesAutoresizingMaskIntoConstraints="NO" id="hZQ-Xw-w8f" userLabel="Logo">
-                    <rect key="frame" x="118" y="39" width="85" height="50"/>
+                    <rect key="frame" x="165" y="39" width="85" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="85" id="3fd-bn-p7G"/>
                         <constraint firstAttribute="height" constant="50" id="Spi-Ma-7px"/>
@@ -68,7 +68,7 @@
                 <constraint firstItem="hZQ-Xw-w8f" firstAttribute="centerX" secondItem="8Lp-8i-cy7" secondAttribute="centerX" id="y5Q-hY-4Zg"/>
                 <constraint firstAttribute="trailing" secondItem="kov-EX-liX" secondAttribute="trailing" id="yze-2R-WB4"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
         </view>
     </objects>
     <resources>

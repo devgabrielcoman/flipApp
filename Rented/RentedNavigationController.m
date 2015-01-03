@@ -22,7 +22,7 @@
     [self.navigationBar setShadowImage:[UIImage new]];
     [self.navigationBar setTranslucent:YES];
     
-    UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, 320, 20)];
+    UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, wScr, 20)];
     statusBarView.backgroundColor = StatusBarBackgroundColor;
     [self.navigationBar addSubview:statusBarView];
 }
