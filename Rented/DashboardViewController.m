@@ -7,8 +7,13 @@
 //
 
 #import "DashboardViewController.h"
+#import "UIViewController+JASidePanels.h"
+#import <JASidePanelController.h>
 #import <AsyncImageView.h>
 #import "UIImage+ProportionalFill.h"
+#import "NoListingViewController.h"
+#import "MyPlaceViewController.h"
+#import "RentedNavigationController.h"
 
 @interface DashboardViewController ()
 
@@ -83,7 +88,11 @@
 
 #pragma mark - Action Handlers
 
-- (IBAction)openMyPlace:(id)sender {
+- (IBAction)openMyPlace:(id)sender
+{
+    //self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:[NoListingViewController new]];
+    
+    self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:[MyPlaceViewController new]];
 }
 
 - (IBAction)openOtherPlaces:(id)sender {
