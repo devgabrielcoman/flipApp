@@ -32,11 +32,11 @@
             if (user.isNew)
             {
                 [self loadRequiredUserData:^(BOOL success) {
-                    completionHandler(@YES);
+                    completionHandler(YES);
                 }];
             }
             
-            completionHandler(@YES);
+            completionHandler(YES);
         }
     }];
 }

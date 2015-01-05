@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import <AsyncImageView.h>
 
 @interface ApartmentTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *apartmentImgView;
+@property (weak, nonatomic) IBOutlet AsyncImageView *apartmentImgView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) IBOutlet UIImageView *ownerImgView;
 @property (weak, nonatomic) IBOutlet UILabel *ownerNameLbl;
+@property (weak, nonatomic) IBOutlet AsyncImageView *ownerImgView;
+@property (weak, nonatomic) IBOutlet UILabel *daysUntilRenewal;
+
+- (void)setApartmentDetails:(PFObject *)apartment andImages:(NSArray *)images;
 
 @end

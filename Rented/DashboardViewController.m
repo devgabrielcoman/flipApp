@@ -7,6 +7,7 @@
 //
 
 #import "DashboardViewController.h"
+#import <UIAlertView+Blocks.h>
 #import "UIViewController+JASidePanels.h"
 #import <JASidePanelController.h>
 #import <AsyncImageView.h>
@@ -90,9 +91,26 @@
 
 - (IBAction)openMyPlace:(id)sender
 {
-    //self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:[NoListingViewController new]];
-    
-    self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:[MyPlaceViewController new]];
+    [DEP.api.apartmentApi userApartment:^(PFObject *apartment, NSArray *images, BOOL succeeded) {
+        if(succeeded)
+        {
+            if(apartment)
+            {
+                MyPlaceViewController *myPlace = [MyPlaceViewController new];
+                myPlace.apartment = apartment;
+                myPlace.apartmentImages = images;
+                self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:myPlace];
+            }
+            else
+                self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:[NoListingViewController new]];
+        }
+        else
+            [UIAlertView showWithTitle:@""
+                               message:@"An error occurred. Please try again"
+                     cancelButtonTitle:@"Dismiss"
+                     otherButtonTitles:nil
+                              tapBlock:nil];
+    }];
 }
 
 - (IBAction)openOtherPlaces:(id)sender {

@@ -10,4 +10,7 @@
 
 @interface MyPlaceViewController : UITableViewController
 
+@property PFObject *apartment;
+@property NSArray *apartmentImages;
+
 @end

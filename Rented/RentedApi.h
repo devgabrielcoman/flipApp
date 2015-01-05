@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "IRentedUser.h"
+#import "IRentedApartment.h"
 
 @interface RentedApi : NSObject
 
 @property id<IRentedUser> userApi;
+@property id<IRentedApartment> apartmentApi;
 
 @end

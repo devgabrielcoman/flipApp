@@ -8,6 +8,7 @@
 
 #import "RentedApi.h"
 #import "UserApi.h"
+#import "ApartmentApi.h"
 
 @implementation RentedApi
 
@@ -17,6 +18,7 @@
     if (self)
     {
         _userApi = [UserApi new];
+        _apartmentApi = [ApartmentApi new];
     }
     return self;
 }

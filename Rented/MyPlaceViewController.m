@@ -18,8 +18,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    //self.automaticallyAdjustsScrollViewInsets = NO;
     [self.tableView registerNib:[UINib nibWithNibName:@"ApartmentTableViewCell" bundle:nil] forCellReuseIdentifier:@"ApartmentCell"];
+    
+    self.tableView.contentInset = UIEdgeInsetsMake(-44, 0, 0, 0);
 }
 
 #pragma mark - Table view data source
@@ -34,7 +36,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 716.0f;
+    return hScr-statusBarHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -42,6 +44,8 @@
     
     if(!cell)
         cell = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentTableViewCell" owner:self options:nil] firstObject];
+    
+    [cell setApartmentDetails:_apartment andImages:_apartmentImages];
     
     return cell;
 }
