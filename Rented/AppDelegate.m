@@ -31,6 +31,8 @@
     
     [self setupParse];
     
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     _rootViewController = [RentedPanelController new];

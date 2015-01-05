@@ -10,6 +10,8 @@
 #import <MapKit/MapKit.h>
 #import <AsyncImageView.h>
 
+@protocol ApartmentCellProtocol;
+
 @interface ApartmentTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet AsyncImageView *apartmentImgView;
@@ -17,6 +19,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *ownerNameLbl;
 @property (weak, nonatomic) IBOutlet AsyncImageView *ownerImgView;
 @property (weak, nonatomic) IBOutlet UILabel *daysUntilRenewal;
+
+@property BOOL enableSwipeGestures;
+@property id<ApartmentCellProtocol> delegate;
+@property NSInteger apartmentIndex;
 
 - (void)setApartmentDetails:(PFObject *)apartment andImages:(NSArray *)images;
 

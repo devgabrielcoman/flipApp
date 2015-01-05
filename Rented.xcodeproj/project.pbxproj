@@ -43,6 +43,7 @@
 		CD39D6481A4A0A6C0006F7B7 /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD39D6461A4A0A6C0006F7B7 /* DashboardViewController.m */; };
 		CD39D6491A4A0A6C0006F7B7 /* DashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD39D6471A4A0A6C0006F7B7 /* DashboardViewController.xib */; };
 		CD39D64C1A4A0C580006F7B7 /* RentedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD39D64B1A4A0C580006F7B7 /* RentedNavigationController.m */; };
+		CD48D2461A5B1E7800C85AA6 /* GalleryNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD48D2451A5B1E7800C85AA6 /* GalleryNavigationController.m */; };
 		CD5713101A585651003B4C2E /* NoListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD57130E1A585651003B4C2E /* NoListingViewController.m */; };
 		CD5713111A585651003B4C2E /* NoListingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD57130F1A585651003B4C2E /* NoListingViewController.xib */; };
 		CD5713141A585DAE003B4C2E /* UIViewController+JASidePanels.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5713131A585DAE003B4C2E /* UIViewController+JASidePanels.m */; };
@@ -125,6 +126,9 @@
 		CD39D6471A4A0A6C0006F7B7 /* DashboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DashboardViewController.xib; sourceTree = "<group>"; };
 		CD39D64A1A4A0C580006F7B7 /* RentedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RentedNavigationController.h; sourceTree = "<group>"; };
 		CD39D64B1A4A0C580006F7B7 /* RentedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RentedNavigationController.m; sourceTree = "<group>"; };
+		CD48D23F1A5B0A3F00C85AA6 /* ApartmentCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApartmentCellProtocol.h; sourceTree = "<group>"; };
+		CD48D2441A5B1E7800C85AA6 /* GalleryNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryNavigationController.h; sourceTree = "<group>"; };
+		CD48D2451A5B1E7800C85AA6 /* GalleryNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryNavigationController.m; sourceTree = "<group>"; };
 		CD57130D1A585651003B4C2E /* NoListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoListingViewController.h; sourceTree = "<group>"; };
 		CD57130E1A585651003B4C2E /* NoListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoListingViewController.m; sourceTree = "<group>"; };
 		CD57130F1A585651003B4C2E /* NoListingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoListingViewController.xib; sourceTree = "<group>"; };
@@ -288,6 +292,7 @@
 		CD307A961A48552F00D4BE2B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				CD57131D1A597635003B4C2E /* Custom */,
 				CD57130B1A585603003B4C2E /* My place */,
 				CD39D6411A4A0A040006F7B7 /* Dashboard Screen */,
 				CD307AC21A48660300D4BE2B /* Home Screen */,
@@ -371,6 +376,8 @@
 				CD39D64B1A4A0C580006F7B7 /* RentedNavigationController.m */,
 				CD5713121A585DAE003B4C2E /* UIViewController+JASidePanels.h */,
 				CD5713131A585DAE003B4C2E /* UIViewController+JASidePanels.m */,
+				CD48D2441A5B1E7800C85AA6 /* GalleryNavigationController.h */,
+				CD48D2451A5B1E7800C85AA6 /* GalleryNavigationController.m */,
 			);
 			name = "Global Elements";
 			sourceTree = "<group>";
@@ -388,7 +395,6 @@
 		CD57130B1A585603003B4C2E /* My place */ = {
 			isa = PBXGroup;
 			children = (
-				CD57131D1A597635003B4C2E /* Custom */,
 				CD5713171A597526003B4C2E /* Display Listing */,
 				CD57130C1A585618003B4C2E /* No Listing */,
 			);
@@ -418,6 +424,7 @@
 		CD57131D1A597635003B4C2E /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				CD48D23F1A5B0A3F00C85AA6 /* ApartmentCellProtocol.h */,
 				CD57131E1A597651003B4C2E /* ApartmentTableViewCell.h */,
 				CD57131F1A597651003B4C2E /* ApartmentTableViewCell.m */,
 				CD5713201A597651003B4C2E /* ApartmentTableViewCell.xib */,
@@ -572,6 +579,7 @@
 				CD5713101A585651003B4C2E /* NoListingViewController.m in Sources */,
 				CD1BAFAD1A48466F0012CBAA /* AppDelegate.m in Sources */,
 				CD5713211A597651003B4C2E /* ApartmentTableViewCell.m in Sources */,
+				CD48D2461A5B1E7800C85AA6 /* GalleryNavigationController.m in Sources */,
 				CD1BAFAA1A48466F0012CBAA /* main.m in Sources */,
 				12BAD2031A5A959F00ABE909 /* LocationUtils.m in Sources */,
 				CD39D6401A4A09220006F7B7 /* RentedPanelController.m in Sources */,

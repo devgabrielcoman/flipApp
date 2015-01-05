@@ -8,8 +8,12 @@
 
 #import "MyPlaceViewController.h"
 #import "ApartmentTableViewCell.h"
+#import <MWPhotoBrowser.h>
+#import "GalleryNavigationController.h"
 
-@interface MyPlaceViewController ()
+@interface MyPlaceViewController ()<MWPhotoBrowserDelegate>
+
+@property NSMutableArray *apartmentGalleryPhotos;
 
 @end
 
@@ -46,6 +50,8 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentTableViewCell" owner:self options:nil] firstObject];
     
     [cell setApartmentDetails:_apartment andImages:_apartmentImages];
+    cell.apartmentIndex = indexPath.row;
+    cell.delegate = self;
     
     return cell;
 }
@@ -53,7 +59,64 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    RTLog(@"Did select row at indexpath");
+}
+
+#pragma mark - Apartment cell protocol methods
+
+- (void)displayGalleryForApartmentAtIndex:(NSInteger)index
+{
+    [self createGalleryPhotosArray];
     
+    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    
+    browser.displayActionButton = NO;
+    browser.displayNavArrows = NO;
+    browser.displaySelectionButtons = NO;
+    browser.zoomPhotosToFill = YES;
+    browser.alwaysShowControls = NO;
+    browser.enableGrid = NO;
+    browser.startOnGrid = NO;
+    //browser.extendedLayoutIncludesOpaqueBars = YES;
+    
+    [browser setCurrentPhotoIndex:0];
+    
+    GalleryNavigationController *galleryNavController = [[GalleryNavigationController alloc] initWithRootViewController:browser];
+
+    [self.navigationController presentViewController:galleryNavController animated:YES completion:nil];
+    //[self.navigationController pushViewController:browser animated:YES];
+}
+
+- (void)createGalleryPhotosArray
+{
+    if(!_apartmentGalleryPhotos)
+        _apartmentGalleryPhotos = [NSMutableArray new];
+    
+    [_apartmentGalleryPhotos removeAllObjects];
+    
+    for (PFObject *imageObject in _apartmentImages)
+    {
+        PFFile *imageFile = imageObject[@"image"];
+        [_apartmentGalleryPhotos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:imageFile.url]]];
+    }
+}
+
+#pragma mark - MWPhotoBrowser delegate
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return _apartmentGalleryPhotos.count;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < _apartmentGalleryPhotos.count)
+        return [_apartmentGalleryPhotos objectAtIndex:index];
+    
+    return nil;
+}
+
+- (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

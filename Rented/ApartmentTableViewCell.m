@@ -10,6 +10,7 @@
 #import "UIImage+ProportionalFill.h"
 #import "LocationUtils.h"
 #import "MapUtils.h"
+#import "ApartmentCellProtocol.h"
 
 @implementation ApartmentTableViewCell
 
@@ -48,6 +49,11 @@
         PFFile *imageFile = firstImage[@"image"];
         _apartmentImgView.showActivityIndicator = YES;
         _apartmentImgView.imageURL = [NSURL URLWithString:imageFile.url];
+        
+        UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shouldOpenFullGallery)];
+        tapped.numberOfTapsRequired = 1;
+        [_apartmentImgView addGestureRecognizer:tapped];
+        _apartmentImgView.userInteractionEnabled = YES;
     }
     
     //map location
@@ -57,6 +63,14 @@
     [MapUtils zoomToFitMarkersOnMap:_mapView];
     
     _daysUntilRenewal.text = [NSString stringWithFormat:@"%li days\n until\n renewal", (long)[apartment[@"renewaldays"] integerValue]];
+}
+
+
+#pragma mark - Gesture handlers
+
+- (void)shouldOpenFullGallery
+{
+    [_delegate displayGalleryForApartmentAtIndex:_apartmentIndex];
 }
 
 @end

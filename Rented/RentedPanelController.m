@@ -32,4 +32,9 @@
     container.clipsToBounds = NO;
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 @end
