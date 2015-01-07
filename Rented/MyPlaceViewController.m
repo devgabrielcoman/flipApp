@@ -8,6 +8,7 @@
 
 #import "MyPlaceViewController.h"
 #import "ApartmentTableViewCell.h"
+#import "DemoApartmentTableViewCell.h"
 #import <MWPhotoBrowser.h>
 #import "GalleryNavigationController.h"
 #import "FullMapViewViewController.h"
@@ -28,7 +29,8 @@
     [super viewDidLoad];
     
     //self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.tableView registerNib:[UINib nibWithNibName:@"ApartmentTableViewCell" bundle:nil] forCellReuseIdentifier:@"ApartmentCell"];
+    //[self.tableView registerNib:[UINib nibWithNibName:@"ApartmentTableViewCell" bundle:nil] forCellReuseIdentifier:@"ApartmentCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"DemoApartmentTableViewCell" bundle:nil] forCellReuseIdentifier:@"ApartmentCell"];
     
     self.tableView.contentInset = UIEdgeInsetsMake(-44, 0, 0, 0);
     
@@ -48,20 +50,34 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if([indexPath isEqual:expandedRow])
-        return hScr-statusBarHeight+ApartmentDetailsViewHeight;
+        return (hScr-statusBarHeight)+ApartmentDetailsViewHeight;
     
     return hScr-statusBarHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ApartmentTableViewCell *cell = (ApartmentTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"ApartmentCell" forIndexPath:indexPath];
+//    ApartmentTableViewCell *cell = (ApartmentTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"ApartmentCell" forIndexPath:indexPath];
+//    
+//    if(!cell)
+//        cell = [[[NSBundle mainBundle] loadNibNamed:@"DemoTableViewCell" owner:self options:nil] firstObject];
+//    
+//    [cell setApartmentDetails:_apartment andImages:_apartmentImages];
+//    cell.apartmentIndex = indexPath.row;
+//    cell.delegate = self;
+    
+    DemoApartmentTableViewCell *cell = (DemoApartmentTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"ApartmentCell" forIndexPath:indexPath];
     
     if(!cell)
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentTableViewCell" owner:self options:nil] firstObject];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"DemoApartmentTableViewCell" owner:self options:nil] firstObject];
     
-    [cell setApartmentDetails:_apartment andImages:_apartmentImages];
-    cell.apartmentIndex = indexPath.row;
-    cell.delegate = self;
+    [cell setApartmentIndex:indexPath.row];
+    [cell setApartment:_apartment andImages:_apartmentImages];
+    [cell setDelegate:self];
+    
+    if(![indexPath isEqual:expandedRow])
+        [cell hideApartmentDetails];
+    else
+        [cell showApartmentDetails];
     
     return cell;
 }
@@ -111,7 +127,7 @@
 {
     if(![[NSIndexPath indexPathForItem:index inSection:0] isEqual:expandedRow])
     {
-        expandedRow = [NSIndexPath indexPathForItem:index+1 inSection:0];
+        expandedRow = [NSIndexPath indexPathForItem:index inSection:0];
         [self.tableView beginUpdates];
         [self.tableView endUpdates];
         [self.tableView reloadRowsAtIndexPaths:@[expandedRow] withRowAnimation:UITableViewRowAnimationAutomatic];
