@@ -62,15 +62,28 @@
     [_mapView addAnnotation:locationPin];
     [MapUtils zoomToFitMarkersOnMap:_mapView];
     
+    UITapGestureRecognizer *tapOnMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOnMap)];
+    tapOnMap.numberOfTapsRequired = 1;
+    [_mapView addGestureRecognizer:tapOnMap];
+    
     _daysUntilRenewal.text = [NSString stringWithFormat:@"%li days\n until\n renewal", (long)[apartment[@"renewaldays"] integerValue]];
 }
-
 
 #pragma mark - Gesture handlers
 
 - (void)shouldOpenFullGallery
 {
     [_delegate displayGalleryForApartmentAtIndex:_apartmentIndex];
+}
+
+- (void)tapOnMap
+{
+    [_delegate displayFullMapViewForApartmentAtIndex:_apartmentIndex];
+}
+
+- (IBAction)showMoreDetails:(id)sender
+{
+    [_delegate displayMoreInfoForApartmentAtIndex:_apartmentIndex];
 }
 
 @end

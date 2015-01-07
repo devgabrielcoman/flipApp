@@ -15,7 +15,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Dai-HD-Cnx">
+                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dai-HD-Cnx">
                         <rect key="frame" x="127" y="504" width="160" height="160"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="160" id="Xpr-Cr-Apm"/>
@@ -68,13 +68,27 @@
                             </mask>
                         </variation>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6hu-FP-0SM">
+                        <rect key="frame" x="127" y="697" width="160" height="28"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="show more">
+                            <color key="titleColor" red="0.14901960780000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="showMoreDetails:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="zpz-N5-s6f"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="6hu-FP-0SM" firstAttribute="top" secondItem="cQa-Md-uXh" secondAttribute="bottom" constant="4" id="2ge-gw-rSR"/>
+                    <constraint firstItem="6hu-FP-0SM" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="3MJ-9j-u8o"/>
                     <constraint firstItem="f6i-45-jWp" firstAttribute="leading" secondItem="Dai-HD-Cnx" secondAttribute="trailing" constant="5" id="6WN-Oe-cHd"/>
                     <constraint firstItem="cQa-Md-uXh" firstAttribute="leading" secondItem="lES-Xj-hQe" secondAttribute="trailing" constant="7" id="7gR-Yr-Gjm"/>
                     <constraint firstItem="7jd-2a-2XC" firstAttribute="top" secondItem="3Q8-j0-ZWc" secondAttribute="bottom" constant="20" id="7m0-QI-hGa"/>
                     <constraint firstItem="3Q8-j0-ZWc" firstAttribute="centerX" secondItem="Dai-HD-Cnx" secondAttribute="centerX" id="CRD-Id-tta"/>
                     <constraint firstItem="7jd-2a-2XC" firstAttribute="top" secondItem="lES-Xj-hQe" secondAttribute="top" id="FF3-Xi-e7y"/>
+                    <constraint firstItem="6hu-FP-0SM" firstAttribute="trailing" secondItem="Dai-HD-Cnx" secondAttribute="trailing" id="Gv4-sy-I6k"/>
                     <constraint firstAttribute="trailing" secondItem="3Q8-j0-ZWc" secondAttribute="trailing" id="Hez-TR-uHu"/>
                     <constraint firstItem="lES-Xj-hQe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Hkh-EO-D43"/>
                     <constraint firstItem="7jd-2a-2XC" firstAttribute="top" secondItem="3Q8-j0-ZWc" secondAttribute="bottom" constant="25" id="IBT-CW-chc"/>
@@ -88,6 +102,7 @@
                     <constraint firstItem="7jd-2a-2XC" firstAttribute="top" secondItem="3Q8-j0-ZWc" secondAttribute="bottom" constant="25" id="PHE-jO-KLL"/>
                     <constraint firstAttribute="trailingMargin" secondItem="7jd-2a-2XC" secondAttribute="trailing" constant="8" id="SvO-h0-Nc1"/>
                     <constraint firstItem="lES-Xj-hQe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="YJc-H9-OKc"/>
+                    <constraint firstItem="6hu-FP-0SM" firstAttribute="leading" secondItem="Dai-HD-Cnx" secondAttribute="leading" id="aNO-6c-yDf"/>
                     <constraint firstItem="f6i-45-jWp" firstAttribute="leading" secondItem="Dai-HD-Cnx" secondAttribute="trailing" constant="5" id="bPf-Cr-xgQ"/>
                     <constraint firstItem="Dai-HD-Cnx" firstAttribute="leading" secondItem="lES-Xj-hQe" secondAttribute="trailing" constant="79" id="beo-ZR-aK8"/>
                     <constraint firstItem="lES-Xj-hQe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="bqj-ML-5zZ"/>
@@ -101,7 +116,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="7jd-2a-2XC" secondAttribute="trailing" constant="3" id="kvF-PD-w5i"/>
                     <constraint firstItem="f6i-45-jWp" firstAttribute="leading" secondItem="Dai-HD-Cnx" secondAttribute="trailing" constant="5" id="mE9-2q-kfQ"/>
                     <constraint firstItem="cQa-Md-uXh" firstAttribute="leading" secondItem="lES-Xj-hQe" secondAttribute="trailing" constant="7" id="mLx-f4-oHt"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="7jd-2a-2XC" secondAttribute="bottom" constant="28" id="mQM-B1-rga"/>
+                    <constraint firstAttribute="bottomMargin" relation="lessThanOrEqual" secondItem="7jd-2a-2XC" secondAttribute="bottom" constant="28" id="mQM-B1-rga"/>
                     <constraint firstItem="3Q8-j0-ZWc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="pB2-yS-frF"/>
                     <constraint firstItem="f6i-45-jWp" firstAttribute="leading" secondItem="Dai-HD-Cnx" secondAttribute="trailing" constant="5" id="r4a-oT-tDd"/>
                     <constraint firstItem="f6i-45-jWp" firstAttribute="top" secondItem="7jd-2a-2XC" secondAttribute="top" id="rYp-4f-czR"/>
@@ -144,11 +159,12 @@
             <connections>
                 <outlet property="apartmentImgView" destination="3Q8-j0-ZWc" id="ilC-zq-U8B"/>
                 <outlet property="daysUntilRenewal" destination="7jd-2a-2XC" id="Fgq-QP-Jx0"/>
+                <outlet property="displayMore" destination="6hu-FP-0SM" id="XZS-Uf-LDr"/>
                 <outlet property="mapView" destination="Dai-HD-Cnx" id="iv3-Pk-UGj"/>
                 <outlet property="ownerImgView" destination="lES-Xj-hQe" id="yHW-Bs-bQa"/>
                 <outlet property="ownerNameLbl" destination="cQa-Md-uXh" id="mOF-tk-CiT"/>
             </connections>
-            <point key="canvasLocation" x="496" y="290"/>
+            <point key="canvasLocation" x="496" y="288"/>
         </tableViewCell>
     </objects>
     <resources>

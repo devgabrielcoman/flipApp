@@ -11,5 +11,7 @@
 @protocol ApartmentCellProtocol <NSObject>
 
 - (void)displayGalleryForApartmentAtIndex:(NSInteger)index;
+- (void)displayFullMapViewForApartmentAtIndex:(NSInteger)index;
+- (void)displayMoreInfoForApartmentAtIndex:(NSInteger)index;
 
 @end

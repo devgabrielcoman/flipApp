@@ -10,8 +10,13 @@
 #import "ApartmentTableViewCell.h"
 #import <MWPhotoBrowser.h>
 #import "GalleryNavigationController.h"
+#import "FullMapViewViewController.h"
+#import "LocationUtils.h"
 
 @interface MyPlaceViewController ()<MWPhotoBrowserDelegate>
+{
+    NSIndexPath *expandedRow;
+}
 
 @property NSMutableArray *apartmentGalleryPhotos;
 
@@ -26,6 +31,8 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"ApartmentTableViewCell" bundle:nil] forCellReuseIdentifier:@"ApartmentCell"];
     
     self.tableView.contentInset = UIEdgeInsetsMake(-44, 0, 0, 0);
+    
+    expandedRow = [NSIndexPath indexPathForRow:0 inSection:-1];
 }
 
 #pragma mark - Table view data source
@@ -40,6 +47,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if([indexPath isEqual:expandedRow])
+        return hScr-statusBarHeight+ApartmentDetailsViewHeight;
+    
     return hScr-statusBarHeight;
 }
 
@@ -85,6 +95,32 @@
 
     [self.navigationController presentViewController:galleryNavController animated:YES completion:nil];
     //[self.navigationController pushViewController:browser animated:YES];
+}
+
+- (void)displayFullMapViewForApartmentAtIndex:(NSInteger)index
+{
+    FullMapViewViewController *fullMapView = [FullMapViewViewController new];
+    MKPointAnnotation *locationPin = [MKPointAnnotation new];
+    [locationPin setCoordinate:[LocationUtils locationFromPoint:_apartment[@"location"]]];
+    fullMapView.locationPin = locationPin;
+    
+    [self.navigationController pushViewController:fullMapView animated:YES];
+}
+
+- (void)displayMoreInfoForApartmentAtIndex:(NSInteger)index
+{
+    if(![[NSIndexPath indexPathForItem:index inSection:0] isEqual:expandedRow])
+    {
+        expandedRow = [NSIndexPath indexPathForItem:index+1 inSection:0];
+        [self.tableView beginUpdates];
+        [self.tableView endUpdates];
+        [self.tableView reloadRowsAtIndexPaths:@[expandedRow] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    else
+    {
+        expandedRow = [NSIndexPath indexPathForRow:0 inSection:-1];
+        [self.tableView reloadData];
+    }
 }
 
 - (void)createGalleryPhotosArray
