@@ -16,6 +16,8 @@
 
 - (void)awakeFromNib
 {
+    //self.frame = CGRectMake(0, 0, wScr, hScr-statusBarHeight);
+    
     _mapView.layer.cornerRadius = _mapView.frame.size.width/2;
     _mapView.layer.masksToBounds = YES;
     
@@ -23,7 +25,9 @@
     _ownerImgView.layer.masksToBounds = YES;
     
     _ownerNameLbl.font = [UIFont fontWithName:@"GothamRounded-Light" size:12.0];
-    _daysUntilRenewal.font = [UIFont fontWithName:@"GothamRounded-Light" size:11.0];
+    _daysUntilRenewal.font = [UIFont fontWithName:@"GothamRounded-Light" size:12.0];
+    
+    _displayMore.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Light" size:11.0];
     
 #warning fix this!
     [_mapView removeFromSuperview];

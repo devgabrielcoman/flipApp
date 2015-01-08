@@ -1,30 +1,28 @@
 //
-//  ApartmentTableViewCell.h
+//  DemoApartmentTableViewCell.h
 //  Rented
 //
-//  Created by Lucian Gherghel on 04/01/15.
+//  Created by Lucian Gherghel on 08/01/15.
 //  Copyright (c) 2015 DevRented. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import <MapKit/MapKit.h>
-#import <AsyncImageView.h>
+#import "TopApartmentView.h"
+#import "ApartmentDetailsView.h"
 
 @protocol ApartmentCellProtocol;
 
 @interface ApartmentTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet AsyncImageView *apartmentImgView;
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) IBOutlet UILabel *ownerNameLbl;
-@property (weak, nonatomic) IBOutlet AsyncImageView *ownerImgView;
-@property (weak, nonatomic) IBOutlet UILabel *daysUntilRenewal;
-@property (weak, nonatomic) IBOutlet UIButton *displayMore;
+@property TopApartmentView *apartmentTopView;
+@property ApartmentDetailsView *apartmentDetailsView;
+@property BOOL currentUserIsOwner;
 
-@property BOOL enableSwipeGestures;
-@property id<ApartmentCellProtocol> delegate;
-@property NSInteger apartmentIndex;
+- (void)setDelegate:(id<ApartmentCellProtocol>)delegate;
+- (void)setApartment:(PFObject *)apartment andImages:(NSArray *)images;
+- (void)setApartmentIndex:(NSInteger)apartmentIndex;
 
-- (void)setApartmentDetails:(PFObject *)apartment andImages:(NSArray *)images;
+- (void)showApartmentDetails;
+- (void)hideApartmentDetails;
 
 @end

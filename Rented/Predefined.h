@@ -17,7 +17,7 @@
 #define hScr            [[UIScreen mainScreen] bounds].size.height
 #define wScr            [[UIScreen mainScreen] bounds].size.width
 #define statusBarHeight 20.0f
-#define ApartmentDetailsViewHeight 227.0f
+#define ApartmentDetailsViewHeight 277.0f
 #define IS_IPHONE       (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define IS_IPHONE_5     (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 568.0)
 #define ASYNC(...) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{ __VA_ARGS__ })
@@ -25,3 +25,10 @@
 
 #pragma mark - General Display Setup
 #define StatusBarBackgroundColor [UIColor blackColor]
+
+#pragma mark - Component rooms standard
+#define Studio 0
+#define Bedroom1 1
+#define Bedrooms2 2
+#define Bedrooms3 3
+#define Bedrooms4 4

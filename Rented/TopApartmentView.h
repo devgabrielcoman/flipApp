@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet AsyncImageView *ownerImgView;
 @property (weak, nonatomic) IBOutlet UILabel *daysUntilRenewal;
 @property (weak, nonatomic) IBOutlet UIButton *displayMore;
+@property (weak, nonatomic) IBOutlet UIImageView *connectedThroughImgView;
+@property (weak, nonatomic) IBOutlet UILabel *connectedThroughLbl;
 
 @property BOOL enableSwipeGestures;
 @property id<ApartmentCellProtocol> delegate;

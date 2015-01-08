@@ -8,7 +8,6 @@
 
 #import "MyPlaceViewController.h"
 #import "ApartmentTableViewCell.h"
-#import "DemoApartmentTableViewCell.h"
 #import <MWPhotoBrowser.h>
 #import "GalleryNavigationController.h"
 #import "FullMapViewViewController.h"
@@ -29,8 +28,7 @@
     [super viewDidLoad];
     
     //self.automaticallyAdjustsScrollViewInsets = NO;
-    //[self.tableView registerNib:[UINib nibWithNibName:@"ApartmentTableViewCell" bundle:nil] forCellReuseIdentifier:@"ApartmentCell"];
-    [self.tableView registerNib:[UINib nibWithNibName:@"DemoApartmentTableViewCell" bundle:nil] forCellReuseIdentifier:@"ApartmentCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"ApartmentTableViewCell" bundle:nil] forCellReuseIdentifier:@"ApartmentCell"];
     
     self.tableView.contentInset = UIEdgeInsetsMake(-44, 0, 0, 0);
     
@@ -56,23 +54,15 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    ApartmentTableViewCell *cell = (ApartmentTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"ApartmentCell" forIndexPath:indexPath];
-//    
-//    if(!cell)
-//        cell = [[[NSBundle mainBundle] loadNibNamed:@"DemoTableViewCell" owner:self options:nil] firstObject];
-//    
-//    [cell setApartmentDetails:_apartment andImages:_apartmentImages];
-//    cell.apartmentIndex = indexPath.row;
-//    cell.delegate = self;
-    
-    DemoApartmentTableViewCell *cell = (DemoApartmentTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"ApartmentCell" forIndexPath:indexPath];
+    ApartmentTableViewCell *cell = (ApartmentTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"ApartmentCell" forIndexPath:indexPath];
     
     if(!cell)
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"DemoApartmentTableViewCell" owner:self options:nil] firstObject];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentTableViewCell" owner:self options:nil] firstObject];
     
     [cell setApartmentIndex:indexPath.row];
     [cell setApartment:_apartment andImages:_apartmentImages];
     [cell setDelegate:self];
+    cell.currentUserIsOwner = NO;
     
     if(![indexPath isEqual:expandedRow])
         [cell hideApartmentDetails];
@@ -129,13 +119,17 @@
     {
         expandedRow = [NSIndexPath indexPathForItem:index inSection:0];
         [self.tableView beginUpdates];
+        [self.tableView reloadRowsAtIndexPaths:@[expandedRow] withRowAnimation:UITableViewRowAnimationNone];
         [self.tableView endUpdates];
-        [self.tableView reloadRowsAtIndexPaths:@[expandedRow] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        [self.tableView scrollToRowAtIndexPath:expandedRow atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
     else
     {
         expandedRow = [NSIndexPath indexPathForRow:0 inSection:-1];
-        [self.tableView reloadData];
+        [self.tableView beginUpdates];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView endUpdates];
     }
 }
 
