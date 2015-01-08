@@ -27,8 +27,13 @@
 #define StatusBarBackgroundColor [UIColor blackColor]
 
 #pragma mark - Component rooms standard
+
 #define Studio 0
 #define Bedroom1 1
 #define Bedrooms2 2
 #define Bedrooms3 3
 #define Bedrooms4 4
+
+#define VacancyImmediate 0
+#define VacancyShortTerm 1
+#define VacancyNegociable 2
