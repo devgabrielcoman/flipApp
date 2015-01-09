@@ -15,7 +15,7 @@
 
 #pragma mark - Other Dependecies
 #import "RentedPanelController.h"
-#import "HomeViewController.h"
+#import "FeedViewController.h"
 #import "AuthenticationViewController.h"
 #import "DashboardViewController.h"
 
@@ -43,7 +43,7 @@
     _rootViewController.shouldDelegateAutorotateToVisiblePanel = NO;
     _rootViewController.leftFixedWidth = 260.0f;
     _rootViewController.leftPanel = [DashboardViewController new];
-    _rootViewController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:[HomeViewController new]];
+    _rootViewController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:[FeedViewController new]];
     _rootViewController.rightPanel = nil;
     
     self.window.rootViewController = _rootViewController;

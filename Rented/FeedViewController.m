@@ -1,38 +1,55 @@
 //
-//  MyPlaceViewController.m
+//  HomeViewController.m
 //  Rented
 //
-//  Created by Lucian Gherghel on 04/01/15.
-//  Copyright (c) 2015 DevRented. All rights reserved.
+//  Created by Lucian Gherghel on 22/12/14.
+//  Copyright (c) 2014 DevRented. All rights reserved.
 //
 
-#import "MyPlaceViewController.h"
+#import "FeedViewController.h"
+#import "AuthenticationViewController.h"
 #import "ApartmentTableViewCell.h"
 #import <MWPhotoBrowser.h>
 #import "GalleryNavigationController.h"
 #import "FullMapViewViewController.h"
 #import "LocationUtils.h"
+#import "Apartment.h"
 
-@interface MyPlaceViewController ()<MWPhotoBrowserDelegate>
+@interface FeedViewController ()<UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, ApartmentCellProtocol>
 {
     NSIndexPath *expandedRow;
 }
 
 @property NSMutableArray *apartmentGalleryPhotos;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
-@implementation MyPlaceViewController
+@implementation FeedViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
     
-    //self.automaticallyAdjustsScrollViewInsets = NO;
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"ApartmentTableViewCell" bundle:nil] forCellReuseIdentifier:@"ApartmentCell"];
     
     self.tableView.contentInset = UIEdgeInsetsMake(-44, 0, 0, 0);
     
     expandedRow = [NSIndexPath indexPathForRow:0 inSection:-1];
+    
+    [self.tableView reloadData];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    if(![DEP.api.userApi userIsAuthenticated])
+    {
+        UIViewController *rootViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+        [rootViewController presentViewController:[AuthenticationViewController new] animated:NO completion:nil];
+    }
 }
 
 #pragma mark - Table view data source
@@ -42,7 +59,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return _apartments.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -59,8 +76,10 @@
     if(!cell)
         cell = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentTableViewCell" owner:self options:nil] firstObject];
     
+    Apartment *ap = _apartments[indexPath.row];
+    
     [cell setApartmentIndex:indexPath.row];
-    [cell setApartment:_apartment.apartment andImages:_apartment.images];
+    [cell setApartment:ap.apartment andImages:ap.images];
     [cell setDelegate:self];
     cell.currentUserIsOwner = NO;
     
@@ -82,7 +101,7 @@
 
 - (void)displayGalleryForApartmentAtIndex:(NSInteger)index
 {
-    [self createGalleryPhotosArray];
+    [self createGalleryPhotosArray:index];
     
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
     
@@ -98,7 +117,7 @@
     [browser setCurrentPhotoIndex:0];
     
     GalleryNavigationController *galleryNavController = [[GalleryNavigationController alloc] initWithRootViewController:browser];
-
+    
     [self.navigationController presentViewController:galleryNavController animated:YES completion:nil];
     //[self.navigationController pushViewController:browser animated:YES];
 }
@@ -107,7 +126,8 @@
 {
     FullMapViewViewController *fullMapView = [FullMapViewViewController new];
     MKPointAnnotation *locationPin = [MKPointAnnotation new];
-    [locationPin setCoordinate:[LocationUtils locationFromPoint:_apartment.apartment[@"location"]]];
+    Apartment *ap = _apartments[index];
+    [locationPin setCoordinate:[LocationUtils locationFromPoint:ap.apartment[@"location"]]];
     fullMapView.locationPin = locationPin;
     
     [self.navigationController pushViewController:fullMapView animated:YES];
@@ -133,14 +153,16 @@
     }
 }
 
-- (void)createGalleryPhotosArray
+- (void)createGalleryPhotosArray:(NSInteger)index
 {
     if(!_apartmentGalleryPhotos)
         _apartmentGalleryPhotos = [NSMutableArray new];
     
     [_apartmentGalleryPhotos removeAllObjects];
     
-    for (PFObject *imageObject in _apartment.images)
+    Apartment *ap = _apartments[index];
+    
+    for (PFObject *imageObject in ap.images)
     {
         PFFile *imageFile = imageObject[@"image"];
         [_apartmentGalleryPhotos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:imageFile.url]]];
@@ -163,6 +185,13 @@
 - (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    //[self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
 - (void)didReceiveMemoryWarning {

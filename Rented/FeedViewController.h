@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ApartmentCellProtocol.h"
 
-@interface HomeViewController : UIViewController
+@interface FeedViewController : UIViewController
+
+@property NSArray *apartments;
 
 @end

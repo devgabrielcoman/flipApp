@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ApartmentCellProtocol.h"
+#import "Apartment.h"
 
 @interface MyPlaceViewController : UITableViewController<ApartmentCellProtocol>
 
-@property PFObject *apartment;
-@property NSArray *apartmentImages;
+@property Apartment *apartment;
 
 @end

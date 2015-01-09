@@ -11,6 +11,7 @@
 		12BAD2031A5A959F00ABE909 /* LocationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BAD2021A5A959F00ABE909 /* LocationUtils.m */; };
 		12BAD2061A5A95E100ABE909 /* MapUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BAD2051A5A95E100ABE909 /* MapUtils.m */; };
 		374512C5BFA9503A8B6397D6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E5B27B64FD02829D64CDBC /* libPods.a */; };
+		CD19A99E1A5F35960095163F /* Apartment.m in Sources */ = {isa = PBXBuildFile; fileRef = CD19A99D1A5F35960095163F /* Apartment.m */; };
 		CD1BAFAA1A48466F0012CBAA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1BAFA91A48466F0012CBAA /* main.m */; };
 		CD1BAFAD1A48466F0012CBAA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1BAFAC1A48466F0012CBAA /* AppDelegate.m */; };
 		CD1BAFB51A48466F0012CBAA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD1BAFB41A48466F0012CBAA /* Images.xcassets */; };
@@ -39,8 +40,8 @@
 		CD307ABB1A485E3400D4BE2B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD307ABA1A485E3400D4BE2B /* libsqlite3.dylib */; };
 		CD307AC01A48657500D4BE2B /* AuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD307ABE1A48657500D4BE2B /* AuthenticationViewController.m */; };
 		CD307AC11A48657500D4BE2B /* AuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD307ABF1A48657500D4BE2B /* AuthenticationViewController.xib */; };
-		CD307AC61A48661C00D4BE2B /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD307AC41A48661C00D4BE2B /* HomeViewController.m */; };
-		CD307AC71A48661C00D4BE2B /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD307AC51A48661C00D4BE2B /* HomeViewController.xib */; };
+		CD307AC61A48661C00D4BE2B /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD307AC41A48661C00D4BE2B /* FeedViewController.m */; };
+		CD307AC71A48661C00D4BE2B /* FeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD307AC51A48661C00D4BE2B /* FeedViewController.xib */; };
 		CD35CCE61A49A896007F12D0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD1BAFB61A48466F0012CBAA /* LaunchScreen.xib */; };
 		CD35CCE71A49A89F007F12D0 /* GothamRnd-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD35CCE51A49A7E3007F12D0 /* GothamRnd-Bold.otf */; };
 		CD35CCEB1A49ACC4007F12D0 /* UIColor+ColorFromHexString.m in Sources */ = {isa = PBXBuildFile; fileRef = CD35CCEA1A49ACC4007F12D0 /* UIColor+ColorFromHexString.m */; };
@@ -81,6 +82,8 @@
 		12BAD2041A5A95E100ABE909 /* MapUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapUtils.h; sourceTree = "<group>"; };
 		12BAD2051A5A95E100ABE909 /* MapUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapUtils.m; sourceTree = "<group>"; };
 		CADD9CDB49CF1FD79BA7F002 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		CD19A99C1A5F35960095163F /* Apartment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Apartment.h; sourceTree = "<group>"; };
+		CD19A99D1A5F35960095163F /* Apartment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Apartment.m; sourceTree = "<group>"; };
 		CD1BAFA41A48466F0012CBAA /* Rented.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rented.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD1BAFA81A48466F0012CBAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD1BAFA91A48466F0012CBAA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -126,9 +129,9 @@
 		CD307ABD1A48657500D4BE2B /* AuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewController.h; sourceTree = "<group>"; };
 		CD307ABE1A48657500D4BE2B /* AuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewController.m; sourceTree = "<group>"; };
 		CD307ABF1A48657500D4BE2B /* AuthenticationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthenticationViewController.xib; sourceTree = "<group>"; };
-		CD307AC31A48661C00D4BE2B /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
-		CD307AC41A48661C00D4BE2B /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		CD307AC51A48661C00D4BE2B /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		CD307AC31A48661C00D4BE2B /* FeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
+		CD307AC41A48661C00D4BE2B /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
+		CD307AC51A48661C00D4BE2B /* FeedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedViewController.xib; sourceTree = "<group>"; };
 		CD35CCD51A498083007F12D0 /* logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = logger.h; sourceTree = "<group>"; };
 		CD35CCE51A49A7E3007F12D0 /* GothamRnd-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRnd-Bold.otf"; sourceTree = "<group>"; };
 		CD35CCE81A49ABCD007F12D0 /* GothamRnd-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRnd-Light.otf"; sourceTree = "<group>"; };
@@ -224,6 +227,15 @@
 				E9E5B27B64FD02829D64CDBC /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CD19A99B1A5F357C0095163F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CD19A99C1A5F35960095163F /* Apartment.h */,
+				CD19A99D1A5F35960095163F /* Apartment.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		CD1BAF9B1A48466F0012CBAA = {
@@ -346,6 +358,7 @@
 		CD307A951A48551E00D4BE2B /* Backend */ = {
 			isa = PBXGroup;
 			children = (
+				CD19A99B1A5F357C0095163F /* Model */,
 				CD307A981A48555E00D4BE2B /* Interfaces */,
 				CD307A991A48556400D4BE2B /* Implementation */,
 				CD307A9C1A4855C000D4BE2B /* RentedApi.h */,
@@ -416,9 +429,9 @@
 		CD307AC21A48660300D4BE2B /* Home Screen */ = {
 			isa = PBXGroup;
 			children = (
-				CD307AC31A48661C00D4BE2B /* HomeViewController.h */,
-				CD307AC41A48661C00D4BE2B /* HomeViewController.m */,
-				CD307AC51A48661C00D4BE2B /* HomeViewController.xib */,
+				CD307AC31A48661C00D4BE2B /* FeedViewController.h */,
+				CD307AC41A48661C00D4BE2B /* FeedViewController.m */,
+				CD307AC51A48661C00D4BE2B /* FeedViewController.xib */,
 			);
 			name = "Home Screen";
 			sourceTree = "<group>";
@@ -591,7 +604,7 @@
 				CD2A8AE71A5DACB10065299A /* FullMapViewViewController.xib in Resources */,
 				CD2A8AF31A5DB6D20065299A /* ApartmentDetailsView.xib in Resources */,
 				CD57131C1A59755A003B4C2E /* MyPlaceViewController.xib in Resources */,
-				CD307AC71A48661C00D4BE2B /* HomeViewController.xib in Resources */,
+				CD307AC71A48661C00D4BE2B /* FeedViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,8 +673,9 @@
 				CD39D64C1A4A0C580006F7B7 /* RentedNavigationController.m in Sources */,
 				CD39D6481A4A0A6C0006F7B7 /* DashboardViewController.m in Sources */,
 				CD307A9E1A4855C000D4BE2B /* RentedApi.m in Sources */,
+				CD19A99E1A5F35960095163F /* Apartment.m in Sources */,
 				CD307AC01A48657500D4BE2B /* AuthenticationViewController.m in Sources */,
-				CD307AC61A48661C00D4BE2B /* HomeViewController.m in Sources */,
+				CD307AC61A48661C00D4BE2B /* FeedViewController.m in Sources */,
 				CD5713141A585DAE003B4C2E /* UIViewController+JASidePanels.m in Sources */,
 				CD35CCEB1A49ACC4007F12D0 /* UIColor+ColorFromHexString.m in Sources */,
 				CD307AA41A4856D000D4BE2B /* UserApi.m in Sources */,

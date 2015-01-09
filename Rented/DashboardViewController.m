@@ -15,6 +15,8 @@
 #import "NoListingViewController.h"
 #import "MyPlaceViewController.h"
 #import "RentedNavigationController.h"
+#import "Apartment.h"
+#import "FeedViewController.h"
 
 @interface DashboardViewController ()
 
@@ -97,8 +99,13 @@
             if(apartment)
             {
                 MyPlaceViewController *myPlace = [MyPlaceViewController new];
-                myPlace.apartment = apartment;
-                myPlace.apartmentImages = images;
+                Apartment *ap = [Apartment new];
+                
+                ap.apartment = apartment;
+                ap.images = images;
+                
+                myPlace.apartment = ap;
+                
                 self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:myPlace];
             }
             else
@@ -113,7 +120,24 @@
     }];
 }
 
-- (IBAction)openOtherPlaces:(id)sender {
+- (IBAction)openOtherPlaces:(id)sender
+{
+    [DEP.api.apartmentApi getFeedApartments:^(NSArray *apartments, BOOL succeeded) {
+        if(succeeded)
+        {
+            FeedViewController *feedVC = [FeedViewController new];
+            feedVC.apartments = apartments;
+            
+            self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:feedVC];
+        }
+        else
+            [UIAlertView showWithTitle:@""
+                               message:@"An error occurred. Please try again"
+                     cancelButtonTitle:@"Dismiss"
+                     otherButtonTitles:nil
+                              tapBlock:nil];
+    }];
+    
 }
 
 - (IBAction)openMyLikes:(id)sender {

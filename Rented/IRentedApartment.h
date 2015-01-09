@@ -11,5 +11,6 @@
 @protocol IRentedApartment <NSObject>
 
 - (void)userApartment:(void (^)(PFObject *apartment, NSArray *images, BOOL succeeded))completionHandler;
+- (void)getFeedApartments:(void (^)(NSArray *apartments, BOOL succeeded))completionHandler;
 
 @end
