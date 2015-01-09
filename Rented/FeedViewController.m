@@ -14,6 +14,7 @@
 #import "FullMapViewViewController.h"
 #import "LocationUtils.h"
 #import "Apartment.h"
+#import "UITableView+AnimationControl.h"
 
 @interface FeedViewController ()<UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, ApartmentCellProtocol>
 {
@@ -40,7 +41,16 @@
     
     expandedRow = [NSIndexPath indexPathForRow:0 inSection:-1];
     
-    [self.tableView reloadData];
+    if([DEP.api.userApi userIsAuthenticated])
+    {
+        [DEP.api.apartmentApi getFeedApartments:^(NSArray *apartments, BOOL succeeded) {
+            if(succeeded)
+            {
+                self.apartments = apartments;
+                [self.tableView reloadData];
+            }
+        }];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -64,13 +74,17 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if([indexPath isEqual:expandedRow])
+    {
         return (hScr-statusBarHeight)+ApartmentDetailsViewHeight;
+    }
     
     return hScr-statusBarHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     ApartmentTableViewCell *cell = (ApartmentTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"ApartmentCell" forIndexPath:indexPath];
     
     if(!cell)
@@ -84,7 +98,9 @@
     cell.currentUserIsOwner = NO;
     
     if(![indexPath isEqual:expandedRow])
+    {
         [cell hideApartmentDetails];
+    }
     else
         [cell showApartmentDetails];
     
@@ -112,7 +128,6 @@
     browser.alwaysShowControls = NO;
     browser.enableGrid = NO;
     browser.startOnGrid = NO;
-    //browser.extendedLayoutIncludesOpaqueBars = YES;
     
     [browser setCurrentPhotoIndex:0];
     
@@ -135,21 +150,28 @@
 
 - (void)displayMoreInfoForApartmentAtIndex:(NSInteger)index
 {
-    if(![[NSIndexPath indexPathForItem:index inSection:0] isEqual:expandedRow])
+    if(![expandedRow isEqual:[NSIndexPath indexPathForRow:0 inSection:-1]] && ![[NSIndexPath indexPathForItem:index inSection:0] isEqual:expandedRow])
+    {
+        NSInteger prevIndex = expandedRow.row;
+        expandedRow = [NSIndexPath indexPathForItem:index inSection:0];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:prevIndex inSection:0], expandedRow] withRowAnimation:UITableViewRowAnimationNone];
+        
+        [self.tableView scrollToRowAtIndexPath:expandedRow atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+    else if(![[NSIndexPath indexPathForItem:index inSection:0] isEqual:expandedRow])
     {
         expandedRow = [NSIndexPath indexPathForItem:index inSection:0];
-        [self.tableView beginUpdates];
         [self.tableView reloadRowsAtIndexPaths:@[expandedRow] withRowAnimation:UITableViewRowAnimationNone];
-        [self.tableView endUpdates];
         
         [self.tableView scrollToRowAtIndexPath:expandedRow atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
     else
     {
+        NSInteger prevIndex = expandedRow.row;
         expandedRow = [NSIndexPath indexPathForRow:0 inSection:-1];
-        [self.tableView beginUpdates];
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-        [self.tableView endUpdates];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:prevIndex inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:prevIndex inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
 }
 
@@ -186,8 +208,6 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-
 
 - (void)viewWillAppear:(BOOL)animated
 {

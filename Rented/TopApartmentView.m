@@ -37,8 +37,8 @@
 - (void)setApartmentDetails:(PFObject *)apartment andImages:(NSArray *)images
 {
     //set owner pic
-    _ownerImgView.imageURL = [NSURL URLWithString:DEP.authenticatedUser[@"profilePictureUrl"]];
     _ownerImgView.showActivityIndicator = YES;
+    _ownerImgView.imageURL = [NSURL URLWithString:DEP.authenticatedUser[@"profilePictureUrl"]];
     
     //set owner name
     _ownerNameLbl.text = DEP.authenticatedUser.username;
@@ -58,9 +58,12 @@
     }
     
     //map location
+    [_mapView removeAnnotations:_mapView.annotations];
+    
     MKPointAnnotation *locationPin = [MKPointAnnotation new];
     [locationPin setCoordinate:[LocationUtils locationFromPoint:apartment[@"location"]]];
     [_mapView addAnnotation:locationPin];
+    
     [MapUtils zoomToFitMarkersOnMap:_mapView];
     
     UITapGestureRecognizer *tapOnMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOnMap)];

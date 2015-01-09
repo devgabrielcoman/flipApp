@@ -35,13 +35,13 @@
     MKPolygon *poly = [MKPolygon polygonWithPoints:points count:i];
     
     MKCoordinateRegion r = MKCoordinateRegionForMapRect([poly boundingMapRect]);
-    r.span.latitudeDelta += r.span.latitudeDelta * 0.6;
-    r.span.longitudeDelta += r.span.longitudeDelta * 0.6;
+    r.span.latitudeDelta += r.span.latitudeDelta * 0.005;
+    r.span.longitudeDelta += r.span.longitudeDelta * 0.005;
     
     if (r.span.latitudeDelta == 0)
-        r.span.latitudeDelta = 0.5;
+        r.span.latitudeDelta = 0.005;
     if (r.span.longitudeDelta == 0)
-        r.span.longitudeDelta = 0.5;
+        r.span.longitudeDelta = 0.005;
     
     [map setRegion: r animated:YES];
 }

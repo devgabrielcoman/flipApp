@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		120547601A5FF1110036BB75 /* UITableView+AnimationControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1205475F1A5FF1110036BB75 /* UITableView+AnimationControl.m */; };
 		12BAD2001A5A824D00ABE909 /* ApartmentApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BAD1FF1A5A824D00ABE909 /* ApartmentApi.m */; };
 		12BAD2031A5A959F00ABE909 /* LocationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BAD2021A5A959F00ABE909 /* LocationUtils.m */; };
 		12BAD2061A5A95E100ABE909 /* MapUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BAD2051A5A95E100ABE909 /* MapUtils.m */; };
@@ -74,6 +75,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1205475E1A5FF1110036BB75 /* UITableView+AnimationControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+AnimationControl.h"; sourceTree = "<group>"; };
+		1205475F1A5FF1110036BB75 /* UITableView+AnimationControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+AnimationControl.m"; sourceTree = "<group>"; };
 		12BAD1FD1A5A81D300ABE909 /* IRentedApartment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRentedApartment.h; sourceTree = "<group>"; };
 		12BAD1FE1A5A824D00ABE909 /* ApartmentApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApartmentApi.h; sourceTree = "<group>"; };
 		12BAD1FF1A5A824D00ABE909 /* ApartmentApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApartmentApi.m; sourceTree = "<group>"; };
@@ -374,7 +377,7 @@
 				CD57130B1A585603003B4C2E /* My place */,
 				CD2A8AE21A5DAC8D0065299A /* Full Map View */,
 				CD39D6411A4A0A040006F7B7 /* Dashboard Screen */,
-				CD307AC21A48660300D4BE2B /* Home Screen */,
+				CD307AC21A48660300D4BE2B /* Feed Screen */,
 				CD307ABC1A48653E00D4BE2B /* Authentication Screen */,
 				CD1BAFB61A48466F0012CBAA /* LaunchScreen.xib */,
 			);
@@ -384,6 +387,8 @@
 		CD307A971A48554200D4BE2B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1205475E1A5FF1110036BB75 /* UITableView+AnimationControl.h */,
+				1205475F1A5FF1110036BB75 /* UITableView+AnimationControl.m */,
 				CD35CCEC1A49AE49007F12D0 /* UIImage+ProportionalFill.h */,
 				CD35CCED1A49AE49007F12D0 /* UIImage+ProportionalFill.m */,
 				CD35CCE91A49ACC4007F12D0 /* UIColor+ColorFromHexString.h */,
@@ -426,14 +431,14 @@
 			name = "Authentication Screen";
 			sourceTree = "<group>";
 		};
-		CD307AC21A48660300D4BE2B /* Home Screen */ = {
+		CD307AC21A48660300D4BE2B /* Feed Screen */ = {
 			isa = PBXGroup;
 			children = (
 				CD307AC31A48661C00D4BE2B /* FeedViewController.h */,
 				CD307AC41A48661C00D4BE2B /* FeedViewController.m */,
 				CD307AC51A48661C00D4BE2B /* FeedViewController.xib */,
 			);
-			name = "Home Screen";
+			name = "Feed Screen";
 			sourceTree = "<group>";
 		};
 		CD35CCD91A499FF9007F12D0 /* fonts */ = {
@@ -657,6 +662,7 @@
 			files = (
 				12BAD2061A5A95E100ABE909 /* MapUtils.m in Sources */,
 				CD5713101A585651003B4C2E /* NoListingViewController.m in Sources */,
+				120547601A5FF1110036BB75 /* UITableView+AnimationControl.m in Sources */,
 				CD1BAFAD1A48466F0012CBAA /* AppDelegate.m in Sources */,
 				CD48D2461A5B1E7800C85AA6 /* GalleryNavigationController.m in Sources */,
 				CD2A8B001A5DE47E0065299A /* TopApartmentView.m in Sources */,
@@ -729,6 +735,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -749,7 +756,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "cf5b4efe-81db-4295-92c5-141e6a1f5173";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -771,7 +778,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Richard Brault (3R94YD2G33)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -784,7 +791,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "cf5b4efe-81db-4295-92c5-141e6a1f5173";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -795,6 +802,7 @@
 			baseConfigurationReference = CADD9CDB49CF1FD79BA7F002 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Rented/Rented-Prefix.pch";
 				INFOPLIST_FILE = Rented/Info.plist;

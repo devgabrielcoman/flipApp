@@ -8,21 +8,18 @@
 
 #import "ApartmentTableViewCell.h"
 
-
 @implementation ApartmentTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
+    
     self.frame = CGRectMake(0, 0, wScr, hScr);
     
-    if(!_apartmentTopView)
-    {
-        _apartmentTopView = [[[NSBundle mainBundle] loadNibNamed:@"TopApartmentView" owner:self options:nil] firstObject];
-        [self.contentView addSubview:_apartmentTopView];
-        
-        _apartmentDetailsView = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentDetailsView" owner:self options:nil] firstObject];
-        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight, wScr, _apartmentDetailsView.frame.size.height);
-    }
+    _apartmentTopView = [[[NSBundle mainBundle] loadNibNamed:@"TopApartmentView" owner:self options:nil] firstObject];
+    [self.contentView addSubview:_apartmentTopView];
+    
+    _apartmentDetailsView = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentDetailsView" owner:self options:nil] firstObject];
+    _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight, wScr, ApartmentDetailsViewHeight);
     
     if(!_currentUserIsOwner)
     {
@@ -54,14 +51,24 @@
 
 - (void)showApartmentDetails
 {
+//check again
     _apartmentTopView.frame = CGRectMake(0, 0, wScr, hScr-statusBarHeight);
-    [self.contentView addSubview:_apartmentDetailsView];
+    [_apartmentTopView layoutIfNeeded];
+    
+    _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight, wScr, ApartmentDetailsViewHeight);
+    [self addSubview:_apartmentDetailsView];
+    _apartmentDetailsView.alpha = 1.0;
+    
     [_apartmentTopView.displayMore setTitle:@"hide" forState:UIControlStateNormal];
 }
 
 - (void)hideApartmentDetails
 {
+//check again
     [_apartmentDetailsView removeFromSuperview];
+    _apartmentTopView.frame = CGRectMake(0, 0, wScr, hScr-statusBarHeight);
+    
+    [_apartmentTopView layoutIfNeeded];
     [_apartmentTopView.displayMore setTitle:@"show more" forState:UIControlStateNormal];
 }
 

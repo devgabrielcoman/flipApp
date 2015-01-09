@@ -17,7 +17,7 @@
 #define hScr            [[UIScreen mainScreen] bounds].size.height
 #define wScr            [[UIScreen mainScreen] bounds].size.width
 #define statusBarHeight 20.0f
-#define ApartmentDetailsViewHeight 277.0f
+#define ApartmentDetailsViewHeight 267.0f
 #define IS_IPHONE       (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define IS_IPHONE_5     (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 568.0)
 #define ASYNC(...) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{ __VA_ARGS__ })

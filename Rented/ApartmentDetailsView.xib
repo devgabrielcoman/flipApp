@@ -106,6 +106,9 @@
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4c5-fR-t0L">
                     <rect key="frame" x="37" y="208" width="340" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="GZ0-W6-G6Z"/>
+                    </constraints>
                     <state key="normal" title="FLIP">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -147,6 +150,7 @@
                 <constraint firstItem="pec-V4-oTE" firstAttribute="top" secondItem="dVM-rZ-94h" secondAttribute="bottom" constant="8" id="YuA-n7-jdD"/>
                 <constraint firstItem="pec-V4-oTE" firstAttribute="leading" secondItem="QCE-bT-DrQ" secondAttribute="trailing" constant="8" id="ZVG-D1-ZYj"/>
                 <constraint firstItem="4c5-fR-t0L" firstAttribute="top" secondItem="sBR-Uv-cNc" secondAttribute="bottom" constant="8" symbolic="YES" id="bZc-uY-Pba"/>
+                <constraint firstItem="SO5-ci-PCV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="dBO-b7-JKZ"/>
                 <constraint firstAttribute="trailing" secondItem="sBR-Uv-cNc" secondAttribute="trailing" constant="8" id="eAC-HE-LPr"/>
                 <constraint firstItem="sBR-Uv-cNc" firstAttribute="top" secondItem="xFc-d0-zJ2" secondAttribute="bottom" constant="8" id="fOj-Da-srm"/>
                 <constraint firstItem="sBR-Uv-cNc" firstAttribute="trailing" secondItem="d7i-Ry-o7T" secondAttribute="trailing" id="gb9-ag-Pue"/>
@@ -172,6 +176,12 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="U0Y-UT-KTd"/>
+                    <exclude reference="eAC-HE-LPr"/>
+                    <exclude reference="gb9-ag-Pue"/>
+                    <exclude reference="pjW-h9-iWd"/>
+                    <exclude reference="tMa-8H-pr7"/>
+                    <exclude reference="bZc-uY-Pba"/>
                     <exclude reference="4SS-uI-3ic"/>
                     <exclude reference="Epw-VN-oGv"/>
                     <exclude reference="NJg-F6-z2K"/>
