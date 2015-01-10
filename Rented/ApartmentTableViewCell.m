@@ -47,6 +47,7 @@
 - (void)setApartmentIndex:(NSInteger)apartmentIndex
 {
     [_apartmentTopView setApartmentIndex:apartmentIndex];
+    _index = apartmentIndex;
 }
 
 - (void)showApartmentDetails

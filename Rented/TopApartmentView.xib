@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -19,15 +19,20 @@
                         <constraint firstAttribute="width" constant="140" id="ZCO-VA-ea4"/>
                     </constraints>
                 </mapView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXd-sG-Cdd">
-                    <rect key="frame" x="55" y="608" width="91" height="48"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXd-sG-Cdd">
+                    <rect key="frame" x="55" y="608" width="80" height="48"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="91" id="hoN-bo-LNY"/>
+                        <constraint firstAttribute="width" constant="80" id="hoN-bo-LNY"/>
                         <constraint firstAttribute="height" constant="48" id="yqx-iE-ZQB"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="hoN-bo-LNY"/>
+                        </mask>
+                    </variation>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock" translatesAutoresizingMaskIntoConstraints="NO" id="64a-dk-hek">
                     <rect key="frame" x="315" y="617" width="20" height="20"/>
@@ -92,7 +97,7 @@
                     <rect key="frame" x="16" y="662" width="25" height="25"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AXh-ZL-8y8">
-                    <rect key="frame" x="56" y="660" width="90" height="30"/>
+                    <rect key="frame" x="56" y="660" width="79" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -100,6 +105,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="04B-2a-ova" firstAttribute="leading" secondItem="gXd-sG-Cdd" secondAttribute="trailing" constant="2" id="08x-pw-y9q"/>
                 <constraint firstAttribute="trailing" secondItem="TFx-rq-Jww" secondAttribute="trailing" id="4wu-eA-RY4"/>
                 <constraint firstItem="AXh-ZL-8y8" firstAttribute="top" secondItem="gXd-sG-Cdd" secondAttribute="bottom" constant="4" id="6Sv-jU-E4T"/>
                 <constraint firstItem="04B-2a-ova" firstAttribute="leading" secondItem="kRj-vF-PJt" secondAttribute="trailing" constant="79" id="9F0-Uo-88d"/>

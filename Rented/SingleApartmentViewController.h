@@ -10,7 +10,7 @@
 #import "ApartmentCellProtocol.h"
 #import "Apartment.h"
 
-@interface MyPlaceViewController : UITableViewController<ApartmentCellProtocol>
+@interface SingleApartmentViewController : UITableViewController<ApartmentCellProtocol>
 
 @property Apartment *apartment;
 

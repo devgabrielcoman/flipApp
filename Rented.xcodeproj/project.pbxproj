@@ -54,12 +54,18 @@
 		CD39D6491A4A0A6C0006F7B7 /* DashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD39D6471A4A0A6C0006F7B7 /* DashboardViewController.xib */; };
 		CD39D64C1A4A0C580006F7B7 /* RentedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD39D64B1A4A0C580006F7B7 /* RentedNavigationController.m */; };
 		CD48D2461A5B1E7800C85AA6 /* GalleryNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD48D2451A5B1E7800C85AA6 /* GalleryNavigationController.m */; };
+		CD5038E71A6158D700A1320D /* LikedApartment.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5038E61A6158D700A1320D /* LikedApartment.m */; };
+		CD5038EC1A61740B00A1320D /* FavoritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5038EA1A61740B00A1320D /* FavoritesTableViewController.m */; };
+		CD5038ED1A61740B00A1320D /* FavoritesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD5038EB1A61740B00A1320D /* FavoritesTableViewController.xib */; };
+		CD5038F21A61743600A1320D /* FavoriteApartmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5038F01A61743600A1320D /* FavoriteApartmentTableViewCell.m */; };
+		CD5038F31A61743600A1320D /* FavoriteApartmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD5038F11A61743600A1320D /* FavoriteApartmentTableViewCell.xib */; };
+		CD5038F61A617EC800A1320D /* GeneralUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5038F51A617EC800A1320D /* GeneralUtils.m */; };
 		CD5713101A585651003B4C2E /* NoListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD57130E1A585651003B4C2E /* NoListingViewController.m */; };
 		CD5713111A585651003B4C2E /* NoListingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD57130F1A585651003B4C2E /* NoListingViewController.xib */; };
 		CD5713141A585DAE003B4C2E /* UIViewController+JASidePanels.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5713131A585DAE003B4C2E /* UIViewController+JASidePanels.m */; };
 		CD5713161A586751003B4C2E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5713151A586751003B4C2E /* MessageUI.framework */; };
-		CD57131B1A59755A003B4C2E /* MyPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5713191A59755A003B4C2E /* MyPlaceViewController.m */; };
-		CD57131C1A59755A003B4C2E /* MyPlaceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD57131A1A59755A003B4C2E /* MyPlaceViewController.xib */; };
+		CD57131B1A59755A003B4C2E /* SingleApartmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5713191A59755A003B4C2E /* SingleApartmentViewController.m */; };
+		CD57131C1A59755A003B4C2E /* SingleApartmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD57131A1A59755A003B4C2E /* SingleApartmentViewController.xib */; };
 		CD5713241A597C73003B4C2E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5713231A597C73003B4C2E /* MapKit.framework */; };
 		CD5BBEE21A4A32250058E79B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5BBEE11A4A32250058E79B /* CoreText.framework */; };
 /* End PBXBuildFile section */
@@ -153,15 +159,25 @@
 		CD48D23F1A5B0A3F00C85AA6 /* ApartmentCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApartmentCellProtocol.h; sourceTree = "<group>"; };
 		CD48D2441A5B1E7800C85AA6 /* GalleryNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryNavigationController.h; sourceTree = "<group>"; };
 		CD48D2451A5B1E7800C85AA6 /* GalleryNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryNavigationController.m; sourceTree = "<group>"; };
+		CD5038E51A6158D700A1320D /* LikedApartment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikedApartment.h; sourceTree = "<group>"; };
+		CD5038E61A6158D700A1320D /* LikedApartment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikedApartment.m; sourceTree = "<group>"; };
+		CD5038E91A61740B00A1320D /* FavoritesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesTableViewController.h; sourceTree = "<group>"; };
+		CD5038EA1A61740B00A1320D /* FavoritesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesTableViewController.m; sourceTree = "<group>"; };
+		CD5038EB1A61740B00A1320D /* FavoritesTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoritesTableViewController.xib; sourceTree = "<group>"; };
+		CD5038EF1A61743600A1320D /* FavoriteApartmentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteApartmentTableViewCell.h; sourceTree = "<group>"; };
+		CD5038F01A61743600A1320D /* FavoriteApartmentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteApartmentTableViewCell.m; sourceTree = "<group>"; };
+		CD5038F11A61743600A1320D /* FavoriteApartmentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoriteApartmentTableViewCell.xib; sourceTree = "<group>"; };
+		CD5038F41A617EC800A1320D /* GeneralUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralUtils.h; sourceTree = "<group>"; };
+		CD5038F51A617EC800A1320D /* GeneralUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralUtils.m; sourceTree = "<group>"; };
 		CD57130D1A585651003B4C2E /* NoListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoListingViewController.h; sourceTree = "<group>"; };
 		CD57130E1A585651003B4C2E /* NoListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoListingViewController.m; sourceTree = "<group>"; };
 		CD57130F1A585651003B4C2E /* NoListingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoListingViewController.xib; sourceTree = "<group>"; };
 		CD5713121A585DAE003B4C2E /* UIViewController+JASidePanels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JASidePanels.h"; sourceTree = "<group>"; };
 		CD5713131A585DAE003B4C2E /* UIViewController+JASidePanels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JASidePanels.m"; sourceTree = "<group>"; };
 		CD5713151A586751003B4C2E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		CD5713181A59755A003B4C2E /* MyPlaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPlaceViewController.h; sourceTree = "<group>"; };
-		CD5713191A59755A003B4C2E /* MyPlaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPlaceViewController.m; sourceTree = "<group>"; };
-		CD57131A1A59755A003B4C2E /* MyPlaceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyPlaceViewController.xib; sourceTree = "<group>"; };
+		CD5713181A59755A003B4C2E /* SingleApartmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleApartmentViewController.h; sourceTree = "<group>"; };
+		CD5713191A59755A003B4C2E /* SingleApartmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleApartmentViewController.m; sourceTree = "<group>"; };
+		CD57131A1A59755A003B4C2E /* SingleApartmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleApartmentViewController.xib; sourceTree = "<group>"; };
 		CD5713231A597C73003B4C2E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CD5BBEE11A4A32250058E79B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		D88ADE80C6E025ADD79716C1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -376,6 +392,8 @@
 				CD57131D1A597635003B4C2E /* Custom */,
 				CD57130B1A585603003B4C2E /* My place */,
 				CD2A8AE21A5DAC8D0065299A /* Full Map View */,
+				CD5038E81A6173ED00A1320D /* Favorites */,
+				CD5038F71A61945600A1320D /* Preferences */,
 				CD39D6411A4A0A040006F7B7 /* Dashboard Screen */,
 				CD307AC21A48660300D4BE2B /* Feed Screen */,
 				CD307ABC1A48653E00D4BE2B /* Authentication Screen */,
@@ -397,6 +415,8 @@
 				12BAD2021A5A959F00ABE909 /* LocationUtils.m */,
 				12BAD2041A5A95E100ABE909 /* MapUtils.h */,
 				12BAD2051A5A95E100ABE909 /* MapUtils.m */,
+				CD5038F41A617EC800A1320D /* GeneralUtils.h */,
+				CD5038F51A617EC800A1320D /* GeneralUtils.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -476,6 +496,34 @@
 			name = "Dashboard Screen";
 			sourceTree = "<group>";
 		};
+		CD5038E81A6173ED00A1320D /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				CD5038EE1A61741300A1320D /* Favorite Apartment Cell */,
+				CD5038E91A61740B00A1320D /* FavoritesTableViewController.h */,
+				CD5038EA1A61740B00A1320D /* FavoritesTableViewController.m */,
+				CD5038EB1A61740B00A1320D /* FavoritesTableViewController.xib */,
+			);
+			name = Favorites;
+			sourceTree = "<group>";
+		};
+		CD5038EE1A61741300A1320D /* Favorite Apartment Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CD5038EF1A61743600A1320D /* FavoriteApartmentTableViewCell.h */,
+				CD5038F01A61743600A1320D /* FavoriteApartmentTableViewCell.m */,
+				CD5038F11A61743600A1320D /* FavoriteApartmentTableViewCell.xib */,
+			);
+			name = "Favorite Apartment Cell";
+			sourceTree = "<group>";
+		};
+		CD5038F71A61945600A1320D /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Preferences;
+			sourceTree = "<group>";
+		};
 		CD57130B1A585603003B4C2E /* My place */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,9 +546,9 @@
 		CD5713171A597526003B4C2E /* Display Listing */ = {
 			isa = PBXGroup;
 			children = (
-				CD5713181A59755A003B4C2E /* MyPlaceViewController.h */,
-				CD5713191A59755A003B4C2E /* MyPlaceViewController.m */,
-				CD57131A1A59755A003B4C2E /* MyPlaceViewController.xib */,
+				CD5713181A59755A003B4C2E /* SingleApartmentViewController.h */,
+				CD5713191A59755A003B4C2E /* SingleApartmentViewController.m */,
+				CD57131A1A59755A003B4C2E /* SingleApartmentViewController.xib */,
 			);
 			name = "Display Listing";
 			sourceTree = "<group>";
@@ -510,6 +558,8 @@
 			children = (
 				CD48D23F1A5B0A3F00C85AA6 /* ApartmentCellProtocol.h */,
 				CD2A8B031A5DE6A40065299A /* Apartment Cell */,
+				CD5038E51A6158D700A1320D /* LikedApartment.h */,
+				CD5038E61A6158D700A1320D /* LikedApartment.m */,
 			);
 			name = Custom;
 			sourceTree = "<group>";
@@ -602,13 +652,15 @@
 				CD35CCEF1A49B04C007F12D0 /* GothamRnd-Light.otf in Resources */,
 				CD35CCE71A49A89F007F12D0 /* GothamRnd-Bold.otf in Resources */,
 				CD39D6491A4A0A6C0006F7B7 /* DashboardViewController.xib in Resources */,
+				CD5038ED1A61740B00A1320D /* FavoritesTableViewController.xib in Resources */,
 				CD35CCE61A49A896007F12D0 /* LaunchScreen.xib in Resources */,
 				CD307AC11A48657500D4BE2B /* AuthenticationViewController.xib in Resources */,
 				CD1BAFB51A48466F0012CBAA /* Images.xcassets in Resources */,
+				CD5038F31A61743600A1320D /* FavoriteApartmentTableViewCell.xib in Resources */,
 				CD2A8B081A5DE6F10065299A /* ApartmentTableViewCell.xib in Resources */,
 				CD2A8AE71A5DACB10065299A /* FullMapViewViewController.xib in Resources */,
 				CD2A8AF31A5DB6D20065299A /* ApartmentDetailsView.xib in Resources */,
-				CD57131C1A59755A003B4C2E /* MyPlaceViewController.xib in Resources */,
+				CD57131C1A59755A003B4C2E /* SingleApartmentViewController.xib in Resources */,
 				CD307AC71A48661C00D4BE2B /* FeedViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -668,9 +720,11 @@
 				CD2A8B001A5DE47E0065299A /* TopApartmentView.m in Sources */,
 				CD1BAFAA1A48466F0012CBAA /* main.m in Sources */,
 				12BAD2031A5A959F00ABE909 /* LocationUtils.m in Sources */,
+				CD5038F21A61743600A1320D /* FavoriteApartmentTableViewCell.m in Sources */,
+				CD5038E71A6158D700A1320D /* LikedApartment.m in Sources */,
 				CD39D6401A4A09220006F7B7 /* RentedPanelController.m in Sources */,
 				CD2A8AE61A5DACB10065299A /* FullMapViewViewController.m in Sources */,
-				CD57131B1A59755A003B4C2E /* MyPlaceViewController.m in Sources */,
+				CD57131B1A59755A003B4C2E /* SingleApartmentViewController.m in Sources */,
 				CD2A8B071A5DE6F10065299A /* ApartmentTableViewCell.m in Sources */,
 				CD2A8AF11A5DB6AB0065299A /* ApartmentDetailsView.m in Sources */,
 				CD307AA11A48561B00D4BE2B /* DependencyContainer.m in Sources */,
@@ -678,11 +732,13 @@
 				12BAD2001A5A824D00ABE909 /* ApartmentApi.m in Sources */,
 				CD39D64C1A4A0C580006F7B7 /* RentedNavigationController.m in Sources */,
 				CD39D6481A4A0A6C0006F7B7 /* DashboardViewController.m in Sources */,
+				CD5038F61A617EC800A1320D /* GeneralUtils.m in Sources */,
 				CD307A9E1A4855C000D4BE2B /* RentedApi.m in Sources */,
 				CD19A99E1A5F35960095163F /* Apartment.m in Sources */,
 				CD307AC01A48657500D4BE2B /* AuthenticationViewController.m in Sources */,
 				CD307AC61A48661C00D4BE2B /* FeedViewController.m in Sources */,
 				CD5713141A585DAE003B4C2E /* UIViewController+JASidePanels.m in Sources */,
+				CD5038EC1A61740B00A1320D /* FavoritesTableViewController.m in Sources */,
 				CD35CCEB1A49ACC4007F12D0 /* UIColor+ColorFromHexString.m in Sources */,
 				CD307AA41A4856D000D4BE2B /* UserApi.m in Sources */,
 			);

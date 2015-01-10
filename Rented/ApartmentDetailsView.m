@@ -8,6 +8,7 @@
 
 #import "ApartmentDetailsView.h"
 #import "UIColor+ColorFromHexString.h"
+#import "GeneralUtils.h"
 
 @implementation ApartmentDetailsView
 
@@ -44,28 +45,28 @@
     }
     _vacancyLbl.text = vacancy;
     
-    NSMutableString *rooms = [NSMutableString new];
-    NSArray *roomsArray = apartment[@"rooms"];
+//    NSMutableString *rooms = [NSMutableString new];
+//    NSArray *roomsArray = apartment[@"rooms"];
+//    
+//    for (NSNumber *roomType in roomsArray)
+//    {
+//        if([roomType integerValue] == Studio)
+//            [rooms appendFormat:@"Studio"];
+//        
+//        if([roomType integerValue] == Bedroom1)
+//            [rooms appendFormat:@", 1 Bedroom"];
+//        
+//        if([roomType integerValue] == Bedrooms2)
+//            [rooms appendFormat:@", 2 Bedrooms"];
+//        
+//        if([roomType integerValue] == Bedrooms3)
+//            [rooms appendFormat:@", 3 Bedrooms"];
+//        
+//        if([roomType integerValue] == Bedrooms4)
+//            [rooms appendFormat:@", 3 Bedrooms"];
+//    }
     
-    for (NSNumber *roomType in roomsArray)
-    {
-        if([roomType integerValue] == Studio)
-            [rooms appendFormat:@"Studio"];
-        
-        if([roomType integerValue] == Bedroom1)
-            [rooms appendFormat:@", 1 Bedroom"];
-        
-        if([roomType integerValue] == Bedrooms2)
-            [rooms appendFormat:@", 2 Bedrooms"];
-        
-        if([roomType integerValue] == Bedrooms3)
-            [rooms appendFormat:@", 3 Bedrooms"];
-        
-        if([roomType integerValue] == Bedrooms4)
-            [rooms appendFormat:@", 3 Bedrooms"];
-    }
-    
-    _componentRoomsLbl.text = rooms;
+    _componentRoomsLbl.text = [GeneralUtils roomsDescriptionForApartment:apartment];
     
     _priceLbl.text = [NSString stringWithFormat:@"%@ $",apartment[@"rent"]];
     _sizeLbl.text = [NSString stringWithFormat:@"%@ sq ft", apartment[@"area"]];

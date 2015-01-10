@@ -11,7 +11,7 @@
 #import <AsyncImageView.h>
 #import "ApartmentCellProtocol.h"
 
-@interface TopApartmentView : UIView
+@interface TopApartmentView : UIView<UIGestureRecognizerDelegate, MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet AsyncImageView *apartmentImgView;
@@ -25,6 +25,7 @@
 @property BOOL enableSwipeGestures;
 @property id<ApartmentCellProtocol> delegate;
 @property NSInteger apartmentIndex;
+@property NSString *locationString;
 
 - (void)setApartmentDetails:(PFObject *)apartment andImages:(NSArray *)images;
 

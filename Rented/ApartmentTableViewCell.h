@@ -16,6 +16,7 @@
 
 @property TopApartmentView *apartmentTopView;
 @property ApartmentDetailsView *apartmentDetailsView;
+@property NSInteger index;
 @property BOOL currentUserIsOwner;
 
 - (void)setDelegate:(id<ApartmentCellProtocol>)delegate;

@@ -15,6 +15,7 @@
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Apartment"];
     [query whereKey:@"owner" equalTo:DEP.authenticatedUser];
+    [query includeKey:@"owner"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error)
         {
@@ -96,6 +97,7 @@
     
     PFQuery *query = [PFQuery queryWithClassName:@"Apartment"];
     [query whereKey:@"owner" notEqualTo:DEP.authenticatedUser];
+    [query includeKey:@"owner"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error)
         {
@@ -119,6 +121,65 @@
             completionHandler(@[], NO);
     }];
     
+}
+
+- (void)addApartmentToFavorites:(PFObject *)apartment completion:(void (^)(BOOL succeeded))completionHandler
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Favorites"];
+    [query whereKey:@"apartment" equalTo:apartment];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(!error)
+        {
+            
+            if(objects.count>0)
+                completionHandler(YES);
+            else
+            {
+                PFObject *favoriteApartment = [PFObject objectWithClassName:@"Favorites"];
+                favoriteApartment[@"apartment"] = apartment;
+                favoriteApartment[@"user"] = DEP.authenticatedUser;
+                
+                [favoriteApartment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    completionHandler(succeeded);
+                }];
+            }
+        }
+        else
+            completionHandler(NO);
+    }];
+}
+
+- (void)getListOfFavoritesApartments:(void (^)(NSArray *favoriteApartments, BOOL succeeded))completionHandler
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Favorites"];
+    [query whereKey:@"user" equalTo:DEP.authenticatedUser];
+    [query includeKey:@"user"];
+    [query includeKey:@"apartment"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(!error)
+        {
+            NSMutableArray *favorites = [NSMutableArray new];
+            
+            for(PFObject *favAp in objects)
+            {
+                PFObject *apart = favAp[@"apartment"];
+                
+                PFQuery *imgQuery = [PFQuery queryWithClassName:@"ApartmentPhotos"];
+                [imgQuery whereKey:@"apartment" equalTo:apart];
+                
+                Apartment *apartment = [Apartment new];
+                apartment.apartment = apart;
+                apartment.images = [imgQuery findObjects];
+                
+                [favorites addObject:apartment];
+            }
+            
+            completionHandler(favorites, YES);
+        }
+        else
+            completionHandler(@[], NO);
+    }];
 }
 
 @end

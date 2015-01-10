@@ -13,10 +13,11 @@
 #import <AsyncImageView.h>
 #import "UIImage+ProportionalFill.h"
 #import "NoListingViewController.h"
-#import "MyPlaceViewController.h"
+#import "SingleApartmentViewController.h"
 #import "RentedNavigationController.h"
 #import "Apartment.h"
 #import "FeedViewController.h"
+#import "FavoritesTableViewController.h"
 
 @interface DashboardViewController ()
 
@@ -98,7 +99,7 @@
         {
             if(apartment)
             {
-                MyPlaceViewController *myPlace = [MyPlaceViewController new];
+                SingleApartmentViewController *myPlace = [SingleApartmentViewController new];
                 Apartment *ap = [Apartment new];
                 
                 ap.apartment = apartment;
@@ -122,25 +123,17 @@
 
 - (IBAction)openOtherPlaces:(id)sender
 {
-    [DEP.api.apartmentApi getFeedApartments:^(NSArray *apartments, BOOL succeeded) {
-        if(succeeded)
-        {
-            FeedViewController *feedVC = [FeedViewController new];
-            feedVC.apartments = apartments;
-            
-            self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:feedVC];
-        }
-        else
-            [UIAlertView showWithTitle:@""
-                               message:@"An error occurred. Please try again"
-                     cancelButtonTitle:@"Dismiss"
-                     otherButtonTitles:nil
-                              tapBlock:nil];
-    }];
+    FeedViewController *feedVC = [FeedViewController new];
+    
+    self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:feedVC];
     
 }
 
-- (IBAction)openMyLikes:(id)sender {
+- (IBAction)openMyLikes:(id)sender
+{
+    FavoritesTableViewController *favorites = [FavoritesTableViewController new];
+    
+    self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:favorites];
 }
 
 - (IBAction)showPreferences:(id)sender {

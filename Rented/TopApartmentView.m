@@ -20,6 +20,7 @@
     
     _mapView.layer.cornerRadius = _mapView.frame.size.width/2;
     _mapView.layer.masksToBounds = YES;
+    _mapView.delegate = self;
     
     _ownerImgView.layer.cornerRadius = _ownerImgView.frame.size.width/2;
     _ownerImgView.layer.masksToBounds = YES;
@@ -29,6 +30,21 @@
     
     _displayMore.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Light" size:11.0];
     
+    _locationString = @"";
+    
+    
+    //Add a left swipe gesture recognizer
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeLeft:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [self addGestureRecognizer:recognizer];
+    
+    //Add a right swipe gesture recognizer
+//    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeRight:)];
+//    recognizer.delegate = self;
+//    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+//    [self addGestureRecognizer:recognizer];
+    
+    
 #warning fix this!
     [_mapView removeFromSuperview];
     [self addSubview:_mapView];
@@ -36,12 +52,11 @@
 
 - (void)setApartmentDetails:(PFObject *)apartment andImages:(NSArray *)images
 {
-    //set owner pic
+    //set owner details
     _ownerImgView.showActivityIndicator = YES;
-    _ownerImgView.imageURL = [NSURL URLWithString:DEP.authenticatedUser[@"profilePictureUrl"]];
-    
-    //set owner name
-    _ownerNameLbl.text = DEP.authenticatedUser.username;
+    PFUser *owner = apartment[@"owner"];
+    _ownerImgView.imageURL = [NSURL URLWithString:owner[@"profilePictureUrl"]];
+    _ownerNameLbl.text = owner[@"username"];
     
     //apartment image
     if(images && images.count > 0)
@@ -58,13 +73,19 @@
     }
     
     //map location
-    [_mapView removeAnnotations:_mapView.annotations];
-    
-    MKPointAnnotation *locationPin = [MKPointAnnotation new];
-    [locationPin setCoordinate:[LocationUtils locationFromPoint:apartment[@"location"]]];
-    [_mapView addAnnotation:locationPin];
-    
-    [MapUtils zoomToFitMarkersOnMap:_mapView];
+    if(![_locationString isEqualToString:apartment[@"location"]])
+    {
+        [_mapView removeAnnotations:_mapView.annotations];
+        
+        MKPointAnnotation *locationPin = [MKPointAnnotation new];
+        [locationPin setCoordinate:[LocationUtils locationFromPoint:apartment[@"location"]]];
+        
+        [_mapView addAnnotation:locationPin];
+        
+        [MapUtils zoomToFitMarkersOnMap:_mapView];
+        
+        _locationString = apartment[@"location"];
+    }
     
     UITapGestureRecognizer *tapOnMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOnMap)];
     tapOnMap.numberOfTapsRequired = 1;
@@ -88,6 +109,32 @@
 - (IBAction)showApartmentDetails:(id)sender
 {
     [_delegate displayMoreInfoForApartmentAtIndex:_apartmentIndex];
+}
+
+#pragma mark - Swipe gesture handlers
+
+- (void)handleSwipeLeft:(id)gesture
+{
+    RTLog(@"swipe left on cell with index: %li", (long)_apartmentIndex);
+    [_delegate addToFravoritesApartmentFromIndex:_apartmentIndex];
+}
+
+//- (void)handleSwipeRight:(id)gesture
+//{
+//    RTLog(@"swipe right on cell with index: %li", (long)_apartmentIndex);
+//}
+
+#pragma mark - Map View Delegate
+
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+    if ([annotation isKindOfClass:[MKPointAnnotation class]]){
+        MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pin"];
+        [annotationView setImage:nil];
+        
+        return annotationView;
+    }
+    
+    return nil;
 }
 
 @end

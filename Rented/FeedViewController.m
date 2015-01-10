@@ -15,6 +15,8 @@
 #import "LocationUtils.h"
 #import "Apartment.h"
 #import "UITableView+AnimationControl.h"
+#import "LikedApartment.h"
+#import <UIAlertView+Blocks.h>
 
 @interface FeedViewController ()<UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, ApartmentCellProtocol>
 {
@@ -51,6 +53,20 @@
             }
         }];
     }
+    
+    [DEP.api.apartmentApi getFeedApartments:^(NSArray *apartments, BOOL succeeded) {
+        if(succeeded)
+        {
+            self.apartments = apartments;
+            [self.tableView reloadData];
+        }
+        else
+            [UIAlertView showWithTitle:@""
+                               message:@"An error occurred. Please try again"
+                     cancelButtonTitle:@"Dismiss"
+                     otherButtonTitles:nil
+                              tapBlock:nil];
+    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -173,6 +189,32 @@
         
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:prevIndex inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
+}
+
+- (void)addToFravoritesApartmentFromIndex:(NSInteger)index
+{
+    ApartmentTableViewCell *cell = (ApartmentTableViewCell *) [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    
+    UIImage *heartImage = [UIImage imageNamed:@"heart-image"];
+    LikedApartment *likeApartment = [[LikedApartment alloc] initWithSize:heartImage.size inParentFrame:cell.apartmentTopView.apartmentImgView.frame];
+    likeApartment.image = heartImage;
+    
+    [likeApartment displayInParentView:cell.apartmentTopView.apartmentImgView];
+    
+    Apartment *ap = _apartments[index];
+    [DEP.api.apartmentApi addApartmentToFavorites:ap.apartment
+                                       completion:^(BOOL succeeded) {
+                                           if(succeeded)
+                                               [likeApartment removeFromParentView];
+                                           else
+                                           {
+                                               [UIAlertView showWithTitle:@""
+                                                                  message:@"An error occurred while trying to add this apartment to favorites. Please try again."
+                                                        cancelButtonTitle:@"Dismiss"
+                                                        otherButtonTitles:nil
+                                                                 tapBlock:nil];
+                                           }
+                                       }];
 }
 
 - (void)createGalleryPhotosArray:(NSInteger)index

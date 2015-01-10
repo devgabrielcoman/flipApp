@@ -6,14 +6,14 @@
 //  Copyright (c) 2015 DevRented. All rights reserved.
 //
 
-#import "MyPlaceViewController.h"
+#import "SingleApartmentViewController.h"
 #import "ApartmentTableViewCell.h"
 #import <MWPhotoBrowser.h>
 #import "GalleryNavigationController.h"
 #import "FullMapViewViewController.h"
 #import "LocationUtils.h"
 
-@interface MyPlaceViewController ()<MWPhotoBrowserDelegate>
+@interface SingleApartmentViewController ()<MWPhotoBrowserDelegate>
 {
     NSIndexPath *expandedRow;
 }
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation MyPlaceViewController
+@implementation SingleApartmentViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -62,7 +62,7 @@
     [cell setApartmentIndex:indexPath.row];
     [cell setApartment:_apartment.apartment andImages:_apartment.images];
     [cell setDelegate:self];
-    cell.currentUserIsOwner = NO;
+    cell.currentUserIsOwner = YES;
     
     if(![indexPath isEqual:expandedRow])
         [cell hideApartmentDetails];
@@ -131,6 +131,11 @@
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         [self.tableView endUpdates];
     }
+}
+
+- (void)addToFravoritesApartmentFromIndex:(NSInteger)index
+{
+    
 }
 
 - (void)createGalleryPhotosArray
