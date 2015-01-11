@@ -37,6 +37,7 @@
     
     _rootViewController = [RentedPanelController new];
     _rootViewController.allowRightSwipe = NO;
+    _rootViewController.allowLeftSwipe = NO;
     _rootViewController.bounceOnCenterPanelChange = NO;
     _rootViewController.bounceOnSidePanelClose = NO;
     _rootViewController.bounceOnSidePanelOpen = NO;

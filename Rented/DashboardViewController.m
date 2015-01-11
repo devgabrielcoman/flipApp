@@ -18,6 +18,7 @@
 #import "Apartment.h"
 #import "FeedViewController.h"
 #import "FavoritesTableViewController.h"
+#import "PreferencesViewController.h"
 
 @interface DashboardViewController ()
 
@@ -131,12 +132,15 @@
 
 - (IBAction)openMyLikes:(id)sender
 {
-    FavoritesTableViewController *favorites = [FavoritesTableViewController new];
+    FavoritesTableViewController *favoritesVC = [FavoritesTableViewController new];
     
-    self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:favorites];
+    self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:favoritesVC];
 }
 
-- (IBAction)showPreferences:(id)sender {
+- (IBAction)showPreferences:(id)sender
+{
+    PreferencesViewController *preferencesVC = [PreferencesViewController new];
+    self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:preferencesVC];
 }
 
 - (IBAction)sendEmail:(id)sender {
