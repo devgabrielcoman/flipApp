@@ -43,6 +43,20 @@
     
     expandedRow = [NSIndexPath indexPathForRow:0 inSection:-1];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadFeed:)
+                                                 name:@"ReloadFeedData" object:nil];
+    
+    [self reloadFeedData];
+}
+
+- (void)reloadFeed:(NSNotification*)notification
+{
+    [self reloadFeedData];
+}
+
+- (void)reloadFeedData
+{
     if([DEP.api.userApi userIsAuthenticated])
     {
         [DEP.api.apartmentApi getFeedApartments:^(NSArray *apartments, BOOL succeeded) {
@@ -53,6 +67,10 @@
             }
         }];
     }
+    
+    [DEP.api.userApi getFacebookMutualFriendsWithFriend:@"799877360063203" completionHandler:^(NSArray *mutualFriends, BOOL succeeded) {
+        
+    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated

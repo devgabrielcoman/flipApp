@@ -9,6 +9,9 @@
 #import "AuthenticationViewController.h"
 #import "UIColor+ColorFromHexString.h"
 #import "UIImage+ProportionalFill.h"
+#import "FeedViewController.h"
+#import "UIViewController+JASidePanels.h"
+#import <JASidePanelController.h>
 
 @interface AuthenticationViewController ()
 
@@ -56,7 +59,9 @@
 - (IBAction)loginWithFacebook:(id)sender
 {
     [DEP.api.userApi authenticateUserWithFacebook:^(BOOL authenticated) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self dismissViewControllerAnimated:YES completion:^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadFeedData" object:nil];
+        }];
     }];
 }
 

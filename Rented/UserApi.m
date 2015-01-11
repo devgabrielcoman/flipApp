@@ -21,7 +21,7 @@
 
 - (void)authenticateUserWithFacebook:(void (^)(BOOL authenticated))completionHandler
 {
-    NSArray *permissionsArray = @[ @"user_about_me", @"user_location"];
+    NSArray *permissionsArray = @[ @"user_about_me", @"user_location", @"user_friends"];
     
     [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
         
@@ -67,6 +67,21 @@
 - (void)logoutUser
 {
     [PFUser logOut];
+}
+
+- (void)getFacebookMutualFriendsWithFriend:(NSString *)userId completionHandler:(void (^)(NSArray *mutualFriends, BOOL succeeded))completion
+{
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"context.fields(mutual_friends)", @"fields",
+                            nil
+                            ];
+    
+    [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/{%@}", userId]
+                                 parameters:params
+                                 HTTPMethod:@"GET"
+                          completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                                NSLog(@"result: %@", result);
+                                            }];
 }
 
 @end

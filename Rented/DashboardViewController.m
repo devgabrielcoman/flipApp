@@ -136,7 +136,6 @@
 - (IBAction)openOtherPlaces:(id)sender
 {
     FeedViewController *feedVC = [FeedViewController new];
-    
     self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:feedVC];
     
 }
