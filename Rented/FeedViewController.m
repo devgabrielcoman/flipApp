@@ -53,20 +53,6 @@
             }
         }];
     }
-    
-    [DEP.api.apartmentApi getFeedApartments:^(NSArray *apartments, BOOL succeeded) {
-        if(succeeded)
-        {
-            self.apartments = apartments;
-            [self.tableView reloadData];
-        }
-        else
-            [UIAlertView showWithTitle:@""
-                               message:@"An error occurred. Please try again"
-                     cancelButtonTitle:@"Dismiss"
-                     otherButtonTitles:nil
-                              tapBlock:nil];
-    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated

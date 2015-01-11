@@ -53,6 +53,10 @@
             [DEP.authenticatedUser setObject:userData[@"name"] forKey:@"username"];
             [DEP.authenticatedUser setObject:userData[@"location"][@"name"] forKey:@"location"];
             [DEP.authenticatedUser setObject:userData[@"gender"] forKey:@"gender"];
+            
+            //set here listing status too
+            [DEP.authenticatedUser setObject:@ListingNotRequested forKey:@"listingStatus"];
+            
             [DEP.authenticatedUser setObject:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", userData[@"id"]] forKey:@"profilePictureUrl"];
             
             [DEP.authenticatedUser saveInBackground];

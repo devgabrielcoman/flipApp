@@ -12,6 +12,7 @@
 #import "GalleryNavigationController.h"
 #import "FullMapViewViewController.h"
 #import "LocationUtils.h"
+#import <UIAlertView+Blocks.h>
 
 @interface SingleApartmentViewController ()<MWPhotoBrowserDelegate>
 {
@@ -33,6 +34,28 @@
     self.tableView.contentInset = UIEdgeInsetsMake(-44, 0, 0, 0);
     
     expandedRow = [NSIndexPath indexPathForRow:0 inSection:-1];
+    
+    [DEP.api.apartmentApi userApartment:^(PFObject *apartment, NSArray *images, BOOL succeeded) {
+        if(succeeded)
+        {
+            if(apartment)
+            {
+                Apartment *ap = [Apartment new];
+                
+                ap.apartment = apartment;
+                ap.images = images;
+                
+                self.apartment = ap;
+                [self.tableView reloadData];
+            }
+        }
+        else
+            [UIAlertView showWithTitle:@""
+                               message:@"An error occurred. Please try again"
+                     cancelButtonTitle:@"Dismiss"
+                     otherButtonTitles:nil
+                              tapBlock:nil];
+    }];
 }
 
 #pragma mark - Table view data source

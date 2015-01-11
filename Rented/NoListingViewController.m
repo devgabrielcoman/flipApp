@@ -30,6 +30,12 @@
     _addApartmentBtn.backgroundColor = [UIColor colorFromHexString:@"3b5998"];
     _addApartmentBtn.layer.cornerRadius = 2.0;
     _addApartmentBtn.titleLabel.font = [UIFont fontWithName:@"Gotham-Medium" size:15.0];
+    
+    if([DEP.authenticatedUser[@"listingStatus"] integerValue] == ListingRequested)
+    {
+        _addApartmentBtn.alpha = 0.0f;
+        _messageLbl.text = @"Your request has been registered and apartment will be added as soon as possible.";
+    }
 }
 
 - (IBAction)addApartment:(id)sender
@@ -47,7 +53,7 @@
     
     [mail setSubject:@"New Listing"];
     
-    NSArray *toRecipients = [NSArray arrayWithObject:@"admin_account@demo.com"];
+    NSArray *toRecipients = [NSArray arrayWithObject:@"admin@hiflip.com"];
     NSArray *ccRecipients = @[];
     NSArray *bccRecipients = @[];
     

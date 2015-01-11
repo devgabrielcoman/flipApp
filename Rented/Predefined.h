@@ -37,3 +37,8 @@
 #define VacancyImmediate 0
 #define VacancyShortTerm 1
 #define VacancyNegociable 2
+
+#pragma mark - User listing status
+#define ListingNotRequested 0
+#define ListingRequested 1
+#define ListingAdded 2
