@@ -30,12 +30,12 @@
             [rooms appendFormat:@", 3 Bedrooms"];
         
         if([roomType integerValue] == Bedrooms4)
-            [rooms appendFormat:@", 3 Bedrooms"];
+            [rooms appendFormat:@", 4 Bedrooms"];
     }
     
-    NSString *finalString;
+    NSString *finalString = @"";
     
-    if([[rooms substringToIndex:1] isEqualToString:@","])
+    if(rooms.length > 1 && [[rooms substringToIndex:1] isEqualToString:@","])
         finalString = [rooms substringFromIndex:1];
     else
         finalString = rooms;

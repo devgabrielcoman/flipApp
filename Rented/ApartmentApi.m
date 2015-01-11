@@ -97,7 +97,7 @@
     
     PFQuery *query = [PFQuery queryWithClassName:@"Apartment"];
     [query whereKey:@"owner" notEqualTo:DEP.authenticatedUser];
-    
+    //[query whereKey:@"visible" equalTo:@YES];
     
     //include user preferences in search clauses
     [query whereKey:@"renewaldays" greaterThanOrEqualTo:[NSNumber numberWithInteger:DEP.userPreferences.minRenewalDays]];

@@ -122,6 +122,8 @@
 //                              tapBlock:nil];
 //    }];
     
+    RTLog(@"authenticated status: %li", (long)[DEP.authenticatedUser[@"listingStatus"] integerValue]);
+    
     if([DEP.authenticatedUser[@"listingStatus"] integerValue] == ListingAdded)
     {
         SingleApartmentViewController *myPlace = [SingleApartmentViewController new];
