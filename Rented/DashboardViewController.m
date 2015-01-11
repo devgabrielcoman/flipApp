@@ -19,8 +19,9 @@
 #import "FeedViewController.h"
 #import "FavoritesTableViewController.h"
 #import "PreferencesViewController.h"
+#import <MessageUI/MFMailComposeViewController.h>
 
-@interface DashboardViewController ()
+@interface DashboardViewController ()<MFMailComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet AsyncImageView *profileImgView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLbl;
@@ -143,9 +144,51 @@
     self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:preferencesVC];
 }
 
-- (IBAction)sendEmail:(id)sender {
+- (IBAction)sendEmail:(id)sender
+{
+    if (![MFMailComposeViewController canSendMail])
+    {
+        [UIAlertView showWithTitle:@""
+                           message:@"Cannot send emails from this device!"
+                 cancelButtonTitle:@"Dismiss"
+                 otherButtonTitles:nil
+                          tapBlock:nil];
+    }
+    else
+    {
+        MFMailComposeViewController *mail = [MFMailComposeViewController new];
+        
+        mail.mailComposeDelegate = self;
+        
+        [mail setSubject:@"Feedback"];
+        
+        NSArray *toRecipients = [NSArray arrayWithObject:@"admin@hiflip.com"];
+        NSArray *ccRecipients = @[];
+        NSArray *bccRecipients = @[];
+        
+        [mail setToRecipients:toRecipients];
+        [mail setCcRecipients:ccRecipients];
+        [mail setBccRecipients:bccRecipients];
+        
+        NSString *emailBody = @"Hi, <br> I really like your application, although there are a few things to say..";
+        [mail setMessageBody:emailBody isHTML:YES];
+        
+        [self presentViewController:mail animated:YES completion:NULL];
+    }
 }
 
+#pragma mark - MailComposer delegate methods
 
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    if(result != MFMailComposeResultCancelled && result != MFMailComposeResultFailed)
+        [UIAlertView showWithTitle:@""
+                           message:@"An error occurred, please try again."
+                 cancelButtonTitle:@"Dismiss"
+                 otherButtonTitles:nil
+                          tapBlock:nil];
+}
 
 @end

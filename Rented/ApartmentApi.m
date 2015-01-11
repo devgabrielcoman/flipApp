@@ -103,7 +103,7 @@
     [query whereKey:@"renewaldays" greaterThanOrEqualTo:[NSNumber numberWithInteger:DEP.userPreferences.minRenewalDays]];
     [query whereKey:@"renewaldays" lessThanOrEqualTo:[NSNumber numberWithInteger:DEP.userPreferences.maxRenewalDays]];
     
-    if (DEP.userPreferences.vacancyTypes)
+    if (DEP.userPreferences.vacancyTypes && DEP.userPreferences.vacancyTypes.count)
         [query whereKey:@"vacancy" containedIn:DEP.userPreferences.vacancyTypes];
     
     if(DEP.userPreferences.minRent > 0)
@@ -118,7 +118,7 @@
     if(DEP.userPreferences.maxSqFt > 0)
         [query whereKey:@"area" lessThanOrEqualTo:[NSNumber numberWithInteger:DEP.userPreferences.maxSqFt]];
 
-    if (DEP.userPreferences.rooms)
+    if (DEP.userPreferences.rooms && DEP.userPreferences.rooms.count > 0)
         [query whereKey:@"rooms" containedIn:DEP.userPreferences.rooms];
     
     

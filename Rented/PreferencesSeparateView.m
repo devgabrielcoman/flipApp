@@ -285,15 +285,23 @@
     {
         if(textField.tag == 1)
             DEP.userPreferences.minRent = textField.text.integerValue;
+        else
+            DEP.userPreferences.minRent = -1;
         
         if(textField.tag == 2)
             DEP.userPreferences.maxRent = textField.text.integerValue;
+        else
+            DEP.userPreferences.maxRent = -1;
         
         if(textField.tag == 3)
             DEP.userPreferences.minSqFt = textField.text.integerValue;
+        else
+            DEP.userPreferences.minSqFt = -1;
         
         if(textField.tag == 4)
             DEP.userPreferences.maxSqFt = textField.text.integerValue;
+        else
+            DEP.userPreferences.maxSqFt = -1;
     }
     
     [DEP saveUserPreferences];
