@@ -8,6 +8,7 @@
 
 #import "PreferencesSeparateView.h"
 #import "UIColor+ColorFromHexString.h"
+#import <UIAlertView+Blocks.h>
 
 @implementation PreferencesSeparateView
 
@@ -19,10 +20,12 @@
     
     _minRentTF = [[UITextField alloc] initWithFrame:CGRectMake(76, 162, remainedWidth/2, 40)];
     _minRentTF.placeholder = @"Min";
+    _minRentTF.tag = 1;
     [self setupTextField:_minRentTF];
     
     _maxRentTF = [[UITextField alloc] initWithFrame:CGRectMake(76+remainedWidth/2+10, 162, remainedWidth/2, 40)];
     _maxRentTF.placeholder = @"Max";
+    _maxRentTF.tag = 2;
     [self setupTextField:_maxRentTF];
     
     [self addSubview:_minRentTF];
@@ -30,10 +33,12 @@
     
     _minSquareFtTF = [[UITextField alloc] initWithFrame:CGRectMake(76, 210, remainedWidth/2, 40)];
     _minSquareFtTF.placeholder = @"Min";
+    _minSquareFtTF.tag = 3;
     [self setupTextField:_minSquareFtTF];
     
     _maxSquareFtTF = [[UITextField alloc] initWithFrame:CGRectMake(76+remainedWidth/2+10, 210, remainedWidth/2, 40)];
     _maxSquareFtTF.placeholder = @"Max";
+    _maxSquareFtTF.tag = 4;
     [self setupTextField:_maxSquareFtTF];
     
     [self addSubview:_minSquareFtTF];
@@ -57,6 +62,75 @@
     
     rooms= [NSMutableArray new];
     vacancyTypes = [NSMutableArray new];
+    
+    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    [doneButton setTitle:@"Done" forState:UIControlStateNormal];
+    [doneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [doneButton setBackgroundColor:[UIColor whiteColor]];
+    [doneButton addTarget:self action:@selector(dismissKeyboard) forControlEvents:UIControlEventTouchUpInside];
+    
+    _minRentTF.inputAccessoryView = doneButton;
+    _maxRentTF.inputAccessoryView = doneButton;
+    
+    _minSquareFtTF.inputAccessoryView = doneButton;
+    _maxSquareFtTF.inputAccessoryView = doneButton;
+    
+    [self completePreferences];
+}
+
+- (void)completePreferences
+{
+    [self.leaseRenewalSlider setLowerValue:DEP.userPreferences.minRenewalDays animated:YES];
+    [self.leaseRenewalSlider setUpperValue:DEP.userPreferences.maxRenewalDays animated:YES];
+    
+    lowerLabel.text = [NSString stringWithFormat:@"%d", (int)self.leaseRenewalSlider.lowerValue];
+    upperLabel.text = [NSString stringWithFormat:@"%d", (int)self.leaseRenewalSlider.upperValue];
+    
+    if (DEP.userPreferences.vacancyTypes)
+    {
+        vacancyTypes = [[NSMutableArray alloc] initWithArray:DEP.userPreferences.vacancyTypes];
+        
+        if([vacancyTypes containsObject:@VacancyImmediate])
+            vacancyImmediate.checkState = M13CheckboxStateChecked;
+        
+        if([vacancyTypes containsObject:@VacancyShortTerm])
+            vacancyShortTerm.checkState = M13CheckboxStateChecked;
+        
+        if([vacancyTypes containsObject:@VacancyNegociable])
+            vacancyNegociable.checkState = M13CheckboxStateChecked;
+    }
+    
+    if(DEP.userPreferences.minRent > 0)
+        self.minRentTF.text = [NSString stringWithFormat:@"%ld", (long)DEP.userPreferences.minRent];
+    
+    if(DEP.userPreferences.maxRent > 0)
+        self.maxRentTF.text = [NSString stringWithFormat:@"%ld", (long)DEP.userPreferences.maxRent];
+    
+    if(DEP.userPreferences.minSqFt > 0)
+        self.minSquareFtTF.text = [NSString stringWithFormat:@"%ld", (long)DEP.userPreferences.minSqFt];
+    
+    if(DEP.userPreferences.maxSqFt > 0)
+        self.maxSquareFtTF.text = [NSString stringWithFormat:@"%ld", (long)DEP.userPreferences.maxSqFt];
+    
+    if (DEP.userPreferences.rooms)
+    {
+        rooms = [[NSMutableArray alloc] initWithArray:DEP.userPreferences.rooms];
+        
+        if([rooms containsObject:@Studio])
+            studioRoom.checkState = M13CheckboxStateChecked;
+        
+        if([rooms containsObject:@Bedroom1])
+            bedroom1.checkState = M13CheckboxStateChecked;
+        
+        if([rooms containsObject:@Bedrooms2])
+            bedroom2.checkState = M13CheckboxStateChecked;
+        
+        if([rooms containsObject:@Bedrooms3])
+            bedroom3.checkState = M13CheckboxStateChecked;
+        
+        if([rooms containsObject:@Bedrooms4])
+            bedroom4.checkState = M13CheckboxStateChecked;
+    }
 }
 
 - (void)setupTextField:(UITextField *)textField
@@ -69,6 +143,7 @@
     textField.returnKeyType = UIReturnKeyDone;
     textField.textAlignment = NSTextAlignmentCenter;
     textField.font = [UIFont systemFontOfSize:13.0f];
+    textField.keyboardType = UIKeyboardTypeNumberPad;
 }
 
 - (void)setEqualHeightForTextField:(UITextField *)textField
@@ -85,7 +160,6 @@
     studioRoom.frame = CGRectMake(76, 263, 70, 30);
     studioRoom.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     studioRoom.titleLabel.textAlignment = NSTextAlignmentRight;
-    studioRoom.checkState = M13CheckboxStateChecked;
     [studioRoom addTarget:self action:@selector(checkStudio:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:studioRoom];
     
@@ -121,7 +195,6 @@
     vacancyImmediate.frame = CGRectMake(_vacancyLbl.frame.origin.x+_vacancyLbl.frame.size.width+8, _leaseRenewalLbl.frame.origin.y+_leaseRenewalLbl.frame.size.height+8, 100, 30);
     vacancyImmediate.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     vacancyImmediate.titleLabel.textAlignment = NSTextAlignmentRight;
-    vacancyImmediate.checkState = M13CheckboxStateChecked;
     [vacancyImmediate addTarget:self action:@selector(checkVacancyImmediate:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:vacancyImmediate];
     
@@ -145,8 +218,8 @@
     self.leaseRenewalSlider.minimumValue = 0;
     self.leaseRenewalSlider.maximumValue = 365;
     
-    self.leaseRenewalSlider.lowerValue = 0;
-    self.leaseRenewalSlider.upperValue = 365;
+    self.leaseRenewalSlider.lowerValue = 110;
+    self.leaseRenewalSlider.upperValue = 270;
     
     self.leaseRenewalSlider.minimumRange = 10;
     
@@ -192,6 +265,11 @@
 - (IBAction)sliderValueChanged:(id)sender
 {
     [self updateSliderLabels];
+    
+    DEP.userPreferences.minRenewalDays = self.leaseRenewalSlider.lowerValue;
+    DEP.userPreferences.maxRenewalDays = self.leaseRenewalSlider.upperValue;
+    
+    [DEP saveUserPreferences];
 }
 
 - (void)dismissKeyboard
@@ -200,6 +278,26 @@
 }
 
 #pragma mark - UITextField delegates
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if(textField.text.length > 0)
+    {
+        if(textField.tag == 1)
+            DEP.userPreferences.minRent = textField.text.integerValue;
+        
+        if(textField.tag == 2)
+            DEP.userPreferences.maxRent = textField.text.integerValue;
+        
+        if(textField.tag == 3)
+            DEP.userPreferences.minSqFt = textField.text.integerValue;
+        
+        if(textField.tag == 4)
+            DEP.userPreferences.maxSqFt = textField.text.integerValue;
+    }
+    
+    [DEP saveUserPreferences];
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -218,6 +316,9 @@
     }
     else
         [rooms removeObject:@Studio];
+    
+    DEP.userPreferences.rooms = rooms;
+    [DEP saveUserPreferences];
 }
 
 - (void)check1Bedroom:(M13Checkbox *)checkbox
@@ -229,6 +330,9 @@
     }
     else
         [rooms removeObject:@Bedroom1];
+    
+    DEP.userPreferences.rooms = rooms;
+    [DEP saveUserPreferences];
 }
 
 - (void)check2Bedrooms:(M13Checkbox *)checkbox
@@ -240,6 +344,9 @@
     }
     else
         [rooms removeObject:@Bedrooms2];
+    
+    DEP.userPreferences.rooms = rooms;
+    [DEP saveUserPreferences];
 }
 
 - (void)check3Bedrooms:(M13Checkbox *)checkbox
@@ -251,6 +358,9 @@
     }
     else
         [rooms removeObject:@Bedrooms3];
+    
+    DEP.userPreferences.rooms = rooms;
+    [DEP saveUserPreferences];
 }
 
 - (void)check4Bedrooms:(M13Checkbox *)checkbox
@@ -262,6 +372,9 @@
     }
     else
         [rooms removeObject:@Bedrooms4];
+    
+    DEP.userPreferences.rooms = rooms;
+    [DEP saveUserPreferences];
 }
 
 - (void)checkVacancyImmediate:(M13Checkbox *)checkbox
@@ -273,6 +386,9 @@
     }
     else
         [vacancyTypes removeObject:@VacancyImmediate];
+    
+    DEP.userPreferences.vacancyTypes = vacancyTypes;
+    [DEP saveUserPreferences];
 }
 
 - (void)checkVacancyShortTerm:(M13Checkbox *)checkbox
@@ -285,6 +401,8 @@
     else
         [vacancyTypes removeObject:@VacancyShortTerm];
     
+    DEP.userPreferences.vacancyTypes = vacancyTypes;
+    [DEP saveUserPreferences];
 }
 
 - (void)checkVacancyNegociable:(M13Checkbox *)checkbox
@@ -296,6 +414,9 @@
     }
     else
         [vacancyTypes removeObject:@VacancyNegociable];
+    
+    DEP.userPreferences.vacancyTypes = vacancyTypes;
+    [DEP saveUserPreferences];
 }
 
 @end

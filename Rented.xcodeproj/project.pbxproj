@@ -92,6 +92,7 @@
 		CD50395B1A61F30700A1320D /* PreferencesSeparateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD50395A1A61F30700A1320D /* PreferencesSeparateView.xib */; };
 		CD50395F1A61F3B300A1320D /* PreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD50395D1A61F3B300A1320D /* PreferencesViewController.m */; };
 		CD5039601A61F3B300A1320D /* PreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD50395E1A61F3B300A1320D /* PreferencesViewController.xib */; };
+		CD5039631A620ADE00A1320D /* UserSearchPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5039621A620ADE00A1320D /* UserSearchPreferences.m */; };
 		CD5713101A585651003B4C2E /* NoListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD57130E1A585651003B4C2E /* NoListingViewController.m */; };
 		CD5713111A585651003B4C2E /* NoListingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD57130F1A585651003B4C2E /* NoListingViewController.xib */; };
 		CD5713141A585DAE003B4C2E /* UIViewController+JASidePanels.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5713131A585DAE003B4C2E /* UIViewController+JASidePanels.m */; };
@@ -237,6 +238,8 @@
 		CD50395C1A61F3B300A1320D /* PreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesViewController.h; sourceTree = "<group>"; };
 		CD50395D1A61F3B300A1320D /* PreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesViewController.m; sourceTree = "<group>"; };
 		CD50395E1A61F3B300A1320D /* PreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesViewController.xib; sourceTree = "<group>"; };
+		CD5039611A620ADE00A1320D /* UserSearchPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSearchPreferences.h; sourceTree = "<group>"; };
+		CD5039621A620ADE00A1320D /* UserSearchPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSearchPreferences.m; sourceTree = "<group>"; };
 		CD57130D1A585651003B4C2E /* NoListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoListingViewController.h; sourceTree = "<group>"; };
 		CD57130E1A585651003B4C2E /* NoListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoListingViewController.m; sourceTree = "<group>"; };
 		CD57130F1A585651003B4C2E /* NoListingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoListingViewController.xib; sourceTree = "<group>"; };
@@ -450,6 +453,8 @@
 				CD307A991A48556400D4BE2B /* Implementation */,
 				CD307A9C1A4855C000D4BE2B /* RentedApi.h */,
 				CD307A9D1A4855C000D4BE2B /* RentedApi.m */,
+				CD5039611A620ADE00A1320D /* UserSearchPreferences.h */,
+				CD5039621A620ADE00A1320D /* UserSearchPreferences.m */,
 			);
 			name = Backend;
 			sourceTree = "<group>";
@@ -917,6 +922,7 @@
 				CD5038EC1A61740B00A1320D /* FavoritesTableViewController.m in Sources */,
 				CD35CCEB1A49ACC4007F12D0 /* UIColor+ColorFromHexString.m in Sources */,
 				CD307AA41A4856D000D4BE2B /* UserApi.m in Sources */,
+				CD5039631A620ADE00A1320D /* UserSearchPreferences.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -97,6 +97,31 @@
     
     PFQuery *query = [PFQuery queryWithClassName:@"Apartment"];
     [query whereKey:@"owner" notEqualTo:DEP.authenticatedUser];
+    
+    
+    //include user preferences in search clauses
+    [query whereKey:@"renewaldays" greaterThanOrEqualTo:[NSNumber numberWithInteger:DEP.userPreferences.minRenewalDays]];
+    [query whereKey:@"renewaldays" lessThanOrEqualTo:[NSNumber numberWithInteger:DEP.userPreferences.maxRenewalDays]];
+    
+    if (DEP.userPreferences.vacancyTypes)
+        [query whereKey:@"vacancy" containedIn:DEP.userPreferences.vacancyTypes];
+    
+    if(DEP.userPreferences.minRent > 0)
+        [query whereKey:@"rent" greaterThanOrEqualTo:[NSNumber numberWithInteger:DEP.userPreferences.minRent]];
+    
+    if(DEP.userPreferences.maxRent > 0)
+        [query whereKey:@"rent" lessThanOrEqualTo:[NSNumber numberWithInteger:DEP.userPreferences.maxRent]];
+
+    if(DEP.userPreferences.minSqFt > 0)
+        [query whereKey:@"area" greaterThanOrEqualTo:[NSNumber numberWithInteger:DEP.userPreferences.minSqFt]];
+    
+    if(DEP.userPreferences.maxSqFt > 0)
+        [query whereKey:@"area" lessThanOrEqualTo:[NSNumber numberWithInteger:DEP.userPreferences.maxSqFt]];
+
+    if (DEP.userPreferences.rooms)
+        [query whereKey:@"rooms" containedIn:DEP.userPreferences.rooms];
+    
+    
     [query includeKey:@"owner"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error)

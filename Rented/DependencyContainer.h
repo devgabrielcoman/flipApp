@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "RentedApi.h"
+#import "UserSearchPreferences.h"
 
 #define DEP [DependencyContainer sharedInstance]
 
@@ -17,5 +18,8 @@
 
 @property PFUser *authenticatedUser;
 @property RentedApi *api;
+@property UserSearchPreferences *userPreferences;
+
+- (void)saveUserPreferences;
 
 @end
