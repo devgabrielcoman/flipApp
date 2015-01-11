@@ -21,7 +21,7 @@
 
 - (void)authenticateUserWithFacebook:(void (^)(BOOL authenticated))completionHandler
 {
-    NSArray *permissionsArray = @[ @"user_about_me", @"user_location", @"user_friends"];
+    NSArray *permissionsArray = @[@"user_about_me", @"user_location", @"user_friends", @"user_location"];
     
     [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
         
@@ -51,7 +51,11 @@
             
             [DEP.authenticatedUser setObject:userData[@"id"] forKey:@"facebookID"];
             [DEP.authenticatedUser setObject:userData[@"name"] forKey:@"username"];
-            [DEP.authenticatedUser setObject:userData[@"location"][@"name"] forKey:@"location"];
+            if([[userData allKeys] containsObject:@"location"])
+                [DEP.authenticatedUser setObject:userData[@"location"][@"name"] forKey:@"location"];
+            else
+                [DEP.authenticatedUser setObject:@"(currently not available)" forKey:@"location"];
+                
             [DEP.authenticatedUser setObject:userData[@"gender"] forKey:@"gender"];
             
             //set here listing status too
