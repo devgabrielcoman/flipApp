@@ -93,6 +93,7 @@
 		CD50395F1A61F3B300A1320D /* PreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD50395D1A61F3B300A1320D /* PreferencesViewController.m */; };
 		CD5039601A61F3B300A1320D /* PreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD50395E1A61F3B300A1320D /* PreferencesViewController.xib */; };
 		CD5039631A620ADE00A1320D /* UserSearchPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5039621A620ADE00A1320D /* UserSearchPreferences.m */; };
+		CD5039651A62B3FA00A1320D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5039641A62B3F900A1320D /* Social.framework */; };
 		CD5713101A585651003B4C2E /* NoListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD57130E1A585651003B4C2E /* NoListingViewController.m */; };
 		CD5713111A585651003B4C2E /* NoListingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD57130F1A585651003B4C2E /* NoListingViewController.xib */; };
 		CD5713141A585DAE003B4C2E /* UIViewController+JASidePanels.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5713131A585DAE003B4C2E /* UIViewController+JASidePanels.m */; };
@@ -240,6 +241,7 @@
 		CD50395E1A61F3B300A1320D /* PreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesViewController.xib; sourceTree = "<group>"; };
 		CD5039611A620ADE00A1320D /* UserSearchPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSearchPreferences.h; sourceTree = "<group>"; };
 		CD5039621A620ADE00A1320D /* UserSearchPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSearchPreferences.m; sourceTree = "<group>"; };
+		CD5039641A62B3F900A1320D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CD57130D1A585651003B4C2E /* NoListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoListingViewController.h; sourceTree = "<group>"; };
 		CD57130E1A585651003B4C2E /* NoListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoListingViewController.m; sourceTree = "<group>"; };
 		CD57130F1A585651003B4C2E /* NoListingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoListingViewController.xib; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD5039651A62B3FA00A1320D /* Social.framework in Frameworks */,
 				CD5713241A597C73003B4C2E /* MapKit.framework in Frameworks */,
 				CD5713161A586751003B4C2E /* MessageUI.framework in Frameworks */,
 				CD5BBEE21A4A32250058E79B /* CoreText.framework in Frameworks */,
@@ -300,6 +303,7 @@
 		76483CDB66ACFC63E3E7263A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CD5039641A62B3F900A1320D /* Social.framework */,
 				CD5713231A597C73003B4C2E /* MapKit.framework */,
 				CD5713151A586751003B4C2E /* MessageUI.framework */,
 				CD5BBEE11A4A32250058E79B /* CoreText.framework */,

@@ -79,13 +79,16 @@
                             @"context.fields(mutual_friends)", @"fields",
                             nil
                             ];
-    
-    [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/{%@}", userId]
-                                 parameters:params
-                                 HTTPMethod:@"GET"
-                          completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                                NSLog(@"result: %@", result);
-                                            }];
+    FBSession *session = [PFFacebookUtils session];
+    if(session.state == FBSessionStateOpen)
+    {
+        [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@", userId]
+                                     parameters:params
+                                     HTTPMethod:@"GET"
+                              completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                                    NSLog(@"result: %@", result);
+                                                }];
+    }
 }
 
 @end
