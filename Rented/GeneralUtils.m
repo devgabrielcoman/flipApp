@@ -7,6 +7,7 @@
 //
 
 #import "GeneralUtils.h"
+#import "FacebookFriend.h"
 
 @implementation GeneralUtils
 
@@ -18,7 +19,7 @@
     for (NSNumber *roomType in roomsArray)
     {
         if([roomType integerValue] == Studio)
-            [rooms appendFormat:@"Studio"];
+            [rooms appendFormat:@", Studio"];
         
         if([roomType integerValue] == Bedroom1)
             [rooms appendFormat:@", 1 Bedroom"];
@@ -41,6 +42,22 @@
         finalString = rooms;
     
     return finalString;
+}
+
++ (NSString *)connectedThroughExtendedDescription:(NSMutableArray *)mutalFriends
+{
+    NSMutableString *description = [[NSMutableString alloc] initWithString:@"Connected through "];
+    if(mutalFriends.count == 1)
+    {
+        FacebookFriend *fr = [mutalFriends firstObject];
+        [description appendFormat:@"%@", fr.name];
+    } else {
+        FacebookFriend *fr = [mutalFriends firstObject];
+        [mutalFriends removeObject:fr];
+        [description appendFormat:@"%@ and %lu others", fr.name, (unsigned long)mutalFriends.count];
+    }
+    
+    return description;
 }
 
 @end

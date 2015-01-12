@@ -122,15 +122,45 @@
 //                              tapBlock:nil];
 //    }];
     
-    RTLog(@"authenticated status: %li", (long)[DEP.authenticatedUser[@"listingStatus"] integerValue]);
+    [DEP.api.apartmentApi userApartment:^(PFObject *apartment, NSArray *images, BOOL succeeded) {
+        
+        if(succeeded)
+        {
+            if(apartment != nil && images !=nil)
+            {
+                Apartment *ap = [Apartment new];
+                
+                ap.apartment = apartment;
+                ap.images = images;
+                
+                SingleApartmentViewController *myPlace = [SingleApartmentViewController new];
+                myPlace.apartment = ap;
+                self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:myPlace];
+            }
+            else
+            {
+                self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:[NoListingViewController new]];
+            }
+        }
+        else
+            [UIAlertView showWithTitle:@""
+                               message:@"An error occurred. Please try again"
+                     cancelButtonTitle:@"Dismiss"
+                     otherButtonTitles:nil
+                              tapBlock:nil];
+    }];
     
-    if([DEP.authenticatedUser[@"listingStatus"] integerValue] == ListingAdded)
-    {
-        SingleApartmentViewController *myPlace = [SingleApartmentViewController new];
-        self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:myPlace];
-    }
-    else
-        self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:[NoListingViewController new]];
+    [self.sidePanelController showCenterPanelAnimated:YES];
+    
+//    RTLog(@"authenticated status: %li", (long)[DEP.authenticatedUser[@"listingStatus"] integerValue]);
+//    
+//    if([DEP.authenticatedUser[@"listingStatus"] integerValue] == ListingAdded)
+//    {
+//        SingleApartmentViewController *myPlace = [SingleApartmentViewController new];
+//        self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:myPlace];
+//    }
+//    else
+//        self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:[NoListingViewController new]];
 }
 
 - (IBAction)openOtherPlaces:(id)sender

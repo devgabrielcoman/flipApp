@@ -12,6 +12,7 @@
 		12BAD2031A5A959F00ABE909 /* LocationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BAD2021A5A959F00ABE909 /* LocationUtils.m */; };
 		12BAD2061A5A95E100ABE909 /* MapUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BAD2051A5A95E100ABE909 /* MapUtils.m */; };
 		12D87DDB1A63C76700A979A0 /* UIImage+imageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D87DDA1A63C76700A979A0 /* UIImage+imageWithColor.m */; };
+		12D87DDE1A63D68800A979A0 /* FacebookFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D87DDD1A63D68800A979A0 /* FacebookFriend.m */; };
 		374512C5BFA9503A8B6397D6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E5B27B64FD02829D64CDBC /* libPods.a */; };
 		CD19A99E1A5F35960095163F /* Apartment.m in Sources */ = {isa = PBXBuildFile; fileRef = CD19A99D1A5F35960095163F /* Apartment.m */; };
 		CD1BAFAA1A48466F0012CBAA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1BAFA91A48466F0012CBAA /* main.m */; };
@@ -127,6 +128,8 @@
 		12BAD2051A5A95E100ABE909 /* MapUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapUtils.m; sourceTree = "<group>"; };
 		12D87DD91A63C76700A979A0 /* UIImage+imageWithColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+imageWithColor.h"; sourceTree = "<group>"; };
 		12D87DDA1A63C76700A979A0 /* UIImage+imageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+imageWithColor.m"; sourceTree = "<group>"; };
+		12D87DDC1A63D68800A979A0 /* FacebookFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookFriend.h; sourceTree = "<group>"; };
+		12D87DDD1A63D68800A979A0 /* FacebookFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookFriend.m; sourceTree = "<group>"; };
 		CADD9CDB49CF1FD79BA7F002 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CD19A99C1A5F35960095163F /* Apartment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Apartment.h; sourceTree = "<group>"; };
 		CD19A99D1A5F35960095163F /* Apartment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Apartment.m; sourceTree = "<group>"; };
@@ -331,6 +334,8 @@
 			children = (
 				CD19A99C1A5F35960095163F /* Apartment.h */,
 				CD19A99D1A5F35960095163F /* Apartment.m */,
+				12D87DDC1A63D68800A979A0 /* FacebookFriend.h */,
+				12D87DDD1A63D68800A979A0 /* FacebookFriend.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -899,6 +904,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD50395F1A61F3B300A1320D /* PreferencesViewController.m in Sources */,
+				12D87DDE1A63D68800A979A0 /* FacebookFriend.m in Sources */,
 				CD50393A1A61E09000A1320D /* M13Checkbox.m in Sources */,
 				12BAD2061A5A95E100ABE909 /* MapUtils.m in Sources */,
 				CD5713101A585651003B4C2E /* NoListingViewController.m in Sources */,

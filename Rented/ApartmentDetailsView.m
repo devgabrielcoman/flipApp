@@ -24,6 +24,9 @@
     
     _flipBtn.titleLabel.font = [UIFont fontWithName:@"Gotham-Medium" size:15.0];
     [_flipBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"47a0db"]] forState:UIControlStateNormal];
+    
+    _connectedThroughLbl.font = [UIFont fontWithName:@"GothamRounded-Light" size:12.0];
+    
     //_flipBtn.backgroundColor = [UIColor lightGrayColor];
 }
 

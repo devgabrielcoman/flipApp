@@ -81,7 +81,7 @@
     
     PFUser *owner = ap.apartment[@"owner"];
     
-    cell.apartmentDescriptionLbl.text = [NSString stringWithFormat:@"%@'s apartment", owner[@"username"]];
+    cell.apartmentDescriptionLbl.text = [NSString stringWithFormat:@"%@'s apartment", owner.username];
     cell.locationLbl.text = ap.apartment[@"locationName"];
     
     return cell;

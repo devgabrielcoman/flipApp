@@ -35,27 +35,7 @@
     
     expandedRow = [NSIndexPath indexPathForRow:0 inSection:-1];
     
-    [DEP.api.apartmentApi userApartment:^(PFObject *apartment, NSArray *images, BOOL succeeded) {
-        if(succeeded)
-        {
-            if(apartment)
-            {
-                Apartment *ap = [Apartment new];
-                
-                ap.apartment = apartment;
-                ap.images = images;
-                
-                self.apartment = ap;
-                [self.tableView reloadData];
-            }
-        }
-        else
-            [UIAlertView showWithTitle:@""
-                               message:@"An error occurred. Please try again"
-                     cancelButtonTitle:@"Dismiss"
-                     otherButtonTitles:nil
-                              tapBlock:nil];
-    }];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source

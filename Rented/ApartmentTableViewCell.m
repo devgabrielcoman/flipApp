@@ -7,6 +7,8 @@
 //
 
 #import "ApartmentTableViewCell.h"
+#import "GeneralUtils.h"
+
 
 @implementation ApartmentTableViewCell
 
@@ -20,15 +22,6 @@
     
     _apartmentDetailsView = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentDetailsView" owner:self options:nil] firstObject];
     _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight, wScr, ApartmentDetailsViewHeight);
-    
-    if(!_currentUserIsOwner)
-    {
-        _apartmentTopView.connectedThroughImgView.alpha = 0.0;
-        _apartmentTopView.connectedThroughLbl.alpha = 0.0;
-        
-        _apartmentDetailsView.connectedThroughImageView.alpha = 0.0;
-        _apartmentDetailsView.connectedThroughLbl.alpha = 0.0;
-    }
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
@@ -45,6 +38,54 @@
     [_apartmentDetailsView setApartmentDetails:apartment];
     _currentUserIsOwner = isOwner;
     _apartmentDetailsView.currentUserIsOwner = isOwner;
+    
+    if(_currentUserIsOwner)
+    {
+        _apartmentTopView.connectedThroughImgView.alpha = 0.0;
+        _apartmentTopView.connectedThroughLbl.alpha = 0.0;
+        
+        _apartmentDetailsView.connectedThroughImageView.alpha = 0.0;
+        _apartmentDetailsView.connectedThroughLbl.alpha = 0.0;
+    }
+    else
+    {
+        _apartmentTopView.connectedThroughImgView.alpha = 1.0;
+        _apartmentDetailsView.connectedThroughImageView.alpha = 1.0;
+        
+        PFUser *apartmentOwner = apartment[@"owner"];
+        [DEP.api.userApi getFacebookMutualFriendsWithFriend:apartmentOwner[@"facebookID"] completionHandler:^(NSArray *mutualFriends, BOOL succeeded) {
+            if(succeeded)
+            {
+                if(mutualFriends)
+                {
+                    if(mutualFriends.count == 0)
+                    {
+                        _apartmentTopView.connectedThroughLbl.text = @"No connections";
+                        _apartmentDetailsView.connectedThroughLbl.text = @"No connections";
+                    }
+                    else
+                    {
+                        _apartmentTopView.connectedThroughLbl.text = [NSString stringWithFormat:@"%lu", (unsigned long)mutualFriends.count];
+                        _apartmentDetailsView.connectedThroughLbl.text = [GeneralUtils connectedThroughExtendedDescription:[[NSMutableArray alloc] initWithArray:mutualFriends]];
+                    }
+                    
+                }
+                else
+                {
+                    _apartmentTopView.connectedThroughLbl.text = @"No connections";
+                    _apartmentDetailsView.connectedThroughLbl.text = @"No connections";
+                }
+            }
+            else
+            {
+                _apartmentTopView.connectedThroughLbl.text = @"No connections";
+                _apartmentDetailsView.connectedThroughLbl.text = @"No connections";
+            }
+            
+            _apartmentTopView.connectedThroughLbl.alpha = 1.0;
+            _apartmentDetailsView.connectedThroughLbl.alpha = 1.0;
+        }];
+    }
 }
 
 - (void)setApartmentIndex:(NSInteger)apartmentIndex
