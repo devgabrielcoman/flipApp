@@ -23,6 +23,9 @@
 #import "AuthenticationViewController.h"
 
 @interface DashboardViewController ()<MFMailComposeViewControllerDelegate>
+{
+    NSString *lastUserId;
+}
 
 @property (weak, nonatomic) IBOutlet AsyncImageView *profileImgView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLbl;
@@ -41,7 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    lastUserId = @"";
     [self setVisualDetails];
 }
 
@@ -52,12 +55,17 @@
 
 - (void)setProfileData
 {
-    _usernameLbl.text = DEP.authenticatedUser.username;
-    [_locationLbl setTitle:DEP.authenticatedUser[@"location"] forState:UIControlStateNormal];
-    
-    _profileImgView.showActivityIndicator = YES;
-    _profileImgView.image = nil;
-    _profileImgView.imageURL = [NSURL URLWithString:DEP.authenticatedUser[@"profilePictureUrl"]];
+    if(![lastUserId isEqualToString:DEP.authenticatedUser[@"facebookID"]])
+    {
+        _usernameLbl.text = DEP.authenticatedUser.username;
+        [_locationLbl setTitle:DEP.authenticatedUser[@"location"] forState:UIControlStateNormal];
+        
+        _profileImgView.showActivityIndicator = YES;
+        _profileImgView.image = nil;
+        _profileImgView.imageURL = [NSURL URLWithString:DEP.authenticatedUser[@"profilePictureUrl"]];
+        
+        lastUserId = DEP.authenticatedUser[@"facebookID"];
+    }
 }
 
 - (void)setVisualDetails
