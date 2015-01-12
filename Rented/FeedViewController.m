@@ -8,6 +8,7 @@
 
 #import "FeedViewController.h"
 #import "AuthenticationViewController.h"
+#import "TutorialViewController.h"
 #import "ApartmentTableViewCell.h"
 #import <MWPhotoBrowser.h>
 #import "GalleryNavigationController.h"
@@ -72,6 +73,15 @@
 
 - (void)reloadFeed:(NSNotification*)notification
 {
+    NSNumber *didShowTutorial = [[NSUserDefaults standardUserDefaults] objectForKey:@"didShowTutorial"];
+    
+    if (didShowTutorial == nil){
+        TutorialViewController *tutorial = [[TutorialViewController alloc] initWithNibName:nil bundle:nil];
+        
+        [self presentViewController:tutorial animated:YES completion:^{
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:@YES] forKey:@"didShowTutorial"];
+        }];
+    }
     [self reloadFeedData];
 }
 

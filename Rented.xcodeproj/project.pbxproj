@@ -14,6 +14,13 @@
 		12D87DDB1A63C76700A979A0 /* UIImage+imageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D87DDA1A63C76700A979A0 /* UIImage+imageWithColor.m */; };
 		12D87DDE1A63D68800A979A0 /* FacebookFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D87DDD1A63D68800A979A0 /* FacebookFriend.m */; };
 		374512C5BFA9503A8B6397D6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E5B27B64FD02829D64CDBC /* libPods.a */; };
+		9AD8DA9A1A64592C001F8F2C /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8DA981A64592C001F8F2C /* TutorialViewController.m */; };
+		9AD8DA9B1A64592C001F8F2C /* TutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DA991A64592C001F8F2C /* TutorialViewController.xib */; };
+		9AD8DA9E1A645BCF001F8F2C /* TutorialPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8DA9D1A645BCF001F8F2C /* TutorialPageView.m */; };
+		9AD8DAA01A645BEE001F8F2C /* TutorialPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DA9F1A645BEE001F8F2C /* TutorialPageView.xib */; };
+		9AD8DAA71A645CAD001F8F2C /* Tutorial1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DAA41A645CAD001F8F2C /* Tutorial1.png */; };
+		9AD8DAA81A645CAD001F8F2C /* Tutorial2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DAA51A645CAD001F8F2C /* Tutorial2.png */; };
+		9AD8DAA91A645CAD001F8F2C /* Tutorial3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DAA61A645CAD001F8F2C /* Tutorial3.png */; };
 		CD19A99E1A5F35960095163F /* Apartment.m in Sources */ = {isa = PBXBuildFile; fileRef = CD19A99D1A5F35960095163F /* Apartment.m */; };
 		CD1BAFAA1A48466F0012CBAA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1BAFA91A48466F0012CBAA /* main.m */; };
 		CD1BAFAD1A48466F0012CBAA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1BAFAC1A48466F0012CBAA /* AppDelegate.m */; };
@@ -131,6 +138,15 @@
 		12D87DDA1A63C76700A979A0 /* UIImage+imageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+imageWithColor.m"; sourceTree = "<group>"; };
 		12D87DDC1A63D68800A979A0 /* FacebookFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookFriend.h; sourceTree = "<group>"; };
 		12D87DDD1A63D68800A979A0 /* FacebookFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookFriend.m; sourceTree = "<group>"; };
+		9AD8DA971A64592C001F8F2C /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
+		9AD8DA981A64592C001F8F2C /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialViewController.m; sourceTree = "<group>"; };
+		9AD8DA991A64592C001F8F2C /* TutorialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialViewController.xib; sourceTree = "<group>"; };
+		9AD8DA9C1A645BCF001F8F2C /* TutorialPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialPageView.h; sourceTree = "<group>"; };
+		9AD8DA9D1A645BCF001F8F2C /* TutorialPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialPageView.m; sourceTree = "<group>"; };
+		9AD8DA9F1A645BEE001F8F2C /* TutorialPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialPageView.xib; sourceTree = "<group>"; };
+		9AD8DAA41A645CAD001F8F2C /* Tutorial1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial1.png; sourceTree = "<group>"; };
+		9AD8DAA51A645CAD001F8F2C /* Tutorial2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial2.png; sourceTree = "<group>"; };
+		9AD8DAA61A645CAD001F8F2C /* Tutorial3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial3.png; sourceTree = "<group>"; };
 		CADD9CDB49CF1FD79BA7F002 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CD19A99C1A5F35960095163F /* Apartment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Apartment.h; sourceTree = "<group>"; };
 		CD19A99D1A5F35960095163F /* Apartment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Apartment.m; sourceTree = "<group>"; };
@@ -332,6 +348,46 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9AD8DA961A64590B001F8F2C /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				9AD8DAA21A645C1F001F8F2C /* Tutorial Controller */,
+				9AD8DAA31A645C33001F8F2C /* Tutorial Page */,
+				9AD8DAA11A645C17001F8F2C /* Tutorial Assets */,
+			);
+			name = Tutorial;
+			sourceTree = "<group>";
+		};
+		9AD8DAA11A645C17001F8F2C /* Tutorial Assets */ = {
+			isa = PBXGroup;
+			children = (
+				9AD8DAA41A645CAD001F8F2C /* Tutorial1.png */,
+				9AD8DAA51A645CAD001F8F2C /* Tutorial2.png */,
+				9AD8DAA61A645CAD001F8F2C /* Tutorial3.png */,
+			);
+			name = "Tutorial Assets";
+			sourceTree = "<group>";
+		};
+		9AD8DAA21A645C1F001F8F2C /* Tutorial Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9AD8DA971A64592C001F8F2C /* TutorialViewController.h */,
+				9AD8DA981A64592C001F8F2C /* TutorialViewController.m */,
+				9AD8DA991A64592C001F8F2C /* TutorialViewController.xib */,
+			);
+			name = "Tutorial Controller";
+			sourceTree = "<group>";
+		};
+		9AD8DAA31A645C33001F8F2C /* Tutorial Page */ = {
+			isa = PBXGroup;
+			children = (
+				9AD8DA9C1A645BCF001F8F2C /* TutorialPageView.h */,
+				9AD8DA9D1A645BCF001F8F2C /* TutorialPageView.m */,
+				9AD8DA9F1A645BEE001F8F2C /* TutorialPageView.xib */,
+			);
+			name = "Tutorial Page";
+			sourceTree = "<group>";
+		};
 		CD19A99B1A5F357C0095163F /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -477,6 +533,7 @@
 		CD307A961A48552F00D4BE2B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				9AD8DA961A64590B001F8F2C /* Tutorial */,
 				CD57131D1A597635003B4C2E /* Custom */,
 				CD57130B1A585603003B4C2E /* My place */,
 				CD2A8AE21A5DAC8D0065299A /* Full Map View */,
@@ -820,6 +877,7 @@
 				CD50391E1A61978100A1320D /* slider-default-handle-highlighted@2x.png in Resources */,
 				CD5039361A61978100A1320D /* slider-metal-trackBackground@2x.png in Resources */,
 				CD5039201A61978100A1320D /* slider-default-handle@2x.png in Resources */,
+				9AD8DA9B1A64592C001F8F2C /* TutorialViewController.xib in Resources */,
 				CD5039221A61978100A1320D /* slider-default-track@2x.png in Resources */,
 				CD5039351A61978100A1320D /* slider-metal-trackBackground.png in Resources */,
 				CD50392B1A61978100A1320D /* slider-default7-trackBackground.png in Resources */,
@@ -828,12 +886,15 @@
 				CD2A8B021A5DE4920065299A /* TopApartmentView.xib in Resources */,
 				CD35CCEF1A49B04C007F12D0 /* GothamRnd-Light.otf in Resources */,
 				CD50391F1A61978100A1320D /* slider-default-handle.png in Resources */,
+				9AD8DAA01A645BEE001F8F2C /* TutorialPageView.xib in Resources */,
+				9AD8DAA91A645CAD001F8F2C /* Tutorial3.png in Resources */,
 				CD5039211A61978100A1320D /* slider-default-track.png in Resources */,
 				CD5039601A61F3B300A1320D /* PreferencesViewController.xib in Resources */,
 				CD35CCE71A49A89F007F12D0 /* GothamRnd-Bold.otf in Resources */,
 				CD39D6491A4A0A6C0006F7B7 /* DashboardViewController.xib in Resources */,
 				CD5039231A61978100A1320D /* slider-default-trackBackground.png in Resources */,
 				CD5039251A61978100A1320D /* slider-default-trackCrossedOver@2x.png in Resources */,
+				9AD8DAA81A645CAD001F8F2C /* Tutorial2.png in Resources */,
 				CD5038ED1A61740B00A1320D /* FavoritesTableViewController.xib in Resources */,
 				CD5039281A61978100A1320D /* slider-default7-handle@2x.png in Resources */,
 				CD50391D1A61978100A1320D /* slider-default-handle-highlighted.png in Resources */,
@@ -850,6 +911,7 @@
 				CD5038F31A61743600A1320D /* FavoriteApartmentTableViewCell.xib in Resources */,
 				CD5039291A61978100A1320D /* slider-default7-track.png in Resources */,
 				CD50392A1A61978100A1320D /* slider-default7-track@2x.png in Resources */,
+				9AD8DAA71A645CAD001F8F2C /* Tutorial1.png in Resources */,
 				CD5039241A61978100A1320D /* slider-default-trackCrossedOver.png in Resources */,
 				CD2A8B081A5DE6F10065299A /* ApartmentTableViewCell.xib in Resources */,
 				CD2A8AE71A5DACB10065299A /* FullMapViewViewController.xib in Resources */,
@@ -908,6 +970,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AD8DA9E1A645BCF001F8F2C /* TutorialPageView.m in Sources */,
 				CD50395F1A61F3B300A1320D /* PreferencesViewController.m in Sources */,
 				12D87DDE1A63D68800A979A0 /* FacebookFriend.m in Sources */,
 				CD50393A1A61E09000A1320D /* M13Checkbox.m in Sources */,
@@ -926,6 +989,7 @@
 				CD2A8AE61A5DACB10065299A /* FullMapViewViewController.m in Sources */,
 				CD5039371A61978100A1320D /* NMRangeSlider.m in Sources */,
 				CD57131B1A59755A003B4C2E /* SingleApartmentViewController.m in Sources */,
+				9AD8DA9A1A64592C001F8F2C /* TutorialViewController.m in Sources */,
 				CD2A8B071A5DE6F10065299A /* ApartmentTableViewCell.m in Sources */,
 				CD5039561A61EEC000A1320D /* PreferencesSeparateView.m in Sources */,
 				CD2A8AF11A5DB6AB0065299A /* ApartmentDetailsView.m in Sources */,
