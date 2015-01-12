@@ -20,6 +20,7 @@
 #import "FavoritesTableViewController.h"
 #import "PreferencesViewController.h"
 #import <MessageUI/MFMailComposeViewController.h>
+#import "AuthenticationViewController.h"
 
 @interface DashboardViewController ()<MFMailComposeViewControllerDelegate>
 
@@ -31,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *locationLbl;
 @property (weak, nonatomic) IBOutlet UIButton *preferencesBtn;
 @property (weak, nonatomic) IBOutlet UIButton *saySomethingBtn;
+@property (weak, nonatomic) IBOutlet UIButton *logoutBtn;
 
 @end
 
@@ -60,6 +62,7 @@
     [self.view addSubview:statusBarView];
     
     _myPlaceBtn.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Light" size:15.0];
+    _logoutBtn.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Light" size:15.0];
     _otherPlacesBtn.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Light" size:15.0];
     _likesBtn.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Light" size:15.0];
     
@@ -214,6 +217,14 @@
         
         [self presentViewController:mail animated:YES completion:NULL];
     }
+}
+
+- (IBAction)logoutUser:(id)sender
+{
+    [DEP.api.userApi logoutUser];
+    [self.sidePanelController showCenterPanelAnimated:YES];
+    
+    [self presentViewController:[AuthenticationViewController new] animated:YES completion:nil];
 }
 
 #pragma mark - MailComposer delegate methods

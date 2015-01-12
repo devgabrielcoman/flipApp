@@ -154,6 +154,7 @@
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Favorites"];
     [query whereKey:@"apartment" equalTo:apartment];
+    [query whereKey:@"user" equalTo:DEP.authenticatedUser];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error)
