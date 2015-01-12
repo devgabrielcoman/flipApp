@@ -49,6 +49,7 @@
         {
             NSDictionary *userData = (NSDictionary *)result;
             
+            [DEP.authenticatedUser setObject:userData[@"email"] forKey:@"email"];
             [DEP.authenticatedUser setObject:userData[@"id"] forKey:@"facebookID"];
             [DEP.authenticatedUser setObject:userData[@"name"] forKey:@"username"];
             if([[userData allKeys] containsObject:@"location"])
@@ -75,19 +76,12 @@
 
 - (void)getFacebookMutualFriendsWithFriend:(NSString *)userId completionHandler:(void (^)(NSArray *mutualFriends, BOOL succeeded))completion
 {
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            @"context.fields(mutual_friends)", @"fields",
-                            nil
-                            ];
     FBSession *session = [PFFacebookUtils session];
     if(session.state == FBSessionStateOpen)
     {
-        [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@", userId]
-                                     parameters:params
-                                     HTTPMethod:@"GET"
-                              completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                                    NSLog(@"result: %@", result);
-                                                }];
+        [FBRequestConnection startWithGraphPath:@"me/friends" parameters:nil HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+            NSLog(@"result %@",result);
+        }];
     }
 }
 

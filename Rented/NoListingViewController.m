@@ -73,7 +73,7 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
     
-    if(result != MFMailComposeResultCancelled && result != MFMailComposeResultFailed)
+    if(result == MFMailComposeResultFailed)
         [UIAlertView showWithTitle:@""
                            message:@"An error occurred, please try again."
                  cancelButtonTitle:@"Dismiss"

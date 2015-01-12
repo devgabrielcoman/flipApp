@@ -36,23 +36,28 @@
 - (void)setDelegate:(id<ApartmentCellProtocol>)delegate
 {
     _apartmentTopView.delegate = delegate;
+    _apartmentDetailsView.delegate = delegate;
 }
 
-- (void)setApartment:(PFObject *)apartment andImages:(NSArray *)images
+- (void)setApartment:(PFObject *)apartment withImages:(NSArray *)images andCurrentUsersStatus:(BOOL)isOwner;
 {
     [_apartmentTopView setApartmentDetails:apartment andImages:images];
     [_apartmentDetailsView setApartmentDetails:apartment];
+    _currentUserIsOwner = isOwner;
+    _apartmentDetailsView.currentUserIsOwner = isOwner;
 }
 
 - (void)setApartmentIndex:(NSInteger)apartmentIndex
 {
     [_apartmentTopView setApartmentIndex:apartmentIndex];
+    _apartmentDetailsView.apartmentIndex = apartmentIndex;
     _index = apartmentIndex;
 }
 
 - (void)showApartmentDetails
 {
 //check again
+    [_apartmentDetailsView updateFlipButtonStatus];
     _apartmentTopView.frame = CGRectMake(0, 0, wScr, hScr-statusBarHeight);
     [_apartmentTopView layoutIfNeeded];
     

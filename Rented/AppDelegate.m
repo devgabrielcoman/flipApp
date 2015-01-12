@@ -57,7 +57,7 @@
 - (void)setupParse
 {
 #pragma warning - Check the warning with enableLocalDatastore and initializeFacebook
-    [Parse enableLocalDatastore];
+    //[Parse enableLocalDatastore];
     [Parse setApplicationId:ParseApplicationID
                   clientKey:ParseCliendKey];
     [PFFacebookUtils initializeFacebook];

@@ -17,8 +17,9 @@
 #import "UITableView+AnimationControl.h"
 #import "LikedApartment.h"
 #import <UIAlertView+Blocks.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
-@interface FeedViewController ()<UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, ApartmentCellProtocol>
+@interface FeedViewController ()<UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, ApartmentCellProtocol, MFMailComposeViewControllerDelegate>
 {
     NSIndexPath *expandedRow;
 }
@@ -113,9 +114,8 @@
     Apartment *ap = _apartments[indexPath.row];
     
     [cell setApartmentIndex:indexPath.row];
-    [cell setApartment:ap.apartment andImages:ap.images];
+    [cell setApartment:ap.apartment withImages:ap.images andCurrentUsersStatus:NO];
     [cell setDelegate:self];
-    cell.currentUserIsOwner = NO;
     
     if(![indexPath isEqual:expandedRow])
     {
@@ -236,6 +236,73 @@
         [_apartmentGalleryPhotos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:imageFile.url]]];
     }
 }
+
+- (void)getApartmentAtIndex:(NSInteger)index
+{
+    Apartment *ap = _apartments[index];
+    [self sendGetApartmentMessageToUser:ap.apartment[@"owner"]];
+}
+
+- (void)sendGetApartmentMessageToUser:(PFUser *)user
+{
+    if (![MFMailComposeViewController canSendMail])
+    {
+        [UIAlertView showWithTitle:@""
+                           message:@"Cannot send emails from this device!"
+                 cancelButtonTitle:@"Dismiss"
+                 otherButtonTitles:nil
+                          tapBlock:nil];
+    }
+    else
+    {
+        NSString *email = user[@"email"];
+        if(email.length)
+        {
+            MFMailComposeViewController *mail = [MFMailComposeViewController new];
+            
+            mail.mailComposeDelegate = self;
+            
+            [mail setSubject:@"Flip apartment"];
+            
+            NSArray *toRecipients = [NSArray arrayWithObject:email];
+            NSArray *ccRecipients = @[];
+            NSArray *bccRecipients = @[];
+            
+            [mail setToRecipients:toRecipients];
+            [mail setCcRecipients:ccRecipients];
+            [mail setBccRecipients:bccRecipients];
+            
+            NSString *emailBody = [NSString stringWithFormat:@"Hi %@, <br> I really like your apartment and i would to join....", user.username];
+            [mail setMessageBody:emailBody isHTML:YES];
+            
+            [self presentViewController:mail animated:YES completion:NULL];
+        }
+        else
+        {
+            [UIAlertView showWithTitle:@""
+                               message:@"You flip mate doesn't have an email address..."
+                     cancelButtonTitle:@"Dismiss"
+                     otherButtonTitles:nil
+                              tapBlock:nil];
+        }
+
+    }
+}
+
+#pragma mark - MailComposer delegate methods
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    if(result == MFMailComposeResultFailed)
+        [UIAlertView showWithTitle:@""
+                           message:@"An error occurred, please try again."
+                 cancelButtonTitle:@"Dismiss"
+                 otherButtonTitles:nil
+                          tapBlock:nil];
+}
+
 
 #pragma mark - MWPhotoBrowser delegate
 

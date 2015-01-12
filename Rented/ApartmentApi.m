@@ -207,4 +207,13 @@
     }];
 }
 
+- (void)makeApartmentLive:(PFObject *)apartment completion:(void (^)(BOOL succeeded))completionHandler
+{
+    apartment[@"visible"] = [NSNumber numberWithInteger:1];
+    
+    [apartment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        completionHandler(succeeded);
+    }];
+}
+
 @end

@@ -11,6 +11,7 @@
 		12BAD2001A5A824D00ABE909 /* ApartmentApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BAD1FF1A5A824D00ABE909 /* ApartmentApi.m */; };
 		12BAD2031A5A959F00ABE909 /* LocationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BAD2021A5A959F00ABE909 /* LocationUtils.m */; };
 		12BAD2061A5A95E100ABE909 /* MapUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BAD2051A5A95E100ABE909 /* MapUtils.m */; };
+		12D87DDB1A63C76700A979A0 /* UIImage+imageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D87DDA1A63C76700A979A0 /* UIImage+imageWithColor.m */; };
 		374512C5BFA9503A8B6397D6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E5B27B64FD02829D64CDBC /* libPods.a */; };
 		CD19A99E1A5F35960095163F /* Apartment.m in Sources */ = {isa = PBXBuildFile; fileRef = CD19A99D1A5F35960095163F /* Apartment.m */; };
 		CD1BAFAA1A48466F0012CBAA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1BAFA91A48466F0012CBAA /* main.m */; };
@@ -124,6 +125,8 @@
 		12BAD2021A5A959F00ABE909 /* LocationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationUtils.m; sourceTree = "<group>"; };
 		12BAD2041A5A95E100ABE909 /* MapUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapUtils.h; sourceTree = "<group>"; };
 		12BAD2051A5A95E100ABE909 /* MapUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapUtils.m; sourceTree = "<group>"; };
+		12D87DD91A63C76700A979A0 /* UIImage+imageWithColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+imageWithColor.h"; sourceTree = "<group>"; };
+		12D87DDA1A63C76700A979A0 /* UIImage+imageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+imageWithColor.m"; sourceTree = "<group>"; };
 		CADD9CDB49CF1FD79BA7F002 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CD19A99C1A5F35960095163F /* Apartment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Apartment.h; sourceTree = "<group>"; };
 		CD19A99D1A5F35960095163F /* Apartment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Apartment.m; sourceTree = "<group>"; };
@@ -497,6 +500,8 @@
 				CD5038F51A617EC800A1320D /* GeneralUtils.m */,
 				CD5039381A61E09000A1320D /* M13Checkbox.h */,
 				CD5039391A61E09000A1320D /* M13Checkbox.m */,
+				12D87DD91A63C76700A979A0 /* UIImage+imageWithColor.h */,
+				12D87DDA1A63C76700A979A0 /* UIImage+imageWithColor.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -900,6 +905,7 @@
 				120547601A5FF1110036BB75 /* UITableView+AnimationControl.m in Sources */,
 				CD1BAFAD1A48466F0012CBAA /* AppDelegate.m in Sources */,
 				CD48D2461A5B1E7800C85AA6 /* GalleryNavigationController.m in Sources */,
+				12D87DDB1A63C76700A979A0 /* UIImage+imageWithColor.m in Sources */,
 				CD2A8B001A5DE47E0065299A /* TopApartmentView.m in Sources */,
 				CD1BAFAA1A48466F0012CBAA /* main.m in Sources */,
 				12BAD2031A5A959F00ABE909 /* LocationUtils.m in Sources */,
