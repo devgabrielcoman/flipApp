@@ -43,6 +43,10 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setVisualDetails];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
     [self setProfileData];
 }
 
@@ -52,6 +56,7 @@
     [_locationLbl setTitle:DEP.authenticatedUser[@"location"] forState:UIControlStateNormal];
     
     _profileImgView.showActivityIndicator = YES;
+    _profileImgView.image = nil;
     _profileImgView.imageURL = [NSURL URLWithString:DEP.authenticatedUser[@"profilePictureUrl"]];
 }
 
@@ -222,9 +227,12 @@
 - (IBAction)logoutUser:(id)sender
 {
     [DEP.api.userApi logoutUser];
-    [self.sidePanelController showCenterPanelAnimated:YES];
+    DEP.authenticatedUser = nil;
     
-    [self presentViewController:[AuthenticationViewController new] animated:YES completion:nil];
+    [self presentViewController:[AuthenticationViewController new] animated:YES completion:^{
+        FeedViewController *feedVC = [FeedViewController new];
+        self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:feedVC];
+    }];
 }
 
 #pragma mark - MailComposer delegate methods

@@ -70,10 +70,11 @@
             }
         }];
     }
-    
-    [DEP.api.userApi getFacebookMutualFriendsWithFriend:@"799877360063203" completionHandler:^(NSArray *mutualFriends, BOOL succeeded) {
-        
-    }];
+    else
+    {
+        self.apartments = @[];
+        [self.tableView reloadData];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
