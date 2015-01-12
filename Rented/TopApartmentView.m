@@ -37,12 +37,12 @@
     UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeLeft:)];
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [self addGestureRecognizer:recognizer];
-    
+
     //Add a right swipe gesture recognizer
-//    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeRight:)];
-//    recognizer.delegate = self;
-//    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
-//    [self addGestureRecognizer:recognizer];
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeRight:)];
+    recognizer.delegate = self;
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [self addGestureRecognizer:recognizer];
     
     
 #warning fix this!
@@ -119,10 +119,15 @@
     [_delegate addToFravoritesApartmentFromIndex:_apartmentIndex];
 }
 
-//- (void)handleSwipeRight:(id)gesture
-//{
-//    RTLog(@"swipe right on cell with index: %li", (long)_apartmentIndex);
-//}
+- (void)handleSwipeRight:(id)gesture
+{
+    RTLog(@"swipe right on cell with index: %li", (long)_apartmentIndex);
+    
+    if ([_delegate respondsToSelector:@selector(switchToNextApartmentFromIndex:)])
+    {
+        [_delegate switchToNextApartmentFromIndex:_apartmentIndex];
+    }
+}
 
 #pragma mark - Map View Delegate
 

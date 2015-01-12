@@ -21,6 +21,7 @@
 @interface FeedViewController ()<UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, ApartmentCellProtocol>
 {
     NSIndexPath *expandedRow;
+    int indexOfShownApartment;
 }
 
 @property NSMutableArray *apartmentGalleryPhotos;
@@ -63,6 +64,7 @@
             if(succeeded)
             {
                 self.apartments = apartments;
+                indexOfShownApartment = 0;
                 [self.tableView reloadData];
             }
         }];
@@ -89,7 +91,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _apartments.count;
+    return self.apartments.count && indexOfShownApartment ? 1 : 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -110,7 +112,7 @@
     if(!cell)
         cell = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentTableViewCell" owner:self options:nil] firstObject];
     
-    Apartment *ap = _apartments[indexPath.row];
+    Apartment *ap = _apartments[indexOfShownApartment];
     
     [cell setApartmentIndex:indexPath.row];
     [cell setApartment:ap.apartment andImages:ap.images];
@@ -195,6 +197,26 @@
     }
 }
 
+
+- (void)createGalleryPhotosArray:(NSInteger)index
+{
+    if(!_apartmentGalleryPhotos)
+        _apartmentGalleryPhotos = [NSMutableArray new];
+    
+    [_apartmentGalleryPhotos removeAllObjects];
+    
+    Apartment *ap = _apartments[index];
+    
+    for (PFObject *imageObject in ap.images)
+    {
+        PFFile *imageFile = imageObject[@"image"];
+        [_apartmentGalleryPhotos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:imageFile.url]]];
+    }
+}
+
+
+#pragma mark - Appartament delegate
+
 - (void)addToFravoritesApartmentFromIndex:(NSInteger)index
 {
     ApartmentTableViewCell *cell = (ApartmentTableViewCell *) [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
@@ -221,20 +243,11 @@
                                        }];
 }
 
-- (void)createGalleryPhotosArray:(NSInteger)index
-{
-    if(!_apartmentGalleryPhotos)
-        _apartmentGalleryPhotos = [NSMutableArray new];
-    
-    [_apartmentGalleryPhotos removeAllObjects];
-    
-    Apartment *ap = _apartments[index];
-    
-    for (PFObject *imageObject in ap.images)
-    {
-        PFFile *imageFile = imageObject[@"image"];
-        [_apartmentGalleryPhotos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:imageFile.url]]];
-    }
+-(void)switchToNextApartmentFromIndex:(NSInteger)index{
+    if (++indexOfShownApartment > _apartments.count)
+        indexOfShownApartment = 0;
+
+    [_tableView reloadData];
 }
 
 #pragma mark - MWPhotoBrowser delegate

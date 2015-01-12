@@ -14,5 +14,6 @@
 - (void)displayFullMapViewForApartmentAtIndex:(NSInteger)index;
 - (void)displayMoreInfoForApartmentAtIndex:(NSInteger)index;
 - (void)addToFravoritesApartmentFromIndex:(NSInteger)index;
+- (void)switchToNextApartmentFromIndex:(NSInteger)index;
 
 @end
