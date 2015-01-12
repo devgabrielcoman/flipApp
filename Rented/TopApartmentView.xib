@@ -13,8 +13,8 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXd-sG-Cdd">
-                    <rect key="frame" x="55" y="608" width="80" height="48"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="63" translatesAutoresizingMaskIntoConstraints="NO" id="gXd-sG-Cdd">
+                    <rect key="frame" x="55" y="608" width="63" height="48"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="hoN-bo-LNY"/>
                         <constraint firstAttribute="height" constant="48" id="yqx-iE-ZQB"/>
@@ -100,17 +100,17 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="04B-2a-ova">
-                    <rect key="frame" x="137" y="508" width="140" height="140"/>
+                    <rect key="frame" x="120" y="474" width="174" height="174"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="04B-2a-ova" secondAttribute="height" multiplier="1:1" id="2az-kR-cYh"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="9gb-gM-KVR"/>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="ZCO-VA-ea4"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="9gb-gM-KVR"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="ZCO-VA-ea4"/>
                     </constraints>
                 </mapView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="04B-2a-ova" firstAttribute="leading" secondItem="gXd-sG-Cdd" secondAttribute="trailing" constant="2" id="08x-pw-y9q"/>
+                <constraint firstItem="04B-2a-ova" firstAttribute="leading" secondItem="gXd-sG-Cdd" secondAttribute="trailing" priority="750" constant="2" id="08x-pw-y9q"/>
                 <constraint firstAttribute="trailing" secondItem="TFx-rq-Jww" secondAttribute="trailing" id="4wu-eA-RY4"/>
                 <constraint firstItem="AXh-ZL-8y8" firstAttribute="leading" secondItem="sJ2-4s-1Bp" secondAttribute="trailing" constant="15" id="8bZ-p9-yIj"/>
                 <constraint firstItem="04B-2a-ova" firstAttribute="leading" secondItem="kRj-vF-PJt" secondAttribute="trailing" constant="79" id="9F0-Uo-88d"/>
@@ -124,13 +124,14 @@
                 <constraint firstItem="TFx-rq-Jww" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="MCB-Cr-gUa"/>
                 <constraint firstAttribute="bottom" secondItem="sJ2-4s-1Bp" secondAttribute="bottom" constant="49" id="ORf-gg-cu8"/>
                 <constraint firstAttribute="bottom" secondItem="9l3-c5-1mW" secondAttribute="bottom" constant="11" id="PaX-i2-klv"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="04B-2a-ova" secondAttribute="trailing" priority="750" constant="137" id="Twx-fk-h1p"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="04B-2a-ova" secondAttribute="trailing" priority="750" constant="120" id="Twx-fk-h1p"/>
                 <constraint firstItem="9l3-c5-1mW" firstAttribute="top" secondItem="gXd-sG-Cdd" secondAttribute="bottom" constant="41" id="UT8-kK-ec7"/>
                 <constraint firstItem="9l3-c5-1mW" firstAttribute="top" secondItem="04B-2a-ova" secondAttribute="bottom" constant="49" id="UWR-kh-11F"/>
-                <constraint firstItem="04B-2a-ova" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" priority="750" constant="137" id="UaL-tq-YaY"/>
+                <constraint firstItem="04B-2a-ova" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" priority="750" constant="120" id="UaL-tq-YaY"/>
                 <constraint firstItem="64a-dk-hek" firstAttribute="leading" secondItem="04B-2a-ova" secondAttribute="trailing" constant="15" id="UcU-jW-NeB"/>
                 <constraint firstAttribute="bottom" secondItem="cMb-YZ-dSw" secondAttribute="bottom" constant="74" id="bAy-NR-5Ff"/>
                 <constraint firstItem="04B-2a-ova" firstAttribute="centerX" secondItem="TFx-rq-Jww" secondAttribute="centerX" id="c98-K9-5KE"/>
+                <constraint firstItem="04B-2a-ova" firstAttribute="leading" secondItem="gXd-sG-Cdd" secondAttribute="trailing" constant="2" id="cfy-nP-NSW"/>
                 <constraint firstItem="gXd-sG-Cdd" firstAttribute="top" secondItem="TFx-rq-Jww" secondAttribute="bottom" constant="8" symbolic="YES" id="dDD-AV-ra2"/>
                 <constraint firstItem="cMb-YZ-dSw" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" id="f5P-pU-1FF"/>
                 <constraint firstItem="sJ2-4s-1Bp" firstAttribute="top" secondItem="kRj-vF-PJt" secondAttribute="bottom" constant="13" id="fMo-9k-Vhi"/>
@@ -155,6 +156,7 @@
                     <exclude reference="hn9-mn-jTH"/>
                     <exclude reference="lGC-ti-KQt"/>
                     <exclude reference="9F0-Uo-88d"/>
+                    <exclude reference="cfy-nP-NSW"/>
                     <exclude reference="UcU-jW-NeB"/>
                     <exclude reference="qsg-0Z-V6c"/>
                     <exclude reference="tNC-DH-Y0q"/>
