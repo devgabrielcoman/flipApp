@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -12,13 +13,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="04B-2a-ova">
-                    <rect key="frame" x="137" y="508" width="140" height="140"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="140" id="9gb-gM-KVR"/>
-                        <constraint firstAttribute="width" constant="140" id="ZCO-VA-ea4"/>
-                    </constraints>
-                </mapView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXd-sG-Cdd">
                     <rect key="frame" x="55" y="608" width="80" height="48"/>
                     <constraints>
@@ -105,6 +99,14 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="04B-2a-ova">
+                    <rect key="frame" x="137" y="508" width="140" height="140"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="04B-2a-ova" secondAttribute="height" multiplier="1:1" id="2az-kR-cYh"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="9gb-gM-KVR"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="ZCO-VA-ea4"/>
+                    </constraints>
+                </mapView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -122,8 +124,10 @@
                 <constraint firstItem="TFx-rq-Jww" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="MCB-Cr-gUa"/>
                 <constraint firstAttribute="bottom" secondItem="sJ2-4s-1Bp" secondAttribute="bottom" constant="49" id="ORf-gg-cu8"/>
                 <constraint firstAttribute="bottom" secondItem="9l3-c5-1mW" secondAttribute="bottom" constant="11" id="PaX-i2-klv"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="04B-2a-ova" secondAttribute="trailing" priority="750" constant="137" id="Twx-fk-h1p"/>
                 <constraint firstItem="9l3-c5-1mW" firstAttribute="top" secondItem="gXd-sG-Cdd" secondAttribute="bottom" constant="41" id="UT8-kK-ec7"/>
                 <constraint firstItem="9l3-c5-1mW" firstAttribute="top" secondItem="04B-2a-ova" secondAttribute="bottom" constant="49" id="UWR-kh-11F"/>
+                <constraint firstItem="04B-2a-ova" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" priority="750" constant="137" id="UaL-tq-YaY"/>
                 <constraint firstItem="64a-dk-hek" firstAttribute="leading" secondItem="04B-2a-ova" secondAttribute="trailing" constant="15" id="UcU-jW-NeB"/>
                 <constraint firstAttribute="bottom" secondItem="cMb-YZ-dSw" secondAttribute="bottom" constant="74" id="bAy-NR-5Ff"/>
                 <constraint firstItem="04B-2a-ova" firstAttribute="centerX" secondItem="TFx-rq-Jww" secondAttribute="centerX" id="c98-K9-5KE"/>
@@ -172,6 +176,6 @@
     </objects>
     <resources>
         <image name="clock" width="20" height="20"/>
-        <image name="users" width="25" height="25"/>
+        <image name="users" width="52" height="61"/>
     </resources>
 </document>

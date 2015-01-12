@@ -23,6 +23,8 @@
 {
     NSIndexPath *expandedRow;
     int indexOfShownApartment;
+    
+    UILabel *lbNoMoreApartments;
 }
 
 @property NSMutableArray *apartmentGalleryPhotos;
@@ -35,6 +37,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
+    
+    lbNoMoreApartments = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 200,500)];
+    [lbNoMoreApartments setText:@"That's all we've got for today."];
+    [lbNoMoreApartments setNumberOfLines:0];
+    [lbNoMoreApartments setTextAlignment:NSTextAlignmentCenter];
+    [lbNoMoreApartments sizeToFit];
+    lbNoMoreApartments.center = self.tableView.center;
+    [self.tableView addSubview:lbNoMoreApartments];
+    
+    lbNoMoreApartments.hidden = YES;
     
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -50,6 +63,11 @@
                                                  name:@"ReloadFeedData" object:nil];
     
     [self reloadFeedData];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+
+    
 }
 
 - (void)reloadFeed:(NSNotification*)notification
@@ -92,7 +110,12 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.apartments.count && (indexOfShownApartment >= 0) ? 1 : 0;
+    int rows = self.apartments.count && (indexOfShownApartment >= 0) ? 1 : 0;
+    
+    // afisare label doar cand nu sunt celule afisate si exista totusi apartamente - aka am dat scroll pana la capat => nu vad labelul la 'loading';
+    lbNoMoreApartments.hidden = !(!rows && self.apartments.count > 0);
+
+    return rows;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -338,10 +361,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    //[self.navigationController setNavigationBarHidden:YES animated:NO];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

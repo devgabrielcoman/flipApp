@@ -17,8 +17,7 @@
 - (void)awakeFromNib
 {
     //self.frame = CGRectMake(0, 0, wScr, hScr-statusBarHeight);
-    
-    _mapView.layer.cornerRadius = _mapView.frame.size.width/2;
+
     _mapView.layer.masksToBounds = YES;
     _mapView.delegate = self;
     
@@ -44,11 +43,12 @@
     recognizer.delegate = self;
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
     [self addGestureRecognizer:recognizer];
+}
+
+-(void)layoutSubviews{
+    [super layoutSubviews];
     
-    
-#warning fix this!
-    [_mapView removeFromSuperview];
-    [self addSubview:_mapView];
+    _mapView.layer.cornerRadius = _mapView.bounds.size.width/2;
 }
 
 - (void)setApartmentDetails:(PFObject *)apartment andImages:(NSArray *)images
