@@ -22,6 +22,7 @@
 @interface FeedViewController ()<UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, ApartmentCellProtocol, MFMailComposeViewControllerDelegate>
 {
     NSIndexPath *expandedRow;
+    int indexOfShownApartment;
 }
 
 @property NSMutableArray *apartmentGalleryPhotos;
@@ -64,6 +65,7 @@
             if(succeeded)
             {
                 self.apartments = apartments;
+                indexOfShownApartment = 0;
                 [self.tableView reloadData];
             }
         }];
@@ -90,7 +92,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _apartments.count;
+    return self.apartments.count && (indexOfShownApartment >= 0) ? 1 : 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -111,7 +113,7 @@
     if(!cell)
         cell = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentTableViewCell" owner:self options:nil] firstObject];
     
-    Apartment *ap = _apartments[indexPath.row];
+    Apartment *ap = _apartments[indexOfShownApartment];
     
     [cell setApartmentIndex:indexPath.row];
     [cell setApartment:ap.apartment withImages:ap.images andCurrentUsersStatus:NO];
@@ -195,6 +197,26 @@
     }
 }
 
+
+- (void)createGalleryPhotosArray:(NSInteger)index
+{
+    if(!_apartmentGalleryPhotos)
+        _apartmentGalleryPhotos = [NSMutableArray new];
+    
+    [_apartmentGalleryPhotos removeAllObjects];
+    
+    Apartment *ap = _apartments[index];
+    
+    for (PFObject *imageObject in ap.images)
+    {
+        PFFile *imageFile = imageObject[@"image"];
+        [_apartmentGalleryPhotos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:imageFile.url]]];
+    }
+}
+
+
+#pragma mark - Appartament delegate
+
 - (void)addToFravoritesApartmentFromIndex:(NSInteger)index
 {
     ApartmentTableViewCell *cell = (ApartmentTableViewCell *) [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
@@ -221,20 +243,14 @@
                                        }];
 }
 
-- (void)createGalleryPhotosArray:(NSInteger)index
-{
-    if(!_apartmentGalleryPhotos)
-        _apartmentGalleryPhotos = [NSMutableArray new];
+-(void)switchToNextApartmentFromIndex:(NSInteger)index{
+    if (++indexOfShownApartment >= _apartments.count)
+        indexOfShownApartment = -1;
     
-    [_apartmentGalleryPhotos removeAllObjects];
-    
-    Apartment *ap = _apartments[index];
-    
-    for (PFObject *imageObject in ap.images)
-    {
-        PFFile *imageFile = imageObject[@"image"];
-        [_apartmentGalleryPhotos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:imageFile.url]]];
-    }
+    if (indexOfShownApartment != -1)
+        [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    else
+        [_tableView reloadData];
 }
 
 - (void)getApartmentAtIndex:(NSInteger)index
