@@ -103,8 +103,8 @@
                     <rect key="frame" x="120" y="474" width="174" height="174"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="04B-2a-ova" secondAttribute="height" multiplier="1:1" id="2az-kR-cYh"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="9gb-gM-KVR"/>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="ZCO-VA-ea4"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="9gb-gM-KVR"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="ZCO-VA-ea4"/>
                     </constraints>
                 </mapView>
             </subviews>
