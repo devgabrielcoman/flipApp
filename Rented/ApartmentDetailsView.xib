@@ -215,6 +215,6 @@
         </view>
     </objects>
     <resources>
-        <image name="users" width="25" height="25"/>
+        <image name="users" width="52" height="61"/>
     </resources>
 </document>

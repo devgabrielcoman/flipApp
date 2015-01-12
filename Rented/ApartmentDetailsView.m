@@ -10,6 +10,7 @@
 #import "UIColor+ColorFromHexString.h"
 #import "GeneralUtils.h"
 #import "UIImage+imageWithColor.h"
+#import "UIImage+ProportionalFill.h"
 
 @implementation ApartmentDetailsView
 
@@ -26,6 +27,7 @@
     [_flipBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"47a0db"]] forState:UIControlStateNormal];
     
     _connectedThroughLbl.font = [UIFont fontWithName:@"GothamRounded-Light" size:12.0];
+    _connectedThroughImageView.image = [[UIImage imageNamed:@"users"] imageScaledToFitSize:_connectedThroughImageView.frame.size];
     
     //_flipBtn.backgroundColor = [UIColor lightGrayColor];
 }
