@@ -10,7 +10,6 @@
             <connections>
                 <outlet property="likesBtn" destination="GV1-C5-20o" id="XF3-3M-RI3"/>
                 <outlet property="locationLbl" destination="Hau-uL-PRG" id="uXm-cn-gqo"/>
-                <outlet property="logoutBtn" destination="pSf-mi-h3Q" id="sUK-jP-dwY"/>
                 <outlet property="myPlaceBtn" destination="5XU-4b-rGK" id="atj-U7-hOs"/>
                 <outlet property="otherPlacesBtn" destination="nAT-3n-Pqg" id="yj4-a7-PtO"/>
                 <outlet property="preferencesBtn" destination="rD0-Yl-Dk8" id="wm1-Cf-CQ3"/>
@@ -150,25 +149,13 @@
                             <rect key="frame" x="13" y="323" width="234" height="2"/>
                             <color key="backgroundColor" red="0.75294117650000003" green="0.75686274509999996" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AB2-XQ-OlU" userLabel="Separator">
-                            <rect key="frame" x="13" y="391" width="234" height="2"/>
-                            <color key="backgroundColor" red="0.75294117650000003" green="0.75686274509999996" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="2" id="ygW-8W-goo"/>
-                            </constraints>
-                        </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSf-mi-h3Q">
-                            <rect key="frame" x="13" y="396" width="234" height="60"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="60" id="7Yi-ed-Zv3"/>
-                            </constraints>
-                            <inset key="titleEdgeInsets" minX="-90" minY="3" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="LOGOUT">
-                                <color key="titleColor" red="0.14901960780000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uVF-I1-Ecm">
+                            <rect key="frame" x="8" y="20" width="30" height="32"/>
+                            <state key="normal" image="power-off">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="logoutUser:" destination="-1" eventType="touchUpInside" id="vag-qi-dMw"/>
+                                <action selector="logoutUser:" destination="-1" eventType="touchUpInside" id="S5z-bk-hkl"/>
                             </connections>
                         </button>
                     </subviews>
@@ -176,15 +163,15 @@
                     <constraints>
                         <constraint firstItem="pCJ-2D-WaR" firstAttribute="centerX" secondItem="nAT-3n-Pqg" secondAttribute="centerX" id="2cz-VV-t9g"/>
                         <constraint firstItem="nAT-3n-Pqg" firstAttribute="top" secondItem="5XU-4b-rGK" secondAttribute="bottom" constant="8" symbolic="YES" id="37r-TW-kRb"/>
-                        <constraint firstItem="pSf-mi-h3Q" firstAttribute="top" secondItem="AB2-XQ-OlU" secondAttribute="bottom" constant="3" id="3S4-tF-9hB"/>
-                        <constraint firstAttribute="trailing" secondItem="AB2-XQ-OlU" secondAttribute="trailing" constant="13" id="4EP-9u-YhI"/>
                         <constraint firstItem="rD0-Yl-Dk8" firstAttribute="bottom" secondItem="P12-rz-z7t" secondAttribute="bottomMargin" id="4vX-U4-4Zu"/>
                         <constraint firstAttribute="trailing" secondItem="pCJ-2D-WaR" secondAttribute="trailing" constant="13" id="7OG-Dw-HUD"/>
                         <constraint firstItem="pCJ-2D-WaR" firstAttribute="leading" secondItem="P12-rz-z7t" secondAttribute="leading" constant="13" id="8h3-BO-5Hl"/>
                         <constraint firstItem="pCJ-2D-WaR" firstAttribute="leading" secondItem="uor-Nv-ado" secondAttribute="leading" id="90G-Iy-bDC"/>
                         <constraint firstItem="5XU-4b-rGK" firstAttribute="leading" secondItem="pCJ-2D-WaR" secondAttribute="leading" id="9H1-cK-y5D"/>
+                        <constraint firstItem="uVF-I1-Ecm" firstAttribute="top" secondItem="P12-rz-z7t" secondAttribute="top" constant="20" id="9MS-hN-HTS"/>
                         <constraint firstItem="pCJ-2D-WaR" firstAttribute="centerX" secondItem="kyS-2F-gWU" secondAttribute="centerX" id="9rN-cB-B81"/>
                         <constraint firstItem="Hau-uL-PRG" firstAttribute="top" secondItem="kyS-2F-gWU" secondAttribute="bottom" constant="37" id="AE3-DY-Z14"/>
+                        <constraint firstItem="Ld8-gQ-pY3" firstAttribute="top" secondItem="uVF-I1-Ecm" secondAttribute="bottom" constant="78" id="BFK-Ne-aKQ"/>
                         <constraint firstItem="GV1-C5-20o" firstAttribute="top" secondItem="nAT-3n-Pqg" secondAttribute="bottom" constant="8" symbolic="YES" id="Bc7-bN-oas"/>
                         <constraint firstItem="nAT-3n-Pqg" firstAttribute="top" secondItem="pCJ-2D-WaR" secondAttribute="bottom" constant="3" id="Br5-eE-X7C"/>
                         <constraint firstItem="5XU-4b-rGK" firstAttribute="top" secondItem="Ld8-gQ-pY3" secondAttribute="bottom" constant="32" id="C5s-yL-dOH"/>
@@ -197,8 +184,6 @@
                         <constraint firstItem="Hau-uL-PRG" firstAttribute="top" secondItem="P12-rz-z7t" secondAttribute="top" constant="159" id="II4-1x-kw9"/>
                         <constraint firstItem="Hau-uL-PRG" firstAttribute="leading" secondItem="rD0-Yl-Dk8" secondAttribute="leading" id="Jwn-Tw-xpf"/>
                         <constraint firstItem="pCJ-2D-WaR" firstAttribute="centerX" secondItem="P12-rz-z7t" secondAttribute="centerX" id="KGU-sH-YI6"/>
-                        <constraint firstItem="AB2-XQ-OlU" firstAttribute="top" secondItem="GV1-C5-20o" secondAttribute="bottom" constant="3" id="Mbs-PT-RZE"/>
-                        <constraint firstAttribute="trailing" secondItem="pSf-mi-h3Q" secondAttribute="trailing" constant="13" id="MlJ-ln-zNc"/>
                         <constraint firstItem="Hau-uL-PRG" firstAttribute="leading" secondItem="P12-rz-z7t" secondAttribute="leading" constant="8" id="Pnd-ix-gYx"/>
                         <constraint firstItem="Ld8-gQ-pY3" firstAttribute="trailing" secondItem="Hau-uL-PRG" secondAttribute="trailing" id="Pvw-yP-pBN"/>
                         <constraint firstItem="8eC-Fu-3p6" firstAttribute="leading" secondItem="rD0-Yl-Dk8" secondAttribute="trailing" id="RLw-7s-klF"/>
@@ -211,7 +196,7 @@
                         <constraint firstItem="kyS-2F-gWU" firstAttribute="leading" secondItem="P12-rz-z7t" secondAttribute="leading" constant="90" id="bC9-VV-g04"/>
                         <constraint firstAttribute="trailing" secondItem="Hau-uL-PRG" secondAttribute="trailing" constant="8" id="dCG-gH-4Xf"/>
                         <constraint firstItem="Hau-uL-PRG" firstAttribute="leading" secondItem="P12-rz-z7t" secondAttribute="leading" constant="8" id="dgX-dz-2ee"/>
-                        <constraint firstItem="AB2-XQ-OlU" firstAttribute="leading" secondItem="P12-rz-z7t" secondAttribute="leading" constant="13" id="fBa-Ea-fSo"/>
+                        <constraint firstItem="uVF-I1-Ecm" firstAttribute="leading" secondItem="Ld8-gQ-pY3" secondAttribute="leading" id="f14-ld-OW9"/>
                         <constraint firstAttribute="bottom" secondItem="pCJ-2D-WaR" secondAttribute="bottom" constant="264" id="fLq-KC-8tL"/>
                         <constraint firstItem="pCJ-2D-WaR" firstAttribute="top" secondItem="5XU-4b-rGK" secondAttribute="bottom" constant="3" id="h9H-Nt-w56"/>
                         <constraint firstItem="nAT-3n-Pqg" firstAttribute="top" secondItem="pCJ-2D-WaR" secondAttribute="bottom" constant="3" id="jEo-L0-fjC"/>
@@ -220,7 +205,6 @@
                         <constraint firstItem="pCJ-2D-WaR" firstAttribute="centerX" secondItem="uor-Nv-ado" secondAttribute="centerX" id="lSL-nQ-jWQ"/>
                         <constraint firstItem="Hau-uL-PRG" firstAttribute="centerX" secondItem="pCJ-2D-WaR" secondAttribute="centerX" id="m7f-zn-Vy2"/>
                         <constraint firstItem="8eC-Fu-3p6" firstAttribute="top" secondItem="rD0-Yl-Dk8" secondAttribute="top" id="mHt-uM-syQ"/>
-                        <constraint firstItem="pSf-mi-h3Q" firstAttribute="leading" secondItem="P12-rz-z7t" secondAttribute="leading" constant="13" id="nDI-ZY-rZt"/>
                         <constraint firstItem="pCJ-2D-WaR" firstAttribute="centerX" secondItem="Hau-uL-PRG" secondAttribute="centerX" id="nS6-my-m5h"/>
                         <constraint firstItem="Hau-uL-PRG" firstAttribute="leading" secondItem="P12-rz-z7t" secondAttribute="leadingMargin" id="nfn-2y-ilW"/>
                         <constraint firstAttribute="bottom" secondItem="rD0-Yl-Dk8" secondAttribute="bottom" constant="8" id="oZa-2E-fMr"/>
@@ -228,6 +212,7 @@
                         <constraint firstItem="Hau-uL-PRG" firstAttribute="top" secondItem="kyS-2F-gWU" secondAttribute="bottom" constant="37" id="qQe-dw-PmT"/>
                         <constraint firstAttribute="trailing" secondItem="pCJ-2D-WaR" secondAttribute="trailing" constant="13" id="qxk-7F-L4d"/>
                         <constraint firstAttribute="bottom" secondItem="8eC-Fu-3p6" secondAttribute="bottom" constant="8" id="rJV-cx-21J"/>
+                        <constraint firstItem="kyS-2F-gWU" firstAttribute="leading" secondItem="uVF-I1-Ecm" secondAttribute="trailing" constant="52" id="rR4-tk-wgy"/>
                         <constraint firstItem="pCJ-2D-WaR" firstAttribute="trailing" secondItem="nAT-3n-Pqg" secondAttribute="trailing" id="s9e-hb-nEY"/>
                         <constraint firstItem="uor-Nv-ado" firstAttribute="top" secondItem="nAT-3n-Pqg" secondAttribute="bottom" constant="3" id="sck-yu-gB1"/>
                         <constraint firstItem="pCJ-2D-WaR" firstAttribute="leading" secondItem="P12-rz-z7t" secondAttribute="leading" constant="13" id="t7t-eo-lYV"/>
@@ -272,5 +257,6 @@
         <image name="heart-icon" width="20" height="20"/>
         <image name="map-marker-icon" width="20" height="20"/>
         <image name="map-marker-small-icon" width="10" height="10"/>
+        <image name="power-off" width="20" height="20"/>
     </resources>
 </document>

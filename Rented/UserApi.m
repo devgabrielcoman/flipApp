@@ -72,6 +72,9 @@
 
 - (void)logoutUser
 {
+    [[PFFacebookUtils session] closeAndClearTokenInformation];
+    [[FBSession activeSession] closeAndClearTokenInformation];
+    [FBSession setActiveSession:nil];
     [PFUser logOut];
 }
 

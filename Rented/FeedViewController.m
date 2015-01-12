@@ -88,10 +88,11 @@
             }
         }];
     }
-    
-    [DEP.api.userApi getFacebookMutualFriendsWithFriend:@"799877360063203" completionHandler:^(NSArray *mutualFriends, BOOL succeeded) {
-        
-    }];
+    else
+    {
+        self.apartments = @[];
+        [self.tableView reloadData];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -311,7 +312,7 @@
             [mail setCcRecipients:ccRecipients];
             [mail setBccRecipients:bccRecipients];
             
-            NSString *emailBody = [NSString stringWithFormat:@"Hi %@, <br> I really like your apartment and i would to join....", user.username];
+            NSString *emailBody = [NSString stringWithFormat:@"Hi %@, <br> I really like your apartment and i would like to join....", user.username];
             [mail setMessageBody:emailBody isHTML:YES];
             
             [self presentViewController:mail animated:YES completion:NULL];

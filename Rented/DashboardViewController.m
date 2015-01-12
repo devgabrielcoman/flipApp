@@ -23,6 +23,9 @@
 #import "AuthenticationViewController.h"
 
 @interface DashboardViewController ()<MFMailComposeViewControllerDelegate>
+{
+    NSString *lastUserId;
+}
 
 @property (weak, nonatomic) IBOutlet AsyncImageView *profileImgView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLbl;
@@ -41,18 +44,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    lastUserId = @"";
     [self setVisualDetails];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
     [self setProfileData];
 }
 
 - (void)setProfileData
 {
-    _usernameLbl.text = DEP.authenticatedUser.username;
-    [_locationLbl setTitle:DEP.authenticatedUser[@"location"] forState:UIControlStateNormal];
-    
-    _profileImgView.showActivityIndicator = YES;
-    _profileImgView.imageURL = [NSURL URLWithString:DEP.authenticatedUser[@"profilePictureUrl"]];
+    if(![lastUserId isEqualToString:DEP.authenticatedUser[@"facebookID"]])
+    {
+        _usernameLbl.text = DEP.authenticatedUser.username;
+        [_locationLbl setTitle:DEP.authenticatedUser[@"location"] forState:UIControlStateNormal];
+        
+        _profileImgView.showActivityIndicator = YES;
+        _profileImgView.image = nil;
+        _profileImgView.imageURL = [NSURL URLWithString:DEP.authenticatedUser[@"profilePictureUrl"]];
+        
+        lastUserId = DEP.authenticatedUser[@"facebookID"];
+    }
 }
 
 - (void)setVisualDetails
@@ -222,9 +235,12 @@
 - (IBAction)logoutUser:(id)sender
 {
     [DEP.api.userApi logoutUser];
-    [self.sidePanelController showCenterPanelAnimated:YES];
+    DEP.authenticatedUser = nil;
     
-    [self presentViewController:[AuthenticationViewController new] animated:YES completion:nil];
+    [self presentViewController:[AuthenticationViewController new] animated:YES completion:^{
+        FeedViewController *feedVC = [FeedViewController new];
+        self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:feedVC];
+    }];
 }
 
 #pragma mark - MailComposer delegate methods

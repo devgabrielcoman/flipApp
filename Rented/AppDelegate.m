@@ -18,6 +18,8 @@
 #import "FeedViewController.h"
 #import "AuthenticationViewController.h"
 #import "DashboardViewController.h"
+#import <AFNetworking.h>
+#import "NoInternetConnectionView.h"
 
 @interface AppDelegate ()
 
@@ -29,6 +31,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    [self setupDataConnectionNotifier];
     [self setupParse];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -52,6 +55,22 @@
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+- (void)setupDataConnectionNotifier
+{
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status)
+     {
+         if(status == AFNetworkReachabilityStatusNotReachable || status == AFNetworkReachabilityStatusUnknown)
+         {
+             [NoInternetConnection displayNoInternetConnection];
+         }
+         else
+         {
+             [NoInternetConnection internetConnectionAvailable];
+         }
+     }];
 }
 
 - (void)setupParse

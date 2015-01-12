@@ -104,6 +104,7 @@
 		CD57131C1A59755A003B4C2E /* SingleApartmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD57131A1A59755A003B4C2E /* SingleApartmentViewController.xib */; };
 		CD5713241A597C73003B4C2E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5713231A597C73003B4C2E /* MapKit.framework */; };
 		CD5BBEE21A4A32250058E79B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5BBEE11A4A32250058E79B /* CoreText.framework */; };
+		CDEE8E3C1A64496F0030A88E /* NoInternetConnectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE8E3B1A64496F0030A88E /* NoInternetConnectionView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -259,6 +260,8 @@
 		CD57131A1A59755A003B4C2E /* SingleApartmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleApartmentViewController.xib; sourceTree = "<group>"; };
 		CD5713231A597C73003B4C2E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CD5BBEE11A4A32250058E79B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		CDEE8E3A1A64496F0030A88E /* NoInternetConnectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoInternetConnectionView.h; sourceTree = "<group>"; };
+		CDEE8E3B1A64496F0030A88E /* NoInternetConnectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoInternetConnectionView.m; sourceTree = "<group>"; };
 		D88ADE80C6E025ADD79716C1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		E9E5B27B64FD02829D64CDBC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -490,6 +493,8 @@
 		CD307A971A48554200D4BE2B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CDEE8E3A1A64496F0030A88E /* NoInternetConnectionView.h */,
+				CDEE8E3B1A64496F0030A88E /* NoInternetConnectionView.m */,
 				CD5038FD1A61978100A1320D /* NMRangeSlider */,
 				1205475E1A5FF1110036BB75 /* UITableView+AnimationControl.h */,
 				1205475F1A5FF1110036BB75 /* UITableView+AnimationControl.m */,
@@ -927,6 +932,7 @@
 				CD307AA11A48561B00D4BE2B /* DependencyContainer.m in Sources */,
 				CD35CCEE1A49AE49007F12D0 /* UIImage+ProportionalFill.m in Sources */,
 				12BAD2001A5A824D00ABE909 /* ApartmentApi.m in Sources */,
+				CDEE8E3C1A64496F0030A88E /* NoInternetConnectionView.m in Sources */,
 				CD39D64C1A4A0C580006F7B7 /* RentedNavigationController.m in Sources */,
 				CD39D6481A4A0A6C0006F7B7 /* DashboardViewController.m in Sources */,
 				CD5038F61A617EC800A1320D /* GeneralUtils.m in Sources */,
@@ -1062,7 +1068,7 @@
 				INFOPLIST_FILE = Rented/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Rented;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -1078,7 +1084,7 @@
 				INFOPLIST_FILE = Rented/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Rented;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
