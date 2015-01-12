@@ -92,7 +92,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.apartments.count && indexOfShownApartment ? 1 : 0;
+    return self.apartments.count && (indexOfShownApartment >= 0) ? 1 : 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -244,10 +244,13 @@
 }
 
 -(void)switchToNextApartmentFromIndex:(NSInteger)index{
-    if (++indexOfShownApartment > _apartments.count)
-        indexOfShownApartment = 0;
-
-    [_tableView reloadData];
+    if (++indexOfShownApartment >= _apartments.count)
+        indexOfShownApartment = -1;
+    
+    if (indexOfShownApartment != -1)
+        [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    else
+        [_tableView reloadData];
 }
 
 - (void)getApartmentAtIndex:(NSInteger)index
