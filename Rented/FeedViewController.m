@@ -37,17 +37,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-
     
-    lbNoMoreApartments = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 200,500)];
-    [lbNoMoreApartments setText:@"That's all we've got for today."];
+    self.view.frame = CGRectMake(0, 0, wScr, hScr);
+    
+    lbNoMoreApartments = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 260,100)];
+    [lbNoMoreApartments setText:@"That's all we've got for today"];
     [lbNoMoreApartments setNumberOfLines:0];
     [lbNoMoreApartments setTextAlignment:NSTextAlignmentCenter];
     [lbNoMoreApartments sizeToFit];
-    lbNoMoreApartments.center = self.tableView.center;
-    [self.tableView addSubview:lbNoMoreApartments];
+    lbNoMoreApartments.center = self.view.center;
+    [self.view addSubview:lbNoMoreApartments];
     
     lbNoMoreApartments.hidden = YES;
+    
+    lbNoMoreApartments.font = [UIFont fontWithName:@"GothamRounded-Bold" size:15.0];
     
     _tableView.delegate = self;
     _tableView.dataSource = self;
