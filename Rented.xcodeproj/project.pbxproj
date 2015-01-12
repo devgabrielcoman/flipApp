@@ -11,6 +11,8 @@
 		12BAD2001A5A824D00ABE909 /* ApartmentApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BAD1FF1A5A824D00ABE909 /* ApartmentApi.m */; };
 		12BAD2031A5A959F00ABE909 /* LocationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BAD2021A5A959F00ABE909 /* LocationUtils.m */; };
 		12BAD2061A5A95E100ABE909 /* MapUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BAD2051A5A95E100ABE909 /* MapUtils.m */; };
+		12D87DDB1A63C76700A979A0 /* UIImage+imageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D87DDA1A63C76700A979A0 /* UIImage+imageWithColor.m */; };
+		12D87DDE1A63D68800A979A0 /* FacebookFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D87DDD1A63D68800A979A0 /* FacebookFriend.m */; };
 		374512C5BFA9503A8B6397D6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E5B27B64FD02829D64CDBC /* libPods.a */; };
 		CD19A99E1A5F35960095163F /* Apartment.m in Sources */ = {isa = PBXBuildFile; fileRef = CD19A99D1A5F35960095163F /* Apartment.m */; };
 		CD1BAFAA1A48466F0012CBAA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1BAFA91A48466F0012CBAA /* main.m */; };
@@ -93,6 +95,7 @@
 		CD50395F1A61F3B300A1320D /* PreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD50395D1A61F3B300A1320D /* PreferencesViewController.m */; };
 		CD5039601A61F3B300A1320D /* PreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD50395E1A61F3B300A1320D /* PreferencesViewController.xib */; };
 		CD5039631A620ADE00A1320D /* UserSearchPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5039621A620ADE00A1320D /* UserSearchPreferences.m */; };
+		CD5039651A62B3FA00A1320D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5039641A62B3F900A1320D /* Social.framework */; };
 		CD5713101A585651003B4C2E /* NoListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD57130E1A585651003B4C2E /* NoListingViewController.m */; };
 		CD5713111A585651003B4C2E /* NoListingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD57130F1A585651003B4C2E /* NoListingViewController.xib */; };
 		CD5713141A585DAE003B4C2E /* UIViewController+JASidePanels.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5713131A585DAE003B4C2E /* UIViewController+JASidePanels.m */; };
@@ -123,6 +126,10 @@
 		12BAD2021A5A959F00ABE909 /* LocationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationUtils.m; sourceTree = "<group>"; };
 		12BAD2041A5A95E100ABE909 /* MapUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapUtils.h; sourceTree = "<group>"; };
 		12BAD2051A5A95E100ABE909 /* MapUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapUtils.m; sourceTree = "<group>"; };
+		12D87DD91A63C76700A979A0 /* UIImage+imageWithColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+imageWithColor.h"; sourceTree = "<group>"; };
+		12D87DDA1A63C76700A979A0 /* UIImage+imageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+imageWithColor.m"; sourceTree = "<group>"; };
+		12D87DDC1A63D68800A979A0 /* FacebookFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookFriend.h; sourceTree = "<group>"; };
+		12D87DDD1A63D68800A979A0 /* FacebookFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookFriend.m; sourceTree = "<group>"; };
 		CADD9CDB49CF1FD79BA7F002 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CD19A99C1A5F35960095163F /* Apartment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Apartment.h; sourceTree = "<group>"; };
 		CD19A99D1A5F35960095163F /* Apartment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Apartment.m; sourceTree = "<group>"; };
@@ -240,6 +247,7 @@
 		CD50395E1A61F3B300A1320D /* PreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesViewController.xib; sourceTree = "<group>"; };
 		CD5039611A620ADE00A1320D /* UserSearchPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSearchPreferences.h; sourceTree = "<group>"; };
 		CD5039621A620ADE00A1320D /* UserSearchPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSearchPreferences.m; sourceTree = "<group>"; };
+		CD5039641A62B3F900A1320D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CD57130D1A585651003B4C2E /* NoListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoListingViewController.h; sourceTree = "<group>"; };
 		CD57130E1A585651003B4C2E /* NoListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoListingViewController.m; sourceTree = "<group>"; };
 		CD57130F1A585651003B4C2E /* NoListingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoListingViewController.xib; sourceTree = "<group>"; };
@@ -260,6 +268,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD5039651A62B3FA00A1320D /* Social.framework in Frameworks */,
 				CD5713241A597C73003B4C2E /* MapKit.framework in Frameworks */,
 				CD5713161A586751003B4C2E /* MessageUI.framework in Frameworks */,
 				CD5BBEE21A4A32250058E79B /* CoreText.framework in Frameworks */,
@@ -300,6 +309,7 @@
 		76483CDB66ACFC63E3E7263A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CD5039641A62B3F900A1320D /* Social.framework */,
 				CD5713231A597C73003B4C2E /* MapKit.framework */,
 				CD5713151A586751003B4C2E /* MessageUI.framework */,
 				CD5BBEE11A4A32250058E79B /* CoreText.framework */,
@@ -324,6 +334,8 @@
 			children = (
 				CD19A99C1A5F35960095163F /* Apartment.h */,
 				CD19A99D1A5F35960095163F /* Apartment.m */,
+				12D87DDC1A63D68800A979A0 /* FacebookFriend.h */,
+				12D87DDD1A63D68800A979A0 /* FacebookFriend.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -493,6 +505,8 @@
 				CD5038F51A617EC800A1320D /* GeneralUtils.m */,
 				CD5039381A61E09000A1320D /* M13Checkbox.h */,
 				CD5039391A61E09000A1320D /* M13Checkbox.m */,
+				12D87DD91A63C76700A979A0 /* UIImage+imageWithColor.h */,
+				12D87DDA1A63C76700A979A0 /* UIImage+imageWithColor.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -890,12 +904,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD50395F1A61F3B300A1320D /* PreferencesViewController.m in Sources */,
+				12D87DDE1A63D68800A979A0 /* FacebookFriend.m in Sources */,
 				CD50393A1A61E09000A1320D /* M13Checkbox.m in Sources */,
 				12BAD2061A5A95E100ABE909 /* MapUtils.m in Sources */,
 				CD5713101A585651003B4C2E /* NoListingViewController.m in Sources */,
 				120547601A5FF1110036BB75 /* UITableView+AnimationControl.m in Sources */,
 				CD1BAFAD1A48466F0012CBAA /* AppDelegate.m in Sources */,
 				CD48D2461A5B1E7800C85AA6 /* GalleryNavigationController.m in Sources */,
+				12D87DDB1A63C76700A979A0 /* UIImage+imageWithColor.m in Sources */,
 				CD2A8B001A5DE47E0065299A /* TopApartmentView.m in Sources */,
 				CD1BAFAA1A48466F0012CBAA /* main.m in Sources */,
 				12BAD2031A5A959F00ABE909 /* LocationUtils.m in Sources */,

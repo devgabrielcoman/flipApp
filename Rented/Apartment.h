@@ -12,5 +12,6 @@
 
 @property PFObject *apartment;
 @property NSArray *images;
+@property PFUser *owner;
 
 @end

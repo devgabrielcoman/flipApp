@@ -15,5 +15,6 @@
 - (void)displayMoreInfoForApartmentAtIndex:(NSInteger)index;
 - (void)addToFravoritesApartmentFromIndex:(NSInteger)index;
 - (void)switchToNextApartmentFromIndex:(NSInteger)index;
+- (void)getApartmentAtIndex:(NSInteger)index;
 
 @end

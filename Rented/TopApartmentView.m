@@ -29,6 +29,7 @@
     _daysUntilRenewal.font = [UIFont fontWithName:@"GothamRounded-Light" size:12.0];
     
     _displayMore.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Light" size:11.0];
+    _connectedThroughLbl.font = [UIFont fontWithName:@"GothamRounded-Light" size:12.0];
     
     _locationString = @"";
     

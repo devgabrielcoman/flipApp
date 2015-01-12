@@ -130,6 +130,8 @@
             
             for(PFObject *ap in objects)
             {
+                RTLog(@"%li", (long)[ap[@"visible"] integerValue]);
+                
                 PFQuery *imgQuery = [PFQuery queryWithClassName:@"ApartmentPhotos"];
                 [imgQuery whereKey:@"apartment" equalTo:ap];
                 
@@ -181,6 +183,7 @@
     [query whereKey:@"user" equalTo:DEP.authenticatedUser];
     [query includeKey:@"user"];
     [query includeKey:@"apartment"];
+    [query includeKey:@"apartment.owner"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error)
         {
@@ -197,6 +200,7 @@
                 apartment.apartment = apart;
                 apartment.images = [imgQuery findObjects];
                 
+                
                 [favorites addObject:apartment];
             }
             
@@ -204,6 +208,15 @@
         }
         else
             completionHandler(@[], NO);
+    }];
+}
+
+- (void)makeApartmentLive:(PFObject *)apartment completion:(void (^)(BOOL succeeded))completionHandler
+{
+    apartment[@"visible"] = [NSNumber numberWithInteger:1];
+    
+    [apartment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        completionHandler(succeeded);
     }];
 }
 

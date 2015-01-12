@@ -9,6 +9,8 @@
 #import "ApartmentDetailsView.h"
 #import "UIColor+ColorFromHexString.h"
 #import "GeneralUtils.h"
+#import "UIImage+imageWithColor.h"
+#import "UIImage+ProportionalFill.h"
 
 @implementation ApartmentDetailsView
 
@@ -22,11 +24,17 @@
     _connectedThroughLbl.font = [UIFont fontWithName:@"GothamRounded-Light" size:11.0];
     
     _flipBtn.titleLabel.font = [UIFont fontWithName:@"Gotham-Medium" size:15.0];
-    _flipBtn.backgroundColor = [UIColor colorFromHexString:@"47a0db"];
+    [_flipBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"47a0db"]] forState:UIControlStateNormal];
+    
+    _connectedThroughLbl.font = [UIFont fontWithName:@"GothamRounded-Light" size:12.0];
+    _connectedThroughImageView.image = [[UIImage imageNamed:@"users"] imageScaledToFitSize:_connectedThroughImageView.frame.size];
+    
+    //_flipBtn.backgroundColor = [UIColor lightGrayColor];
 }
 
 - (void)setApartmentDetails:(PFObject *)apartment
 {
+    _apartment = apartment;
     _descriptionTextView.text = apartment[@"description"];
     
     NSMutableString *vacancy = [[NSMutableString alloc] initWithString:@"Vacancy:\n"];
@@ -45,31 +53,57 @@
     }
     _vacancyLbl.text = vacancy;
     
-//    NSMutableString *rooms = [NSMutableString new];
-//    NSArray *roomsArray = apartment[@"rooms"];
-//    
-//    for (NSNumber *roomType in roomsArray)
-//    {
-//        if([roomType integerValue] == Studio)
-//            [rooms appendFormat:@"Studio"];
-//        
-//        if([roomType integerValue] == Bedroom1)
-//            [rooms appendFormat:@", 1 Bedroom"];
-//        
-//        if([roomType integerValue] == Bedrooms2)
-//            [rooms appendFormat:@", 2 Bedrooms"];
-//        
-//        if([roomType integerValue] == Bedrooms3)
-//            [rooms appendFormat:@", 3 Bedrooms"];
-//        
-//        if([roomType integerValue] == Bedrooms4)
-//            [rooms appendFormat:@", 3 Bedrooms"];
-//    }
-    
     _componentRoomsLbl.text = [GeneralUtils roomsDescriptionForApartment:apartment];
     
     _priceLbl.text = [NSString stringWithFormat:@"%@ $",apartment[@"rent"]];
     _sizeLbl.text = [NSString stringWithFormat:@"%@ sq ft", apartment[@"area"]];
 }
 
+- (void)updateFlipButtonStatus
+{
+    if(_currentUserIsOwner)
+    {
+        [_flipBtn setTitle:@"FLIP" forState:UIControlStateNormal];
+        if([_apartment[@"visible"] boolValue])
+        {
+            //user already flipped his apartmen aka made it visible on screen
+            //_flipBtn.backgroundColor = [UIColor lightGrayColor];
+            [_flipBtn setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateNormal];
+            _flipBtn.enabled = NO;
+        }
+        else
+        {
+            //else, should be flipped
+            //_flipBtn.backgroundColor = [UIColor colorFromHexString:@"47a0db"];
+            [_flipBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"47a0db"]] forState:UIControlStateNormal];
+            _flipBtn.enabled = YES;
+        }
+    }
+    else
+    {
+        [_flipBtn setTitle:@"GET" forState:UIControlStateNormal];
+        [_flipBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"47a0db"]] forState:UIControlStateNormal];
+        _flipBtn.enabled = YES;
+    }
+}
+
+- (IBAction)flipBtn:(id)sender
+{
+    if(_currentUserIsOwner)
+    {
+        if(![_apartment[@"visible"] boolValue])
+            [DEP.api.apartmentApi makeApartmentLive:_apartment completion:^(BOOL succeeded) {
+                _flipBtn.enabled = NO;
+                
+                [UIView animateWithDuration:0.3
+                                 animations:^{
+                                     [_flipBtn setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateNormal];
+                                 }];
+            }];
+    }
+    else
+    {
+        [_delegate getApartmentAtIndex:_apartmentIndex];
+    }
+}
 @end

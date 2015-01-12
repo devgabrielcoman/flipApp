@@ -11,5 +11,6 @@
 @interface GeneralUtils : NSObject
 
 + (NSString *)roomsDescriptionForApartment:(PFObject *)apartment;
++ (NSString *)connectedThroughExtendedDescription:(NSMutableArray *)mutalFriends;
 
 @end

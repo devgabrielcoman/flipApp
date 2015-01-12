@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ApartmentCellProtocol.h"
 
 @interface ApartmentDetailsView : UIView
 
@@ -19,6 +20,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *connectedThroughLbl;
 @property (weak, nonatomic) IBOutlet UIButton *flipBtn;
 
+@property PFObject *apartment;
+@property BOOL currentUserIsOwner;
+@property id<ApartmentCellProtocol> delegate;
+@property NSInteger apartmentIndex;
+
 - (void)setApartmentDetails:(PFObject *)apartment;
+- (void)updateFlipButtonStatus;
 
 @end

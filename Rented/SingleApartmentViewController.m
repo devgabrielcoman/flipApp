@@ -35,27 +35,7 @@
     
     expandedRow = [NSIndexPath indexPathForRow:0 inSection:-1];
     
-    [DEP.api.apartmentApi userApartment:^(PFObject *apartment, NSArray *images, BOOL succeeded) {
-        if(succeeded)
-        {
-            if(apartment)
-            {
-                Apartment *ap = [Apartment new];
-                
-                ap.apartment = apartment;
-                ap.images = images;
-                
-                self.apartment = ap;
-                [self.tableView reloadData];
-            }
-        }
-        else
-            [UIAlertView showWithTitle:@""
-                               message:@"An error occurred. Please try again"
-                     cancelButtonTitle:@"Dismiss"
-                     otherButtonTitles:nil
-                              tapBlock:nil];
-    }];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -83,9 +63,8 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentTableViewCell" owner:self options:nil] firstObject];
     
     [cell setApartmentIndex:indexPath.row];
-    [cell setApartment:_apartment.apartment andImages:_apartment.images];
+    [cell setApartment:_apartment.apartment withImages:_apartment.images andCurrentUsersStatus:YES];
     [cell setDelegate:self];
-    cell.currentUserIsOwner = YES;
     
     if(![indexPath isEqual:expandedRow])
         [cell hideApartmentDetails];
@@ -191,6 +170,11 @@
 - (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)getApartmentAtIndex:(NSInteger)index
+{
+    
 }
 
 - (void)didReceiveMemoryWarning {

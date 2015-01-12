@@ -43,7 +43,7 @@
     _fbLoginBtn.titleLabel.font = [UIFont fontWithName:@"Gotham-Medium" size:15.0];
     [_fbLoginBtn setImage:[[UIImage imageNamed:@"facebook-icon"] imageScaledToFitSize:CGSizeMake(20.0, 20.0)] forState:UIControlStateNormal];
     
-    _backgroundImageView.image = [[UIImage imageNamed:@"LoginBackground"] imageScaledToFitSize:CGSizeMake(wScr, hScr)];
+    _backgroundImageView.image = [[UIImage imageNamed:@"Login"] imageScaledToFitSize:CGSizeMake(wScr, hScr)];
 }
 
 - (void)didReceiveMemoryWarning {

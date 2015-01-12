@@ -73,12 +73,19 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
     
-    if(result != MFMailComposeResultCancelled && result != MFMailComposeResultFailed)
+    if(result == MFMailComposeResultFailed)
         [UIAlertView showWithTitle:@""
                            message:@"An error occurred, please try again."
                  cancelButtonTitle:@"Dismiss"
                  otherButtonTitles:nil
                           tapBlock:nil];
+    else
+    {
+        DEP.authenticatedUser[@"listingStatus"] = [NSNumber numberWithInt:ListingRequested];
+        [DEP.authenticatedUser saveInBackground];
+        _addApartmentBtn.alpha = 0.0f;
+        _messageLbl.text = @"Your request has been registered and apartment will be added as soon as possible.";
+    }
 }
 
 - (void)didReceiveMemoryWarning {

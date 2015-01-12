@@ -20,7 +20,7 @@
 @property BOOL currentUserIsOwner;
 
 - (void)setDelegate:(id<ApartmentCellProtocol>)delegate;
-- (void)setApartment:(PFObject *)apartment andImages:(NSArray *)images;
+- (void)setApartment:(PFObject *)apartment withImages:(NSArray *)images andCurrentUsersStatus:(BOOL)isOwner;
 - (void)setApartmentIndex:(NSInteger)apartmentIndex;
 
 - (void)showApartmentDetails;
