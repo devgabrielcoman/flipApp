@@ -61,26 +61,26 @@
                 {
                     if(mutualFriends.count == 0)
                     {
-                        _apartmentTopView.connectedThroughLbl.text = @"No connections";
-                        _apartmentDetailsView.connectedThroughLbl.text = @"No connections";
+                        _apartmentTopView.connectedThroughLbl.text = @"";
+                        _apartmentDetailsView.connectedThroughLbl.text = @"";
                     }
                     else
                     {
-                        _apartmentTopView.connectedThroughLbl.text = [NSString stringWithFormat:@"%lu", (unsigned long)mutualFriends.count];
-                        _apartmentDetailsView.connectedThroughLbl.text = [GeneralUtils connectedThroughExtendedDescription:[[NSMutableArray alloc] initWithArray:mutualFriends]];
+                        _apartmentTopView.connectedThroughLbl.text = @"";// [NSString stringWithFormat:@"%lu", (unsigned long)mutualFriends.count];
+                        _apartmentDetailsView.connectedThroughLbl.text = @""; // [GeneralUtils connectedThroughExtendedDescription:[[NSMutableArray alloc] initWithArray:mutualFriends]];
                     }
                     
                 }
                 else
                 {
-                    _apartmentTopView.connectedThroughLbl.text = @"No connections";
-                    _apartmentDetailsView.connectedThroughLbl.text = @"No connections";
+                    _apartmentTopView.connectedThroughLbl.text = @"";
+                    _apartmentDetailsView.connectedThroughLbl.text = @"";
                 }
             }
             else
             {
-                _apartmentTopView.connectedThroughLbl.text = @"No connections";
-                _apartmentDetailsView.connectedThroughLbl.text = @"No connections";
+                _apartmentTopView.connectedThroughLbl.text = @"";
+                _apartmentDetailsView.connectedThroughLbl.text = @"";
             }
             
             _apartmentTopView.connectedThroughLbl.alpha = 1.0;
