@@ -61,20 +61,29 @@
 
 - (void)updateFlipButtonStatus
 {
-    if(_currentUserIsOwner)
+    if(!_isFromFavorites)
     {
-        [_flipBtn setTitle:@"FLIP" forState:UIControlStateNormal];
-        if([_apartment[@"visible"] boolValue])
+        if(_currentUserIsOwner)
         {
-            //user already flipped his apartmen aka made it visible on screen
-            //_flipBtn.backgroundColor = [UIColor lightGrayColor];
-            [_flipBtn setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateNormal];
-            _flipBtn.enabled = NO;
+            [_flipBtn setTitle:@"FLIP" forState:UIControlStateNormal];
+            if([_apartment[@"visible"] boolValue])
+            {
+                //user already flipped his apartmen aka made it visible on screen
+                //_flipBtn.backgroundColor = [UIColor lightGrayColor];
+                [_flipBtn setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateNormal];
+                _flipBtn.enabled = NO;
+            }
+            else
+            {
+                //else, should be flipped
+                //_flipBtn.backgroundColor = [UIColor colorFromHexString:@"47a0db"];
+                [_flipBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"47a0db"]] forState:UIControlStateNormal];
+                _flipBtn.enabled = YES;
+            }
         }
         else
         {
-            //else, should be flipped
-            //_flipBtn.backgroundColor = [UIColor colorFromHexString:@"47a0db"];
+            [_flipBtn setTitle:@"GET" forState:UIControlStateNormal];
             [_flipBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"47a0db"]] forState:UIControlStateNormal];
             _flipBtn.enabled = YES;
         }

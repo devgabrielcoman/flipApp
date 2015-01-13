@@ -13,5 +13,6 @@
 @interface SingleApartmentViewController : UITableViewController<ApartmentCellProtocol>
 
 @property Apartment *apartment;
+@property BOOL isFromFavorites;
 
 @end

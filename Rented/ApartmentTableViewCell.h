@@ -18,6 +18,7 @@
 @property ApartmentDetailsView *apartmentDetailsView;
 @property NSInteger index;
 @property BOOL currentUserIsOwner;
+@property BOOL isFromFavorites;
 
 - (void)setDelegate:(id<ApartmentCellProtocol>)delegate;
 - (void)setApartment:(PFObject *)apartment withImages:(NSArray *)images andCurrentUsersStatus:(BOOL)isOwner;

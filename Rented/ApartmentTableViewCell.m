@@ -38,6 +38,7 @@
     [_apartmentDetailsView setApartmentDetails:apartment];
     _currentUserIsOwner = isOwner;
     _apartmentDetailsView.currentUserIsOwner = isOwner;
+    _apartmentDetailsView.isFromFavorites = _isFromFavorites;
     
     if(_currentUserIsOwner)
     {
@@ -86,6 +87,8 @@
             _apartmentDetailsView.connectedThroughLbl.alpha = 1.0;
         }];
     }
+    
+    _apartmentDetailsView.isFromFavorites = _isFromFavorites;
 }
 
 - (void)setApartmentIndex:(NSInteger)apartmentIndex
