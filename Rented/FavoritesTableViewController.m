@@ -94,6 +94,7 @@
     Apartment *ap = _favoriteApartments[indexPath.row];
     SingleApartmentViewController *apartmentViewController = [SingleApartmentViewController new];
     apartmentViewController.apartment = ap;
+    apartmentViewController.isFromFavorites = YES;
     
     [self.navigationController pushViewController:apartmentViewController animated:YES];
 }

@@ -24,6 +24,7 @@
 @property BOOL currentUserIsOwner;
 @property id<ApartmentCellProtocol> delegate;
 @property NSInteger apartmentIndex;
+@property BOOL isFromFavorites;
 
 - (void)setApartmentDetails:(PFObject *)apartment;
 - (void)updateFlipButtonStatus;

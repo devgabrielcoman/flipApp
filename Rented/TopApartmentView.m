@@ -34,12 +34,12 @@
     
     
     //Add a left swipe gesture recognizer
-    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeLeft:)];
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeRight:)];
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [self addGestureRecognizer:recognizer];
 
     //Add a right swipe gesture recognizer
-    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeRight:)];
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeLeft:)];
     recognizer.delegate = self;
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
     [self addGestureRecognizer:recognizer];
