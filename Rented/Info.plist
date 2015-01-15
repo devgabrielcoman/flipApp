@@ -37,6 +37,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>GothamRnd-Medium.otf</string>
 		<string>Gotham-Medium.otf</string>
 		<string>GothamRnd-Light.otf</string>
 		<string>GothamRnd-Bold.otf</string>
