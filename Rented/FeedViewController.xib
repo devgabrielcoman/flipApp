@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeedViewController">
             <connections>
+                <outlet property="pageControl" destination="eZt-2f-wGv" id="wG1-es-4jU"/>
                 <outlet property="tableView" destination="PgH-iW-FHv" id="dAA-oH-a9U"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,15 +22,28 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
+                <pageControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="eZt-2f-wGv">
+                    <rect key="frame" x="375" y="349" width="39" height="37"/>
+                    <color key="backgroundColor" white="0.79934210526315785" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
+                    <color key="pageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="currentPageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </pageControl>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="eZt-2f-wGv" secondAttribute="trailing" id="D3C-BR-Png"/>
                 <constraint firstItem="PgH-iW-FHv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="DUd-cO-PfV"/>
+                <constraint firstAttribute="centerY" secondItem="eZt-2f-wGv" secondAttribute="centerY" id="NfN-K4-IJT"/>
                 <constraint firstItem="PgH-iW-FHv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eti-hg-m5R"/>
                 <constraint firstAttribute="bottom" secondItem="PgH-iW-FHv" secondAttribute="bottom" id="km9-in-FJl"/>
                 <constraint firstAttribute="trailing" secondItem="PgH-iW-FHv" secondAttribute="trailing" id="uBi-BZ-0dD"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="D3C-BR-Png"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>
