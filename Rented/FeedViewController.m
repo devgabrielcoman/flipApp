@@ -30,6 +30,7 @@
 
 @property NSMutableArray *apartmentGalleryPhotos;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
 @end
 
@@ -59,6 +60,12 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"ApartmentTableViewCell" bundle:nil] forCellReuseIdentifier:@"ApartmentCell"];
     
     self.tableView.contentInset = UIEdgeInsetsMake(-44, 0, 0, 0);
+    
+    CGAffineTransform rotate = CGAffineTransformMakeRotation(M_PI_2);
+    CGAffineTransform resize = CGAffineTransformMakeScale(1.4, 1.4);
+    
+    _pageControl.transform = CGAffineTransformConcat(rotate, resize);
+    _pageControl.hidden = YES;
     
     expandedRow = [NSIndexPath indexPathForRow:0 inSection:-1];
     
@@ -97,6 +104,12 @@
             {
                 self.apartments = apartments;
                 indexOfShownApartment = 0;
+ 
+                _pageControl.hidden = NO;
+                _pageControl.numberOfPages = apartments.count;
+        
+                [self layoutPageControl];
+                
                 [self.tableView reloadData];
             }
         }];
@@ -408,7 +421,40 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - shitty methods
 
+-(void)layoutPageControl
+{
+    CGRect frame = _pageControl.bounds;
+    frame.size.height -= 20;
+    frame.size.width += 40;
+    
+    
+    //modific size-ul prin constrainturi
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_pageControl
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:nil
+                                                          attribute:NSLayoutAttributeNotAnAttribute
+                                                         multiplier:1.0
+                                                           constant:frame.size.height]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_pageControl
+                                                          attribute:NSLayoutAttributeWidth
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:nil
+                                                          attribute:NSLayoutAttributeNotAnAttribute
+                                                         multiplier:1.0
+                                                           constant:frame.size.width]];
+    //constraint pentru right-margin 
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_pageControl
+                                                          attribute:NSLayoutAttributeRightMargin
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeRight
+                                                         multiplier:1.0
+                                                           constant:frame.size.width/2 - frame.size.height]];
+
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
