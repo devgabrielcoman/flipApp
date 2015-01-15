@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "TopApartmentView.h"
 #import "ApartmentDetailsView.h"
+#import "ApartmentDetailsViewProtocol.h"
 
 @protocol ApartmentCellProtocol;
 
 @interface ApartmentTableViewCell : UITableViewCell
 
 @property TopApartmentView *apartmentTopView;
-@property ApartmentDetailsView *apartmentDetailsView;
+@property UIView<ApartmentDetailsViewProtocol> *apartmentDetailsView;
 @property NSInteger index;
 @property BOOL currentUserIsOwner;
 @property BOOL isFromFavorites;

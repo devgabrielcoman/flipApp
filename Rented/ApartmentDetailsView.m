@@ -23,6 +23,12 @@
     _componentRoomsLbl.font = [UIFont fontWithName:@"GothamRounded-Light" size:11.0];
     _connectedThroughLbl.font = [UIFont fontWithName:@"GothamRounded-Light" size:11.0];
     
+    _vacancyLbl.textColor = [UIColor colorFromHexString:FeedTextColor];
+    _priceLbl.textColor = [UIColor colorFromHexString:FeedTextColor];
+    _sizeLbl.textColor = [UIColor colorFromHexString:FeedTextColor];
+    _componentRoomsLbl.textColor = [UIColor colorFromHexString:FeedTextColor];
+    _connectedThroughLbl.textColor = [UIColor colorFromHexString:FeedTextColor];
+    
     _flipBtn.titleLabel.font = [UIFont fontWithName:@"Gotham-Medium" size:15.0];
     [_flipBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"47a0db"]] forState:UIControlStateNormal];
     
@@ -55,7 +61,7 @@
     
     _componentRoomsLbl.text = [GeneralUtils roomsDescriptionForApartment:apartment];
     
-    _priceLbl.text = [NSString stringWithFormat:@"%@ $",apartment[@"rent"]];
+    _priceLbl.text = [NSString stringWithFormat:@"$%@",apartment[@"rent"]];
     _sizeLbl.text = [NSString stringWithFormat:@"%@ sq ft", apartment[@"area"]];
 }
 

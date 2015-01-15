@@ -26,6 +26,7 @@
 @property id<ApartmentCellProtocol> delegate;
 @property NSInteger apartmentIndex;
 @property NSString *locationString;
+@property PFObject *apartment;
 
 - (void)setApartmentDetails:(PFObject *)apartment andImages:(NSArray *)images;
 

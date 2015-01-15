@@ -12,6 +12,6 @@
 
 - (instancetype)initWithSize:(CGSize)size inParentFrame:(CGRect)parentFrame;
 - (void)displayInParentView:(UIView *)container;
-- (void)removeFromParentView;
+- (void)removeFromParentView:(void (^)(BOOL finished))completion;
 
 @end

@@ -134,10 +134,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     if([indexPath isEqual:expandedRow])
     {
-        return (hScr-statusBarHeight)+ApartmentDetailsViewHeight;
+        return (hScr-statusBarHeight)+ApartmentDetailsOtherListingViewHeight;
     }
     
     return hScr-statusBarHeight;
@@ -268,7 +267,9 @@
     [DEP.api.apartmentApi addApartmentToFavorites:ap.apartment
                                        completion:^(BOOL succeeded) {
                                            if(succeeded)
-                                               [likeApartment removeFromParentView];
+                                               [likeApartment removeFromParentView:^(BOOL finished) {
+                                                   [self switchToNextApartmentFromIndex:indexOfShownApartment];
+                                               }];
                                            else
                                            {
                                                [UIAlertView showWithTitle:@""
@@ -280,14 +281,46 @@
                                        }];
 }
 
--(void)switchToNextApartmentFromIndex:(NSInteger)index{
+- (void)addToFravoritesApartment:(PFObject *)apartment
+{
+    ApartmentTableViewCell *cell = (ApartmentTableViewCell *) [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    
+    UIImage *heartImage = [UIImage imageNamed:@"heart-image"];
+    LikedApartment *likeApartment = [[LikedApartment alloc] initWithSize:heartImage.size inParentFrame:cell.apartmentTopView.apartmentImgView.frame];
+    likeApartment.image = heartImage;
+    
+    [likeApartment displayInParentView:cell.apartmentTopView.apartmentImgView];
+    
+    [DEP.api.apartmentApi addApartmentToFavorites:apartment
+                                       completion:^(BOOL succeeded) {
+                                           if(succeeded)
+                                           {
+                                               [likeApartment removeFromParentView:^(BOOL finished) {
+                                                   [self switchToNextApartmentFromIndex:indexOfShownApartment];
+                                               }];
+                                           }
+                                           else
+                                           {
+                                               [UIAlertView showWithTitle:@""
+                                                                  message:@"An error occurred while trying to add this apartment to favorites. Please try again."
+                                                        cancelButtonTitle:@"Dismiss"
+                                                        otherButtonTitles:nil
+                                                                 tapBlock:nil];
+                                           }
+                                       }];
+}
+
+-(void)switchToNextApartmentFromIndex:(NSInteger)index
+{
     if (++indexOfShownApartment >= _apartments.count)
         indexOfShownApartment = -1;
     
-    if (indexOfShownApartment != -1)
-        [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-    else
-        [_tableView reloadData];
+//    if (indexOfShownApartment != -1)
+//        [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+//    else
+//        [_tableView reloadData];
+    
+    [_tableView reloadData];
 }
 
 - (void)getApartmentAtIndex:(NSInteger)index

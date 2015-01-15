@@ -52,7 +52,12 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if([indexPath isEqual:expandedRow])
+    {
+        if(_isFromFavorites)
+            return (hScr-statusBarHeight)+ApartmentDetailsOtherListingViewHeight;
+        
         return (hScr-statusBarHeight)+ApartmentDetailsViewHeight;
+    }
     
     return hScr-statusBarHeight;
 }
@@ -143,6 +148,11 @@
 }
 
 - (void)addToFravoritesApartmentFromIndex:(NSInteger)index
+{
+    
+}
+
+- (void)addToFravoritesApartment:(PFObject *)apartment
 {
     
 }

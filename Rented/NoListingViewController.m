@@ -10,11 +10,13 @@
 #import "UIColor+ColorFromHexString.h"
 #import <MessageUI/MFMailComposeViewController.h>
 #import <UIAlertView+Blocks.h>
+#import "KAProgressLabel.h"
 
 @interface NoListingViewController ()<MFMailComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *messageLbl;
 @property (weak, nonatomic) IBOutlet UIButton *addApartmentBtn;
+@property (weak, nonatomic) IBOutlet KAProgressLabel *plabel;
 
 @end
 
@@ -31,11 +33,34 @@
     _addApartmentBtn.layer.cornerRadius = 2.0;
     _addApartmentBtn.titleLabel.font = [UIFont fontWithName:@"Gotham-Medium" size:15.0];
     
+    [self.plabel setBackBorderWidth:3.0];
+    [self.plabel setFrontBorderWidth:4];
+    [self.plabel setColorTable: @{
+                                  NSStringFromProgressLabelColorTableKey(ProgressLabelTrackColor):[UIColor lightGrayColor],
+                                  NSStringFromProgressLabelColorTableKey(ProgressLabelProgressColor):[UIColor colorFromHexString:@"3b5998"]
+                                  }];
+    
+    self.plabel.center = self.view.center;
+    self.plabel.userInteractionEnabled = YES;
+
+    
     if([DEP.authenticatedUser[@"listingStatus"] integerValue] == ListingRequested)
     {
         _addApartmentBtn.alpha = 0.0f;
         _messageLbl.text = @"Your request has been registered and apartment will be added as soon as possible.";
+        [self.plabel setProgress:0.5
+                          timing:TPPropertyAnimationTimingEaseOut
+                        duration:1.0
+                           delay:0.0];
     }
+    else
+    {
+        [self.plabel setProgress:0.01
+                          timing:TPPropertyAnimationTimingEaseOut
+                        duration:1.0
+                           delay:0.0];
+    }
+    
 }
 
 - (IBAction)addApartment:(id)sender
@@ -71,8 +96,6 @@
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
     if(result == MFMailComposeResultFailed)
         [UIAlertView showWithTitle:@""
                            message:@"An error occurred, please try again."
@@ -87,6 +110,12 @@
             [DEP.authenticatedUser saveInBackground];
             _addApartmentBtn.alpha = 0.0f;
             _messageLbl.text = @"Your request has been registered and apartment will be added as soon as possible.";
+            
+            [self.plabel setProgress:0.5
+                              timing:TPPropertyAnimationTimingEaseOut
+                            duration:1.0
+                               delay:0.0];
+            
         }
     }
 }

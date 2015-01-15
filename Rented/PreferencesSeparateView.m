@@ -9,6 +9,7 @@
 #import "PreferencesSeparateView.h"
 #import "UIColor+ColorFromHexString.h"
 #import <UIAlertView+Blocks.h>
+#import "UIColor+ColorFromHexString.h"
 
 @implementation PreferencesSeparateView
 
@@ -86,6 +87,9 @@
     lowerLabel.text = [NSString stringWithFormat:@"%d", (int)self.leaseRenewalSlider.lowerValue];
     upperLabel.text = [NSString stringWithFormat:@"%d", (int)self.leaseRenewalSlider.upperValue];
     
+    lowerLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
+    upperLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
+    
     if (DEP.userPreferences.vacancyTypes)
     {
         vacancyTypes = [[NSMutableArray alloc] initWithArray:DEP.userPreferences.vacancyTypes];
@@ -160,6 +164,7 @@
     studioRoom.frame = CGRectMake(76, 263, 70, 30);
     studioRoom.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     studioRoom.titleLabel.textAlignment = NSTextAlignmentRight;
+    studioRoom.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
     [studioRoom addTarget:self action:@selector(checkStudio:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:studioRoom];
     
@@ -167,6 +172,7 @@
     bedroom1.frame = CGRectMake(studioRoom.frame.origin.x+studioRoom.frame.size.width, 263, 40, 30);
     bedroom1.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     bedroom1.titleLabel.textAlignment = NSTextAlignmentRight;
+    bedroom1.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
     [bedroom1 addTarget:self action:@selector(check1Bedroom:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:bedroom1];
     
@@ -174,6 +180,7 @@
     bedroom2.frame = CGRectMake(bedroom1.frame.origin.x+bedroom1.frame.size.width+1, 263, 40, 30);
     bedroom2.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     bedroom2.titleLabel.textAlignment = NSTextAlignmentRight;
+    bedroom2.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
     [bedroom2 addTarget:self action:@selector(check2Bedrooms:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:bedroom2];
     
@@ -181,6 +188,7 @@
     bedroom3.frame = CGRectMake(bedroom2.frame.origin.x+bedroom2.frame.size.width+1, 263, 40, 30);
     bedroom3.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     bedroom3.titleLabel.textAlignment = NSTextAlignmentRight;
+    bedroom3.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
     [bedroom3 addTarget:self action:@selector(check3Bedrooms:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:bedroom3];
     
@@ -188,6 +196,7 @@
     bedroom4.frame = CGRectMake(bedroom3.frame.origin.x+bedroom3.frame.size.width+1, 263, 40, 30);
     bedroom4.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     bedroom4.titleLabel.textAlignment = NSTextAlignmentRight;
+    bedroom4.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
     [bedroom4 addTarget:self action:@selector(check4Bedrooms:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:bedroom4];
     
@@ -195,6 +204,7 @@
     vacancyImmediate.frame = CGRectMake(_vacancyLbl.frame.origin.x+_vacancyLbl.frame.size.width+8, _leaseRenewalLbl.frame.origin.y+_leaseRenewalLbl.frame.size.height+8, 100, 30);
     vacancyImmediate.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     vacancyImmediate.titleLabel.textAlignment = NSTextAlignmentRight;
+    vacancyImmediate.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
     [vacancyImmediate addTarget:self action:@selector(checkVacancyImmediate:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:vacancyImmediate];
     
@@ -202,6 +212,7 @@
     vacancyShortTerm.frame = CGRectMake(_vacancyLbl.frame.origin.x+_vacancyLbl.frame.size.width+8, vacancyImmediate.frame.origin.y+30, 100, 30);
     vacancyShortTerm.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     vacancyShortTerm.titleLabel.textAlignment = NSTextAlignmentRight;
+    vacancyShortTerm.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
     [vacancyShortTerm addTarget:self action:@selector(checkVacancyShortTerm:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:vacancyShortTerm];
     
@@ -209,8 +220,17 @@
     vacancyNegociable.frame = CGRectMake(_vacancyLbl.frame.origin.x+_vacancyLbl.frame.size.width+10, vacancyShortTerm.frame.origin.y+30, 99, 30);
     vacancyNegociable.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     vacancyNegociable.titleLabel.textAlignment = NSTextAlignmentRight;
+    vacancyNegociable.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
     [vacancyNegociable addTarget:self action:@selector(checkVacancyNegociable:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:vacancyNegociable];
+    
+    showOnlyRentalInMyNetwork = [[M13Checkbox alloc] initWithTitle:@"Only view rentals in my network"];
+    showOnlyRentalInMyNetwork.frame = CGRectMake(_roomsLbl.frame.origin.x, _roomsLbl.frame.origin.y+_roomsLbl.frame.size.height+8, 210, 30);
+    showOnlyRentalInMyNetwork.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+    showOnlyRentalInMyNetwork.titleLabel.textAlignment = NSTextAlignmentRight;
+    showOnlyRentalInMyNetwork.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
+    [showOnlyRentalInMyNetwork addTarget:self action:@selector(showRentalInNetwork:) forControlEvents:UIControlEventValueChanged];
+    [self addSubview:showOnlyRentalInMyNetwork];
 }
 
 - (void)configureSlider
@@ -425,6 +445,11 @@
     
     DEP.userPreferences.vacancyTypes = vacancyTypes;
     [DEP saveUserPreferences];
+}
+
+- (void)showRentalInNetwork:(M13Checkbox *)checkbox
+{
+    
 }
 
 @end

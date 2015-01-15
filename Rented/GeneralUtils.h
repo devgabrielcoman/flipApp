@@ -12,5 +12,6 @@
 
 + (NSString *)roomsDescriptionForApartment:(PFObject *)apartment;
 + (NSString *)connectedThroughExtendedDescription:(NSMutableArray *)mutalFriends;
++ (NSString *)getCityFromLocation:(NSString *)locationString;
 
 @end

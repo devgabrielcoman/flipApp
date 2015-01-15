@@ -36,7 +36,7 @@
                      completion:nil];
 }
 
-- (void)removeFromParentView
+- (void)removeFromParentView:(void (^)(BOOL finished))completion
 {
     [UIView animateWithDuration:0.4
                           delay:1.0
@@ -45,7 +45,7 @@
                          self.alpha = 0.0f;
                      }
                      completion:^(BOOL finished) {
-                         [self removeFromSuperview];
+                         completion(YES);
                      }];
 }
 

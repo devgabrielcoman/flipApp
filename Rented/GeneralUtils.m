@@ -60,4 +60,12 @@
     return description;
 }
 
++ (NSString *)getCityFromLocation:(NSString *)locationString
+{
+    NSString *substring1 = [locationString substringToIndex:[locationString rangeOfString:@", " options:NSBackwardsSearch].location];
+    NSInteger location2 = [substring1 rangeOfString:@", " options:NSBackwardsSearch].location;
+    
+    return [substring1 substringFromIndex:location2+2];
+}
+
 @end

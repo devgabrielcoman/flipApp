@@ -11,6 +11,7 @@
 #import "LocationUtils.h"
 #import "MapUtils.h"
 #import "ApartmentCellProtocol.h"
+#import "UIColor+ColorFromHexString.h"
 
 @implementation TopApartmentView
 
@@ -25,10 +26,14 @@
     _ownerImgView.layer.masksToBounds = YES;
     
     _ownerNameLbl.font = [UIFont fontWithName:@"GothamRounded-Light" size:12.0];
+    _ownerNameLbl.textColor = [UIColor colorFromHexString:FeedTextColor];
     _daysUntilRenewal.font = [UIFont fontWithName:@"GothamRounded-Light" size:12.0];
+    _daysUntilRenewal.textColor = [UIColor colorFromHexString:FeedTextColor];
     
-    _displayMore.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Light" size:11.0];
+    _displayMore.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Light" size:12.0];
+    [_displayMore setTintColor:[UIColor colorFromHexString:FeedTextColor]];
     _connectedThroughLbl.font = [UIFont fontWithName:@"GothamRounded-Light" size:12.0];
+    _connectedThroughLbl.textColor = [UIColor colorFromHexString:FeedTextColor];
     
     _locationString = @"";
     
@@ -54,6 +59,7 @@
 - (void)setApartmentDetails:(PFObject *)apartment andImages:(NSArray *)images
 {
     //set owner details
+    _ownerImgView.image = nil;
     _ownerImgView.showActivityIndicator = YES;
     PFUser *owner = apartment[@"owner"];
     _ownerImgView.imageURL = [NSURL URLWithString:owner[@"profilePictureUrl"]];
@@ -64,6 +70,7 @@
     {
         PFObject *firstImage = [images firstObject];
         PFFile *imageFile = firstImage[@"image"];
+        _apartmentImgView.image = nil;
         _apartmentImgView.showActivityIndicator = YES;
         _apartmentImgView.imageURL = [NSURL URLWithString:imageFile.url];
         
@@ -117,7 +124,8 @@
 - (void)handleSwipeLeft:(id)gesture
 {
     RTLog(@"swipe left on cell with index: %li", (long)_apartmentIndex);
-    [_delegate addToFravoritesApartmentFromIndex:_apartmentIndex];
+    //[_delegate addToFravoritesApartmentFromIndex:_apartmentIndex];
+    [_delegate addToFravoritesApartment:_apartment];
 }
 
 - (void)handleSwipeRight:(id)gesture

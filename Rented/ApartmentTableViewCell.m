@@ -20,9 +20,6 @@
     _apartmentTopView = [[[NSBundle mainBundle] loadNibNamed:@"TopApartmentView" owner:self options:nil] firstObject];
     [self.contentView addSubview:_apartmentTopView];
     
-    _apartmentDetailsView = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentDetailsView" owner:self options:nil] firstObject];
-    _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight, wScr, ApartmentDetailsViewHeight);
-    
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
@@ -35,13 +32,13 @@
 - (void)setApartment:(PFObject *)apartment withImages:(NSArray *)images andCurrentUsersStatus:(BOOL)isOwner;
 {
     [_apartmentTopView setApartmentDetails:apartment andImages:images];
-    [_apartmentDetailsView setApartmentDetails:apartment];
     _currentUserIsOwner = isOwner;
-    _apartmentDetailsView.currentUserIsOwner = isOwner;
-    _apartmentDetailsView.isFromFavorites = _isFromFavorites;
     
     if(_currentUserIsOwner)
     {
+        _apartmentDetailsView = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentDetailsView" owner:self options:nil] firstObject];
+        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight, wScr, ApartmentDetailsViewHeight);
+        
         _apartmentTopView.connectedThroughImgView.alpha = 0.0;
         _apartmentTopView.connectedThroughLbl.alpha = 0.0;
         
@@ -50,6 +47,9 @@
     }
     else
     {
+        _apartmentDetailsView = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentDetailsOtherListingView" owner:self options:nil] firstObject];
+        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight, wScr, ApartmentDetailsOtherListingViewHeight);
+        
         _apartmentTopView.connectedThroughImgView.alpha = 1.0;
         _apartmentDetailsView.connectedThroughImageView.alpha = 1.0;
         
@@ -88,7 +88,11 @@
         }];
     }
     
+    _apartmentDetailsView.currentUserIsOwner = isOwner;
     _apartmentDetailsView.isFromFavorites = _isFromFavorites;
+    [_apartmentDetailsView setApartmentDetails:apartment];
+    _apartmentDetailsView.isFromFavorites = _isFromFavorites;
+    _apartmentTopView.apartment = apartment;
 }
 
 - (void)setApartmentIndex:(NSInteger)apartmentIndex
@@ -105,7 +109,11 @@
     _apartmentTopView.frame = CGRectMake(0, 0, wScr, hScr-statusBarHeight);
     [_apartmentTopView layoutIfNeeded];
     
-    _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight, wScr, ApartmentDetailsViewHeight);
+    if(_currentUserIsOwner)
+        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight, wScr, ApartmentDetailsViewHeight);
+    else
+        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight, wScr, ApartmentDetailsOtherListingViewHeight);
+    
     [self addSubview:_apartmentDetailsView];
     _apartmentDetailsView.alpha = 1.0;
     
@@ -117,6 +125,8 @@
 //check again
     [_apartmentDetailsView removeFromSuperview];
     _apartmentTopView.frame = CGRectMake(0, 0, wScr, hScr-statusBarHeight);
+    
+    _apartmentDetailsView = nil;
     
     [_apartmentTopView layoutIfNeeded];
     [_apartmentTopView.displayMore setTitle:@"show more" forState:UIControlStateNormal];

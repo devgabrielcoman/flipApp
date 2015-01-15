@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AuthenticationViewController">
             <connections>
                 <outlet property="backgroundImageView" destination="kov-EX-liX" id="6Ve-RC-zmD"/>
                 <outlet property="fbLoginBtn" destination="8Lp-8i-cy7" id="Wek-Ea-I9T"/>
+                <outlet property="flipLbl" destination="Tjo-3e-GL5" id="zQ8-na-YEy"/>
                 <outlet property="messageLbl" destination="tTj-vu-Fyv" id="5lw-yG-ESt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,9 +23,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Lp-8i-cy7">
-                    <rect key="frame" x="20" y="663" width="374" height="34"/>
+                    <rect key="frame" x="67" y="664" width="280" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="34" id="5Cx-gr-Me8"/>
+                        <constraint firstAttribute="height" constant="40" id="IA5-Sc-BQG"/>
+                        <constraint firstAttribute="width" constant="280" id="ecm-dm-ghg"/>
                     </constraints>
                     <inset key="imageEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="LOGIN VIA FACEBOOK">
@@ -36,43 +37,44 @@
                         <action selector="loginWithFacebook:" destination="-1" eventType="touchUpInside" id="BCM-Tf-XdO"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find a new place to live through the people who live there now." lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTj-vu-Fyv" userLabel="Message Lbl">
-                    <rect key="frame" x="8" y="174" width="150" height="154"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FLIP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tjo-3e-GL5">
+                    <rect key="frame" x="147" y="30" width="120" height="60"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="154" id="cLR-Ja-cbV"/>
-                        <constraint firstAttribute="width" constant="150" id="eHR-Os-lAi"/>
+                        <constraint firstAttribute="height" constant="60" id="BPq-Bh-nmh"/>
+                        <constraint firstAttribute="width" constant="120" id="Un6-mO-Ms0"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find a new place to live through the people who live there now." lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTj-vu-Fyv" userLabel="Message Lbl">
+                    <rect key="frame" x="25" y="118" width="201" height="111"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="111" id="qcz-uF-oL7"/>
+                        <constraint firstAttribute="width" constant="201" id="v17-xF-Hnb"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flip logo" translatesAutoresizingMaskIntoConstraints="NO" id="hZQ-Xw-w8f" userLabel="Logo">
-                    <rect key="frame" x="165" y="39" width="85" height="50"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="85" id="3fd-bn-p7G"/>
-                        <constraint firstAttribute="height" constant="50" id="Spi-Ma-7px"/>
-                    </constraints>
-                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="hZQ-Xw-w8f" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="39" id="9ie-Fh-R2M"/>
-                <constraint firstItem="kov-EX-liX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="AWC-i8-rEM"/>
-                <constraint firstItem="8Lp-8i-cy7" firstAttribute="centerX" secondItem="kov-EX-liX" secondAttribute="centerX" id="Ai8-c0-qPo"/>
-                <constraint firstItem="tTj-vu-Fyv" firstAttribute="top" secondItem="hZQ-Xw-w8f" secondAttribute="bottom" constant="85" id="GcZ-zu-6d5"/>
-                <constraint firstItem="kov-EX-liX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Xey-9e-2KX"/>
-                <constraint firstAttribute="bottom" secondItem="8Lp-8i-cy7" secondAttribute="bottom" constant="39" id="enI-bS-z8i"/>
-                <constraint firstAttribute="bottom" secondItem="kov-EX-liX" secondAttribute="bottom" id="nFZ-YL-y8Q"/>
-                <constraint firstItem="8Lp-8i-cy7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="upY-fb-zMu"/>
-                <constraint firstItem="tTj-vu-Fyv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="vFV-mg-IAx"/>
-                <constraint firstItem="hZQ-Xw-w8f" firstAttribute="centerX" secondItem="8Lp-8i-cy7" secondAttribute="centerX" id="y5Q-hY-4Zg"/>
-                <constraint firstAttribute="trailing" secondItem="kov-EX-liX" secondAttribute="trailing" id="yze-2R-WB4"/>
+                <constraint firstItem="tTj-vu-Fyv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="22U-5P-1Ne"/>
+                <constraint firstItem="Tjo-3e-GL5" firstAttribute="centerX" secondItem="8Lp-8i-cy7" secondAttribute="centerX" id="5Wm-Ie-4T4"/>
+                <constraint firstAttribute="bottom" secondItem="kov-EX-liX" secondAttribute="bottom" id="EkS-Ke-nIW"/>
+                <constraint firstItem="kov-EX-liX" firstAttribute="centerX" secondItem="Tjo-3e-GL5" secondAttribute="centerX" id="HTX-ZU-CeI"/>
+                <constraint firstAttribute="bottom" secondItem="8Lp-8i-cy7" secondAttribute="bottom" constant="32" id="Lz2-wP-RcE"/>
+                <constraint firstItem="tTj-vu-Fyv" firstAttribute="top" secondItem="Tjo-3e-GL5" secondAttribute="bottom" constant="28" id="Odr-1c-CqL"/>
+                <constraint firstItem="kov-EX-liX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZFu-rT-etR"/>
+                <constraint firstItem="Tjo-3e-GL5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="i1c-Yt-1Yk"/>
+                <constraint firstItem="kov-EX-liX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rgm-aQ-Myr"/>
+                <constraint firstAttribute="trailing" secondItem="kov-EX-liX" secondAttribute="trailing" id="xFR-uZ-wAd"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
         </view>
     </objects>
     <resources>
-        <image name="Flip logo" width="170" height="100"/>
         <image name="Login" width="750" height="1334"/>
     </resources>
 </document>
