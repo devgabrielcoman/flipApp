@@ -333,7 +333,17 @@
 //    else
 //        [_tableView reloadData];
     
-    [_tableView reloadData];
+//    [_tableView reloadData];
+    
+    if (indexOfShownApartment != -1){
+        //[_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [_tableView reloadData];
+        _pageControl.currentPage = indexOfShownApartment;
+    }
+    else{
+        [_tableView reloadData];
+        _pageControl.hidden = YES;
+    }
 }
 
 - (void)getApartmentAtIndex:(NSInteger)index
