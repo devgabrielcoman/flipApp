@@ -213,6 +213,7 @@
 		CD39D6471A4A0A6C0006F7B7 /* DashboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DashboardViewController.xib; sourceTree = "<group>"; };
 		CD39D64A1A4A0C580006F7B7 /* RentedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RentedNavigationController.h; sourceTree = "<group>"; };
 		CD39D64B1A4A0C580006F7B7 /* RentedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RentedNavigationController.m; sourceTree = "<group>"; };
+		CD40A5551A67332400B6F314 /* GothamRnd-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRnd-Medium.otf"; sourceTree = "<group>"; };
 		CD48D23F1A5B0A3F00C85AA6 /* ApartmentCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApartmentCellProtocol.h; sourceTree = "<group>"; };
 		CD48D2441A5B1E7800C85AA6 /* GalleryNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryNavigationController.h; sourceTree = "<group>"; };
 		CD48D2451A5B1E7800C85AA6 /* GalleryNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryNavigationController.m; sourceTree = "<group>"; };
@@ -619,6 +620,7 @@
 				CD35CCE51A49A7E3007F12D0 /* GothamRnd-Bold.otf */,
 				CD35CCE81A49ABCD007F12D0 /* GothamRnd-Light.otf */,
 				CD35CCF01A49B0D5007F12D0 /* Gotham-Medium.otf */,
+				CD40A5551A67332400B6F314 /* GothamRnd-Medium.otf */,
 			);
 			name = fonts;
 			sourceTree = "<group>";
@@ -1080,7 +1082,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "16dc759e-eab8-483d-8024-a6878d074583";
+				PROVISIONING_PROFILE = "0a49b619-f43d-4219-99b2-1b371042223a";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1115,7 +1117,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "16dc759e-eab8-483d-8024-a6878d074583";
+				PROVISIONING_PROFILE = "0a49b619-f43d-4219-99b2-1b371042223a";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1133,7 +1135,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Rented;
-				PROVISIONING_PROFILE = "16dc759e-eab8-483d-8024-a6878d074583";
+				PROVISIONING_PROFILE = "0a49b619-f43d-4219-99b2-1b371042223a";
 			};
 			name = Debug;
 		};
@@ -1149,7 +1151,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Rented;
-				PROVISIONING_PROFILE = "16dc759e-eab8-483d-8024-a6878d074583";
+				PROVISIONING_PROFILE = "0a49b619-f43d-4219-99b2-1b371042223a";
 			};
 			name = Release;
 		};

@@ -33,14 +33,14 @@
 - (void)setVisualDetails
 {
     _messageLbl.font = [UIFont fontWithName:@"GothamRounded-Bold" size:22];
-    _messageLbl.layer.shadowOffset = CGSizeMake(0.5, 0.5);
-    _messageLbl.layer.shadowRadius = 0.5;
-    _messageLbl.layer.shadowOpacity = 0.5;
-    _messageLbl.layer.shadowColor = [[UIColor blackColor] CGColor];
+//    _messageLbl.layer.shadowOffset = CGSizeMake(0.5, 0.5);
+//    _messageLbl.layer.shadowRadius = 0.5;
+//    _messageLbl.layer.shadowOpacity = 0.5;
+//    _messageLbl.layer.shadowColor = [[UIColor blackColor] CGColor];
     
     _fbLoginBtn.backgroundColor = [UIColor colorFromHexString:@"3b5998"];
     _fbLoginBtn.layer.cornerRadius = 2.0;
-    _fbLoginBtn.titleLabel.font = [UIFont fontWithName:@"Gotham-Medium" size:15.0];
+    _fbLoginBtn.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Bold" size:15.0];
     [_fbLoginBtn setImage:[[UIImage imageNamed:@"facebook-icon"] imageScaledToFitSize:CGSizeMake(20.0, 20.0)] forState:UIControlStateNormal];
     
     _backgroundImageView.image = [[UIImage imageNamed:@"Login"] imageScaledToFitSize:CGSizeMake(wScr, hScr)];
