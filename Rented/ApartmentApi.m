@@ -121,6 +121,8 @@
     if (DEP.userPreferences.rooms && DEP.userPreferences.rooms.count > 0)
         [query whereKey:@"rooms" containedIn:DEP.userPreferences.rooms];
     
+    [query setLimit:5];
+    [query orderByDescending:@"createdAt"];
     
     [query includeKey:@"owner"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
