@@ -37,7 +37,6 @@
     
     _locationString = @"";
     
-    
     //Add a left swipe gesture recognizer
     UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeRight:)];
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
@@ -48,11 +47,16 @@
     recognizer.delegate = self;
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
     [self addGestureRecognizer:recognizer];
+    
+    CGRect apartmentImgViewFrame = _apartmentImgView.frame;
+    apartmentImgViewFrame.size.width = wScr;
+    _apartmentImgView.frame = apartmentImgViewFrame;
 }
 
 -(void)layoutSubviews{
-    [super layoutSubviews];
     
+    self.frame = CGRectMake(0, 0, wScr, hScr-statusBarHeight);
+    [super layoutSubviews];
     _mapView.layer.cornerRadius = _mapView.bounds.size.width/2;
 }
 

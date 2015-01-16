@@ -1122,7 +1122,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "2e905aca-9151-4d77-b4dc-ae5fa0dbaf6f";
+				PROVISIONING_PROFILE = "93b5ae96-7c44-4808-9ebf-3ab26ac4c90a";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1157,7 +1157,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "2e905aca-9151-4d77-b4dc-ae5fa0dbaf6f";
+				PROVISIONING_PROFILE = "93b5ae96-7c44-4808-9ebf-3ab26ac4c90a";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1168,6 +1168,7 @@
 			baseConfigurationReference = CADD9CDB49CF1FD79BA7F002 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Rented/Rented-Prefix.pch";
@@ -1175,7 +1176,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Rented;
-				PROVISIONING_PROFILE = "2e905aca-9151-4d77-b4dc-ae5fa0dbaf6f";
+				PROVISIONING_PROFILE = "93b5ae96-7c44-4808-9ebf-3ab26ac4c90a";
 			};
 			name = Debug;
 		};
@@ -1184,6 +1185,7 @@
 			baseConfigurationReference = D88ADE80C6E025ADD79716C1 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Rented/Rented-Prefix.pch";
@@ -1191,7 +1193,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Rented;
-				PROVISIONING_PROFILE = "2e905aca-9151-4d77-b4dc-ae5fa0dbaf6f";
+				PROVISIONING_PROFILE = "93b5ae96-7c44-4808-9ebf-3ab26ac4c90a";
 			};
 			name = Release;
 		};

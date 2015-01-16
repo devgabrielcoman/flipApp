@@ -37,6 +37,20 @@
     expandedRow = [NSIndexPath indexPathForRow:0 inSection:-1];
     
     [self.tableView reloadData];
+    
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navSingleTap)];
+    gestureRecognizer.numberOfTapsRequired = 1;
+    CGRect frame = CGRectMake(self.view.frame.size.width/4, 0, self.view.frame.size.width/2, 44);
+    UIView *navBarTapView = [[UIView alloc] initWithFrame:frame];
+    [self.navigationController.navigationBar addSubview:navBarTapView];
+    navBarTapView.backgroundColor = [UIColor clearColor];
+    [navBarTapView setUserInteractionEnabled:YES];
+    [navBarTapView addGestureRecognizer:gestureRecognizer];
+}
+
+- (void)navSingleTap
+{
+    [self displayMoreInfoForApartmentAtIndex:0];
 }
 
 #pragma mark - Table view data source
@@ -54,7 +68,7 @@
     if([indexPath isEqual:expandedRow])
     {
         if(_isFromFavorites)
-            return (hScr-statusBarHeight)+ApartmentDetailsOtherListingViewHeight;
+            return (hScr-statusBarHeight)+ApartmentDetailsOtherListingViewHeight+10+22;
         
         return (hScr-statusBarHeight)+ApartmentDetailsViewHeight;
     }

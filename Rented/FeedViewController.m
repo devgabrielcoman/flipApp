@@ -20,6 +20,8 @@
 #import <UIAlertView+Blocks.h>
 #import <MessageUI/MFMailComposeViewController.h>
 
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
 @interface FeedViewController ()<UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, ApartmentCellProtocol, MFMailComposeViewControllerDelegate>
 {
     NSIndexPath *expandedRow;
@@ -74,11 +76,26 @@
                                                  name:@"ReloadFeedData" object:nil];
     
     [self reloadFeedData];
+    
+    self.tableView.allowsSelection = NO;
+    
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navSingleTap)];
+    gestureRecognizer.numberOfTapsRequired = 1;
+    CGRect frame = CGRectMake(self.view.frame.size.width/4, 0, self.view.frame.size.width/2, 44);
+    UIView *navBarTapView = [[UIView alloc] initWithFrame:frame];
+    [self.navigationController.navigationBar addSubview:navBarTapView];
+    navBarTapView.backgroundColor = [UIColor clearColor];
+    [navBarTapView setUserInteractionEnabled:YES];
+    [navBarTapView addGestureRecognizer:gestureRecognizer];
+}
+
+- (void)navSingleTap
+{
+    [self displayMoreInfoForApartmentAtIndex:0];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-
-    
+    [super viewWillDisappear:animated];
 }
 
 - (void)reloadFeed:(NSNotification*)notification
@@ -149,7 +166,9 @@
 {
     if([indexPath isEqual:expandedRow])
     {
-        return (hScr-statusBarHeight)+ApartmentDetailsOtherListingViewHeight;
+        CGFloat extra = 22;
+        
+        return (hScr-statusBarHeight)+ApartmentDetailsOtherListingViewHeight+10+extra;
     }
     
     return hScr-statusBarHeight;
@@ -439,32 +458,60 @@
     frame.size.height -= 20;
     frame.size.width += 40;
     
-    
-    //modific size-ul prin constrainturi
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_pageControl
-                                                          attribute:NSLayoutAttributeHeight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:nil
-                                                          attribute:NSLayoutAttributeNotAnAttribute
-                                                         multiplier:1.0
-                                                           constant:frame.size.height]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_pageControl
-                                                          attribute:NSLayoutAttributeWidth
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:nil
-                                                          attribute:NSLayoutAttributeNotAnAttribute
-                                                         multiplier:1.0
-                                                           constant:frame.size.width]];
-    //constraint pentru right-margin 
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_pageControl
-                                                          attribute:NSLayoutAttributeRightMargin
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeRight
-                                                         multiplier:1.0
-                                                           constant:frame.size.width/2 - frame.size.height]];
-
+    if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
+    {
+        //modific size-ul prin constrainturi
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_pageControl
+                                                              attribute:NSLayoutAttributeHeight
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:nil
+                                                              attribute:NSLayoutAttributeNotAnAttribute
+                                                             multiplier:1.0
+                                                               constant:frame.size.height]];
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_pageControl
+                                                              attribute:NSLayoutAttributeWidth
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:nil
+                                                              attribute:NSLayoutAttributeNotAnAttribute
+                                                             multiplier:1.0
+                                                               constant:frame.size.width]];
+        //constraint pentru right-margin 
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_pageControl
+                                                              attribute:NSLayoutAttributeRightMargin
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:self.view
+                                                              attribute:NSLayoutAttributeRight
+                                                             multiplier:1.0
+                                                               constant:frame.size.width/2 - frame.size.height]];
+        
+    }
+    else
+    {
+        [_pageControl removeFromSuperview];
+        [_pageControl removeConstraints:_pageControl.constraints];
+        
+        frame.size.width -= 50;
+        frame.origin.x = wScr - frame.size.width;
+        frame.origin.y = self.view.center.y;
+        _pageControl.frame = frame;
+        
+        _pageControl.backgroundColor = [UIColor clearColor];
+        
+        CGRect backgroundViewFrame = _pageControl.frame;
+        backgroundViewFrame.size.height = _apartments.count * (backgroundViewFrame.size.height+6);
+        backgroundViewFrame.origin.y = _pageControl.center.y - backgroundViewFrame.size.height/2;
+        
+        UIView *backgroundPaginationView = [[UIView alloc] initWithFrame:backgroundViewFrame];
+        backgroundPaginationView.backgroundColor = [UIColor lightGrayColor];
+        backgroundPaginationView.alpha = 0.8;
+        
+        RTLog(@"sad panda -  %@", NSStringFromCGRect(backgroundPaginationView.frame));
+        
+        [self.view addSubview:backgroundPaginationView];
+        [self.view addSubview:_pageControl];
+    }
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -10,4 +10,8 @@
 
 @interface RentedPanelController : JASidePanelController
 
+@property BOOL hideLeftButton;
+
+- (UIBarButtonItem *)getLeftButton;
+
 @end

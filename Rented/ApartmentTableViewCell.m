@@ -8,7 +8,8 @@
 
 #import "ApartmentTableViewCell.h"
 #import "GeneralUtils.h"
-
+#import "AppDelegate.h"
+#import "RentedPanelController.h"
 
 @implementation ApartmentTableViewCell
 
@@ -37,7 +38,7 @@
     if(_currentUserIsOwner)
     {
         _apartmentDetailsView = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentDetailsView" owner:self options:nil] firstObject];
-        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight, wScr, ApartmentDetailsViewHeight);
+        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight+10, wScr, ApartmentDetailsViewHeight);
         
         _apartmentTopView.connectedThroughImgView.alpha = 0.0;
         _apartmentTopView.connectedThroughLbl.alpha = 0.0;
@@ -48,7 +49,7 @@
     else
     {
         _apartmentDetailsView = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentDetailsOtherListingView" owner:self options:nil] firstObject];
-        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight, wScr, ApartmentDetailsOtherListingViewHeight);
+        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight+20, wScr, ApartmentDetailsOtherListingViewHeight);
         
         _apartmentTopView.connectedThroughImgView.alpha = 1.0;
         _apartmentDetailsView.connectedThroughImageView.alpha = 1.0;
@@ -110,14 +111,15 @@
     [_apartmentTopView layoutIfNeeded];
     
     if(_currentUserIsOwner)
-        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight, wScr, ApartmentDetailsViewHeight);
+        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight+10, wScr, ApartmentDetailsViewHeight);
     else
-        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight, wScr, ApartmentDetailsOtherListingViewHeight);
+        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight+10, wScr, ApartmentDetailsOtherListingViewHeight);
     
     [self addSubview:_apartmentDetailsView];
     _apartmentDetailsView.alpha = 1.0;
     
     [_apartmentTopView.displayMore setTitle:@"hide" forState:UIControlStateNormal];
+    
 }
 
 - (void)hideApartmentDetails
@@ -129,6 +131,7 @@
     _apartmentDetailsView = nil;
     
     [_apartmentTopView layoutIfNeeded];
+    
     [_apartmentTopView.displayMore setTitle:@"show more" forState:UIControlStateNormal];
 }
 

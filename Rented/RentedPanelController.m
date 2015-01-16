@@ -37,4 +37,12 @@
     return UIStatusBarStyleLightContent;
 }
 
+- (UIBarButtonItem *)getLeftButton
+{
+    if(_hideLeftButton)
+        return [[UIBarButtonItem alloc] initWithImage:nil style:UIBarButtonItemStylePlain target:self action:@selector(toggleLeftPanel:)];
+    
+    return [[UIBarButtonItem alloc] initWithImage:[[self class] defaultImage] style:UIBarButtonItemStylePlain target:self action:@selector(toggleLeftPanel:)];
+}
+
 @end

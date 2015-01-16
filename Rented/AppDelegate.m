@@ -36,6 +36,7 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
+    RTLog(@"screen bounds: %@", NSStringFromCGRect([[UIScreen mainScreen] bounds]));
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     _rootViewController = [RentedPanelController new];
