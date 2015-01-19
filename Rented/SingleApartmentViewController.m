@@ -68,9 +68,9 @@
     if([indexPath isEqual:expandedRow])
     {
         if(_isFromFavorites)
-            return (hScr-statusBarHeight)+ApartmentDetailsOtherListingViewHeight+10+22;
+            return (hScr-statusBarHeight)+ApartmentDetailsOtherListingViewHeight+10+22+10;
         
-        return (hScr-statusBarHeight)+ApartmentDetailsViewHeight;
+        return (hScr-statusBarHeight)+ApartmentDetailsViewHeight+10;
     }
     
     return hScr-statusBarHeight;

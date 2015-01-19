@@ -77,7 +77,9 @@
                 //user already flipped his apartmen aka made it visible on screen
                 //_flipBtn.backgroundColor = [UIColor lightGrayColor];
                 [_flipBtn setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateNormal];
-                _flipBtn.enabled = NO;
+                _flipBtn.enabled = YES;
+                [_flipBtn setTitle:@"UNFLIP" forState:UIControlStateNormal];
+                
             }
             else
             {
@@ -108,13 +110,25 @@
     {
         if(![_apartment[@"visible"] boolValue])
             [DEP.api.apartmentApi makeApartmentLive:_apartment completion:^(BOOL succeeded) {
-                _flipBtn.enabled = NO;
+                _flipBtn.enabled = YES;
                 
                 [UIView animateWithDuration:0.3
                                  animations:^{
                                      [_flipBtn setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateNormal];
+                                     [_flipBtn setTitle:@"UNFLIP" forState:UIControlStateNormal];
                                  }];
             }];
+        else
+            [DEP.api.apartmentApi hideLiveApartment:_apartment completion:^(BOOL succeeded) {
+                _flipBtn.enabled = YES;
+                
+                [UIView animateWithDuration:0.3
+                                 animations:^{
+                                     [_flipBtn setTitle:@"FLIP" forState:UIControlStateNormal];
+                                     [_flipBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"47a0db"]] forState:UIControlStateNormal];
+                                 }];
+            }];
+            
     }
     else
     {

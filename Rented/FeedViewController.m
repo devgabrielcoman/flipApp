@@ -168,7 +168,7 @@
     {
         CGFloat extra = 22;
         
-        return (hScr-statusBarHeight)+ApartmentDetailsOtherListingViewHeight+10+extra;
+        return (hScr-statusBarHeight)+ApartmentDetailsOtherListingViewHeight+10+extra+10;
     }
     
     return hScr-statusBarHeight;

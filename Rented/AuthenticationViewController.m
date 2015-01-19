@@ -41,7 +41,8 @@
     
     _fbLoginBtn.backgroundColor = [UIColor colorFromHexString:@"3b5998"];
     _fbLoginBtn.layer.cornerRadius = 2.0;
-    _fbLoginBtn.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Bold" size:15.0];
+    //_fbLoginBtn.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Bold" size:15.0];
+    _fbLoginBtn.titleLabel.font = [UIFont systemFontOfSize:15.0];
     [_fbLoginBtn setImage:[[UIImage imageNamed:@"facebook-icon"] imageScaledToFitSize:CGSizeMake(20.0, 20.0)] forState:UIControlStateNormal];
     
     _backgroundImageView.image = [[UIImage imageNamed:@"Login"] imageScaledToFitSize:CGSizeMake(wScr, hScr)];
