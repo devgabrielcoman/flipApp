@@ -103,7 +103,23 @@
     tapOnMap.numberOfTapsRequired = 1;
     [_mapView addGestureRecognizer:tapOnMap];
     
-    _daysUntilRenewal.text = [NSString stringWithFormat:@"%li days\n until\n renewal", (long)[apartment[@"renewaldays"] integerValue]];
+    //_daysUntilRenewal.text = [NSString stringWithFormat:@"%li days\n until\n renewal", (long)[apartment[@"renewaldays"] integerValue]];
+    
+    NSMutableString *vacancy = [[NSMutableString alloc] initWithString:@"Available:\n"];
+    NSArray *vacancyArray = apartment[@"vacancy"];
+    
+    for (NSNumber *vacancyType in vacancyArray)
+    {
+        if([vacancyType integerValue] == VacancyImmediate)
+            [vacancy appendFormat:@"Immediate"];
+        
+        if([vacancyType integerValue] == VacancyNegociable)
+            [vacancy appendFormat:@"Negociable"];
+        
+        if([vacancyType integerValue] == VacancyShortTerm)
+            [vacancy appendFormat:@"Short-Term"];
+    }
+    _daysUntilRenewal.text = vacancy;
 }
 
 #pragma mark - Gesture handlers

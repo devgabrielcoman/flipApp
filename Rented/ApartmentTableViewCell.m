@@ -34,10 +34,12 @@
 {
     [_apartmentTopView setApartmentDetails:apartment andImages:images];
     _currentUserIsOwner = isOwner;
+    _apartmentTopView.connectedThroughLbl.text = @"";
     
     if(_currentUserIsOwner)
     {
         _apartmentDetailsView = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentDetailsView" owner:self options:nil] firstObject];
+        _apartmentDetailsView.connectedThroughLbl.text = @"";
         _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight+10, wScr, ApartmentDetailsViewHeight);
         
         _apartmentTopView.connectedThroughImgView.alpha = 0.0;
@@ -56,32 +58,32 @@
         
         PFUser *apartmentOwner = apartment[@"owner"];
         [DEP.api.userApi getFacebookMutualFriendsWithFriend:apartmentOwner[@"facebookID"] completionHandler:^(NSArray *mutualFriends, BOOL succeeded) {
+            NSLog(@"mutual friends: %lu - %@", (unsigned long)mutualFriends.count, mutualFriends);
             if(succeeded)
             {
                 if(mutualFriends)
                 {
                     if(mutualFriends.count == 0)
                     {
-                        _apartmentTopView.connectedThroughLbl.text = @"";
-                        _apartmentDetailsView.connectedThroughLbl.text = @"";
+                        _apartmentTopView.connectedThroughLbl.text = @"0";
+                        _apartmentDetailsView.connectedThroughLbl.text = @"No Connections";
                     }
                     else
                     {
-                        _apartmentTopView.connectedThroughLbl.text = @"";// [NSString stringWithFormat:@"%lu", (unsigned long)mutualFriends.count];
-                        _apartmentDetailsView.connectedThroughLbl.text = @""; // [GeneralUtils connectedThroughExtendedDescription:[[NSMutableArray alloc] initWithArray:mutualFriends]];
+                        _apartmentTopView.connectedThroughLbl.text = [NSString stringWithFormat:@"%lu", (unsigned long)mutualFriends.count];
+                        _apartmentDetailsView.connectedThroughLbl.text = [GeneralUtils connectedThroughExtendedDescription:[[NSMutableArray alloc] initWithArray:mutualFriends]];
                     }
-                    
                 }
                 else
                 {
-                    _apartmentTopView.connectedThroughLbl.text = @"";
-                    _apartmentDetailsView.connectedThroughLbl.text = @"";
+                    _apartmentTopView.connectedThroughLbl.text = @"0";
+                    _apartmentDetailsView.connectedThroughLbl.text = @"No Connections";
                 }
             }
             else
             {
-                _apartmentTopView.connectedThroughLbl.text = @"";
-                _apartmentDetailsView.connectedThroughLbl.text = @"";
+                _apartmentTopView.connectedThroughLbl.text = @"0";
+                _apartmentDetailsView.connectedThroughLbl.text = @"No Connections";
             }
             
             _apartmentTopView.connectedThroughLbl.alpha = 1.0;
@@ -105,7 +107,7 @@
 
 - (void)showApartmentDetails
 {
-//check again
+    //check again
     [_apartmentDetailsView updateFlipButtonStatus];
     _apartmentTopView.frame = CGRectMake(0, 0, wScr, hScr-statusBarHeight);
     [_apartmentTopView layoutIfNeeded];
@@ -124,7 +126,7 @@
 
 - (void)hideApartmentDetails
 {
-//check again
+    //check again
     [_apartmentDetailsView removeFromSuperview];
     _apartmentTopView.frame = CGRectMake(0, 0, wScr, hScr-statusBarHeight);
     

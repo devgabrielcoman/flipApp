@@ -82,61 +82,93 @@
 {
     FBSession *session = [PFFacebookUtils session];
 #warning not so efficient...just a solution for the moment..
-    if(session.state == FBSessionStateOpen)
+    if(session.state == FBSessionStateOpen || session.state == FBSessionStateOpenTokenExtended)
     {
-        [FBRequestConnection startWithGraphPath:@"me/friends" parameters:nil HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-            if(!error)
-            {
-                NSMutableArray *myFriends = [NSMutableArray new];
-                NSArray *myFacebookMutualFriends = result[@"data"];
-                
-                for (NSDictionary *userInfo in myFacebookMutualFriends)
-                {
-                    FacebookFriend *fr = [FacebookFriend new];
-                    fr.userId = userInfo[@"id"];
-                    fr.name = userInfo[@"name"];
-                    fr.profilePictureUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", fr.userId];
-                    
-                    [myFriends addObject:fr];
-                }
-                
-                [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"%@/friends", userId]
-                                             parameters:nil
-                                             HTTPMethod:@"GET"
-                                      completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                                        if(!error)
-                                        {
-                                            NSMutableArray *friendsOfFriend = [NSMutableArray new];
-                                            NSArray *facebookFriendsOfFriend = result[@"data"];
-                                            
-                                            for (NSDictionary *userInfo in facebookFriendsOfFriend)
-                                            {
-                                                FacebookFriend *fr = [FacebookFriend new];
-                                                fr.userId = userInfo[@"id"];
-                                                fr.name = userInfo[@"name"];
-                                                fr.profilePictureUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", fr.userId];
-                                                
-                                                [friendsOfFriend addObject:fr];
-                                            }
-                                            
-                                            NSMutableArray *finalArray = [NSMutableArray new];
-                                            for (FacebookFriend *fr in myFriends)
-                                            {
-                                                if([friendsOfFriend containsObject:fr])
-                                                   [finalArray addObject:fr];
-                                            }
-                                            
-                                            completion(finalArray, YES);
-                                        }
-                                        else
-                                        {
-                                            completion(@[], NO);
-                                        }
-                                    }];
-            }
-            else
-                completion(@[], NO);
-        }];
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"context.fields(mutual_friends)", @"fields",nil];
+        [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@", userId]
+                                     parameters:params
+                                     HTTPMethod:@"GET"
+                              completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                                  if(!error)
+                                  {
+                                    
+                                      if(result != nil && [[result allKeys] containsObject:@"context"])
+                                      {
+                                          NSArray *mutualFriends = [result valueForKeyPath:@"context.mutual_friends.data"];
+                                          
+                                          NSMutableArray *mutual = [NSMutableArray new];
+                                          for (NSDictionary *friendData in mutualFriends)
+                                          {
+                                              FacebookFriend *fr = [FacebookFriend new];
+                                              fr.userId = friendData[@"id"];
+                                              fr.name = friendData[@"name"];
+                                              fr.profilePictureUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", fr.userId];
+                                              
+                                              [mutual addObject:fr];
+                                          }
+                                          
+                                          completion(mutual, YES);
+                                      }
+                                      else
+                                          completion(@[], NO);
+                                  }
+                                  else
+                                      completion(@[], YES);
+                              }];
+        
+//        [FBRequestConnection startWithGraphPath:@"me/friends" parameters:nil HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+//            if(!error)
+//            {
+//                NSMutableArray *myFriends = [NSMutableArray new];
+//                NSArray *myFacebookMutualFriends = result[@"data"];
+//                
+//                for (NSDictionary *userInfo in myFacebookMutualFriends)
+//                {
+//                    FacebookFriend *fr = [FacebookFriend new];
+//                    fr.userId = userInfo[@"id"];
+//                    fr.name = userInfo[@"name"];
+//                    fr.profilePictureUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", fr.userId];
+//                    
+//                    [myFriends addObject:fr];
+//                }
+//                
+//                [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"%@/friends", userId]
+//                                             parameters:nil
+//                                             HTTPMethod:@"GET"
+//                                      completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+//                                        if(!error)
+//                                        {
+//                                            NSMutableArray *friendsOfFriend = [NSMutableArray new];
+//                                            NSArray *facebookFriendsOfFriend = result[@"data"];
+//                                            
+//                                            for (NSDictionary *userInfo in facebookFriendsOfFriend)
+//                                            {
+//                                                FacebookFriend *fr = [FacebookFriend new];
+//                                                fr.userId = userInfo[@"id"];
+//                                                fr.name = userInfo[@"name"];
+//                                                fr.profilePictureUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", fr.userId];
+//                                                
+//                                                [friendsOfFriend addObject:fr];
+//                                            }
+//                                            
+//                                            NSMutableArray *finalArray = [NSMutableArray new];
+//                                            for (FacebookFriend *fr in myFriends)
+//                                            {
+//                                                if([friendsOfFriend containsObject:fr])
+//                                                   [finalArray addObject:fr];
+//                                            }
+//                                            
+//                                            completion(finalArray, YES);
+//                                        }
+//                                        else
+//                                        {
+//                                            completion(@[], NO);
+//                                        }
+//                                    }];
+//            }
+//            else
+//                completion(@[], NO);
+//        }];
     }
 }
 

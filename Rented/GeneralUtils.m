@@ -51,7 +51,12 @@
     {
         FacebookFriend *fr = [mutalFriends firstObject];
         [description appendFormat:@"%@", fr.name];
-    } else {
+    } else if(mutalFriends.count == 2)
+    {
+        FacebookFriend *fr1 = [mutalFriends firstObject];
+        FacebookFriend *fr2 = [mutalFriends objectAtIndex:1];
+        [description appendFormat:@"%@ and %@", fr1.name, fr2.name];
+    }else{
         FacebookFriend *fr = [mutalFriends firstObject];
         [mutalFriends removeObject:fr];
         [description appendFormat:@"%@ and %lu others", fr.name, (unsigned long)mutalFriends.count];
@@ -62,10 +67,12 @@
 
 + (NSString *)getCityFromLocation:(NSString *)locationString
 {
-    NSString *substring1 = [locationString substringToIndex:[locationString rangeOfString:@", " options:NSBackwardsSearch].location];
-    NSInteger location2 = [substring1 rangeOfString:@", " options:NSBackwardsSearch].location;
+//    NSString *substring1 = [locationString substringToIndex:[locationString rangeOfString:@", " options:NSBackwardsSearch].location];
+//    NSInteger location2 = [substring1 rangeOfString:@", " options:NSBackwardsSearch].location;
+//    
+//    return [substring1 substringFromIndex:location2+2];
     
-    return [substring1 substringFromIndex:location2+2];
+    return [locationString substringToIndex:[locationString rangeOfString:@", "].location];
 }
 
 @end
