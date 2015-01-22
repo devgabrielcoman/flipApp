@@ -19,6 +19,10 @@
 #import "LikedApartment.h"
 #import <UIAlertView+Blocks.h>
 #import <MessageUI/MFMailComposeViewController.h>
+#import "ContactViewController.h"
+#import "UIView+MLScreenshot.h"
+#import "GeneralUtils.h"
+#import "ConfirmationView.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -28,6 +32,7 @@
     int indexOfShownApartment;
     
     UILabel *lbNoMoreApartments;
+    NSInteger indexForGetRequest;
 }
 
 @property NSMutableArray *apartmentGalleryPhotos;
@@ -87,6 +92,8 @@
     navBarTapView.backgroundColor = [UIColor clearColor];
     [navBarTapView setUserInteractionEnabled:YES];
     [navBarTapView addGestureRecognizer:gestureRecognizer];
+    
+    indexForGetRequest = -1;
 }
 
 - (void)navSingleTap
@@ -367,54 +374,77 @@
 
 - (void)getApartmentAtIndex:(NSInteger)index
 {
-    Apartment *ap = _apartments[index];
-    [self sendGetApartmentMessageToUser:ap.apartment[@"owner"]];
+//    Apartment *ap = _apartments[index];
+//    [self sendGetApartmentMessageToUser:ap.apartment[@"owner"]];
+    [self sendGetMessageForApartmentAtIndex:index];
 }
 
-- (void)sendGetApartmentMessageToUser:(PFUser *)user
+- (void)sendGetMessageForApartmentAtIndex:(NSInteger)index
 {
-    if (![MFMailComposeViewController canSendMail])
-    {
-        [UIAlertView showWithTitle:@""
-                           message:@"Cannot send emails from this device!"
-                 cancelButtonTitle:@"Dismiss"
-                 otherButtonTitles:nil
-                          tapBlock:nil];
-    }
-    else
-    {
-        NSString *email = user[@"email"];
-        if(email.length)
+    indexForGetRequest = indexOfShownApartment;
+    Apartment *ap = _apartments[indexForGetRequest];
+    PFUser *owner = ap.apartment[@"owner"];
+    
+    [DEP.api.apartmentApi userHasRequestForApartment:ap.apartment completion:^(NSArray *objects, BOOL succeeded) {
+        if(succeeded && objects.count == 1)
         {
-            MFMailComposeViewController *mail = [MFMailComposeViewController new];
+            ApartmentTableViewCell *cell = (ApartmentTableViewCell *) [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
             
-            mail.mailComposeDelegate = self;
+            ContactViewController *contactVC = [[ContactViewController alloc] init];
             
-            [mail setSubject:@"Flip apartment"];
+            contactVC.apartmentSnapshot = [cell.apartmentTopView screenshot];
+            contactVC.message = [NSString stringWithFormat:@"Hold tight, %@! Your flipmate is going to work things out between you and %@'s %@.", DEP.authenticatedUser[@"username"], owner[@"username"], [GeneralUtils roomsDescriptionForApartment:ap.apartment]];
             
-            NSArray *toRecipients = [NSArray arrayWithObject:email];
-            NSArray *ccRecipients = @[];
-            NSArray *bccRecipients = @[];
+            contactVC.apartment = ap.apartment;
             
-            [mail setToRecipients:toRecipients];
-            [mail setCcRecipients:ccRecipients];
-            [mail setBccRecipients:bccRecipients];
-            
-            NSString *emailBody = [NSString stringWithFormat:@"Hi %@, <br> I really like your apartment and i would like to join....", user.username];
-            [mail setMessageBody:emailBody isHTML:YES];
-            
-            [self presentViewController:mail animated:YES completion:NULL];
+            [self.navigationController presentViewController:contactVC animated:YES completion:nil];
         }
         else
         {
-            [UIAlertView showWithTitle:@""
-                               message:@"You flip mate doesn't have an email address..."
-                     cancelButtonTitle:@"Dismiss"
-                     otherButtonTitles:nil
-                              tapBlock:nil];
+            if (![MFMailComposeViewController canSendMail])
+            {
+                [UIAlertView showWithTitle:@""
+                                   message:@"Cannot send emails from this device!"
+                         cancelButtonTitle:@"Dismiss"
+                         otherButtonTitles:nil
+                                  tapBlock:nil];
+            }
+            else
+            {
+                NSString *email = owner[@"email"];
+                if(email.length)
+                {
+                    MFMailComposeViewController *mail = [MFMailComposeViewController new];
+                    
+                    mail.mailComposeDelegate = self;
+                    
+                    [mail setSubject:@"Flip apartment"];
+                    
+                    NSArray *toRecipients = [NSArray arrayWithObject:email];
+                    NSArray *ccRecipients = @[];
+                    NSArray *bccRecipients = @[];
+                    
+                    [mail setToRecipients:toRecipients];
+                    [mail setCcRecipients:ccRecipients];
+                    [mail setBccRecipients:bccRecipients];
+                    
+                    NSString *emailBody = [NSString stringWithFormat:@"Hi %@, <br> I really like your apartment and i would like to join....", owner.username];
+                    [mail setMessageBody:emailBody isHTML:YES];
+                    
+                    [self presentViewController:mail animated:YES completion:NULL];
+                }
+                else
+                {
+                    [UIAlertView showWithTitle:@""
+                                       message:@"You flip mate doesn't have an email address..."
+                             cancelButtonTitle:@"Dismiss"
+                             otherButtonTitles:nil
+                                      tapBlock:nil];
+                }
+                
+            }
         }
-
-    }
+    }];
 }
 
 #pragma mark - MailComposer delegate methods
@@ -429,6 +459,26 @@
                  cancelButtonTitle:@"Dismiss"
                  otherButtonTitles:nil
                           tapBlock:nil];
+    else if(result == MFMailComposeResultSent)
+    {
+        Apartment *ap = _apartments[indexForGetRequest];
+        
+        [DEP.api.apartmentApi addApartmentToGetRequests:ap.apartment completion:^(BOOL succeeded) {
+            if(succeeded)
+            {
+                ConfirmationView *confirmationView = [[[NSBundle mainBundle] loadNibNamed:@"ConfirmationView" owner:self options:nil] firstObject];
+                confirmationView.center = self.view.center;
+                confirmationView.alpha = 0.0;
+                
+                [self.view addSubview:confirmationView];
+                
+                [UIView animateWithDuration:0.3
+                                 animations:^{
+                                     confirmationView.alpha = 1.0;
+                                 }];
+            }
+        }];
+    }
 }
 
 

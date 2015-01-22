@@ -37,39 +37,39 @@
                         <action selector="loginWithFacebook:" destination="-1" eventType="touchUpInside" id="BCM-Tf-XdO"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tjo-3e-GL5">
-                    <rect key="frame" x="147" y="30" width="120" height="60"/>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find a new place to live through the people who live there  now" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTj-vu-Fyv" userLabel="Message Lbl">
+                    <rect key="frame" x="25" y="135" width="133" height="170"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="60" id="BPq-Bh-nmh"/>
-                        <constraint firstAttribute="width" constant="120" id="Un6-mO-Ms0"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="45"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find a new place to live through the people who live there  now" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTj-vu-Fyv" userLabel="Message Lbl">
-                    <rect key="frame" x="25" y="118" width="133" height="170"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="133" id="qOk-QV-1dj"/>
-                        <constraint firstAttribute="height" constant="170" id="yQL-9R-xM9"/>
+                        <constraint firstAttribute="width" constant="133" id="SpQ-79-GJ7"/>
+                        <constraint firstAttribute="height" constant="170" id="WkR-7c-JI7"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tjo-3e-GL5">
+                    <rect key="frame" x="142" y="47" width="130" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="130" id="1Zx-bh-rHg"/>
+                        <constraint firstAttribute="height" constant="80" id="2vT-68-Po6"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="65"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Tjo-3e-GL5" firstAttribute="centerX" secondItem="8Lp-8i-cy7" secondAttribute="centerX" id="5Wm-Ie-4T4"/>
+                <constraint firstItem="Tjo-3e-GL5" firstAttribute="centerX" secondItem="kov-EX-liX" secondAttribute="centerX" id="E6y-Fi-5nE"/>
                 <constraint firstAttribute="bottom" secondItem="kov-EX-liX" secondAttribute="bottom" id="EkS-Ke-nIW"/>
-                <constraint firstItem="kov-EX-liX" firstAttribute="centerX" secondItem="Tjo-3e-GL5" secondAttribute="centerX" id="HTX-ZU-CeI"/>
                 <constraint firstAttribute="bottom" secondItem="8Lp-8i-cy7" secondAttribute="bottom" constant="32" id="Lz2-wP-RcE"/>
+                <constraint firstItem="Tjo-3e-GL5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="47" id="PFh-V9-MVz"/>
+                <constraint firstItem="tTj-vu-Fyv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="QJZ-57-2uB"/>
                 <constraint firstItem="kov-EX-liX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZFu-rT-etR"/>
-                <constraint firstItem="tTj-vu-Fyv" firstAttribute="top" secondItem="Tjo-3e-GL5" secondAttribute="bottom" constant="28" id="eSZ-Ns-zZP"/>
-                <constraint firstItem="Tjo-3e-GL5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="i1c-Yt-1Yk"/>
+                <constraint firstItem="Tjo-3e-GL5" firstAttribute="centerX" secondItem="8Lp-8i-cy7" secondAttribute="centerX" id="cd4-ix-r1i"/>
                 <constraint firstItem="kov-EX-liX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rgm-aQ-Myr"/>
+                <constraint firstItem="tTj-vu-Fyv" firstAttribute="top" secondItem="Tjo-3e-GL5" secondAttribute="bottom" constant="8" symbolic="YES" id="u10-J3-mmL"/>
                 <constraint firstAttribute="trailing" secondItem="kov-EX-liX" secondAttribute="trailing" id="xFR-uZ-wAd"/>
-                <constraint firstItem="tTj-vu-Fyv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="z6F-lj-aMC"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
         </view>

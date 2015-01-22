@@ -66,6 +66,12 @@
 		CD39D6481A4A0A6C0006F7B7 /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD39D6461A4A0A6C0006F7B7 /* DashboardViewController.m */; };
 		CD39D6491A4A0A6C0006F7B7 /* DashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD39D6471A4A0A6C0006F7B7 /* DashboardViewController.xib */; };
 		CD39D64C1A4A0C580006F7B7 /* RentedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD39D64B1A4A0C580006F7B7 /* RentedNavigationController.m */; };
+		CD42A8BE1A70355D000E7BD7 /* SnapshotUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CD42A8BD1A70355D000E7BD7 /* SnapshotUtils.m */; };
+		CD42A8C31A703627000E7BD7 /* ContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD42A8C11A703627000E7BD7 /* ContactViewController.m */; };
+		CD42A8C41A703627000E7BD7 /* ContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD42A8C21A703627000E7BD7 /* ContactViewController.xib */; };
+		CD42A8C71A705787000E7BD7 /* UIView+MLScreenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = CD42A8C61A705787000E7BD7 /* UIView+MLScreenshot.m */; };
+		CD42A8D01A707466000E7BD7 /* ConfirmationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD42A8CF1A707466000E7BD7 /* ConfirmationView.m */; };
+		CD42A8D21A707477000E7BD7 /* ConfirmationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD42A8D11A707477000E7BD7 /* ConfirmationView.xib */; };
 		CD48D2461A5B1E7800C85AA6 /* GalleryNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD48D2451A5B1E7800C85AA6 /* GalleryNavigationController.m */; };
 		CD5038E71A6158D700A1320D /* LikedApartment.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5038E61A6158D700A1320D /* LikedApartment.m */; };
 		CD5038EC1A61740B00A1320D /* FavoritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5038EA1A61740B00A1320D /* FavoritesTableViewController.m */; };
@@ -226,6 +232,16 @@
 		CD39D64A1A4A0C580006F7B7 /* RentedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RentedNavigationController.h; sourceTree = "<group>"; };
 		CD39D64B1A4A0C580006F7B7 /* RentedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RentedNavigationController.m; sourceTree = "<group>"; };
 		CD40A5551A67332400B6F314 /* GothamRnd-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRnd-Medium.otf"; sourceTree = "<group>"; };
+		CD42A8BC1A70355D000E7BD7 /* SnapshotUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapshotUtils.h; sourceTree = "<group>"; };
+		CD42A8BD1A70355D000E7BD7 /* SnapshotUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotUtils.m; sourceTree = "<group>"; };
+		CD42A8C01A703627000E7BD7 /* ContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactViewController.h; sourceTree = "<group>"; };
+		CD42A8C11A703627000E7BD7 /* ContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactViewController.m; sourceTree = "<group>"; };
+		CD42A8C21A703627000E7BD7 /* ContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactViewController.xib; sourceTree = "<group>"; };
+		CD42A8C51A705787000E7BD7 /* UIView+MLScreenshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MLScreenshot.h"; sourceTree = "<group>"; };
+		CD42A8C61A705787000E7BD7 /* UIView+MLScreenshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MLScreenshot.m"; sourceTree = "<group>"; };
+		CD42A8CE1A707466000E7BD7 /* ConfirmationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmationView.h; sourceTree = "<group>"; };
+		CD42A8CF1A707466000E7BD7 /* ConfirmationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmationView.m; sourceTree = "<group>"; };
+		CD42A8D11A707477000E7BD7 /* ConfirmationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmationView.xib; sourceTree = "<group>"; };
 		CD48D23F1A5B0A3F00C85AA6 /* ApartmentCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApartmentCellProtocol.h; sourceTree = "<group>"; };
 		CD48D2441A5B1E7800C85AA6 /* GalleryNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryNavigationController.h; sourceTree = "<group>"; };
 		CD48D2451A5B1E7800C85AA6 /* GalleryNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryNavigationController.m; sourceTree = "<group>"; };
@@ -568,6 +584,8 @@
 		CD307A961A48552F00D4BE2B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				CD42A8C81A707258000E7BD7 /* Get Confirmation Popup */,
+				CD42A8BF1A703608000E7BD7 /* Contact */,
 				9AD8DA961A64590B001F8F2C /* Tutorial */,
 				CD57131D1A597635003B4C2E /* Custom */,
 				CD57130B1A585603003B4C2E /* My place */,
@@ -605,6 +623,10 @@
 				CD5039391A61E09000A1320D /* M13Checkbox.m */,
 				12D87DD91A63C76700A979A0 /* UIImage+imageWithColor.h */,
 				12D87DDA1A63C76700A979A0 /* UIImage+imageWithColor.m */,
+				CD42A8C51A705787000E7BD7 /* UIView+MLScreenshot.h */,
+				CD42A8C61A705787000E7BD7 /* UIView+MLScreenshot.m */,
+				CD42A8BC1A70355D000E7BD7 /* SnapshotUtils.h */,
+				CD42A8BD1A70355D000E7BD7 /* SnapshotUtils.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -683,6 +705,26 @@
 				CD39D6471A4A0A6C0006F7B7 /* DashboardViewController.xib */,
 			);
 			name = "Dashboard Screen";
+			sourceTree = "<group>";
+		};
+		CD42A8BF1A703608000E7BD7 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				CD42A8C01A703627000E7BD7 /* ContactViewController.h */,
+				CD42A8C11A703627000E7BD7 /* ContactViewController.m */,
+				CD42A8C21A703627000E7BD7 /* ContactViewController.xib */,
+			);
+			name = Contact;
+			sourceTree = "<group>";
+		};
+		CD42A8C81A707258000E7BD7 /* Get Confirmation Popup */ = {
+			isa = PBXGroup;
+			children = (
+				CD42A8CE1A707466000E7BD7 /* ConfirmationView.h */,
+				CD42A8CF1A707466000E7BD7 /* ConfirmationView.m */,
+				CD42A8D11A707477000E7BD7 /* ConfirmationView.xib */,
+			);
+			name = "Get Confirmation Popup";
 			sourceTree = "<group>";
 		};
 		CD5038E81A6173ED00A1320D /* Favorites */ = {
@@ -919,6 +961,7 @@
 				9AD8DA9B1A64592C001F8F2C /* TutorialViewController.xib in Resources */,
 				CD5039221A61978100A1320D /* slider-default-track@2x.png in Resources */,
 				CD5039351A61978100A1320D /* slider-metal-trackBackground.png in Resources */,
+				CD42A8C41A703627000E7BD7 /* ContactViewController.xib in Resources */,
 				CD50392B1A61978100A1320D /* slider-default7-trackBackground.png in Resources */,
 				CD50395B1A61F30700A1320D /* PreferencesSeparateView.xib in Resources */,
 				CD5713111A585651003B4C2E /* NoListingViewController.xib in Resources */,
@@ -940,6 +983,7 @@
 				CD35CCE61A49A896007F12D0 /* LaunchScreen.xib in Resources */,
 				CD5039311A61978100A1320D /* slider-metal-handle.png in Resources */,
 				CD5039331A61978100A1320D /* slider-metal-track.png in Resources */,
+				CD42A8D21A707477000E7BD7 /* ConfirmationView.xib in Resources */,
 				CD50392F1A61978100A1320D /* slider-metal-handle-highlighted.png in Resources */,
 				CD307AC11A48657500D4BE2B /* AuthenticationViewController.xib in Resources */,
 				CD50392E1A61978100A1320D /* slider-default7-trackCrossedOver@2x.png in Resources */,
@@ -1018,6 +1062,7 @@
 				CD5713101A585651003B4C2E /* NoListingViewController.m in Sources */,
 				120547601A5FF1110036BB75 /* UITableView+AnimationControl.m in Sources */,
 				CD1BAFAD1A48466F0012CBAA /* AppDelegate.m in Sources */,
+				CD42A8C31A703627000E7BD7 /* ContactViewController.m in Sources */,
 				CD48D2461A5B1E7800C85AA6 /* GalleryNavigationController.m in Sources */,
 				12D87DDB1A63C76700A979A0 /* UIImage+imageWithColor.m in Sources */,
 				CD2A8B001A5DE47E0065299A /* TopApartmentView.m in Sources */,
@@ -1026,6 +1071,7 @@
 				CD5038F21A61743600A1320D /* FavoriteApartmentTableViewCell.m in Sources */,
 				CD5038E71A6158D700A1320D /* LikedApartment.m in Sources */,
 				CD39D6401A4A09220006F7B7 /* RentedPanelController.m in Sources */,
+				CD42A8BE1A70355D000E7BD7 /* SnapshotUtils.m in Sources */,
 				CD2A8AE61A5DACB10065299A /* FullMapViewViewController.m in Sources */,
 				CD5039371A61978100A1320D /* NMRangeSlider.m in Sources */,
 				CD57131B1A59755A003B4C2E /* SingleApartmentViewController.m in Sources */,
@@ -1033,6 +1079,7 @@
 				CD2A8B071A5DE6F10065299A /* ApartmentTableViewCell.m in Sources */,
 				CD5039561A61EEC000A1320D /* PreferencesSeparateView.m in Sources */,
 				CD2A8AF11A5DB6AB0065299A /* ApartmentDetailsView.m in Sources */,
+				CD42A8C71A705787000E7BD7 /* UIView+MLScreenshot.m in Sources */,
 				CD307AA11A48561B00D4BE2B /* DependencyContainer.m in Sources */,
 				CD35CCEE1A49AE49007F12D0 /* UIImage+ProportionalFill.m in Sources */,
 				12BAD2001A5A824D00ABE909 /* ApartmentApi.m in Sources */,
@@ -1049,6 +1096,7 @@
 				CD5713141A585DAE003B4C2E /* UIViewController+JASidePanels.m in Sources */,
 				CD5038EC1A61740B00A1320D /* FavoritesTableViewController.m in Sources */,
 				CD35CCEB1A49ACC4007F12D0 /* UIColor+ColorFromHexString.m in Sources */,
+				CD42A8D01A707466000E7BD7 /* ConfirmationView.m in Sources */,
 				CD307AA41A4856D000D4BE2B /* UserApi.m in Sources */,
 				CD5039631A620ADE00A1320D /* UserSearchPreferences.m in Sources */,
 			);
@@ -1122,7 +1170,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "b7a82d9b-99b3-4f03-b25b-273d0dad2e66";
+				PROVISIONING_PROFILE = "db6e9376-2fde-411f-8122-be4338c8dca5";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1157,7 +1205,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "b7a82d9b-99b3-4f03-b25b-273d0dad2e66";
+				PROVISIONING_PROFILE = "db6e9376-2fde-411f-8122-be4338c8dca5";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1176,7 +1224,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Rented;
-				PROVISIONING_PROFILE = "b7a82d9b-99b3-4f03-b25b-273d0dad2e66";
+				PROVISIONING_PROFILE = "db6e9376-2fde-411f-8122-be4338c8dca5";
 			};
 			name = Debug;
 		};
@@ -1193,7 +1241,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Rented;
-				PROVISIONING_PROFILE = "b7a82d9b-99b3-4f03-b25b-273d0dad2e66";
+				PROVISIONING_PROFILE = "db6e9376-2fde-411f-8122-be4338c8dca5";
 			};
 			name = Release;
 		};

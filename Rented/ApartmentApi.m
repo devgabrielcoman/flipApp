@@ -232,4 +232,49 @@
     }];
 }
 
+
+- (void)addApartmentToGetRequests:(PFObject *)apartment completion:(void (^)(BOOL succeeded))completionHandler
+{
+    PFObject *request = [PFObject objectWithClassName:@"ApartmentRequests"];
+    request[@"apartment"] = apartment;
+    request[@"user"] = DEP.authenticatedUser;
+    
+    [request saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        completionHandler(succeeded);
+    }];
+}
+
+- (void)userHasRequestForApartment:(PFObject *)apartment completion:(void (^)(NSArray *objects, BOOL succeeded))completionHandler
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"ApartmentRequests"];
+    [query whereKey:@"user" equalTo:DEP.authenticatedUser];
+    [query whereKey:@"apartment" equalTo:apartment];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(!error)
+            completionHandler(objects, YES);
+        else
+            completionHandler(@[], NO);
+    }];
+}
+
+- (void)removeApartmentRequest:(PFObject *)apartment completion:(void (^)(BOOL succeeded))completionHandler
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"ApartmentRequests"];
+    [query whereKey:@"user" equalTo:DEP.authenticatedUser];
+    [query whereKey:@"apartment" equalTo:apartment];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(!error)
+        {
+            PFObject *request = [objects firstObject];
+            [request deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                completionHandler(succeeded);
+            }];
+        }
+        else
+            completionHandler(NO);
+    }];
+}
+
 @end

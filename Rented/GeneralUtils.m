@@ -19,19 +19,19 @@
     for (NSNumber *roomType in roomsArray)
     {
         if([roomType integerValue] == Studio)
-            [rooms appendFormat:@", Studio"];
+            [rooms appendFormat:@"studio"];
         
         if([roomType integerValue] == Bedroom1)
-            [rooms appendFormat:@", 1 Bedroom"];
+            [rooms appendFormat:@"1 bedroom"];
         
         if([roomType integerValue] == Bedrooms2)
-            [rooms appendFormat:@", 2 Bedrooms"];
+            [rooms appendFormat:@"2 bedrooms"];
         
         if([roomType integerValue] == Bedrooms3)
-            [rooms appendFormat:@", 3 Bedrooms"];
+            [rooms appendFormat:@"3 bedrooms"];
         
         if([roomType integerValue] == Bedrooms4)
-            [rooms appendFormat:@", 4 Bedrooms"];
+            [rooms appendFormat:@"4 bedrooms"];
     }
     
     NSString *finalString = @"";
