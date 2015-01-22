@@ -23,6 +23,7 @@
     _componentRoomsLbl.font = [UIFont fontWithName:@"GothamRounded-Light" size:13.0];
     _connectedThroughLbl.font = [UIFont fontWithName:@"GothamRounded-Light" size:13.0];
     _cityLbl.font = [UIFont fontWithName:@"GothamRounded-Light" size:13.0];
+    _remainingDays.font = [UIFont fontWithName:@"GothamRounded-Light" size:13.0];
     
     _vacancyLbl.textColor = [UIColor colorFromHexString:FeedTextColor];
     _priceLbl.textColor = [UIColor colorFromHexString:FeedTextColor];
@@ -30,6 +31,7 @@
     _componentRoomsLbl.textColor = [UIColor colorFromHexString:FeedTextColor];
     _connectedThroughLbl.textColor = [UIColor colorFromHexString:FeedTextColor];
     _cityLbl.textColor = [UIColor colorFromHexString:FeedTextColor];
+    _remainingDays.textColor = [UIColor colorFromHexString:FeedTextColor];
     
     _getButton.titleLabel.font = [UIFont fontWithName:@"Gotham-Medium" size:15.0];
     [_getButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"47a0db"]] forState:UIControlStateNormal];
@@ -70,6 +72,8 @@
     
     _priceLbl.text = [NSString stringWithFormat:@"$%@",apartment[@"rent"]];
     _sizeLbl.text = [NSString stringWithFormat:@"%@ sq ft", apartment[@"area"]];
+    
+    _remainingDays.text = [NSString stringWithFormat:@"%li days until renewal", (long)[apartment[@"renewaldays"] integerValue]];
 }
 
 - (void)updateFlipButtonStatus

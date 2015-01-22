@@ -1170,7 +1170,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "db6e9376-2fde-411f-8122-be4338c8dca5";
+				PROVISIONING_PROFILE = "fe0ff20d-8a86-489a-ae62-20350c9be178";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1205,7 +1205,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "db6e9376-2fde-411f-8122-be4338c8dca5";
+				PROVISIONING_PROFILE = "fe0ff20d-8a86-489a-ae62-20350c9be178";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1224,7 +1224,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Rented;
-				PROVISIONING_PROFILE = "db6e9376-2fde-411f-8122-be4338c8dca5";
+				PROVISIONING_PROFILE = "fe0ff20d-8a86-489a-ae62-20350c9be178";
 			};
 			name = Debug;
 		};
@@ -1241,7 +1241,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Rented;
-				PROVISIONING_PROFILE = "db6e9376-2fde-411f-8122-be4338c8dca5";
+				PROVISIONING_PROFILE = "fe0ff20d-8a86-489a-ae62-20350c9be178";
 			};
 			name = Release;
 		};

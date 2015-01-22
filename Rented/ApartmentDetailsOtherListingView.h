@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *messageImageView;
 @property (weak, nonatomic) IBOutlet UIButton *getButton;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
+@property (weak, nonatomic) IBOutlet UILabel *remainingDays;
 
 @property PFObject *apartment;
 @property BOOL currentUserIsOwner;

@@ -51,7 +51,7 @@
     else
     {
         _apartmentDetailsView = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentDetailsOtherListingView" owner:self options:nil] firstObject];
-        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight+20, wScr, ApartmentDetailsOtherListingViewHeight);
+        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight, wScr, ApartmentDetailsOtherListingViewHeight);
         
         _apartmentTopView.connectedThroughImgView.alpha = 1.0;
         _apartmentDetailsView.connectedThroughImageView.alpha = 1.0;
