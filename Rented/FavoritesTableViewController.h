@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FavoriteApartmentCellProtocol.h"
 
-@interface FavoritesTableViewController : UITableViewController
+@interface FavoritesTableViewController : UITableViewController<FavoriteApartmentCellProtocol>
 
-@property NSArray *favoriteApartments;
+@property NSMutableArray *favoriteApartments;
 
 @end

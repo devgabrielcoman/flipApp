@@ -26,7 +26,7 @@
     [DEP.api.apartmentApi getListOfFavoritesApartments:^(NSArray *favoriteApartments, BOOL succeeded) {
         if(succeeded)
         {
-            _favoriteApartments = favoriteApartments;
+            _favoriteApartments = [[NSMutableArray alloc] initWithArray:favoriteApartments];
             [self.tableView reloadData];
         }
         else
@@ -84,6 +84,9 @@
     cell.apartmentDescriptionLbl.text = [NSString stringWithFormat:@"%@'s apartment", owner.username];
     cell.locationLbl.text = ap.apartment[@"locationName"];
     
+    cell.apartmentIndex = indexPath.row;
+    cell.delegate = self;
+    
     return cell;
 }
 
@@ -99,6 +102,24 @@
     [self.navigationController pushViewController:apartmentViewController animated:YES];
 }
 
+
+- (void)removeFromApartmentFromFavorites:(NSInteger)apartmentIndex
+{
+    Apartment *ap = _favoriteApartments[apartmentIndex];
+    
+    [_favoriteApartments removeObject:ap];
+    
+    [self.tableView beginUpdates];
+    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:apartmentIndex inSection:0]] withRowAnimation:UITableViewRowAnimationLeft];
+    [self.tableView endUpdates];
+    
+    [DEP.api.apartmentApi removeApartmentFromFavorites:ap.apartment completion:^(BOOL succeeded) {
+        if(!succeeded)
+            RTLog(@"favorite apartment not deleted: %i", succeeded);
+        
+        [self.tableView reloadData];
+    }];
+}
 
 
 @end

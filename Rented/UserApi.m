@@ -81,7 +81,6 @@
 - (void)getFacebookMutualFriendsWithFriend:(NSString *)userId completionHandler:(void (^)(NSArray *mutualFriends, BOOL succeeded))completion
 {
     FBSession *session = [PFFacebookUtils session];
-#warning not so efficient...just a solution for the moment..
     if(session.state == FBSessionStateOpen || session.state == FBSessionStateOpenTokenExtended)
     {
         NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"context.fields(mutual_friends)", @"fields",nil];
@@ -115,60 +114,6 @@
                                   else
                                       completion(@[], YES);
                               }];
-        
-//        [FBRequestConnection startWithGraphPath:@"me/friends" parameters:nil HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-//            if(!error)
-//            {
-//                NSMutableArray *myFriends = [NSMutableArray new];
-//                NSArray *myFacebookMutualFriends = result[@"data"];
-//                
-//                for (NSDictionary *userInfo in myFacebookMutualFriends)
-//                {
-//                    FacebookFriend *fr = [FacebookFriend new];
-//                    fr.userId = userInfo[@"id"];
-//                    fr.name = userInfo[@"name"];
-//                    fr.profilePictureUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", fr.userId];
-//                    
-//                    [myFriends addObject:fr];
-//                }
-//                
-//                [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"%@/friends", userId]
-//                                             parameters:nil
-//                                             HTTPMethod:@"GET"
-//                                      completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-//                                        if(!error)
-//                                        {
-//                                            NSMutableArray *friendsOfFriend = [NSMutableArray new];
-//                                            NSArray *facebookFriendsOfFriend = result[@"data"];
-//                                            
-//                                            for (NSDictionary *userInfo in facebookFriendsOfFriend)
-//                                            {
-//                                                FacebookFriend *fr = [FacebookFriend new];
-//                                                fr.userId = userInfo[@"id"];
-//                                                fr.name = userInfo[@"name"];
-//                                                fr.profilePictureUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", fr.userId];
-//                                                
-//                                                [friendsOfFriend addObject:fr];
-//                                            }
-//                                            
-//                                            NSMutableArray *finalArray = [NSMutableArray new];
-//                                            for (FacebookFriend *fr in myFriends)
-//                                            {
-//                                                if([friendsOfFriend containsObject:fr])
-//                                                   [finalArray addObject:fr];
-//                                            }
-//                                            
-//                                            completion(finalArray, YES);
-//                                        }
-//                                        else
-//                                        {
-//                                            completion(@[], NO);
-//                                        }
-//                                    }];
-//            }
-//            else
-//                completion(@[], NO);
-//        }];
     }
 }
 

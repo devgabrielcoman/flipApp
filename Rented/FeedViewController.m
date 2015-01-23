@@ -518,6 +518,7 @@
                                                               attribute:NSLayoutAttributeNotAnAttribute
                                                              multiplier:1.0
                                                                constant:frame.size.height]];
+        
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_pageControl
                                                               attribute:NSLayoutAttributeWidth
                                                               relatedBy:NSLayoutRelationEqual
@@ -555,7 +556,7 @@
         backgroundPaginationView.backgroundColor = [UIColor lightGrayColor];
         backgroundPaginationView.alpha = 0.8;
         
-        RTLog(@"sad panda -  %@", NSStringFromCGRect(backgroundPaginationView.frame));
+        //RTLog(@"sad panda -  %@", NSStringFromCGRect(backgroundPaginationView.frame));
         
         [self.view addSubview:backgroundPaginationView];
         [self.view addSubview:_pageControl];

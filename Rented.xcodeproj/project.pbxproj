@@ -22,9 +22,9 @@
 		9AD8DA9B1A64592C001F8F2C /* TutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DA991A64592C001F8F2C /* TutorialViewController.xib */; };
 		9AD8DA9E1A645BCF001F8F2C /* TutorialPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8DA9D1A645BCF001F8F2C /* TutorialPageView.m */; };
 		9AD8DAA01A645BEE001F8F2C /* TutorialPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DA9F1A645BEE001F8F2C /* TutorialPageView.xib */; };
-		9AD8DAA71A645CAD001F8F2C /* Tutorial1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DAA41A645CAD001F8F2C /* Tutorial1.png */; };
-		9AD8DAA81A645CAD001F8F2C /* Tutorial2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DAA51A645CAD001F8F2C /* Tutorial2.png */; };
-		9AD8DAA91A645CAD001F8F2C /* Tutorial3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DAA61A645CAD001F8F2C /* Tutorial3.png */; };
+		9AD8DAA71A645CAD001F8F2C /* -Tutorial1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DAA41A645CAD001F8F2C /* -Tutorial1.png */; };
+		9AD8DAA81A645CAD001F8F2C /* -Tutorial2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DAA51A645CAD001F8F2C /* -Tutorial2.png */; };
+		9AD8DAA91A645CAD001F8F2C /* -Tutorial3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DAA61A645CAD001F8F2C /* -Tutorial3.png */; };
 		CD19A99E1A5F35960095163F /* Apartment.m in Sources */ = {isa = PBXBuildFile; fileRef = CD19A99D1A5F35960095163F /* Apartment.m */; };
 		CD1BAFAA1A48466F0012CBAA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1BAFA91A48466F0012CBAA /* main.m */; };
 		CD1BAFAD1A48466F0012CBAA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1BAFAC1A48466F0012CBAA /* AppDelegate.m */; };
@@ -56,6 +56,9 @@
 		CD307AC11A48657500D4BE2B /* AuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD307ABF1A48657500D4BE2B /* AuthenticationViewController.xib */; };
 		CD307AC61A48661C00D4BE2B /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD307AC41A48661C00D4BE2B /* FeedViewController.m */; };
 		CD307AC71A48661C00D4BE2B /* FeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD307AC51A48661C00D4BE2B /* FeedViewController.xib */; };
+		CD3583461A71D058000D13CE /* Tutorial1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3583431A71D058000D13CE /* Tutorial1.png */; };
+		CD3583471A71D058000D13CE /* Tutorial2.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3583441A71D058000D13CE /* Tutorial2.png */; };
+		CD3583481A71D058000D13CE /* Tutorial3.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3583451A71D058000D13CE /* Tutorial3.png */; };
 		CD35CCE61A49A896007F12D0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD1BAFB61A48466F0012CBAA /* LaunchScreen.xib */; };
 		CD35CCE71A49A89F007F12D0 /* GothamRnd-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD35CCE51A49A7E3007F12D0 /* GothamRnd-Bold.otf */; };
 		CD35CCEB1A49ACC4007F12D0 /* UIColor+ColorFromHexString.m in Sources */ = {isa = PBXBuildFile; fileRef = CD35CCEA1A49ACC4007F12D0 /* UIColor+ColorFromHexString.m */; };
@@ -162,9 +165,9 @@
 		9AD8DA9C1A645BCF001F8F2C /* TutorialPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialPageView.h; sourceTree = "<group>"; };
 		9AD8DA9D1A645BCF001F8F2C /* TutorialPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialPageView.m; sourceTree = "<group>"; };
 		9AD8DA9F1A645BEE001F8F2C /* TutorialPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialPageView.xib; sourceTree = "<group>"; };
-		9AD8DAA41A645CAD001F8F2C /* Tutorial1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial1.png; sourceTree = "<group>"; };
-		9AD8DAA51A645CAD001F8F2C /* Tutorial2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial2.png; sourceTree = "<group>"; };
-		9AD8DAA61A645CAD001F8F2C /* Tutorial3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial3.png; sourceTree = "<group>"; };
+		9AD8DAA41A645CAD001F8F2C /* -Tutorial1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "-Tutorial1.png"; sourceTree = "<group>"; };
+		9AD8DAA51A645CAD001F8F2C /* -Tutorial2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "-Tutorial2.png"; sourceTree = "<group>"; };
+		9AD8DAA61A645CAD001F8F2C /* -Tutorial3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "-Tutorial3.png"; sourceTree = "<group>"; };
 		CADD9CDB49CF1FD79BA7F002 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CD19A99C1A5F35960095163F /* Apartment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Apartment.h; sourceTree = "<group>"; };
 		CD19A99D1A5F35960095163F /* Apartment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Apartment.m; sourceTree = "<group>"; };
@@ -216,6 +219,10 @@
 		CD307AC31A48661C00D4BE2B /* FeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
 		CD307AC41A48661C00D4BE2B /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
 		CD307AC51A48661C00D4BE2B /* FeedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedViewController.xib; sourceTree = "<group>"; };
+		CD3583421A71C323000D13CE /* FavoriteApartmentCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteApartmentCellProtocol.h; sourceTree = "<group>"; };
+		CD3583431A71D058000D13CE /* Tutorial1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial1.png; sourceTree = "<group>"; };
+		CD3583441A71D058000D13CE /* Tutorial2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial2.png; sourceTree = "<group>"; };
+		CD3583451A71D058000D13CE /* Tutorial3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial3.png; sourceTree = "<group>"; };
 		CD35CCD51A498083007F12D0 /* logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = logger.h; sourceTree = "<group>"; };
 		CD35CCE51A49A7E3007F12D0 /* GothamRnd-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRnd-Bold.otf"; sourceTree = "<group>"; };
 		CD35CCE81A49ABCD007F12D0 /* GothamRnd-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRnd-Light.otf"; sourceTree = "<group>"; };
@@ -411,9 +418,12 @@
 		9AD8DAA11A645C17001F8F2C /* Tutorial Assets */ = {
 			isa = PBXGroup;
 			children = (
-				9AD8DAA41A645CAD001F8F2C /* Tutorial1.png */,
-				9AD8DAA51A645CAD001F8F2C /* Tutorial2.png */,
-				9AD8DAA61A645CAD001F8F2C /* Tutorial3.png */,
+				CD3583431A71D058000D13CE /* Tutorial1.png */,
+				CD3583441A71D058000D13CE /* Tutorial2.png */,
+				CD3583451A71D058000D13CE /* Tutorial3.png */,
+				9AD8DAA41A645CAD001F8F2C /* -Tutorial1.png */,
+				9AD8DAA51A645CAD001F8F2C /* -Tutorial2.png */,
+				9AD8DAA61A645CAD001F8F2C /* -Tutorial3.png */,
 			);
 			name = "Tutorial Assets";
 			sourceTree = "<group>";
@@ -741,6 +751,7 @@
 		CD5038EE1A61741300A1320D /* Favorite Apartment Cell */ = {
 			isa = PBXGroup;
 			children = (
+				CD3583421A71C323000D13CE /* FavoriteApartmentCellProtocol.h */,
 				CD5038EF1A61743600A1320D /* FavoriteApartmentTableViewCell.h */,
 				CD5038F01A61743600A1320D /* FavoriteApartmentTableViewCell.m */,
 				CD5038F11A61743600A1320D /* FavoriteApartmentTableViewCell.xib */,
@@ -958,6 +969,7 @@
 				CD50391E1A61978100A1320D /* slider-default-handle-highlighted@2x.png in Resources */,
 				CD5039361A61978100A1320D /* slider-metal-trackBackground@2x.png in Resources */,
 				CD5039201A61978100A1320D /* slider-default-handle@2x.png in Resources */,
+				CD3583461A71D058000D13CE /* Tutorial1.png in Resources */,
 				9AD8DA9B1A64592C001F8F2C /* TutorialViewController.xib in Resources */,
 				CD5039221A61978100A1320D /* slider-default-track@2x.png in Resources */,
 				CD5039351A61978100A1320D /* slider-metal-trackBackground.png in Resources */,
@@ -969,15 +981,17 @@
 				CD35CCEF1A49B04C007F12D0 /* GothamRnd-Light.otf in Resources */,
 				CD50391F1A61978100A1320D /* slider-default-handle.png in Resources */,
 				9AD8DAA01A645BEE001F8F2C /* TutorialPageView.xib in Resources */,
-				9AD8DAA91A645CAD001F8F2C /* Tutorial3.png in Resources */,
+				9AD8DAA91A645CAD001F8F2C /* -Tutorial3.png in Resources */,
 				CD5039211A61978100A1320D /* slider-default-track.png in Resources */,
 				CD5039601A61F3B300A1320D /* PreferencesViewController.xib in Resources */,
 				CD35CCE71A49A89F007F12D0 /* GothamRnd-Bold.otf in Resources */,
 				CD39D6491A4A0A6C0006F7B7 /* DashboardViewController.xib in Resources */,
 				CD5039231A61978100A1320D /* slider-default-trackBackground.png in Resources */,
+				CD3583481A71D058000D13CE /* Tutorial3.png in Resources */,
 				CD5039251A61978100A1320D /* slider-default-trackCrossedOver@2x.png in Resources */,
-				9AD8DAA81A645CAD001F8F2C /* Tutorial2.png in Resources */,
+				9AD8DAA81A645CAD001F8F2C /* -Tutorial2.png in Resources */,
 				CD5038ED1A61740B00A1320D /* FavoritesTableViewController.xib in Resources */,
+				CD3583471A71D058000D13CE /* Tutorial2.png in Resources */,
 				CD5039281A61978100A1320D /* slider-default7-handle@2x.png in Resources */,
 				CD50391D1A61978100A1320D /* slider-default-handle-highlighted.png in Resources */,
 				CD35CCE61A49A896007F12D0 /* LaunchScreen.xib in Resources */,
@@ -994,7 +1008,7 @@
 				CD5038F31A61743600A1320D /* FavoriteApartmentTableViewCell.xib in Resources */,
 				CD5039291A61978100A1320D /* slider-default7-track.png in Resources */,
 				CD50392A1A61978100A1320D /* slider-default7-track@2x.png in Resources */,
-				9AD8DAA71A645CAD001F8F2C /* Tutorial1.png in Resources */,
+				9AD8DAA71A645CAD001F8F2C /* -Tutorial1.png in Resources */,
 				CD5039241A61978100A1320D /* slider-default-trackCrossedOver.png in Resources */,
 				CD2A8B081A5DE6F10065299A /* ApartmentTableViewCell.xib in Resources */,
 				CD2A8AE71A5DACB10065299A /* FullMapViewViewController.xib in Resources */,
@@ -1170,7 +1184,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "fe0ff20d-8a86-489a-ae62-20350c9be178";
+				PROVISIONING_PROFILE = "2bd09f42-2502-4582-87f5-34b44566d506";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1205,7 +1219,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "fe0ff20d-8a86-489a-ae62-20350c9be178";
+				PROVISIONING_PROFILE = "2bd09f42-2502-4582-87f5-34b44566d506";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1224,7 +1238,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Rented;
-				PROVISIONING_PROFILE = "fe0ff20d-8a86-489a-ae62-20350c9be178";
+				PROVISIONING_PROFILE = "2bd09f42-2502-4582-87f5-34b44566d506";
 			};
 			name = Debug;
 		};
@@ -1241,7 +1255,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Rented;
-				PROVISIONING_PROFILE = "fe0ff20d-8a86-489a-ae62-20350c9be178";
+				PROVISIONING_PROFILE = "2bd09f42-2502-4582-87f5-34b44566d506";
 			};
 			name = Release;
 		};

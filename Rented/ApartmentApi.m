@@ -277,4 +277,23 @@
     }];
 }
 
+- (void)removeApartmentFromFavorites:(PFObject *)apartment completion:(void (^)(BOOL succeeded))completionHandler
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Favorites"];
+    [query whereKey:@"user" equalTo:DEP.authenticatedUser];
+    [query whereKey:@"apartment" equalTo:apartment];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(!error)
+        {
+            PFObject *request = [objects firstObject];
+            [request deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                completionHandler(succeeded);
+            }];
+        }
+        else
+            completionHandler(NO);
+    }];
+}
+
 @end
