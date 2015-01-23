@@ -25,6 +25,7 @@
                 PFObject *apartment = [objects firstObject];
                 
                 PFQuery *imgQuery = [PFQuery queryWithClassName:@"ApartmentPhotos"];
+                imgQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
                 [imgQuery whereKey:@"apartment" equalTo:apartment];
                 [imgQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                     if(!error)
@@ -49,7 +50,7 @@
 - (void)getFeedApartments:(void (^)(NSArray *apartments, BOOL succeeded))completionHandler
 {
     
-#warning relational query sucks in parse. didn't found a good solution for the moment. should be changed asap
+#warning relational query sucks in parse. didn't found a better solution for the moment
     
 //    PFQuery *innerQuery = [PFQuery queryWithClassName:@"Apartment"];
 //    [innerQuery whereKey:@"owner" notEqualTo:DEP.authenticatedUser];
@@ -157,16 +158,13 @@
     {
         PFUser *owner = ap[@"owner"];
         
-        RTLog(@"%li", (long)[ap[@"visible"] integerValue]);
-        
         PFQuery *imgQuery = [PFQuery queryWithClassName:@"ApartmentPhotos"];
+        imgQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
         [imgQuery whereKey:@"apartment" equalTo:ap];
         
         Apartment *apartment = [Apartment new];
         apartment.apartment = ap;
         apartment.images = [imgQuery findObjects];
-        
-        RTLog(@"user facebook friends: %lu", (unsigned long)DEP.userFacebookFriends.count);
         
         if(shouldFilter)
         {
@@ -225,6 +223,7 @@
                 PFObject *apart = favAp[@"apartment"];
                 
                 PFQuery *imgQuery = [PFQuery queryWithClassName:@"ApartmentPhotos"];
+                imgQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
                 [imgQuery whereKey:@"apartment" equalTo:apart];
                 
                 Apartment *apartment = [Apartment new];

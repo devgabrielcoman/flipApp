@@ -38,7 +38,6 @@
     [self dismissCurrentView];
 }
 
-
 - (void)dismissCurrentView
 {
     [UIView animateWithDuration:0.3 animations:^{

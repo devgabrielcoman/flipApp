@@ -58,7 +58,6 @@
         
         PFUser *apartmentOwner = apartment[@"owner"];
         [DEP.api.userApi getFacebookMutualFriendsWithFriend:apartmentOwner[@"facebookID"] completionHandler:^(NSArray *mutualFriends, BOOL succeeded) {
-            NSLog(@"mutual friends: %lu - %@", (unsigned long)mutualFriends.count, mutualFriends);
             if(succeeded)
             {
                 if(mutualFriends)

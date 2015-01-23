@@ -36,7 +36,6 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    RTLog(@"screen bounds: %@", NSStringFromCGRect([[UIScreen mainScreen] bounds]));
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     _rootViewController = [RentedPanelController new];
@@ -78,6 +77,7 @@
 {
 #pragma warning - Check the warning with enableLocalDatastore and initializeFacebook
     //[Parse enableLocalDatastore];
+    [Parse setLogLevel:PFLogLevelError];
     [Parse setApplicationId:ParseApplicationID
                   clientKey:ParseCliendKey];
     [PFFacebookUtils initializeFacebook];

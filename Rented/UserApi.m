@@ -126,7 +126,6 @@
     {
         FBRequest* friendsRequest = [FBRequest requestForMyFriends];
         [friendsRequest startWithCompletionHandler: ^(FBRequestConnection *connection,NSDictionary* result,NSError *error) {
-            RTLog(@"user friends: %@", result);
             if(!error && [[result allKeys] containsObject:@"data"])
             {
                 NSArray *friends = result[@"data"];

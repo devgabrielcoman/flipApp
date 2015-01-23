@@ -65,7 +65,6 @@
     
     _vacancyLbl.text = vacancy;
     
-    RTLog(@"apartment location: %@", apartment[@"locationName"]);
     _cityLbl.text = [GeneralUtils getCityFromLocation:apartment[@"locationName"]];
     
     _componentRoomsLbl.text = [GeneralUtils roomsDescriptionForApartment:apartment];
