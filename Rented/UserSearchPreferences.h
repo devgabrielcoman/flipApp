@@ -23,5 +23,7 @@
 
 @property NSArray *rooms;
 
+@property NSInteger showRentalsInUserNetwork;
+
 
 @end

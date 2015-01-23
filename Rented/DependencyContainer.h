@@ -19,6 +19,7 @@
 @property PFUser *authenticatedUser;
 @property RentedApi *api;
 @property UserSearchPreferences *userPreferences;
+@property NSArray *userFacebookFriends;
 
 - (void)saveUserPreferences;
 

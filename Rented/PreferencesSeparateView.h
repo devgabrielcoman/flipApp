@@ -29,6 +29,8 @@
     NSMutableArray *rooms;
     
     M13Checkbox *showOnlyRentalInMyNetwork;
+    
+    NSInteger showRentalsFromUserNetork;
 }
 
 @property (weak, nonatomic) IBOutlet NMRangeSlider *leaseRenewalSlider;

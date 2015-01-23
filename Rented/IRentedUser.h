@@ -15,5 +15,6 @@
 - (void)authenticateUserWithFacebook:(void (^)(BOOL authenticated))completionHandler;
 - (void)logoutUser;
 - (void)getFacebookMutualFriendsWithFriend:(NSString *)userId completionHandler:(void (^)(NSArray *mutualFriends, BOOL succeeded))completion;
+- (void)getCurrentUsersFacebookFriends:(void(^)(NSArray *friends, BOOL succeeded))completion;
 
 @end

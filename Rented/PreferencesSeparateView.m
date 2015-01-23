@@ -76,6 +76,8 @@
     _minSquareFtTF.inputAccessoryView = doneButton;
     _maxSquareFtTF.inputAccessoryView = doneButton;
     
+    showRentalsFromUserNetork = 0;
+    
     [self completePreferences];
 }
 
@@ -135,6 +137,11 @@
         if([rooms containsObject:@Bedrooms4])
             bedroom4.checkState = M13CheckboxStateChecked;
     }
+    
+    if(DEP.userPreferences.showRentalsInUserNetwork == 1)
+        showOnlyRentalInMyNetwork.checkState = M13CheckboxStateChecked;
+    else
+        showOnlyRentalInMyNetwork.checkState = M13CheckboxStateUnchecked;
 }
 
 - (void)setupTextField:(UITextField *)textField
@@ -449,7 +456,13 @@
 
 - (void)showRentalInNetwork:(M13Checkbox *)checkbox
 {
+    if(showOnlyRentalInMyNetwork.checkState == M13CheckboxStateChecked)
+        showRentalsFromUserNetork = 1;
+    else
+        showRentalsFromUserNetork = 0;
     
+    DEP.userPreferences.showRentalsInUserNetwork = showRentalsFromUserNetork;
+    [DEP saveUserPreferences];
 }
 
 @end

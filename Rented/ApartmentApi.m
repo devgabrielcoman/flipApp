@@ -128,28 +128,56 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error)
         {
-            NSMutableArray *mutableArray = [NSMutableArray new];
             
-            for(PFObject *ap in objects)
+            if(DEP.userPreferences.showRentalsInUserNetwork && !DEP.userFacebookFriends)
             {
-                RTLog(@"%li", (long)[ap[@"visible"] integerValue]);
-                
-                PFQuery *imgQuery = [PFQuery queryWithClassName:@"ApartmentPhotos"];
-                [imgQuery whereKey:@"apartment" equalTo:ap];
-                
-                Apartment *apartment = [Apartment new];
-                apartment.apartment = ap;
-                apartment.images = [imgQuery findObjects];
-                
-                [mutableArray addObject:apartment];
+                [DEP.api.userApi getCurrentUsersFacebookFriends:^(NSArray *friends, BOOL succeeded) {
+                    if(succeeded)
+                        DEP.userFacebookFriends = friends;
+                    
+                     [self completeListOfApartmentsForFeed:objects filterOnlyFromNetwork:YES completion:completionHandler];
+                }];
             }
-            
-            completionHandler(mutableArray, YES);
+            else
+            {
+                [self completeListOfApartmentsForFeed:objects filterOnlyFromNetwork:NO completion:completionHandler];
+            }
         }
         else
             completionHandler(@[], NO);
     }];
     
+}
+
+- (void)completeListOfApartmentsForFeed:(NSArray *)apartments filterOnlyFromNetwork:(BOOL)shouldFilter completion:(void (^)(NSArray *apartments, BOOL succeeded))completionHandler
+{
+    NSMutableArray *mutableArray = [NSMutableArray new];
+    
+    for(PFObject *ap in apartments)
+    {
+        PFUser *owner = ap[@"owner"];
+        
+        RTLog(@"%li", (long)[ap[@"visible"] integerValue]);
+        
+        PFQuery *imgQuery = [PFQuery queryWithClassName:@"ApartmentPhotos"];
+        [imgQuery whereKey:@"apartment" equalTo:ap];
+        
+        Apartment *apartment = [Apartment new];
+        apartment.apartment = ap;
+        apartment.images = [imgQuery findObjects];
+        
+        RTLog(@"user facebook friends: %lu", (unsigned long)DEP.userFacebookFriends.count);
+        
+        if(shouldFilter)
+        {
+            if([DEP.userFacebookFriends containsObject:owner[@"facebookID"]])
+                [mutableArray addObject:apartment];
+        }
+        else
+            [mutableArray addObject:apartment];
+    }
+    
+    completionHandler(mutableArray, YES);
 }
 
 - (void)addApartmentToFavorites:(PFObject *)apartment completion:(void (^)(BOOL succeeded))completionHandler

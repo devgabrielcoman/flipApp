@@ -115,6 +115,34 @@
                                       completion(@[], YES);
                               }];
     }
+    else
+        completion(@[], NO);
+}
+
+- (void)getCurrentUsersFacebookFriends:(void(^)(NSArray *friends, BOOL succeeded))completion
+{
+    FBSession *session = [PFFacebookUtils session];
+    if(session.state == FBSessionStateOpen || session.state == FBSessionStateOpenTokenExtended)
+    {
+        FBRequest* friendsRequest = [FBRequest requestForMyFriends];
+        [friendsRequest startWithCompletionHandler: ^(FBRequestConnection *connection,NSDictionary* result,NSError *error) {
+            RTLog(@"user friends: %@", result);
+            if(!error && [[result allKeys] containsObject:@"data"])
+            {
+                NSArray *friends = result[@"data"];
+                
+                NSMutableArray *userFriends = [NSMutableArray new];
+                for (NSDictionary *friendData in friends)
+                    [userFriends addObject:friendData[@"id"]];
+                
+                completion(userFriends, YES);
+            }
+            else
+                completion(@[], NO);
+        }];
+    }
+    else
+        completion(@[], NO);
 }
 
 @end

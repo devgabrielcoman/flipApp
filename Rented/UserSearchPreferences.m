@@ -24,6 +24,8 @@
     [encoder encodeInteger:self.minSqFt forKey:@"MinSqFt"];
     [encoder encodeInteger:self.maxSqFt forKey:@"MaxSqFt"];
     
+    [encoder encodeInteger:self.showRentalsInUserNetwork forKey:@"ShowRentalsInUserNetwork"];
+    
     NSData *encodedRoomTypes = [NSKeyedArchiver archivedDataWithRootObject:self.rooms];
     [encoder encodeObject:encodedRoomTypes forKey:@"RoomTypes"];
     
@@ -43,6 +45,8 @@
         
         self.minSqFt = [decoder decodeIntegerForKey:@"MinSqFt"];
         self.maxSqFt = [decoder decodeIntegerForKey:@"MaxSqFt"];
+        
+        self.showRentalsInUserNetwork = [decoder decodeIntegerForKey:@"ShowRentalsInUserNetwork"];
         
         NSData *encodedRoomTypes = [decoder decodeObjectForKey:@"RoomTypes"];
         self.rooms = [NSKeyedUnarchiver unarchiveObjectWithData:encodedRoomTypes];
