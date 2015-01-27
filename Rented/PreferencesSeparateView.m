@@ -142,6 +142,11 @@
         showOnlyRentalInMyNetwork.checkState = M13CheckboxStateChecked;
     else
         showOnlyRentalInMyNetwork.checkState = M13CheckboxStateUnchecked;
+    
+    if(DEP.userPreferences.hideFacebookProfile == 1)
+        hideFacebookProfileCheckbox.checkState = M13CheckboxStateChecked;
+    else
+        hideFacebookProfileCheckbox.checkState = M13CheckboxStateUnchecked;
 }
 
 - (void)setupTextField:(UITextField *)textField
@@ -238,6 +243,14 @@
     showOnlyRentalInMyNetwork.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
     [showOnlyRentalInMyNetwork addTarget:self action:@selector(showRentalInNetwork:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:showOnlyRentalInMyNetwork];
+    
+    hideFacebookProfileCheckbox = [[M13Checkbox alloc] initWithTitle:@"Hide Facebook profile"];
+    hideFacebookProfileCheckbox.frame = CGRectMake(_roomsLbl.frame.origin.x, showOnlyRentalInMyNetwork.frame.origin.y+showOnlyRentalInMyNetwork.frame.size.height+8, 210, 30);
+    hideFacebookProfileCheckbox.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+    hideFacebookProfileCheckbox.titleLabel.textAlignment = NSTextAlignmentRight;
+    hideFacebookProfileCheckbox.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
+    [hideFacebookProfileCheckbox addTarget:self action:@selector(hideFacebookProfile:) forControlEvents:UIControlEventValueChanged];
+    [self addSubview:hideFacebookProfileCheckbox];
 }
 
 - (void)configureSlider
@@ -463,6 +476,19 @@
     
     DEP.userPreferences.showRentalsInUserNetwork = showRentalsFromUserNetork;
     [DEP saveUserPreferences];
+}
+
+- (void)hideFacebookProfile:(M13Checkbox *)checkbox
+{
+    if(hideFacebookProfileCheckbox.checkState == M13CheckboxStateChecked)
+        hideFacebookProfile = 1;
+    else
+        hideFacebookProfile = 0;
+    
+    DEP.userPreferences.hideFacebookProfile = hideFacebookProfile;
+    [DEP saveUserPreferences];
+    [[PFUser currentUser] setObject:[NSNumber numberWithInteger:hideFacebookProfile ] forKey:@"isFacebookProfileHidden"];
+    [[PFUser currentUser]saveInBackground];
 }
 
 @end

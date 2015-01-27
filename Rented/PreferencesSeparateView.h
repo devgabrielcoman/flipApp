@@ -29,8 +29,10 @@
     NSMutableArray *rooms;
     
     M13Checkbox *showOnlyRentalInMyNetwork;
+    M13Checkbox *hideFacebookProfileCheckbox;
     
     NSInteger showRentalsFromUserNetork;
+    NSInteger hideFacebookProfile;
 }
 
 @property (weak, nonatomic) IBOutlet NMRangeSlider *leaseRenewalSlider;

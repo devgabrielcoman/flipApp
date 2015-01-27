@@ -66,8 +66,16 @@
     _ownerImgView.image = nil;
     _ownerImgView.showActivityIndicator = YES;
     PFUser *owner = apartment[@"owner"];
-    _ownerImgView.imageURL = [NSURL URLWithString:owner[@"profilePictureUrl"]];
-    _ownerNameLbl.text = owner[@"username"];
+    BOOL isOwnerFacebookProfileHidden = [[owner objectForKey:@"isFacebookProfileHidden"] boolValue];
+    if(!isOwnerFacebookProfileHidden)
+    {
+        _ownerImgView.imageURL = [NSURL URLWithString:owner[@"profilePictureUrl"]];
+        _ownerNameLbl.text = owner[@"username"];
+    }
+    else
+    {
+        _ownerNameLbl.text = @"Anonymous User";
+    }
     
     //apartment image
     if(images && images.count > 0)

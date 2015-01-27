@@ -24,6 +24,7 @@
 @property NSArray *rooms;
 
 @property NSInteger showRentalsInUserNetwork;
+@property NSInteger hideFacebookProfile;
 
 
 @end

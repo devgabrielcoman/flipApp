@@ -25,6 +25,8 @@
     [encoder encodeInteger:self.maxSqFt forKey:@"MaxSqFt"];
     
     [encoder encodeInteger:self.showRentalsInUserNetwork forKey:@"ShowRentalsInUserNetwork"];
+    [encoder encodeInteger:self.hideFacebookProfile forKey:@"HideFacebookProfile"];
+
     
     NSData *encodedRoomTypes = [NSKeyedArchiver archivedDataWithRootObject:self.rooms];
     [encoder encodeObject:encodedRoomTypes forKey:@"RoomTypes"];
@@ -47,6 +49,7 @@
         self.maxSqFt = [decoder decodeIntegerForKey:@"MaxSqFt"];
         
         self.showRentalsInUserNetwork = [decoder decodeIntegerForKey:@"ShowRentalsInUserNetwork"];
+        self.hideFacebookProfile = [decoder decodeIntegerForKey:@"HideFacebookProfile"];
         
         NSData *encodedRoomTypes = [decoder decodeObjectForKey:@"RoomTypes"];
         self.rooms = [NSKeyedUnarchiver unarchiveObjectWithData:encodedRoomTypes];
