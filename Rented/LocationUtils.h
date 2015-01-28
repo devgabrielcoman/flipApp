@@ -11,5 +11,6 @@
 @interface LocationUtils : NSObject
 
 + (CLLocationCoordinate2D)locationFromPoint:(NSString *)point;
++(id)pointFromString:(NSString *)string;
 
 @end

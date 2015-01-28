@@ -11,6 +11,7 @@
                 <outlet property="fbLoginBtn" destination="8Lp-8i-cy7" id="Wek-Ea-I9T"/>
                 <outlet property="flipLbl" destination="Tjo-3e-GL5" id="zQ8-na-YEy"/>
                 <outlet property="messageLbl" destination="tTj-vu-Fyv" id="5lw-yG-ESt"/>
+                <outlet property="tutorialBtn" destination="y9t-5S-IsY" id="2gM-0s-imb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,7 +24,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Lp-8i-cy7">
-                    <rect key="frame" x="67" y="664" width="280" height="40"/>
+                    <rect key="frame" x="67" y="612" width="280" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="IA5-Sc-BQG"/>
                         <constraint firstAttribute="width" constant="280" id="ecm-dm-ghg"/>
@@ -57,12 +58,29 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y9t-5S-IsY">
+                    <rect key="frame" x="67" y="660" width="280" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="280" id="Sih-tg-hDY"/>
+                        <constraint firstAttribute="height" constant="40" id="xeU-BP-zzg"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="HOW IT WORKS">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="showTutorial:" destination="-1" eventType="touchUpInside" id="3OH-3f-e5j"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="centerX" secondItem="y9t-5S-IsY" secondAttribute="centerX" id="0wk-5X-h3d"/>
+                <constraint firstAttribute="bottom" secondItem="y9t-5S-IsY" secondAttribute="bottom" constant="36" id="Ajo-pX-iB3"/>
                 <constraint firstItem="Tjo-3e-GL5" firstAttribute="centerX" secondItem="kov-EX-liX" secondAttribute="centerX" id="E6y-Fi-5nE"/>
                 <constraint firstAttribute="bottom" secondItem="kov-EX-liX" secondAttribute="bottom" id="EkS-Ke-nIW"/>
-                <constraint firstAttribute="bottom" secondItem="8Lp-8i-cy7" secondAttribute="bottom" constant="32" id="Lz2-wP-RcE"/>
+                <constraint firstAttribute="bottom" secondItem="8Lp-8i-cy7" secondAttribute="bottom" constant="84" id="Lz2-wP-RcE"/>
                 <constraint firstItem="Tjo-3e-GL5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="47" id="PFh-V9-MVz"/>
                 <constraint firstItem="tTj-vu-Fyv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="QJZ-57-2uB"/>
                 <constraint firstItem="kov-EX-liX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZFu-rT-etR"/>

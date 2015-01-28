@@ -7,7 +7,10 @@
 //
 
 #import "ApartmentApi.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "Apartment.h"
+#import <MBProgressHUD.h>
+
 
 @implementation ApartmentApi
 
@@ -322,5 +325,98 @@
             completionHandler(NO);
     }];
 }
+
+- (void)saveApartment:(NSDictionary *)apartmentInfo images:(NSArray *)images forUser:(PFUser *)user completion:(void (^)(BOOL succes))completionHandler
+{
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    hud.labelText = @"Uploading";
+    [hud show:YES];
+    
+    PFObject *apartment = [PFObject objectWithClassName:@"Apartment"];
+    apartment[@"location"] = apartmentInfo[@"location"];
+    apartment[@"locationName"] = apartmentInfo[@"locationName"];
+    apartment[@"type"] = apartmentInfo[@"type"];
+    apartment[@"rooms"] = apartmentInfo[@"rooms"];
+    apartment[@"fee"] = apartmentInfo[@"fee"];
+    apartment[@"rentWillChange"] = apartmentInfo[@"rentWillChange"];
+    apartment[@"vacancy"] = apartmentInfo[@"vacancy"];
+    apartment[@"description"] = apartmentInfo[@"description"];
+    apartment[@"area"] = [NSNumber numberWithInteger:[apartmentInfo[@"area"] integerValue]];
+    apartment[@"renewaldays"] = [NSNumber numberWithInteger:[apartmentInfo[@"renewaldays"] integerValue]];
+    apartment[@"rent"] = [NSNumber numberWithInteger:[apartmentInfo[@"rent"] integerValue]];
+    apartment[@"visible"] = [NSNumber numberWithInteger:0];
+    
+    apartment[@"owner"] = user;
+    
+    [apartment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if(!error)
+        {
+            //apartment has been saved
+            [hud hide:YES];
+            [self uploadImages:images forApartment:apartment completion:completionHandler];
+        }
+        else
+            completionHandler(NO);
+    }];
+}
+
+- (void)uploadImages:(NSArray *)images forApartment:(PFObject *)apartment completion:(void (^)(BOOL succes))completionHandler
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    hud.labelText = [NSString stringWithFormat:@"Uploading images"];
+    [hud show:YES];
+    
+    ALAsset *asset = [images firstObject];
+    ALAssetRepresentation *representation = [asset defaultRepresentation];
+    Byte *buffer = (Byte*)malloc(representation.size);
+    NSUInteger buffered = [representation getBytes:buffer fromOffset:0.0 length:representation.size error:nil];
+    NSData *sourceData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+    
+    PFFile *imageFile = [PFFile fileWithName:[NSString stringWithFormat:@"image-%lld.jpg", [@(floor([[NSDate new] timeIntervalSince1970] * 1000)) longLongValue]] data:sourceData];
+    
+    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error)
+        {
+            PFObject *apartmentPhoto = [PFObject objectWithClassName:@"ApartmentPhotos"];
+            apartmentPhoto[@"image"] = imageFile;
+            apartmentPhoto[@"apartment"] = apartment;
+            
+            [apartmentPhoto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if(!error)
+                {
+                    //apartment[@"images"] = apartmentPhoto;
+                    
+                    NSMutableArray *remainedImages = [NSMutableArray arrayWithArray:images];
+                    [remainedImages removeObject:asset];
+                    
+                    [hud hide:YES];
+                    
+                    if(remainedImages.count>0)
+                        [self uploadImages:remainedImages forApartment:apartment completion:completionHandler];
+                    else
+                    {
+                        completionHandler(YES);
+                    }
+                }
+                else
+                {
+                    [hud hide:YES];
+                    completionHandler(NO);
+                }
+            }];
+        }
+        else
+        {
+            [hud hide:YES];
+            RTLog(@"Error uploading file: %@ %@", error, [error userInfo]);
+            completionHandler(NO);
+        }
+    } progressBlock:^(int percentDone) {
+        hud.progress = (float)percentDone/100;
+    }];
+}
+
 
 @end

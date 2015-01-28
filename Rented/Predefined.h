@@ -11,6 +11,7 @@
 #pragma mark - Required keys and Ids
 #define ParseApplicationID @"NfeWASdJkljLxheftuqxxdktFxgY0bFItX6TNTT9"
 #define ParseCliendKey @"bQk3rMiqrzuYSDzJbYjfI3iMuF8NfP6bnIlpYEAj"
+#define GoogleMapsApiKey @"AIzaSyCO8K6YKBSF9lmZYKB6FzrkQ0lkq7HuOv4"
 
 
 #pragma mark - General usage functions
@@ -39,9 +40,19 @@
 #define VacancyShortTerm 1
 #define VacancyNegociable 2
 
+#define Fee3percent 0
+#define Fee4percent 1
+#define Fee5percent 2
+
+#define RentWillChangeYES 0
+#define RentWillChangeNO 1
+#define RentWillChangeMaybe 2
+
 #pragma mark - User listing status
 #define ListingNotRequested 0
 #define ListingRequested 1
 #define ListingAdded 2
+
+#define RequestTimeoutInterval 30.0
 
 #define FeedTextColor @"546a79"

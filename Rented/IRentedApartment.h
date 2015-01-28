@@ -25,4 +25,5 @@
 
 - (void)removeApartmentFromFavorites:(PFObject *)apartment completion:(void (^)(BOOL succeeded))completionHandler;
 
+- (void)saveApartment:(NSDictionary *)apartmentInfo images:(NSArray *)images forUser:(PFUser *)user completion:(void (^)(BOOL succes))completionHandler;
 @end

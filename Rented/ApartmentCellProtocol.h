@@ -15,7 +15,9 @@
 - (void)displayMoreInfoForApartmentAtIndex:(NSInteger)index;
 - (void)addToFravoritesApartmentFromIndex:(NSInteger)index;
 - (void)addToFravoritesApartment:(PFObject *)apartment;
+- (void)switchToPreviousApartmentFromIndex:(NSInteger)index;
 - (void)switchToNextApartmentFromIndex:(NSInteger)index;
 - (void)getApartmentAtIndex:(NSInteger)index;
+
 
 @end

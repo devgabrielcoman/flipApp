@@ -109,13 +109,7 @@
 {
     NSNumber *didShowTutorial = [[NSUserDefaults standardUserDefaults] objectForKey:@"didShowTutorial"];
     
-    if (didShowTutorial == nil){
-        TutorialViewController *tutorial = [[TutorialViewController alloc] initWithNibName:nil bundle:nil];
-        
-        [self presentViewController:tutorial animated:YES completion:^{
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:@YES] forKey:@"didShowTutorial"];
-        }];
-    }
+
     [self reloadFeedData];
 }
 
@@ -349,26 +343,24 @@
                                        }];
 }
 
--(void)switchToNextApartmentFromIndex:(NSInteger)index
+
+-(void)switchToPreviousApartmentFromIndex:(NSInteger)index
 {
-    if (++indexOfShownApartment >= _apartments.count)
-        indexOfShownApartment = -1;
-    
-//    if (indexOfShownApartment != -1)
-//        [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-//    else
-//        [_tableView reloadData];
-    
-//    [_tableView reloadData];
-    
-    if (indexOfShownApartment != -1){
-        //[_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    if(indexOfShownApartment > 0)
+    {
+        indexOfShownApartment--;
         [_tableView reloadData];
         _pageControl.currentPage = indexOfShownApartment;
     }
-    else{
+}
+
+-(void)switchToNextApartmentFromIndex:(NSInteger)index
+{
+    if(indexOfShownApartment < _apartments.count -1)
+    {
+        indexOfShownApartment++;
         [_tableView reloadData];
-        _pageControl.hidden = YES;
+        _pageControl.currentPage = indexOfShownApartment;
     }
 }
 

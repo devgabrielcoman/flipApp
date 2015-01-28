@@ -38,14 +38,26 @@
     _locationString = @"";
     
     //Add a left swipe gesture recognizer
-    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeRight:)];
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeLeft:)];
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [self addGestureRecognizer:recognizer];
 
     //Add a right swipe gesture recognizer
-    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeLeft:)];
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeRight:)];
     recognizer.delegate = self;
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [self addGestureRecognizer:recognizer];
+    
+    //Add a right swipe gesture recognizer
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeUp:)];
+    recognizer.delegate = self;
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionUp)];
+    [self addGestureRecognizer:recognizer];
+    
+    //Add a right swipe gesture recognizer
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeDown:)];
+    recognizer.delegate = self;
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
     [self addGestureRecognizer:recognizer];
     
     CGRect apartmentImgViewFrame = _apartmentImgView.frame;
@@ -159,8 +171,22 @@
 - (void)handleSwipeRight:(id)gesture
 {
     RTLog(@"swipe right on cell with index: %li", (long)_apartmentIndex);
-    
+
+}
+- (void)handleSwipeUp:(id)gesture
+{
+    RTLog(@"swipe Up on cell with index: %li", (long)_apartmentIndex);
+
     if ([_delegate respondsToSelector:@selector(switchToNextApartmentFromIndex:)])
+    {
+        [_delegate switchToPreviousApartmentFromIndex:_apartmentIndex];
+    }
+}
+- (void)handleSwipeDown:(id)gesture
+{
+    RTLog(@"swipe Down on cell with index: %li", (long)_apartmentIndex);
+
+    if ([_delegate respondsToSelector:@selector(switchToPreviousApartmentFromIndex:)])
     {
         [_delegate switchToNextApartmentFromIndex:_apartmentIndex];
     }

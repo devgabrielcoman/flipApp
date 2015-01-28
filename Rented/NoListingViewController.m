@@ -10,6 +10,7 @@
 #import "UIColor+ColorFromHexString.h"
 #import <MessageUI/MFMailComposeViewController.h>
 #import <UIAlertView+Blocks.h>
+#import "AddApartmentViewController.h"
 #import "KAProgressLabel.h"
 
 @interface NoListingViewController ()<MFMailComposeViewControllerDelegate>
@@ -65,6 +66,13 @@
 
 - (IBAction)addApartment:(id)sender
 {
+    
+    AddApartmentViewController* addApartmentVC = [AddApartmentViewController new];
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:addApartmentVC] animated:YES completion:^{}];
+    
+    
+    // old version w/ email request
+    /*
     if (![MFMailComposeViewController canSendMail])
         [UIAlertView showWithTitle:@""
                            message:@"Cannot send emails from this device!"
@@ -90,6 +98,7 @@
     [mail setMessageBody:emailBody isHTML:NO];
     
     [self presentViewController:mail animated:YES completion:NULL];
+     */
 }
 
 #pragma mark - MailComposer delegate methods

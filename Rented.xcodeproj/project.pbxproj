@@ -18,6 +18,19 @@
 		12D87DDB1A63C76700A979A0 /* UIImage+imageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D87DDA1A63C76700A979A0 /* UIImage+imageWithColor.m */; };
 		12D87DDE1A63D68800A979A0 /* FacebookFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D87DDD1A63D68800A979A0 /* FacebookFriend.m */; };
 		374512C5BFA9503A8B6397D6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E5B27B64FD02829D64CDBC /* libPods.a */; };
+		7EC507ED1A78203A00E03E75 /* AddApartmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC507EB1A78203A00E03E75 /* AddApartmentViewController.m */; };
+		7EC507EE1A78203A00E03E75 /* AddApartmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC507EC1A78203A00E03E75 /* AddApartmentViewController.xib */; };
+		7EC507F31A7821D500E03E75 /* SelectLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC507F11A7821D500E03E75 /* SelectLocationViewController.m */; };
+		7EC507F41A7821D500E03E75 /* SelectLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC507F21A7821D500E03E75 /* SelectLocationViewController.xib */; };
+		7EC507F81A78262300E03E75 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC507F71A78262300E03E75 /* GCPlaceholderTextView.m */; };
+		7EC507FC1A78264A00E03E75 /* PickerData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC507FB1A78264A00E03E75 /* PickerData.m */; };
+		7EC5080D1A78288700E03E75 /* TRAutocompleteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC508001A78288700E03E75 /* TRAutocompleteView.m */; };
+		7EC5080E1A78288700E03E75 /* TRGoogleMapsAutocompleteItemsSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC508041A78288700E03E75 /* TRGoogleMapsAutocompleteItemsSource.m */; };
+		7EC5080F1A78288700E03E75 /* TRGoogleMapsAutocompletionCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC508061A78288700E03E75 /* TRGoogleMapsAutocompletionCellFactory.m */; };
+		7EC508101A78288700E03E75 /* TRGoogleMapsSuggestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC508081A78288700E03E75 /* TRGoogleMapsSuggestion.m */; };
+		7EC508111A78288700E03E75 /* TRStringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5080A1A78288700E03E75 /* TRStringExtensions.m */; };
+		7EC508121A78288700E03E75 /* TRTextFieldExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5080C1A78288700E03E75 /* TRTextFieldExtensions.m */; };
+		7EC508151A782A3400E03E75 /* RequestsBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC508141A782A3400E03E75 /* RequestsBuilder.m */; };
 		9AD8DA9A1A64592C001F8F2C /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8DA981A64592C001F8F2C /* TutorialViewController.m */; };
 		9AD8DA9B1A64592C001F8F2C /* TutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DA991A64592C001F8F2C /* TutorialViewController.xib */; };
 		9AD8DA9E1A645BCF001F8F2C /* TutorialPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8DA9D1A645BCF001F8F2C /* TutorialPageView.m */; };
@@ -159,6 +172,34 @@
 		12D87DDA1A63C76700A979A0 /* UIImage+imageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+imageWithColor.m"; sourceTree = "<group>"; };
 		12D87DDC1A63D68800A979A0 /* FacebookFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookFriend.h; sourceTree = "<group>"; };
 		12D87DDD1A63D68800A979A0 /* FacebookFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookFriend.m; sourceTree = "<group>"; };
+		7EC507EA1A78203A00E03E75 /* AddApartmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddApartmentViewController.h; sourceTree = "<group>"; };
+		7EC507EB1A78203A00E03E75 /* AddApartmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddApartmentViewController.m; sourceTree = "<group>"; };
+		7EC507EC1A78203A00E03E75 /* AddApartmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddApartmentViewController.xib; sourceTree = "<group>"; };
+		7EC507F01A7821D500E03E75 /* SelectLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectLocationViewController.h; sourceTree = "<group>"; };
+		7EC507F11A7821D500E03E75 /* SelectLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectLocationViewController.m; sourceTree = "<group>"; };
+		7EC507F21A7821D500E03E75 /* SelectLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectLocationViewController.xib; sourceTree = "<group>"; };
+		7EC507F61A78262300E03E75 /* GCPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPlaceholderTextView.h; sourceTree = "<group>"; };
+		7EC507F71A78262300E03E75 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
+		7EC507FA1A78264A00E03E75 /* PickerData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerData.h; sourceTree = "<group>"; };
+		7EC507FB1A78264A00E03E75 /* PickerData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerData.m; sourceTree = "<group>"; };
+		7EC507FE1A78288700E03E75 /* TRAutocompleteItemsSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRAutocompleteItemsSource.h; sourceTree = "<group>"; };
+		7EC507FF1A78288700E03E75 /* TRAutocompleteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRAutocompleteView.h; sourceTree = "<group>"; };
+		7EC508001A78288700E03E75 /* TRAutocompleteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRAutocompleteView.m; sourceTree = "<group>"; };
+		7EC508011A78288700E03E75 /* TRAutocompletionCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRAutocompletionCellFactory.h; sourceTree = "<group>"; };
+		7EC508021A78288700E03E75 /* TRAutocompletionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRAutocompletionDelegate.h; sourceTree = "<group>"; };
+		7EC508031A78288700E03E75 /* TRGoogleMapsAutocompleteItemsSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRGoogleMapsAutocompleteItemsSource.h; sourceTree = "<group>"; };
+		7EC508041A78288700E03E75 /* TRGoogleMapsAutocompleteItemsSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRGoogleMapsAutocompleteItemsSource.m; sourceTree = "<group>"; };
+		7EC508051A78288700E03E75 /* TRGoogleMapsAutocompletionCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRGoogleMapsAutocompletionCellFactory.h; sourceTree = "<group>"; };
+		7EC508061A78288700E03E75 /* TRGoogleMapsAutocompletionCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRGoogleMapsAutocompletionCellFactory.m; sourceTree = "<group>"; };
+		7EC508071A78288700E03E75 /* TRGoogleMapsSuggestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRGoogleMapsSuggestion.h; sourceTree = "<group>"; };
+		7EC508081A78288700E03E75 /* TRGoogleMapsSuggestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRGoogleMapsSuggestion.m; sourceTree = "<group>"; };
+		7EC508091A78288700E03E75 /* TRStringExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRStringExtensions.h; sourceTree = "<group>"; };
+		7EC5080A1A78288700E03E75 /* TRStringExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRStringExtensions.m; sourceTree = "<group>"; };
+		7EC5080B1A78288700E03E75 /* TRTextFieldExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTextFieldExtensions.h; sourceTree = "<group>"; };
+		7EC5080C1A78288700E03E75 /* TRTextFieldExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRTextFieldExtensions.m; sourceTree = "<group>"; };
+		7EC508131A782A3400E03E75 /* RequestsBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestsBuilder.h; sourceTree = "<group>"; };
+		7EC508141A782A3400E03E75 /* RequestsBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestsBuilder.m; sourceTree = "<group>"; };
+		7EC508171A782F4400E03E75 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		9AD8DA971A64592C001F8F2C /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
 		9AD8DA981A64592C001F8F2C /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialViewController.m; sourceTree = "<group>"; };
 		9AD8DA991A64592C001F8F2C /* TutorialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialViewController.xib; sourceTree = "<group>"; };
@@ -385,6 +426,7 @@
 		76483CDB66ACFC63E3E7263A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7EC508171A782F4400E03E75 /* AssetsLibrary.framework */,
 				CD5039641A62B3F900A1320D /* Social.framework */,
 				CD5713231A597C73003B4C2E /* MapKit.framework */,
 				CD5713151A586751003B4C2E /* MessageUI.framework */,
@@ -403,6 +445,71 @@
 				E9E5B27B64FD02829D64CDBC /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7EC507EF1A78204600E03E75 /* Add Apartment */ = {
+			isa = PBXGroup;
+			children = (
+				7EC508161A782A3900E03E75 /* API */,
+				7EC507F91A78262800E03E75 /* utils */,
+				7EC507F51A7821DB00E03E75 /* Select Location */,
+				7EC507EA1A78203A00E03E75 /* AddApartmentViewController.h */,
+				7EC507EB1A78203A00E03E75 /* AddApartmentViewController.m */,
+				7EC507EC1A78203A00E03E75 /* AddApartmentViewController.xib */,
+			);
+			name = "Add Apartment";
+			sourceTree = "<group>";
+		};
+		7EC507F51A7821DB00E03E75 /* Select Location */ = {
+			isa = PBXGroup;
+			children = (
+				7EC507F01A7821D500E03E75 /* SelectLocationViewController.h */,
+				7EC507F11A7821D500E03E75 /* SelectLocationViewController.m */,
+				7EC507F21A7821D500E03E75 /* SelectLocationViewController.xib */,
+			);
+			name = "Select Location";
+			sourceTree = "<group>";
+		};
+		7EC507F91A78262800E03E75 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				7EC507FA1A78264A00E03E75 /* PickerData.h */,
+				7EC507FB1A78264A00E03E75 /* PickerData.m */,
+				7EC507F61A78262300E03E75 /* GCPlaceholderTextView.h */,
+				7EC507F71A78262300E03E75 /* GCPlaceholderTextView.m */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
+		7EC507FD1A78288600E03E75 /* TRAutocomplete */ = {
+			isa = PBXGroup;
+			children = (
+				7EC507FE1A78288700E03E75 /* TRAutocompleteItemsSource.h */,
+				7EC507FF1A78288700E03E75 /* TRAutocompleteView.h */,
+				7EC508001A78288700E03E75 /* TRAutocompleteView.m */,
+				7EC508011A78288700E03E75 /* TRAutocompletionCellFactory.h */,
+				7EC508021A78288700E03E75 /* TRAutocompletionDelegate.h */,
+				7EC508031A78288700E03E75 /* TRGoogleMapsAutocompleteItemsSource.h */,
+				7EC508041A78288700E03E75 /* TRGoogleMapsAutocompleteItemsSource.m */,
+				7EC508051A78288700E03E75 /* TRGoogleMapsAutocompletionCellFactory.h */,
+				7EC508061A78288700E03E75 /* TRGoogleMapsAutocompletionCellFactory.m */,
+				7EC508071A78288700E03E75 /* TRGoogleMapsSuggestion.h */,
+				7EC508081A78288700E03E75 /* TRGoogleMapsSuggestion.m */,
+				7EC508091A78288700E03E75 /* TRStringExtensions.h */,
+				7EC5080A1A78288700E03E75 /* TRStringExtensions.m */,
+				7EC5080B1A78288700E03E75 /* TRTextFieldExtensions.h */,
+				7EC5080C1A78288700E03E75 /* TRTextFieldExtensions.m */,
+			);
+			path = TRAutocomplete;
+			sourceTree = "<group>";
+		};
+		7EC508161A782A3900E03E75 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				7EC508131A782A3400E03E75 /* RequestsBuilder.h */,
+				7EC508141A782A3400E03E75 /* RequestsBuilder.m */,
+			);
+			name = API;
 			sourceTree = "<group>";
 		};
 		9AD8DA961A64590B001F8F2C /* Tutorial */ = {
@@ -613,6 +720,7 @@
 		CD307A971A48554200D4BE2B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				7EC507FD1A78288600E03E75 /* TRAutocomplete */,
 				126F9C461A68595F0074AF72 /* KAProgressLabel */,
 				CDEE8E3A1A64496F0030A88E /* NoInternetConnectionView.h */,
 				CDEE8E3B1A64496F0030A88E /* NoInternetConnectionView.m */,
@@ -842,6 +950,7 @@
 		CD57130B1A585603003B4C2E /* My place */ = {
 			isa = PBXGroup;
 			children = (
+				7EC507EF1A78204600E03E75 /* Add Apartment */,
 				CD5713171A597526003B4C2E /* Display Listing */,
 				CD57130C1A585618003B4C2E /* No Listing */,
 			);
@@ -974,6 +1083,7 @@
 				9AD8DA9B1A64592C001F8F2C /* TutorialViewController.xib in Resources */,
 				CD5039221A61978100A1320D /* slider-default-track@2x.png in Resources */,
 				CD5039351A61978100A1320D /* slider-metal-trackBackground.png in Resources */,
+				7EC507EE1A78203A00E03E75 /* AddApartmentViewController.xib in Resources */,
 				CD42A8C41A703627000E7BD7 /* ContactViewController.xib in Resources */,
 				CD50392B1A61978100A1320D /* slider-default7-trackBackground.png in Resources */,
 				CD50395B1A61F30700A1320D /* PreferencesSeparateView.xib in Resources */,
@@ -1015,6 +1125,7 @@
 				CD2A8AE71A5DACB10065299A /* FullMapViewViewController.xib in Resources */,
 				CD5039341A61978100A1320D /* slider-metal-track@2x.png in Resources */,
 				CD5039261A61978100A1320D /* slider-default_trackBackground@2x.png in Resources */,
+				7EC507F41A7821D500E03E75 /* SelectLocationViewController.xib in Resources */,
 				CD2A8AF31A5DB6D20065299A /* ApartmentDetailsView.xib in Resources */,
 				CD57131C1A59755A003B4C2E /* SingleApartmentViewController.xib in Resources */,
 				CD307AC71A48661C00D4BE2B /* FeedViewController.xib in Resources */,
@@ -1069,16 +1180,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AD8DA9E1A645BCF001F8F2C /* TutorialPageView.m in Sources */,
+				7EC507ED1A78203A00E03E75 /* AddApartmentViewController.m in Sources */,
 				CD50395F1A61F3B300A1320D /* PreferencesViewController.m in Sources */,
+				7EC507F81A78262300E03E75 /* GCPlaceholderTextView.m in Sources */,
 				12D87DDE1A63D68800A979A0 /* FacebookFriend.m in Sources */,
 				CD50393A1A61E09000A1320D /* M13Checkbox.m in Sources */,
 				12BAD2061A5A95E100ABE909 /* MapUtils.m in Sources */,
 				126F9C4B1A68595F0074AF72 /* KAProgressLabel.m in Sources */,
 				CD5713101A585651003B4C2E /* NoListingViewController.m in Sources */,
+				7EC508121A78288700E03E75 /* TRTextFieldExtensions.m in Sources */,
 				120547601A5FF1110036BB75 /* UITableView+AnimationControl.m in Sources */,
 				CD1BAFAD1A48466F0012CBAA /* AppDelegate.m in Sources */,
 				CD42A8C31A703627000E7BD7 /* ContactViewController.m in Sources */,
 				CD48D2461A5B1E7800C85AA6 /* GalleryNavigationController.m in Sources */,
+				7EC507FC1A78264A00E03E75 /* PickerData.m in Sources */,
 				12D87DDB1A63C76700A979A0 /* UIImage+imageWithColor.m in Sources */,
 				CD2A8B001A5DE47E0065299A /* TopApartmentView.m in Sources */,
 				CD1BAFAA1A48466F0012CBAA /* main.m in Sources */,
@@ -1088,11 +1203,13 @@
 				CD39D6401A4A09220006F7B7 /* RentedPanelController.m in Sources */,
 				CD42A8BE1A70355D000E7BD7 /* SnapshotUtils.m in Sources */,
 				CD2A8AE61A5DACB10065299A /* FullMapViewViewController.m in Sources */,
+				7EC5080F1A78288700E03E75 /* TRGoogleMapsAutocompletionCellFactory.m in Sources */,
 				CD5039371A61978100A1320D /* NMRangeSlider.m in Sources */,
 				CD57131B1A59755A003B4C2E /* SingleApartmentViewController.m in Sources */,
 				9AD8DA9A1A64592C001F8F2C /* TutorialViewController.m in Sources */,
 				CD2A8B071A5DE6F10065299A /* ApartmentTableViewCell.m in Sources */,
 				CD5039561A61EEC000A1320D /* PreferencesSeparateView.m in Sources */,
+				7EC5080D1A78288700E03E75 /* TRAutocompleteView.m in Sources */,
 				CD2A8AF11A5DB6AB0065299A /* ApartmentDetailsView.m in Sources */,
 				CD42A8C71A705787000E7BD7 /* UIView+MLScreenshot.m in Sources */,
 				CD307AA11A48561B00D4BE2B /* DependencyContainer.m in Sources */,
@@ -1100,10 +1217,15 @@
 				12BAD2001A5A824D00ABE909 /* ApartmentApi.m in Sources */,
 				126F9C4C1A68595F0074AF72 /* TPPropertyAnimation.m in Sources */,
 				CDEE8E3C1A64496F0030A88E /* NoInternetConnectionView.m in Sources */,
+				7EC508101A78288700E03E75 /* TRGoogleMapsSuggestion.m in Sources */,
+				7EC507F31A7821D500E03E75 /* SelectLocationViewController.m in Sources */,
 				CD39D64C1A4A0C580006F7B7 /* RentedNavigationController.m in Sources */,
 				CD39D6481A4A0A6C0006F7B7 /* DashboardViewController.m in Sources */,
+				7EC508151A782A3400E03E75 /* RequestsBuilder.m in Sources */,
 				CD5038F61A617EC800A1320D /* GeneralUtils.m in Sources */,
+				7EC508111A78288700E03E75 /* TRStringExtensions.m in Sources */,
 				126F9C421A68276C0074AF72 /* ApartmentDetailsOtherListingView.m in Sources */,
+				7EC5080E1A78288700E03E75 /* TRGoogleMapsAutocompleteItemsSource.m in Sources */,
 				CD307A9E1A4855C000D4BE2B /* RentedApi.m in Sources */,
 				CD19A99E1A5F35960095163F /* Apartment.m in Sources */,
 				CD307AC01A48657500D4BE2B /* AuthenticationViewController.m in Sources */,
@@ -1164,8 +1286,9 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1185,7 +1308,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "185d857c-1f21-4169-8a4f-a4635fbf7e73";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1207,7 +1330,9 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1220,7 +1345,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "185d857c-1f21-4169-8a4f-a4635fbf7e73";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1232,7 +1357,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Rented/Rented-Prefix.pch";
 				INFOPLIST_FILE = Rented/Info.plist;
@@ -1249,7 +1374,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Rented/Rented-Prefix.pch";

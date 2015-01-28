@@ -22,6 +22,7 @@ PODS:
     - AFNetworking/NSURLSession
   - AsyncImageView (1.5.1)
   - Bolts (1.1.3)
+  - CTAssetsPickerController (2.8.0)
   - DACircularProgress (2.2.0)
   - Facebook-iOS-SDK (3.22.0):
     - Bolts (~> 1.0)
@@ -47,6 +48,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - AsyncImageView
+  - CTAssetsPickerController
   - Facebook-iOS-SDK
   - JASidePanels
   - MWPhotoBrowser
@@ -59,6 +61,7 @@ SPEC CHECKSUMS:
   AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
   AsyncImageView: 388442ae8314a5c99de0d98040c2926826d31da7
   Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
+  CTAssetsPickerController: 32b02079e2dd41c76fbc63740f4638ced71b7d1b
   DACircularProgress: 3b41941891a56dc6aa17971f5322a9a38a6f446e
   Facebook-iOS-SDK: 0eda8ff7120aada0a9c5f98552f7625da6c3440a
   JASidePanels: ca943907d88a0738c80755204c6098969d43e4e9
