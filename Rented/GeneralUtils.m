@@ -22,16 +22,16 @@
             [rooms appendFormat:@"studio"];
         
         if([roomType integerValue] == Bedroom1)
-            [rooms appendFormat:@"1 bedroom"];
+            [rooms appendFormat:@"1"];
         
         if([roomType integerValue] == Bedrooms2)
-            [rooms appendFormat:@"2 bedrooms"];
+            [rooms appendFormat:@"2"];
         
         if([roomType integerValue] == Bedrooms3)
-            [rooms appendFormat:@"3 bedrooms"];
+            [rooms appendFormat:@"3"];
         
         if([roomType integerValue] == Bedrooms4)
-            [rooms appendFormat:@"4 bedrooms"];
+            [rooms appendFormat:@"4"];
     }
     
     NSString *finalString = @"";
@@ -44,22 +44,90 @@
     return finalString;
 }
 
++ (NSString *)roomsLongDescriptionForApartment:(PFObject *)apartment
+{
+    NSMutableString *rooms = [NSMutableString new];
+    NSArray *roomsArray = apartment[@"rooms"];
+    
+    for (NSNumber *roomType in roomsArray)
+    {
+        if([roomType integerValue] == Studio)
+            [rooms appendFormat:@"Studio"];
+        
+        if([roomType integerValue] == Bedroom1)
+            [rooms appendFormat:@"1 Bedroom"];
+        
+        if([roomType integerValue] == Bedrooms2)
+            [rooms appendFormat:@"2 Bedroom"];
+        
+        if([roomType integerValue] == Bedrooms3)
+            [rooms appendFormat:@"3 Bedroom"];
+        
+        if([roomType integerValue] == Bedrooms4)
+            [rooms appendFormat:@"4 Bedroom"];
+    }
+    
+    NSString *finalString = @"";
+    
+    if(rooms.length > 1 && [[rooms substringToIndex:1] isEqualToString:@","])
+        finalString = [rooms substringFromIndex:1];
+    else
+        finalString = rooms;
+    
+    return finalString;
+}
+
++(NSMutableArray*) mutableFriendsInArray1: (NSArray*)friends1 andArray2: (NSArray*)friends2
+{
+    NSMutableArray* returnedArray = [NSMutableArray new];
+    
+    for (NSString* facebookId in friends1)
+    {
+        if ([friends2 containsObject:facebookId])
+        {
+            [returnedArray addObject:facebookId];
+        }
+    }
+    
+    return returnedArray;
+}
+
 + (NSString *)connectedThroughExtendedDescription:(NSMutableArray *)mutalFriends
 {
     NSMutableString *description = [[NSMutableString alloc] initWithString:@"Connected through "];
-    if(mutalFriends.count == 1)
+    NSMutableArray* actualFriends =[NSMutableArray new];
+    for (NSString* friend in mutalFriends)
     {
-        FacebookFriend *fr = [mutalFriends firstObject];
-        [description appendFormat:@"%@", fr.name];
-    } else if(mutalFriends.count == 2)
+        if ([DEP.facebookFriendsInfo objectForKey:friend])
+        {
+            [actualFriends addObject:friend];
+        }
+    }
+    if(actualFriends.count == 0)
     {
-        FacebookFriend *fr1 = [mutalFriends firstObject];
-        FacebookFriend *fr2 = [mutalFriends objectAtIndex:1];
-        [description appendFormat:@"%@ and %@", fr1.name, fr2.name];
-    }else{
-        FacebookFriend *fr = [mutalFriends firstObject];
-        [mutalFriends removeObject:fr];
-        [description appendFormat:@"%@ and %lu others", fr.name, (unsigned long)mutalFriends.count];
+        description=[@"No Connections" mutableCopy];
+    }
+    else
+    {
+        if(actualFriends.count == 1)
+        {
+            NSString* friendId =[mutalFriends firstObject];
+            FacebookFriend *fr = [DEP.facebookFriendsInfo objectForKey:friendId];
+            [description appendFormat:@"%@", fr.name];
+        } else if(mutalFriends.count == 2)
+        {
+            NSString* friendId1 =[mutalFriends firstObject];
+            NSString* friendId2 =[mutalFriends objectAtIndex:1];
+
+            FacebookFriend *fr1 = [DEP.facebookFriendsInfo objectForKey:friendId1];
+            FacebookFriend *fr2 = [DEP.facebookFriendsInfo objectForKey:friendId2];
+            [description appendFormat:@"%@ and %@", fr1.name, fr2.name];
+        }else{
+            NSString* friendId =[mutalFriends firstObject];
+            FacebookFriend *fr = [DEP.facebookFriendsInfo objectForKey:friendId];
+            [mutalFriends removeObject:fr];
+            [description appendFormat:@"%@ and %lu others", fr.name, (unsigned long)mutalFriends.count];
+        }
     }
     
     return description;
@@ -71,8 +139,83 @@
 //    NSInteger location2 = [substring1 rangeOfString:@", " options:NSBackwardsSearch].location;
 //    
 //    return [substring1 substringFromIndex:location2+2];
+    if ([locationString containsString:@", "])
+    {
+        return [locationString substringToIndex:[locationString rangeOfString:@", "].location];
+    }
+    else
+    {
+        return locationString;
+    }
+}
+
++(NSString*) stateAbbreviationForState:(NSString*) state
+{
     
-    return [locationString substringToIndex:[locationString rangeOfString:@", "].location];
+    NSString* lowerCaseState = [state lowercaseString];
+    NSDictionary* nameAbbreviations = [NSDictionary dictionaryWithObjectsAndKeys:
+                         @"AL",@"alabama",
+                         @"AK",@"alaska",
+                         @"AZ",@"arizona",
+                         @"AR",@"arkansas",
+                         @"CA",@"california",
+                         @"CO",@"colorado",
+                         @"CT",@"connecticut",
+                         @"DE",@"delaware",
+                         @"DC",@"district of columbia",
+                         @"FL",@"florida",
+                         @"GA",@"georgia",
+                         @"HI",@"hawaii",
+                         @"ID",@"idaho",
+                         @"IL",@"illinois",
+                         @"IN",@"indiana",
+                         @"IA",@"iowa",
+                         @"KS",@"kansas",
+                         @"KY",@"kentucky",
+                         @"LA",@"louisiana",
+                         @"ME",@"maine",
+                         @"MD",@"maryland",
+                         @"MA",@"massachusetts",
+                         @"MI",@"michigan",
+                         @"MN",@"minnesota",
+                         @"MS",@"mississippi",
+                         @"MO",@"missouri",
+                         @"MT",@"montana",
+                         @"NE",@"nebraska",
+                         @"NV",@"nevada",
+                         @"NH",@"new hampshire",
+                         @"NJ",@"new jersey",
+                         @"NM",@"new mexico",
+                         @"NY",@"new york",
+                         @"NC",@"north carolina",
+                         @"ND",@"north dakota",
+                         @"OH",@"ohio",
+                         @"OK",@"oklahoma",
+                         @"OR",@"oregon",
+                         @"PA",@"pennsylvania",
+                         @"RI",@"rhode island",
+                         @"SC",@"south carolina",
+                         @"SD",@"south dakota",
+                         @"TN",@"tennessee",
+                         @"TX",@"texas",
+                         @"UT",@"utah",
+                         @"VT",@"vermont",
+                         @"VA",@"virginia",
+                         @"WA",@"washington",
+                         @"WV",@"west virginia",
+                         @"WI",@"wisconsin",
+                         @"WY",@"wyoming",
+                         nil];
+    
+    if ([nameAbbreviations objectForKey:lowerCaseState])
+    {
+        return [nameAbbreviations objectForKey:lowerCaseState];
+
+    }
+    else
+    {
+        return state;
+    }
 }
 
 @end

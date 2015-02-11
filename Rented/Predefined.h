@@ -19,7 +19,7 @@
 #define wScr            [[UIScreen mainScreen] bounds].size.width
 #define statusBarHeight 20.0f
 #define ApartmentDetailsViewHeight 267.0f
-#define ApartmentDetailsOtherListingViewHeight 430.0f
+#define ApartmentDetailsOtherListingViewHeight 614.0f
 #define IS_IPHONE       (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define IS_IPHONE_5     (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 568.0)
 #define ASYNC(...) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{ __VA_ARGS__ })
@@ -38,15 +38,24 @@
 
 #define VacancyImmediate 0
 #define VacancyShortTerm 1
-#define VacancyNegociable 2
+#define VacancyFlexible 2
 
 #define Fee3percent 0
-#define Fee4percent 1
-#define Fee5percent 2
+#define Fee6percent 1
+#define Fee9percent 2
+#define FeeOtherpercent 3
+
+#define Weekdays 0
+#define Weekends 1
+#define Anyday 0
 
 #define RentWillChangeYES 0
 #define RentWillChangeNO 1
 #define RentWillChangeMaybe 2
+
+#define TypeEntirePlace 0
+#define TypePrivateRoom 1
+#define TypeRetailOrCommercial 2
 
 #pragma mark - User listing status
 #define ListingNotRequested 0

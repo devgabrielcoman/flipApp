@@ -44,6 +44,8 @@
 @property id <TRAutocompletionDelegate> delegate;
 
 @property(nonatomic) UIColor *separatorColor;
+@property(nonatomic) BOOL visible;
+
 @property(nonatomic) UITableViewCellSeparatorStyle separatorStyle;
 
 @property(nonatomic) CGFloat topMargin;

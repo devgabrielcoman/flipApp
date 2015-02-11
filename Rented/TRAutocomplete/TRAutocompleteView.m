@@ -30,6 +30,7 @@
 #import "TRAutocompleteView.h"
 #import "TRAutocompleteItemsSource.h"
 #import "TRAutocompletionCellFactory.h"
+#import "AddApartmentViewController.h"
 
 @interface TRAutocompleteView () <UITableViewDelegate, UITableViewDataSource>
 
@@ -101,7 +102,7 @@
 
         [self addSubview:_table];
     }
-
+    [self setBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
     return self;
 }
 
@@ -139,9 +140,9 @@
     calculatedHeight += _contextController.tabBarController.tabBar.frame.size.height; //keyboard is shown over it, need to compensate
 
     self.frame = CGRectMake(_queryTextField.frame.origin.x,
-                            calculatedY,
+                            _queryTextField.frame.origin.y + _queryTextField.frame.size.height,
                             _queryTextField.frame.size.width,
-                            calculatedHeight);
+                            120);
     _table.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
 }
 
@@ -171,7 +172,7 @@
 
                                                                     if (self.suggestions.count > 0 && !_visible)
                                                                     {
-                                                                        [_contextController.view addSubview:self];
+                                                                        [[(AddApartmentViewController*)_contextController scrollViewContainer] addSubview:self];
                                                                         _visible = YES;
                                                                     }
                                                                 }

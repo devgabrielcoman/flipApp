@@ -11,6 +11,7 @@
 #import "Apartment.h"
 #import <UIAlertView+Blocks.h>
 #import "SingleApartmentViewController.h"
+#import "GeneralUtils.h"
 
 @interface FavoritesTableViewController ()
 
@@ -59,7 +60,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 120.0f;
+    return 122.0f;
 }
 
 
@@ -75,14 +76,25 @@
     {
         PFObject *firstImage = [ap.images firstObject];
         PFFile *imageFile = firstImage[@"image"];
+        cell.apartmentImageView.crossfadeDuration =0.0;
         cell.apartmentImageView.showActivityIndicator = YES;
         cell.apartmentImageView.imageURL = [NSURL URLWithString:imageFile.url];
     }
     
     PFUser *owner = ap.apartment[@"owner"];
+    NSString* type = [GeneralUtils roomsLongDescriptionForApartment:ap.apartment];
+    NSString* location;
+    if (ap.apartment[@"neighborhood"])
+    {
+        location = ap.apartment[@"neighborhood" ];
+    }
+    else
+    {
+        location = ap.apartment[@"city"];
+    }
     
-    cell.apartmentDescriptionLbl.text = [NSString stringWithFormat:@"%@'s apartment", owner.username];
-    cell.locationLbl.text = ap.apartment[@"locationName"];
+    cell.apartmentDescriptionLbl.text = [NSString stringWithFormat:@"%@'s %@ in %@", owner.username,type,location];
+//    cell.locationLbl.text = ap.apartment[@"locationName"];
     
     cell.apartmentIndex = indexPath.row;
     cell.delegate = self;

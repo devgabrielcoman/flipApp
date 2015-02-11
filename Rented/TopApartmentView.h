@@ -18,9 +18,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *ownerNameLbl;
 @property (weak, nonatomic) IBOutlet AsyncImageView *ownerImgView;
 @property (weak, nonatomic) IBOutlet UILabel *daysUntilRenewal;
+@property (weak, nonatomic) IBOutlet UILabel *neighborhoodLabel;
 @property (weak, nonatomic) IBOutlet UIButton *displayMore;
 @property (weak, nonatomic) IBOutlet UIImageView *connectedThroughImgView;
 @property (weak, nonatomic) IBOutlet UILabel *connectedThroughLbl;
+@property (weak, nonatomic) IBOutlet UILabel *verifiedLabel;
+@property (weak, nonatomic) IBOutlet UIView *myListingBar;
+@property (weak, nonatomic) IBOutlet UILabel *likesLabel;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
+
+
 
 @property BOOL enableSwipeGestures;
 @property id<ApartmentCellProtocol> delegate;
@@ -29,5 +37,7 @@
 @property PFObject *apartment;
 
 - (void)setApartmentDetails:(PFObject *)apartment andImages:(NSArray *)images;
+- (void)updateMapView;
+
 
 @end

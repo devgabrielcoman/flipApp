@@ -10,6 +10,9 @@
 
 @interface UserSearchPreferences : NSObject<NSCoding>
 
+@property NSString* address;
+@property NSString* zipCode;
+
 @property NSInteger minRenewalDays;
 @property NSInteger maxRenewalDays;
 

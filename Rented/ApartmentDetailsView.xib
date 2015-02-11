@@ -139,7 +139,7 @@
         </view>
     </objects>
     <resources>
-        <image name="users" width="52" height="61"/>
+        <image name="users" width="29" height="34"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

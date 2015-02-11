@@ -10,6 +10,7 @@
 
 @protocol ApartmentCellProtocol <NSObject>
 
+@optional
 - (void)displayGalleryForApartmentAtIndex:(NSInteger)index;
 - (void)displayFullMapViewForApartmentAtIndex:(NSInteger)index;
 - (void)displayMoreInfoForApartmentAtIndex:(NSInteger)index;
@@ -18,6 +19,7 @@
 - (void)switchToPreviousApartmentFromIndex:(NSInteger)index;
 - (void)switchToNextApartmentFromIndex:(NSInteger)index;
 - (void)getApartmentAtIndex:(NSInteger)index;
+- (void)editApartment;
 
 
 @end

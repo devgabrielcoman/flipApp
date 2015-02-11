@@ -13,5 +13,7 @@
 @property PFObject *apartment;
 @property NSArray *images;
 @property PFUser *owner;
+@property NSArray *ownersFacebookFriends;
+
 
 @end

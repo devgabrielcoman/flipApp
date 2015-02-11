@@ -25,6 +25,8 @@
     M13Checkbox *bedroom3;
     M13Checkbox *bedroom4;
     
+    M13Checkbox *everywhere;
+    
     NSMutableArray *vacancyTypes;
     NSMutableArray *rooms;
     
@@ -36,6 +38,8 @@
 }
 
 @property (weak, nonatomic) IBOutlet NMRangeSlider *leaseRenewalSlider;
+@property (weak, nonatomic) IBOutlet UILabel *addressLbl;
+@property UITextField *addressTF;
 @property (weak, nonatomic) IBOutlet UILabel *leaseRenewalLbl;
 @property (weak, nonatomic) IBOutlet UILabel *vacancyLbl;
 @property (weak, nonatomic) IBOutlet UILabel *rentLbl;
@@ -45,5 +49,8 @@
 @property UITextField *minSquareFtTF;
 @property UITextField *maxSquareFtTF;
 @property (weak, nonatomic) IBOutlet UILabel *roomsLbl;
+@property (weak, nonatomic) IBOutlet UILabel *locationLbl;
+@property UITextField *locationTF;
+
 
 @end

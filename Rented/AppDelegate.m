@@ -20,6 +20,7 @@
 #import "DashboardViewController.h"
 #import <AFNetworking.h>
 #import "NoInternetConnectionView.h"
+#import "FacebookFriend.h"
 
 @interface AppDelegate ()
 
@@ -53,6 +54,62 @@
     self.window.rootViewController = _rootViewController;
     
     [self.window makeKeyAndVisible];
+    
+    //check if the user is loggedin
+    if([DEP.api.userApi userIsAuthenticated])
+    {
+        //get the user's updated friend list
+        [DEP.api.userApi getCurrentUsersFacebookFriends:^(NSArray *friends, BOOL succeeded) {
+            
+            [[PFUser currentUser] setObject:friends forKey:@"facebookFriends"];
+            [[PFUser currentUser] saveInBackground];
+            
+            DEP.facebookFriendsInfo = [NSMutableDictionary new];
+            for (NSString *friend in friends)
+            {
+                
+                PFQuery *query = [PFUser query];
+                [query whereKey:@"facebookID" equalTo:friend];
+                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    if(!error)
+                    {
+                        PFUser *userFriend = (PFUser*)[objects objectAtIndex:0];
+                        FacebookFriend *fr = [FacebookFriend new];
+                        fr.userId = friend;
+                        fr.name = userFriend[@"username"];
+                        fr.profilePictureUrl = userFriend[@"profilePictureUrl"];
+                        
+                        [DEP.facebookFriendsInfo setValue:fr forKey:friend];
+                        
+                    }
+                }];
+                
+            }
+            
+        }];
+        
+        PFQuery * query = [PFQuery queryWithClassName:@"UserMetaData"];
+        [query whereKey:@"user"equalTo:DEP.authenticatedUser];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+        {
+            if ([objects count]==0)
+            {
+                PFObject* object = [PFObject objectWithClassName:@"UserMetaData"];
+                object[@"user"] = DEP.authenticatedUser;
+                object[@"isVerified"]= [NSNumber numberWithInt:0];
+                [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+                 {
+                     
+                 }];
+            }
+
+            
+        }];
+    
+
+
+    }
+
     
     return YES;
 }

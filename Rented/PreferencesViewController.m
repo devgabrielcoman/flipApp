@@ -21,6 +21,8 @@
     
     PreferencesSeparateView *pfView = [[[NSBundle mainBundle] loadNibNamed:@"PreferencesSeparateView" owner:self options:nil] firstObject];
     [self.scrollViewWrapper addSubview:pfView];
+    [self.scrollViewWrapper setContentSize: CGSizeMake(self.scrollViewWrapper.contentSize.width,600)];
+
 }
 
 - (void)didReceiveMemoryWarning {

@@ -12,6 +12,7 @@
 #import "MapUtils.h"
 #import "ApartmentCellProtocol.h"
 #import "UIColor+ColorFromHexString.h"
+#import "GeneralUtils.h"
 
 @implementation TopApartmentView
 
@@ -25,44 +26,32 @@
     _ownerImgView.layer.cornerRadius = _ownerImgView.frame.size.width/2;
     _ownerImgView.layer.masksToBounds = YES;
     
-    _ownerNameLbl.font = [UIFont fontWithName:@"GothamRounded-Light" size:12.0];
-    _ownerNameLbl.textColor = [UIColor colorFromHexString:FeedTextColor];
-    _daysUntilRenewal.font = [UIFont fontWithName:@"GothamRounded-Light" size:12.0];
-    _daysUntilRenewal.textColor = [UIColor colorFromHexString:FeedTextColor];
-    
-    _displayMore.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Light" size:12.0];
-    [_displayMore setTintColor:[UIColor colorFromHexString:FeedTextColor]];
-    _connectedThroughLbl.font = [UIFont fontWithName:@"GothamRounded-Light" size:12.0];
-    _connectedThroughLbl.textColor = [UIColor colorFromHexString:FeedTextColor];
+
     
     _locationString = @"";
+
     
     //Add a left swipe gesture recognizer
     UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeLeft:)];
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [self addGestureRecognizer:recognizer];
-
-    //Add a right swipe gesture recognizer
-    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeRight:)];
-    recognizer.delegate = self;
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
-    [self addGestureRecognizer:recognizer];
     
-    //Add a right swipe gesture recognizer
-    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeUp:)];
-    recognizer.delegate = self;
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionUp)];
-    [self addGestureRecognizer:recognizer];
-    
-    //Add a right swipe gesture recognizer
-    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeDown:)];
-    recognizer.delegate = self;
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
-    [self addGestureRecognizer:recognizer];
-    
+       
     CGRect apartmentImgViewFrame = _apartmentImgView.frame;
     apartmentImgViewFrame.size.width = wScr;
     _apartmentImgView.frame = apartmentImgViewFrame;
+    [_apartmentImgView setContentMode:UIViewContentModeScaleAspectFill];
+    
+    
+    
+
+
+}
+-(void)updateMapView
+{
+    CGFloat yposition = hScr- statusBarHeight-18 -40 - 174 + (174 - 100) /2.0;
+    
+    [_mapView setFrame:CGRectMake(_mapView.frame.origin.x, yposition, 100,100)];
 }
 
 -(void)layoutSubviews{
@@ -74,26 +63,25 @@
 
 - (void)setApartmentDetails:(PFObject *)apartment andImages:(NSArray *)images
 {
+    [self.verifiedLabel setHidden:YES];
     //set owner details
+    _ownerImgView.crossfadeDuration =0;
     _ownerImgView.image = nil;
     _ownerImgView.showActivityIndicator = YES;
     PFUser *owner = apartment[@"owner"];
-    BOOL isOwnerFacebookProfileHidden = [[owner objectForKey:@"isFacebookProfileHidden"] boolValue];
-    if(!isOwnerFacebookProfileHidden)
-    {
-        _ownerImgView.imageURL = [NSURL URLWithString:owner[@"profilePictureUrl"]];
-        _ownerNameLbl.text = owner[@"username"];
-    }
-    else
-    {
-        _ownerNameLbl.text = @"Anonymous User";
-    }
+    
+    _ownerImgView.imageURL = [NSURL URLWithString:owner[@"profilePictureUrl"]];
+    _ownerNameLbl.text = owner[@"username"];
+
+    
+
     
     //apartment image
     if(images && images.count > 0)
     {
         PFObject *firstImage = [images firstObject];
         PFFile *imageFile = firstImage[@"image"];
+        _apartmentImgView.crossfadeDuration =0;
         _apartmentImgView.image = nil;
         _apartmentImgView.showActivityIndicator = YES;
         _apartmentImgView.imageURL = [NSURL URLWithString:imageFile.url];
@@ -133,13 +121,41 @@
         if([vacancyType integerValue] == VacancyImmediate)
             [vacancy appendFormat:@"Immediate"];
         
-        if([vacancyType integerValue] == VacancyNegociable)
+        if([vacancyType integerValue] == VacancyFlexible)
             [vacancy appendFormat:@"Negociable"];
         
         if([vacancyType integerValue] == VacancyShortTerm)
             [vacancy appendFormat:@"Short-Term"];
     }
     _daysUntilRenewal.text = vacancy;
+    
+    if (apartment[@"neighborhood"])
+    {
+        _neighborhoodLabel.text = apartment[@"neighborhood"];
+    }
+    else
+    {
+        _neighborhoodLabel.text = apartment[@"city"];
+    }
+    
+//    //show verifiedLabel if user is verified
+//    PFQuery* verifiedQuery = [PFQuery queryWithClassName:@"UserMetaData"];
+//    [verifiedQuery whereKey:@"user" equalTo:owner];
+//    [verifiedQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        if ([objects count]>0)
+//        {
+//            PFObject* object = [objects firstObject];
+//            if ([object[@"isVerified"] integerValue]==1)
+//            {
+//                [self.verifiedLabel setHidden:NO];
+//            }
+//            else
+//            {
+//                [self.verifiedLabel setHidden:YES];
+//            }
+//        }
+//    }];
+    
 }
 
 #pragma mark - Gesture handlers
@@ -159,13 +175,18 @@
     [_delegate displayMoreInfoForApartmentAtIndex:_apartmentIndex];
 }
 
+-(IBAction)editButtonTapped:(id)sender
+{
+    [self.delegate editApartment];
+}
+
 #pragma mark - Swipe gesture handlers
 
 - (void)handleSwipeLeft:(id)gesture
 {
     RTLog(@"swipe left on cell with index: %li", (long)_apartmentIndex);
-    //[_delegate addToFravoritesApartmentFromIndex:_apartmentIndex];
-    [_delegate addToFravoritesApartment:_apartment];
+    [_delegate displayMoreInfoForApartmentAtIndex:_apartmentIndex];
+
 }
 
 - (void)handleSwipeRight:(id)gesture
@@ -179,7 +200,7 @@
 
     if ([_delegate respondsToSelector:@selector(switchToNextApartmentFromIndex:)])
     {
-        [_delegate switchToPreviousApartmentFromIndex:_apartmentIndex];
+        [_delegate switchToNextApartmentFromIndex:_apartmentIndex];
     }
 }
 - (void)handleSwipeDown:(id)gesture
@@ -188,7 +209,7 @@
 
     if ([_delegate respondsToSelector:@selector(switchToPreviousApartmentFromIndex:)])
     {
-        [_delegate switchToNextApartmentFromIndex:_apartmentIndex];
+        [_delegate switchToPreviousApartmentFromIndex:_apartmentIndex];
     }
 }
 

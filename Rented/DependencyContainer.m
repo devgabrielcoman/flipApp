@@ -46,6 +46,8 @@ static DependencyContainer *_instance;
         DEP.userPreferences.minSqFt = -1;
         DEP.userPreferences.maxSqFt = -1;
         DEP.userPreferences.rooms = @[];
+        DEP.userPreferences.address = @"";
+        DEP.userPreferences.zipCode = @"";
     }
 }
 

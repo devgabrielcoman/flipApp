@@ -36,13 +36,17 @@
 {
     return UIStatusBarStyleLightContent;
 }
+-(UIBarButtonItem *)leftButtonForCenterPanel
+{
+    return [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleLeftPanel:)];
+}
 
 - (UIBarButtonItem *)getLeftButton
 {
     if(_hideLeftButton)
-        return [[UIBarButtonItem alloc] initWithImage:nil style:UIBarButtonItemStylePlain target:self action:@selector(toggleLeftPanel:)];
+        return [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleLeftPanel:)];
     
-    return [[UIBarButtonItem alloc] initWithImage:[[self class] defaultImage] style:UIBarButtonItemStylePlain target:self action:@selector(toggleLeftPanel:)];
+    return [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleLeftPanel:)];
 }
 
 @end

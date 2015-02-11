@@ -110,6 +110,17 @@
     if (DEP.userPreferences.vacancyTypes && DEP.userPreferences.vacancyTypes.count)
         [query whereKey:@"vacancy" containedIn:DEP.userPreferences.vacancyTypes];
     
+//    if (DEP.userPreferences.address)
+//    {
+//        [query whereKey:@"locationName" containsString:DEP.userPreferences.address];
+//    }
+    
+    if (DEP.userPreferences.zipCode && ![DEP.userPreferences.zipCode isEqualToString:@""])
+    {
+        [query whereKey:@"zipcode" equalTo:DEP.userPreferences.zipCode];
+    }
+
+    
     if(DEP.userPreferences.minRent > 0)
         [query whereKey:@"rent" greaterThanOrEqualTo:[NSNumber numberWithInteger:DEP.userPreferences.minRent]];
     
@@ -125,7 +136,7 @@
     if (DEP.userPreferences.rooms && DEP.userPreferences.rooms.count > 0)
         [query whereKey:@"rooms" containedIn:DEP.userPreferences.rooms];
     
-    [query setLimit:5];
+//    [query setLimit:5];
     [query orderByDescending:@"createdAt"];
     
     [query includeKey:@"owner"];
@@ -133,7 +144,7 @@
         if(!error)
         {
             
-            if(DEP.userPreferences.showRentalsInUserNetwork && !DEP.userFacebookFriends)
+            if(DEP.userPreferences.showRentalsInUserNetwork )
             {
                 [DEP.api.userApi getCurrentUsersFacebookFriends:^(NSArray *friends, BOOL succeeded) {
                     if(succeeded)
@@ -169,9 +180,11 @@
         apartment.apartment = ap;
         apartment.images = [imgQuery findObjects];
         
+        NSArray * currentUserFacebookFriends = [PFUser currentUser][@"facebookFriends"];
+        
         if(shouldFilter)
         {
-            if([DEP.userFacebookFriends containsObject:owner[@"facebookID"]])
+            if([currentUserFacebookFriends containsObject:owner[@"facebookID"]])
                 [mutableArray addObject:apartment];
         }
         else
@@ -346,6 +359,12 @@
     apartment[@"renewaldays"] = [NSNumber numberWithInteger:[apartmentInfo[@"renewaldays"] integerValue]];
     apartment[@"rent"] = [NSNumber numberWithInteger:[apartmentInfo[@"rent"] integerValue]];
     apartment[@"visible"] = [NSNumber numberWithInteger:0];
+    apartment[@"renewalTimestamp"] = apartmentInfo[@"renewalTimestamp"];
+    apartment[@"neighborhood"] = apartmentInfo[@"neighborhood"];
+    apartment[@"city"] = apartmentInfo[@"city"];
+    apartment[@"state"] = apartmentInfo[@"state"];
+    apartment[@"zipcode"] = apartmentInfo[@"zipcode"];
+
     
     apartment[@"owner"] = user;
     

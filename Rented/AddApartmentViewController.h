@@ -7,13 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Apartment.h"
 
-@interface AddApartmentViewController : UIViewController
 
+@protocol AddApartmentDelegate <NSObject>
+
+-(void)addApartmentFinieshedWithChanges:(BOOL) changes;
+
+@end
+
+@interface AddApartmentViewController : UIViewController 
+
+@property id <AddApartmentDelegate> delegate;
 @property CLLocationCoordinate2D apartmentLocation;
 @property NSString *locationName;
 @property NSInteger apartmentType;
 @property NSArray *apartmentImages;
 @property PFUser *apartmentOwner;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollViewContainer;
+
+@property Apartment* apartment;
 
 @end

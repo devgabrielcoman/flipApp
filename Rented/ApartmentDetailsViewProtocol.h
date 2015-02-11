@@ -11,6 +11,7 @@
 
 @protocol ApartmentDetailsViewProtocol <NSObject>
 
+@optional
 @property (weak, nonatomic) IBOutlet UILabel *vacancyLbl;
 @property (weak, nonatomic) IBOutlet UILabel *priceLbl;
 @property (weak, nonatomic) IBOutlet UILabel *sizeLbl;
@@ -21,10 +22,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *messageImageView;
 @property (weak, nonatomic) IBOutlet UIButton *getButton;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
+@property (weak, nonatomic) IBOutlet UIButton *likeBtn;
 
 @property PFObject *apartment;
 @property BOOL currentUserIsOwner;
-@property id<ApartmentCellProtocol> delegate;
+@property id<ApartmentCellProtocol> apartmentDetailsDelegate;
 @property NSInteger apartmentIndex;
 @property BOOL isFromFavorites;
 

@@ -21,6 +21,10 @@
 #import "PreferencesViewController.h"
 #import <MessageUI/MFMailComposeViewController.h>
 #import "AuthenticationViewController.h"
+#import "AdminViewController.h"
+#import "ApartmentTableViewCell.h"
+#import "GeneralUtils.h"
+#import "MyListingViewController.h"
 
 @interface DashboardViewController ()<MFMailComposeViewControllerDelegate>
 {
@@ -37,6 +41,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *saySomethingBtn;
 @property (weak, nonatomic) IBOutlet UIButton *logoutBtn;
 
+@property (weak, nonatomic) IBOutlet UIButton *adminBtn;
+@property (weak, nonatomic) IBOutlet UIView *adminSeparatorView;
+
 @end
 
 @implementation DashboardViewController
@@ -45,7 +52,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     lastUserId = @"";
+    
     [self setVisualDetails];
+    
+    if(DEP.authenticatedUser && [DEP.authenticatedUser[@"isAdmin"] integerValue]==1)
+    {
+        [self showAdminOptions:YES];
+    }
+    else
+    {
+        [self showAdminOptions:NO];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -74,16 +91,7 @@
     statusBarView.backgroundColor = StatusBarBackgroundColor;
     [self.view addSubview:statusBarView];
     
-    _myPlaceBtn.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Light" size:15.0];
-    _logoutBtn.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Light" size:15.0];
-    _otherPlacesBtn.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Light" size:15.0];
-    _likesBtn.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Light" size:15.0];
-    
-    _preferencesBtn.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Light" size:11.0];
-    _saySomethingBtn.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Light" size:11.0];
-    
-    _usernameLbl.font = [UIFont fontWithName:@"GothamRounded-Bold" size:13.0];
-    _locationLbl.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Light" size:10.0];
+
     
     [_profileImgView removeFromSuperview];
     
@@ -103,6 +111,12 @@
     [_locationLbl setImage:[[UIImage imageNamed:@"map-marker-icon"] imageScaledToFitSize:CGSizeMake(12, 12)] forState:UIControlStateNormal];
 }
 
+-(void)showAdminOptions:(BOOL)visible
+{
+    [self.adminBtn setHidden:!visible];
+    [self.adminSeparatorView setHidden:!visible];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -112,31 +126,6 @@
 
 - (IBAction)openMyPlace:(id)sender
 {
-//    [DEP.api.apartmentApi userApartment:^(PFObject *apartment, NSArray *images, BOOL succeeded) {
-//        if(succeeded)
-//        {
-//            if(apartment)
-//            {
-//                SingleApartmentViewController *myPlace = [SingleApartmentViewController new];
-//                Apartment *ap = [Apartment new];
-//                
-//                ap.apartment = apartment;
-//                ap.images = images;
-//                
-//                myPlace.apartment = ap;
-//                
-//                self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:myPlace];
-//            }
-//            else
-//                self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:[NoListingViewController new]];
-//        }
-//        else
-//            [UIAlertView showWithTitle:@""
-//                               message:@"An error occurred. Please try again"
-//                     cancelButtonTitle:@"Dismiss"
-//                     otherButtonTitles:nil
-//                              tapBlock:nil];
-//    }];
     
     [DEP.api.apartmentApi userApartment:^(PFObject *apartment, NSArray *images, BOOL succeeded) {
         
@@ -149,9 +138,23 @@
                 ap.apartment = apartment;
                 ap.images = images;
                 
-                SingleApartmentViewController *myPlace = [SingleApartmentViewController new];
-                myPlace.apartment = ap;
-                self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:myPlace];
+                MyListingViewController* mylistingVC= [MyListingViewController new];
+                mylistingVC.apartment=ap;
+                ApartmentTableViewCell* topApartmentView = (ApartmentTableViewCell*)[[[NSBundle mainBundle] loadNibNamed:@"ApartmentTableViewCell" owner:nil options:nil] firstObject];
+                topApartmentView.frame = CGRectMake(0,-44, wScr, hScr);
+                [topApartmentView.apartmentTopView.displayMore setHidden:YES];
+
+                [topApartmentView setApartment:ap.apartment withImages:ap.images andCurrentUsersStatus:YES];
+                [topApartmentView setDelegate:mylistingVC];
+
+                [mylistingVC.navigationController setNavigationBarHidden:YES];
+                [self setTitle:@" "];
+                mylistingVC.view=[[UIScrollView alloc] initWithFrame:self.view.frame];
+                [mylistingVC.view addSubview:topApartmentView];
+                [(UIScrollView*)mylistingVC.view setContentSize:CGSizeMake(wScr, topApartmentView.frame.size.height-100)];
+                [(UIScrollView*)mylistingVC.view setScrollEnabled:YES];
+                [mylistingVC.view setBackgroundColor:[UIColor whiteColor]];
+                self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:mylistingVC];
             }
             else
             {
@@ -168,15 +171,6 @@
     
     [self.sidePanelController showCenterPanelAnimated:YES];
     
-//    RTLog(@"authenticated status: %li", (long)[DEP.authenticatedUser[@"listingStatus"] integerValue]);
-//    
-//    if([DEP.authenticatedUser[@"listingStatus"] integerValue] == ListingAdded)
-//    {
-//        SingleApartmentViewController *myPlace = [SingleApartmentViewController new];
-//        self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:myPlace];
-//    }
-//    else
-//        self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:[NoListingViewController new]];
 }
 
 - (IBAction)openOtherPlaces:(id)sender
@@ -186,11 +180,20 @@
     
 }
 
+
+
 - (IBAction)openMyLikes:(id)sender
 {
     FavoritesTableViewController *favoritesVC = [FavoritesTableViewController new];
     
     self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:favoritesVC];
+}
+
+- (IBAction)openAdminMenu:(id)sender
+{
+    AdminViewController *adminVC = [[AdminViewController alloc] initWithNibName:@"AdminViewController" bundle:nil];
+    
+    self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:adminVC];
 }
 
 - (IBAction)showPreferences:(id)sender

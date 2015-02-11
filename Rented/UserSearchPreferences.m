@@ -27,6 +27,8 @@
     [encoder encodeInteger:self.showRentalsInUserNetwork forKey:@"ShowRentalsInUserNetwork"];
     [encoder encodeInteger:self.hideFacebookProfile forKey:@"HideFacebookProfile"];
 
+    [encoder encodeObject:self.address forKey:@"address"];
+    [encoder encodeObject:self.zipCode forKey:@"zipCode"];
     
     NSData *encodedRoomTypes = [NSKeyedArchiver archivedDataWithRootObject:self.rooms];
     [encoder encodeObject:encodedRoomTypes forKey:@"RoomTypes"];
@@ -50,6 +52,10 @@
         
         self.showRentalsInUserNetwork = [decoder decodeIntegerForKey:@"ShowRentalsInUserNetwork"];
         self.hideFacebookProfile = [decoder decodeIntegerForKey:@"HideFacebookProfile"];
+        
+        self.address = [decoder decodeObjectForKey:@"address"];
+        self.zipCode = [decoder decodeObjectForKey:@"zipCode"];
+
         
         NSData *encodedRoomTypes = [decoder decodeObjectForKey:@"RoomTypes"];
         self.rooms = [NSKeyedUnarchiver unarchiveObjectWithData:encodedRoomTypes];

@@ -23,6 +23,7 @@
 #import "UIView+MLScreenshot.h"
 #import "GeneralUtils.h"
 #import "ConfirmationView.h"
+#import "ApartmentDetailsOtherListingView.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -37,6 +38,7 @@
 
 @property NSMutableArray *apartmentGalleryPhotos;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *loadingLabel;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
 @end
@@ -49,25 +51,15 @@
     
     self.view.frame = CGRectMake(0, 0, wScr, hScr);
     
-    lbNoMoreApartments = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 260,100)];
-    [lbNoMoreApartments setText:@"That's all we've got for today"];
-    [lbNoMoreApartments setNumberOfLines:0];
-    [lbNoMoreApartments setTextAlignment:NSTextAlignmentCenter];
-    [lbNoMoreApartments sizeToFit];
-    lbNoMoreApartments.center = self.view.center;
-    [self.view addSubview:lbNoMoreApartments];
-    
-    lbNoMoreApartments.hidden = YES;
-    
-    lbNoMoreApartments.font = [UIFont fontWithName:@"GothamRounded-Bold" size:15.0];
-    
     _tableView.delegate = self;
     _tableView.dataSource = self;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ApartmentTableViewCell" bundle:nil] forCellReuseIdentifier:@"ApartmentCell"];
     
-    self.tableView.contentInset = UIEdgeInsetsMake(-44, 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
     
+    
+    //position pageControl
     CGAffineTransform rotate = CGAffineTransformMakeRotation(M_PI_2);
     CGAffineTransform resize = CGAffineTransformMakeScale(1.4, 1.4);
     
@@ -83,23 +75,11 @@
     [self reloadFeedData];
     
     self.tableView.allowsSelection = NO;
-    
-    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navSingleTap)];
-    gestureRecognizer.numberOfTapsRequired = 1;
-    CGRect frame = CGRectMake(self.view.frame.size.width/4, 0, self.view.frame.size.width/2, 44);
-    UIView *navBarTapView = [[UIView alloc] initWithFrame:frame];
-    [self.navigationController.navigationBar addSubview:navBarTapView];
-    navBarTapView.backgroundColor = [UIColor clearColor];
-    [navBarTapView setUserInteractionEnabled:YES];
-    [navBarTapView addGestureRecognizer:gestureRecognizer];
+
     
     indexForGetRequest = -1;
 }
 
-- (void)navSingleTap
-{
-    [self displayMoreInfoForApartmentAtIndex:0];
-}
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -107,9 +87,6 @@
 
 - (void)reloadFeed:(NSNotification*)notification
 {
-    NSNumber *didShowTutorial = [[NSUserDefaults standardUserDefaults] objectForKey:@"didShowTutorial"];
-    
-
     [self reloadFeedData];
 }
 
@@ -117,9 +94,20 @@
 {
     if([DEP.api.userApi userIsAuthenticated])
     {
+        [DEP.api.apartmentApi getListOfFavoritesApartments:^(NSArray *favoriteApartments, BOOL succeeded) {
+            DEP.favorites = [NSMutableArray new];
+            for (Apartment* apart in favoriteApartments)
+            {
+                [DEP.favorites addObject:apart.apartment.objectId];
+                NSLog(@"%@",apart.apartment.objectId);
+            }
+        }];
+        
         [DEP.api.apartmentApi getFeedApartments:^(NSArray *apartments, BOOL succeeded) {
             if(succeeded)
             {
+                [self.tableView setHidden:NO];
+                [self.loadingLabel setHidden:YES];
                 self.apartments = apartments;
                 indexOfShownApartment = 0;
  
@@ -129,6 +117,7 @@
                 [self layoutPageControl];
                 
                 [self.tableView reloadData];
+                
             }
         }];
     }
@@ -146,6 +135,10 @@
         UIViewController *rootViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
         [rootViewController presentViewController:[AuthenticationViewController new] animated:NO completion:nil];
     }
+    else
+    {
+
+    }
 }
 
 #pragma mark - Table view data source
@@ -155,50 +148,100 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    int rows = self.apartments.count && (indexOfShownApartment >= 0) ? 1 : 0;
     
-    // afisare label doar cand nu sunt celule afisate si exista totusi apartamente - aka am dat scroll pana la capat => nu vad labelul la 'loading';
-    lbNoMoreApartments.hidden = !(!rows && self.apartments.count > 0);
-
-    return rows;
+    if(self.apartments.count==0)
+    {
+        return 1;
+    }
+    
+    return self.apartments.count+1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if([indexPath isEqual:expandedRow])
+     if(self.apartments.count==0)
     {
-        CGFloat extra = 22;
-        
-        return (hScr-statusBarHeight)+ApartmentDetailsOtherListingViewHeight+10+extra+10;
+        return hScr-statusBarHeight;
     }
-    
-    return hScr-statusBarHeight;
+    if(indexPath.row == self.apartments.count)
+    {
+        return hScr-statusBarHeight;
+    }
+    else
+    {
+        return self.view.frame.size.height ;
+    }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
+    if(self.apartments.count==0)
+    {
+        //no apartments in array
+        //search is too restrictive
+        
+        UITableViewCell* nothingCell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"nothingCell"];
+        nothingCell.textLabel.text = @"Looks like we don't have anything to show you today. Try broadening your search!";
+        nothingCell.textLabel.numberOfLines=3;
+        [nothingCell.textLabel setFont:[UIFont fontWithName:@"GothamRounded-Light" size:13.0]];
+        [nothingCell.textLabel setTextColor:[UIColor darkGrayColor]];
+        [nothingCell.textLabel setTextAlignment:NSTextAlignmentCenter];
+        
+        [self.tableView setScrollEnabled:NO];
+        
+        return nothingCell;
+    }
+    else
+    {
+        //at least one apartment is in the array
+        
+        [self.tableView setScrollEnabled:YES];
+    }
+    
+    if(indexPath.row == self.apartments.count)
+    {
+        //the "that's all for now" table cell
+        
+        UITableViewCell* lastCell = (UITableViewCell*)[[[NSBundle mainBundle] loadNibNamed:@"lastFeedCell" owner:self options:nil] firstObject];
+        
+        return lastCell;
+    }
+    
+    
+    //actual apartment cell
     ApartmentTableViewCell *cell = (ApartmentTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"ApartmentCell" forIndexPath:indexPath];
     
     if(!cell)
+    {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentTableViewCell" owner:self options:nil] firstObject];
+    }
+
     
-    Apartment *ap = _apartments[indexOfShownApartment];
+    [cell.layer setMasksToBounds:YES];
+    Apartment *ap = _apartments[indexPath.row];
     
     [cell setApartmentIndex:indexPath.row];
+    
+    //customise the apartment cell
     [cell setApartment:ap.apartment withImages:ap.images andCurrentUsersStatus:NO];
     [cell setDelegate:self];
     
-    if(![indexPath isEqual:expandedRow])
-    {
-        [cell hideApartmentDetails];
-    }
-    else
-        [cell showApartmentDetails];
+ 
     
     return cell;
 }
 
 #pragma mark - Table view delegate
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ([[self.tableView indexPathsForVisibleRows] count])
+    {
+        [self.pageControl setCurrentPage: [(NSIndexPath*)[[self.tableView indexPathsForVisibleRows] objectAtIndex:0] row]];
+    }
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     RTLog(@"Did select row at indexpath");
@@ -225,7 +268,6 @@
     GalleryNavigationController *galleryNavController = [[GalleryNavigationController alloc] initWithRootViewController:browser];
     
     [self.navigationController presentViewController:galleryNavController animated:YES completion:nil];
-    //[self.navigationController pushViewController:browser animated:YES];
 }
 
 - (void)displayFullMapViewForApartmentAtIndex:(NSInteger)index
@@ -241,29 +283,39 @@
 
 - (void)displayMoreInfoForApartmentAtIndex:(NSInteger)index
 {
-    if(![expandedRow isEqual:[NSIndexPath indexPathForRow:0 inSection:-1]] && ![[NSIndexPath indexPathForItem:index inSection:0] isEqual:expandedRow])
-    {
-        NSInteger prevIndex = expandedRow.row;
-        expandedRow = [NSIndexPath indexPathForItem:index inSection:0];
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:prevIndex inSection:0], expandedRow] withRowAnimation:UITableViewRowAnimationNone];
-        
-        [self.tableView scrollToRowAtIndexPath:expandedRow atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-    }
-    else if(![[NSIndexPath indexPathForItem:index inSection:0] isEqual:expandedRow])
-    {
-        expandedRow = [NSIndexPath indexPathForItem:index inSection:0];
-        [self.tableView reloadRowsAtIndexPaths:@[expandedRow] withRowAnimation:UITableViewRowAnimationNone];
-        
-        [self.tableView scrollToRowAtIndexPath:expandedRow atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-    }
-    else
-    {
-        NSInteger prevIndex = expandedRow.row;
-        expandedRow = [NSIndexPath indexPathForRow:0 inSection:-1];
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:prevIndex inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-        
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:prevIndex inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    }
+    
+    //creates a default uiview and adds the apartment details view as a subview
+    
+    UIViewController* moreVC= [UIViewController new];
+    ApartmentDetailsOtherListingView* details = (ApartmentDetailsOtherListingView*)[[[NSBundle mainBundle] loadNibNamed:@"ApartmentDetailsOtherListingView" owner:nil options:nil] firstObject];
+    [details setApartmentDetailsDelegate:self];
+    
+    //set frame to compensate for the invisible navigation bar, fix this once bar is removed
+    details.frame = CGRectMake(0,-64, wScr, ApartmentDetailsOtherListingViewHeight);
+    details.controller = moreVC;
+    Apartment *apartment = _apartments[index];
+
+    //configure mutual friends label
+    NSArray* mutualFriends=[GeneralUtils mutableFriendsInArray1:apartment.apartment[@"owner"][@"facebookFriends"] andArray2:[PFUser currentUser][@"facebookFriends"]];
+     details.connectedThroughLbl.text = [GeneralUtils connectedThroughExtendedDescription:[[NSMutableArray alloc] initWithArray:mutualFriends]];
+
+    //user is never the owner in the browse screen
+    details.currentUserIsOwner = NO;
+    details.isFromFavorites = NO;
+    details.apartmentIndex=index;
+    [details setApartmentDetails:apartment.apartment];
+    
+    [details updateFlipButtonStatus];
+    
+    [self setTitle:@" "];
+    moreVC.view=[[UIScrollView alloc] initWithFrame:self.view.frame];
+    [moreVC.view addSubview:details];
+    [(UIScrollView*)moreVC.view setContentSize:details.frame.size];
+    [(UIScrollView*)moreVC.view setScrollEnabled:YES];
+    [moreVC.view setBackgroundColor:[UIColor whiteColor]];
+    [self.navigationController pushViewController:moreVC animated:YES];
+    
+  
 }
 
 
@@ -344,42 +396,27 @@
 }
 
 
--(void)switchToPreviousApartmentFromIndex:(NSInteger)index
-{
-    if(indexOfShownApartment > 0)
-    {
-        indexOfShownApartment--;
-        [_tableView reloadData];
-        _pageControl.currentPage = indexOfShownApartment;
-    }
-}
-
--(void)switchToNextApartmentFromIndex:(NSInteger)index
-{
-    if(indexOfShownApartment < _apartments.count -1)
-    {
-        indexOfShownApartment++;
-        [_tableView reloadData];
-        _pageControl.currentPage = indexOfShownApartment;
-    }
-}
 
 - (void)getApartmentAtIndex:(NSInteger)index
 {
-//    Apartment *ap = _apartments[index];
-//    [self sendGetApartmentMessageToUser:ap.apartment[@"owner"]];
+    //user pressed the get button in the details screen for an apartment
     [self sendGetMessageForApartmentAtIndex:index];
 }
 
 - (void)sendGetMessageForApartmentAtIndex:(NSInteger)index
 {
-    indexForGetRequest = indexOfShownApartment;
-    Apartment *ap = _apartments[indexForGetRequest];
+
+    Apartment *ap = _apartments[index];
     PFUser *owner = ap.apartment[@"owner"];
     
+    
+    //get all the requests a user has made
     [DEP.api.apartmentApi userHasRequestForApartment:ap.apartment completion:^(NSArray *objects, BOOL succeeded) {
         if(succeeded && objects.count == 1)
         {
+            //if the user has already made a request
+            //don't let him make another one
+            
             ApartmentTableViewCell *cell = (ApartmentTableViewCell *) [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
             
             ContactViewController *contactVC = [[ContactViewController alloc] init];
@@ -393,6 +430,9 @@
         }
         else
         {
+            //if the query failed of the user doesn't have an active request
+            
+            //check if the device can send an email
             if (![MFMailComposeViewController canSendMail])
             {
                 [UIAlertView showWithTitle:@""
@@ -403,9 +443,14 @@
             }
             else
             {
+                //check it the apartment owner has an email address
+                
                 NSString *email = owner[@"email"];
                 if(email.length)
                 {
+                    //email found
+                    //populate and show email composer
+                    
                     MFMailComposeViewController *mail = [MFMailComposeViewController new];
                     
                     mail.mailComposeDelegate = self;
@@ -427,6 +472,8 @@
                 }
                 else
                 {
+                    //user doesn't have an email address
+                    
                     [UIAlertView showWithTitle:@""
                                        message:@"You flip mate doesn't have an email address..."
                              cancelButtonTitle:@"Dismiss"
@@ -494,11 +541,14 @@
 
 #pragma mark - shitty methods
 
+
+
 -(void)layoutPageControl
 {
     CGRect frame = _pageControl.bounds;
-    frame.size.height -= 20;
-    frame.size.width += 40;
+    frame.size.height = 16;
+    frame.size.width = 8 * [_apartments count] + 8 * ([_apartments count] -1) + 8;
+
     
     if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
     {

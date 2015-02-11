@@ -11,6 +11,9 @@
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <FacebookSDK.h>
 #import "FacebookFriend.h"
+#import "AppDelegate.h"
+#import "RentedPanelController.h"
+#import "DashboardViewController.h"
 
 @implementation UserApi
 
@@ -37,6 +40,63 @@
                 }];
             }
             
+            [self getCurrentUsersFacebookFriends:^(NSArray *friends, BOOL succeeded) {
+               
+                [[PFUser currentUser] setObject:friends forKey:@"facebookFriends"];
+                [[PFUser currentUser] saveInBackground];
+                
+                DEP.facebookFriendsInfo = [NSMutableDictionary new];
+                for (NSString *friend in friends)
+                {
+                    
+                    PFQuery *query = [PFUser query];
+                    [query whereKey:@"facebookID" equalTo:friend];
+                    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                        if(!error)
+                        {
+                            PFUser *userFriend = (PFUser*)[objects objectAtIndex:0];
+                            FacebookFriend *fr = [FacebookFriend new];
+                            fr.userId = friend;
+                            fr.name = userFriend[@"username"];
+                            fr.profilePictureUrl = userFriend[@"profilePictureUrl"];
+                            
+                            [DEP.facebookFriendsInfo setValue:fr forKey:friend];
+                            
+                        }
+                    }];
+
+                }
+                
+            }];
+            
+            
+            PFQuery * query = [PFQuery queryWithClassName:@"UserMetaData"];
+            [query whereKey:@"user"equalTo:DEP.authenticatedUser];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+             {
+                 if ([objects count]==0)
+                 {
+                     PFObject* object = [PFObject objectWithClassName:@"UserMetaData"];
+                     object[@"user"] = DEP.authenticatedUser;
+                     object[@"isVerified"]= [NSNumber numberWithInt:0];
+                     [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+                      {
+                          
+                      }];
+                 }
+                 
+                 
+             }];
+            
+            if ([DEP.authenticatedUser[@"isAdmin"] integerValue]==1)
+            {
+                [(DashboardViewController*)[(RentedPanelController*)[(AppDelegate*)[UIApplication sharedApplication].delegate rootViewController] leftPanel] showAdminOptions:YES] ;
+            }
+            else
+            {
+                [(DashboardViewController*)[(RentedPanelController*)[(AppDelegate*)[UIApplication sharedApplication].delegate rootViewController] leftPanel] showAdminOptions:NO] ;
+            }
+
             completionHandler(YES);
         }
     }];
@@ -59,6 +119,7 @@
                 [DEP.authenticatedUser setObject:@"(currently not available)" forKey:@"location"];
                 
             [DEP.authenticatedUser setObject:userData[@"gender"] forKey:@"gender"];
+            [DEP.authenticatedUser setObject:[NSNumber numberWithInt:0] forKey:@"isFacebookProfileHidden"];
             
             //set here listing status too
             [DEP.authenticatedUser setObject:@ListingNotRequested forKey:@"listingStatus"];
@@ -66,6 +127,23 @@
             [DEP.authenticatedUser setObject:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", userData[@"id"]] forKey:@"profilePictureUrl"];
             
             [DEP.authenticatedUser saveInBackground];
+            
+            [self getCurrentUsersFacebookFriends:^(NSArray *friends, BOOL succeeded) {
+                
+                [[PFUser currentUser] setObject:friends forKey:@"facebookFriends"];
+                [[PFUser currentUser] saveInBackground];
+                
+            }];
+            [DEP.authenticatedUser setObject:[NSNumber numberWithInt:0] forKey:@"isVerified"];
+            [DEP.authenticatedUser setObject:[NSNumber numberWithInt:0] forKey:@"isAdmin"];
+
+            PFObject* object = [PFObject objectWithClassName:@"UserMetaData"];
+            object[@"user"] = DEP.authenticatedUser;
+            object[@"isVerified"]= [NSNumber numberWithInt:0];
+            [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                
+            }];
+            
         }
     }];
 }
@@ -84,7 +162,7 @@
     if(session.state == FBSessionStateOpen || session.state == FBSessionStateOpenTokenExtended)
     {
         NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"context.fields(mutual_friends)", @"fields",nil];
-        [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@", userId]
+        [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@", @"762533787128928"]
                                      parameters:params
                                      HTTPMethod:@"GET"
                               completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -109,7 +187,11 @@
                                           completion(mutual, YES);
                                       }
                                       else
+                                      {
+                                          
                                           completion(@[], NO);
+                                          
+                                      }
                                   }
                                   else
                                       completion(@[], YES);
@@ -143,5 +225,45 @@
     else
         completion(@[], NO);
 }
+
+-(void)toggleVerifiedForUser: (PFUser*) user verified: (BOOL) verified
+{
+    int isVerified;
+    if (verified)
+    {
+        isVerified=1;
+    }
+    else
+    {
+        isVerified=0;
+    }
+
+    PFQuery* query = [PFQuery queryWithClassName:@"UserMetaData"];
+    [query whereKey:@"user" equalTo:user];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if ([objects count]>0)
+        {
+            [objects firstObject][@"isVerified"]= [NSNumber numberWithInt:isVerified];
+            [(PFObject*)[objects firstObject] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                
+            }];
+        }
+    }];
+}
+
+- (void)getListOfUsers:(void (^)(NSArray *users, BOOL succeeded))completionHandler
+{
+    PFQuery *query = [PFUser query];
+    [query orderByDescending:@"createdAt"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(!error)
+        {
+            completionHandler(objects, YES);
+        }
+        else
+            completionHandler(@[], NO);
+    }];
+}
+
 
 @end

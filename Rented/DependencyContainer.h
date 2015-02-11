@@ -20,6 +20,8 @@
 @property RentedApi *api;
 @property UserSearchPreferences *userPreferences;
 @property NSArray *userFacebookFriends;
+@property NSMutableArray *favorites;
+@property NSMutableDictionary *facebookFriendsInfo;
 
 - (void)saveUserPreferences;
 

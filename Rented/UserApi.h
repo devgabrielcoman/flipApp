@@ -12,4 +12,5 @@
 
 @interface UserApi : NSObject<IRentedUser>
 
+
 @end

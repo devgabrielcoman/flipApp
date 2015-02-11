@@ -16,15 +16,25 @@
 - (void)awakeFromNib
 {
     
-#warning just a solution for the moment
-    CGFloat remainedWidth = wScr - 94;
+    //setup views
     
-    _minRentTF = [[UITextField alloc] initWithFrame:CGRectMake(76, 162, remainedWidth/2, 40)];
+    _locationTF = [[UITextField alloc] initWithFrame:CGRectMake(86+110, _locationLbl.frame.origin.y, wScr- 86 -8 - 110, 40)];
+    _locationTF.placeholder = @"ZipCode";
+    _locationTF.tag = 6;
+    [self setupTextField:_locationTF];
+    _locationTF.keyboardType = UIKeyboardTypeAlphabet;
+
+    [self addSubview:_locationTF];
+
+#warning just a solution for the moment
+    CGFloat remainedWidth = wScr - 104;
+    
+    _minRentTF = [[UITextField alloc] initWithFrame:CGRectMake(86, _rentLbl.frame.origin.y, remainedWidth/2, 40)];
     _minRentTF.placeholder = @"Min";
     _minRentTF.tag = 1;
     [self setupTextField:_minRentTF];
     
-    _maxRentTF = [[UITextField alloc] initWithFrame:CGRectMake(76+remainedWidth/2+10, 162, remainedWidth/2, 40)];
+    _maxRentTF = [[UITextField alloc] initWithFrame:CGRectMake(86+remainedWidth/2+10, _rentLbl.frame.origin.y, remainedWidth/2, 40)];
     _maxRentTF.placeholder = @"Max";
     _maxRentTF.tag = 2;
     [self setupTextField:_maxRentTF];
@@ -32,12 +42,12 @@
     [self addSubview:_minRentTF];
     [self addSubview:_maxRentTF];
     
-    _minSquareFtTF = [[UITextField alloc] initWithFrame:CGRectMake(76, 210, remainedWidth/2, 40)];
+    _minSquareFtTF = [[UITextField alloc] initWithFrame:CGRectMake(86, _rentLbl.frame.origin.y+48, remainedWidth/2, 40)];
     _minSquareFtTF.placeholder = @"Min";
     _minSquareFtTF.tag = 3;
     [self setupTextField:_minSquareFtTF];
     
-    _maxSquareFtTF = [[UITextField alloc] initWithFrame:CGRectMake(76+remainedWidth/2+10, 210, remainedWidth/2, 40)];
+    _maxSquareFtTF = [[UITextField alloc] initWithFrame:CGRectMake(86+remainedWidth/2+10, _rentLbl.frame.origin.y+48, remainedWidth/2, 40)];
     _maxSquareFtTF.placeholder = @"Max";
     _maxSquareFtTF.tag = 4;
     [self setupTextField:_maxSquareFtTF];
@@ -51,11 +61,13 @@
     dismissGesture.cancelsTouchesInView = NO;
     [self addGestureRecognizer:dismissGesture];
     
+    [self blueBackgroundForLabel:_addressLbl];
     [self blueBackgroundForLabel:_leaseRenewalLbl];
     [self blueBackgroundForLabel:_vacancyLbl];
     [self blueBackgroundForLabel:_rentLbl];
     [self blueBackgroundForLabel:_squareFtLbl];
     [self blueBackgroundForLabel:_roomsLbl];
+    [self blueBackgroundForLabel:_locationLbl];
     
     [self configureSlider];
     
@@ -70,6 +82,8 @@
     [doneButton setBackgroundColor:[UIColor whiteColor]];
     [doneButton addTarget:self action:@selector(dismissKeyboard) forControlEvents:UIControlEventTouchUpInside];
     
+    _addressTF.inputAccessoryView = doneButton;
+    
     _minRentTF.inputAccessoryView = doneButton;
     _maxRentTF.inputAccessoryView = doneButton;
     
@@ -83,6 +97,8 @@
 
 - (void)completePreferences
 {
+    //check user defaults and populate fields
+    
     [self.leaseRenewalSlider setLowerValue:DEP.userPreferences.minRenewalDays animated:YES];
     [self.leaseRenewalSlider setUpperValue:DEP.userPreferences.maxRenewalDays animated:YES];
     
@@ -102,7 +118,7 @@
         if([vacancyTypes containsObject:@VacancyShortTerm])
             vacancyShortTerm.checkState = M13CheckboxStateChecked;
         
-        if([vacancyTypes containsObject:@VacancyNegociable])
+        if([vacancyTypes containsObject:@VacancyFlexible])
             vacancyNegociable.checkState = M13CheckboxStateChecked;
     }
     
@@ -147,10 +163,17 @@
         hideFacebookProfileCheckbox.checkState = M13CheckboxStateChecked;
     else
         hideFacebookProfileCheckbox.checkState = M13CheckboxStateUnchecked;
+    
+
+    _addressTF.text = DEP.userPreferences.address;
+    
+    _locationTF.text = DEP.userPreferences.zipCode;
 }
 
 - (void)setupTextField:(UITextField *)textField
 {
+    //configure custom text fields
+    
     textField.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5f].CGColor;
     textField.layer.borderWidth = 0.5f;
     textField.layer.cornerRadius = 4.0f;
@@ -172,8 +195,10 @@
 
 - (void)addCheckboxes
 {
+    //intantiate and add checkboxes to view
+    
     studioRoom = [[M13Checkbox alloc] initWithTitle:@"Studio"];
-    studioRoom.frame = CGRectMake(76, 263, 70, 30);
+    studioRoom.frame = CGRectMake(86, self.roomsLbl.frame.origin.y+4, 70, 30);
     studioRoom.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     studioRoom.titleLabel.textAlignment = NSTextAlignmentRight;
     studioRoom.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
@@ -181,7 +206,7 @@
     [self addSubview:studioRoom];
     
     bedroom1 = [[M13Checkbox alloc] initWithTitle:@"1"];
-    bedroom1.frame = CGRectMake(studioRoom.frame.origin.x+studioRoom.frame.size.width, 263, 40, 30);
+    bedroom1.frame = CGRectMake(studioRoom.frame.origin.x+studioRoom.frame.size.width, studioRoom.frame.origin.y, 37, 30);
     bedroom1.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     bedroom1.titleLabel.textAlignment = NSTextAlignmentRight;
     bedroom1.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
@@ -189,7 +214,7 @@
     [self addSubview:bedroom1];
     
     bedroom2 = [[M13Checkbox alloc] initWithTitle:@"2"];
-    bedroom2.frame = CGRectMake(bedroom1.frame.origin.x+bedroom1.frame.size.width+1, 263, 40, 30);
+    bedroom2.frame = CGRectMake(bedroom1.frame.origin.x+bedroom1.frame.size.width+1, studioRoom.frame.origin.y, 38, 30);
     bedroom2.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     bedroom2.titleLabel.textAlignment = NSTextAlignmentRight;
     bedroom2.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
@@ -197,7 +222,7 @@
     [self addSubview:bedroom2];
     
     bedroom3 = [[M13Checkbox alloc] initWithTitle:@"3"];
-    bedroom3.frame = CGRectMake(bedroom2.frame.origin.x+bedroom2.frame.size.width+1, 263, 40, 30);
+    bedroom3.frame = CGRectMake(bedroom2.frame.origin.x+bedroom2.frame.size.width+1, studioRoom.frame.origin.y, 38, 30);
     bedroom3.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     bedroom3.titleLabel.textAlignment = NSTextAlignmentRight;
     bedroom3.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
@@ -205,7 +230,7 @@
     [self addSubview:bedroom3];
     
     bedroom4 = [[M13Checkbox alloc] initWithTitle:@"4"];
-    bedroom4.frame = CGRectMake(bedroom3.frame.origin.x+bedroom3.frame.size.width+1, 263, 40, 30);
+    bedroom4.frame = CGRectMake(bedroom3.frame.origin.x+bedroom3.frame.size.width+1, studioRoom.frame.origin.y, 37, 30);
     bedroom4.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     bedroom4.titleLabel.textAlignment = NSTextAlignmentRight;
     bedroom4.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
@@ -213,31 +238,31 @@
     [self addSubview:bedroom4];
     
     vacancyImmediate = [[M13Checkbox alloc] initWithTitle:@"Immediate"];
-    vacancyImmediate.frame = CGRectMake(_vacancyLbl.frame.origin.x+_vacancyLbl.frame.size.width+8, _leaseRenewalLbl.frame.origin.y+_leaseRenewalLbl.frame.size.height+8, 100, 30);
-    vacancyImmediate.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+    vacancyImmediate.frame = CGRectMake(_vacancyLbl.frame.origin.x+_vacancyLbl.frame.size.width+4, self.vacancyLbl.frame.origin.y+6, 80, 30);
+    vacancyImmediate.titleLabel.font = [UIFont systemFontOfSize:8.0f];
     vacancyImmediate.titleLabel.textAlignment = NSTextAlignmentRight;
     vacancyImmediate.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
     [vacancyImmediate addTarget:self action:@selector(checkVacancyImmediate:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:vacancyImmediate];
     
     vacancyShortTerm = [[M13Checkbox alloc] initWithTitle:@"Short Term"];
-    vacancyShortTerm.frame = CGRectMake(_vacancyLbl.frame.origin.x+_vacancyLbl.frame.size.width+8, vacancyImmediate.frame.origin.y+30, 100, 30);
-    vacancyShortTerm.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+    vacancyShortTerm.frame = CGRectMake(_vacancyLbl.frame.origin.x+_vacancyLbl.frame.size.width+81, vacancyImmediate.frame.origin.y, 80, 30);
+    vacancyShortTerm.titleLabel.font = [UIFont systemFontOfSize:8.0f];
     vacancyShortTerm.titleLabel.textAlignment = NSTextAlignmentRight;
     vacancyShortTerm.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
     [vacancyShortTerm addTarget:self action:@selector(checkVacancyShortTerm:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:vacancyShortTerm];
     
-    vacancyNegociable = [[M13Checkbox alloc] initWithTitle:@"Negociable"];
-    vacancyNegociable.frame = CGRectMake(_vacancyLbl.frame.origin.x+_vacancyLbl.frame.size.width+10, vacancyShortTerm.frame.origin.y+30, 99, 30);
-    vacancyNegociable.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+    vacancyNegociable = [[M13Checkbox alloc] initWithTitle:@"Flexible"];
+    vacancyNegociable.frame = CGRectMake(_vacancyLbl.frame.origin.x+_vacancyLbl.frame.size.width+168, vacancyImmediate.frame.origin.y, 60, 30);
+    vacancyNegociable.titleLabel.font = [UIFont systemFontOfSize:8.0f];
     vacancyNegociable.titleLabel.textAlignment = NSTextAlignmentRight;
     vacancyNegociable.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
     [vacancyNegociable addTarget:self action:@selector(checkVacancyNegociable:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:vacancyNegociable];
     
     showOnlyRentalInMyNetwork = [[M13Checkbox alloc] initWithTitle:@"Only view rentals in my network"];
-    showOnlyRentalInMyNetwork.frame = CGRectMake(_roomsLbl.frame.origin.x, _roomsLbl.frame.origin.y+_roomsLbl.frame.size.height+8, 210, 30);
+    showOnlyRentalInMyNetwork.frame = CGRectMake(_roomsLbl.frame.origin.x, _roomsLbl.frame.origin.y+_roomsLbl.frame.size.height+48, 210, 30);
     showOnlyRentalInMyNetwork.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     showOnlyRentalInMyNetwork.titleLabel.textAlignment = NSTextAlignmentRight;
     showOnlyRentalInMyNetwork.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
@@ -250,11 +275,22 @@
     hideFacebookProfileCheckbox.titleLabel.textAlignment = NSTextAlignmentRight;
     hideFacebookProfileCheckbox.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
     [hideFacebookProfileCheckbox addTarget:self action:@selector(hideFacebookProfile:) forControlEvents:UIControlEventValueChanged];
-    [self addSubview:hideFacebookProfileCheckbox];
+//    [self addSubview:hideFacebookProfileCheckbox];
+    
+    everywhere = [[M13Checkbox alloc] initWithTitle:@"Everywhere"];
+    everywhere.frame = CGRectMake(86, self.locationLbl.frame.origin.y+4, 100, 30);
+    everywhere.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+    everywhere.titleLabel.textAlignment = NSTextAlignmentRight;
+    everywhere.titleLabel.textColor = [UIColor colorFromHexString:FeedTextColor];
+    [everywhere addTarget:self action:@selector(checkEverywhere:) forControlEvents:UIControlEventValueChanged];
+    [self addSubview:everywhere];
+
 }
 
 - (void)configureSlider
 {
+    //customise slider options
+    
     self.leaseRenewalSlider.minimumValue = 0;
     self.leaseRenewalSlider.maximumValue = 365;
     
@@ -277,6 +313,7 @@
     
     [self addSubview:lowerLabel];
     [self addSubview:upperLabel];
+    
 }
 
 - (void)updateSliderLabels
@@ -342,6 +379,12 @@
             DEP.userPreferences.maxSqFt = textField.text.integerValue;
         else
             DEP.userPreferences.maxSqFt = -1;
+        
+    }
+
+    if (textField.tag==6)
+    {
+        DEP.userPreferences.zipCode = textField.text;
     }
     
     [DEP saveUserPreferences];
@@ -354,6 +397,23 @@
 }
 
 #pragma mark - Checkbox action handlers
+
+- (void)checkEverywhere:(M13Checkbox *)checkbox
+{
+    if(checkbox.checkState == M13CheckboxStateChecked)
+    {
+        _locationTF.text = @"";
+        _locationTF.enabled= NO;
+        DEP.userPreferences.zipCode = _locationTF.text;
+        [DEP saveUserPreferences];
+
+    }
+
+    else
+    {
+        _locationTF.enabled= YES;
+    }
+}
 
 - (void)checkStudio:(M13Checkbox *)checkbox
 {
@@ -457,11 +517,11 @@
 {
     if(vacancyNegociable.checkState == M13CheckboxStateChecked)
     {
-        if (![vacancyTypes containsObject:@VacancyNegociable])
-            [vacancyTypes addObject:@VacancyNegociable];
+        if (![vacancyTypes containsObject:@VacancyFlexible])
+            [vacancyTypes addObject:@VacancyFlexible];
     }
     else
-        [vacancyTypes removeObject:@VacancyNegociable];
+        [vacancyTypes removeObject:@VacancyFlexible];
     
     DEP.userPreferences.vacancyTypes = vacancyTypes;
     [DEP saveUserPreferences];

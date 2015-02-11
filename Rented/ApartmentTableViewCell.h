@@ -16,7 +16,6 @@
 @interface ApartmentTableViewCell : UITableViewCell
 
 @property TopApartmentView *apartmentTopView;
-@property UIView<ApartmentDetailsViewProtocol> *apartmentDetailsView;
 @property NSInteger index;
 @property BOOL currentUserIsOwner;
 @property BOOL isFromFavorites;
@@ -25,7 +24,5 @@
 - (void)setApartment:(PFObject *)apartment withImages:(NSArray *)images andCurrentUsersStatus:(BOOL)isOwner;
 - (void)setApartmentIndex:(NSInteger)apartmentIndex;
 
-- (void)showApartmentDetails;
-- (void)hideApartmentDetails;
 
 @end

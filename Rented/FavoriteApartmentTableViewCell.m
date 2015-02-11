@@ -14,9 +14,7 @@
 {
     // Initialization code
     
-    _apartmentDescriptionLbl.font = [UIFont fontWithName:@"GothamRounded-Light" size:12.0];
-    _locationLbl.font = [UIFont fontWithName:@"GothamRounded-Light" size:12.0];
-    _apartmentImageView.layer.cornerRadius = 6.0;
+    _apartmentImageView.layer.cornerRadius = 5.0;
     _apartmentImageView.layer.masksToBounds = YES;
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;

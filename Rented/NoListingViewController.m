@@ -12,8 +12,14 @@
 #import <UIAlertView+Blocks.h>
 #import "AddApartmentViewController.h"
 #import "KAProgressLabel.h"
+#import "AppDelegate.h"
+#import "DashboardViewController.h"
+#import "RentedPanelController.h"
 
-@interface NoListingViewController ()<MFMailComposeViewControllerDelegate>
+
+
+
+@interface NoListingViewController ()<MFMailComposeViewControllerDelegate,AddApartmentDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *messageLbl;
 @property (weak, nonatomic) IBOutlet UIButton *addApartmentBtn;
@@ -64,10 +70,20 @@
     
 }
 
+-(void)addApartmentFinieshedWithChanges:(BOOL)changes
+{
+    if (changes)
+    {
+        AppDelegate* appDelegate= (AppDelegate*)[UIApplication sharedApplication].delegate;
+        [(DashboardViewController*)[(RentedPanelController*)appDelegate.rootViewController leftPanel] openMyPlace:nil];
+    }
+}
+
 - (IBAction)addApartment:(id)sender
 {
     
-    AddApartmentViewController* addApartmentVC = [AddApartmentViewController new];
+    AddApartmentViewController* addApartmentVC = [[AddApartmentViewController alloc] initWithNibName:@"AddApartmentViewController" bundle:nil];
+    [addApartmentVC setDelegate:self];
     [self presentViewController:[[UINavigationController alloc] initWithRootViewController:addApartmentVC] animated:YES completion:^{}];
     
     

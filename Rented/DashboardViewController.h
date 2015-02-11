@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DashboardViewController : UIViewController
+@interface DashboardViewController : UIViewController 
 
+-(void)showAdminOptions:(BOOL)visible;
+- (IBAction)openMyPlace:(id)sender;
 @end

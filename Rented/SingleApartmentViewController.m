@@ -92,11 +92,7 @@
     }
     [cell setDelegate:self];
     
-    if(![indexPath isEqual:expandedRow])
-        [cell hideApartmentDetails];
-    else
-        [cell showApartmentDetails];
-    
+      
     return cell;
 }
 

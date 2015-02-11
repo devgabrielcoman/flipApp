@@ -31,13 +31,16 @@
 		7EC508111A78288700E03E75 /* TRStringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5080A1A78288700E03E75 /* TRStringExtensions.m */; };
 		7EC508121A78288700E03E75 /* TRTextFieldExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5080C1A78288700E03E75 /* TRTextFieldExtensions.m */; };
 		7EC508151A782A3400E03E75 /* RequestsBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC508141A782A3400E03E75 /* RequestsBuilder.m */; };
+		7ECE96931A8165300024C69B /* lastFeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ECE96921A8165300024C69B /* lastFeedCell.xib */; };
+		7ED5A23B1A83854F00C34EAF /* AdminViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED5A2391A83854F00C34EAF /* AdminViewController.m */; };
+		7ED5A23C1A83854F00C34EAF /* AdminViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ED5A23A1A83854F00C34EAF /* AdminViewController.xib */; };
+		7ED5A2411A83875300C34EAF /* AdminUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED5A23F1A83875300C34EAF /* AdminUserTableViewCell.m */; };
+		7ED5A2421A83875300C34EAF /* AdminUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ED5A2401A83875300C34EAF /* AdminUserTableViewCell.xib */; };
+		7EE2BA981A8A3E61000527E1 /* MyListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2BA971A8A3E61000527E1 /* MyListingViewController.m */; };
 		9AD8DA9A1A64592C001F8F2C /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8DA981A64592C001F8F2C /* TutorialViewController.m */; };
 		9AD8DA9B1A64592C001F8F2C /* TutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DA991A64592C001F8F2C /* TutorialViewController.xib */; };
 		9AD8DA9E1A645BCF001F8F2C /* TutorialPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8DA9D1A645BCF001F8F2C /* TutorialPageView.m */; };
 		9AD8DAA01A645BEE001F8F2C /* TutorialPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DA9F1A645BEE001F8F2C /* TutorialPageView.xib */; };
-		9AD8DAA71A645CAD001F8F2C /* -Tutorial1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DAA41A645CAD001F8F2C /* -Tutorial1.png */; };
-		9AD8DAA81A645CAD001F8F2C /* -Tutorial2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DAA51A645CAD001F8F2C /* -Tutorial2.png */; };
-		9AD8DAA91A645CAD001F8F2C /* -Tutorial3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DAA61A645CAD001F8F2C /* -Tutorial3.png */; };
 		CD19A99E1A5F35960095163F /* Apartment.m in Sources */ = {isa = PBXBuildFile; fileRef = CD19A99D1A5F35960095163F /* Apartment.m */; };
 		CD1BAFAA1A48466F0012CBAA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1BAFA91A48466F0012CBAA /* main.m */; };
 		CD1BAFAD1A48466F0012CBAA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1BAFAC1A48466F0012CBAA /* AppDelegate.m */; };
@@ -69,9 +72,6 @@
 		CD307AC11A48657500D4BE2B /* AuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD307ABF1A48657500D4BE2B /* AuthenticationViewController.xib */; };
 		CD307AC61A48661C00D4BE2B /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD307AC41A48661C00D4BE2B /* FeedViewController.m */; };
 		CD307AC71A48661C00D4BE2B /* FeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD307AC51A48661C00D4BE2B /* FeedViewController.xib */; };
-		CD3583461A71D058000D13CE /* Tutorial1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3583431A71D058000D13CE /* Tutorial1.png */; };
-		CD3583471A71D058000D13CE /* Tutorial2.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3583441A71D058000D13CE /* Tutorial2.png */; };
-		CD3583481A71D058000D13CE /* Tutorial3.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3583451A71D058000D13CE /* Tutorial3.png */; };
 		CD35CCE61A49A896007F12D0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD1BAFB61A48466F0012CBAA /* LaunchScreen.xib */; };
 		CD35CCE71A49A89F007F12D0 /* GothamRnd-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD35CCE51A49A7E3007F12D0 /* GothamRnd-Bold.otf */; };
 		CD35CCEB1A49ACC4007F12D0 /* UIColor+ColorFromHexString.m in Sources */ = {isa = PBXBuildFile; fileRef = CD35CCEA1A49ACC4007F12D0 /* UIColor+ColorFromHexString.m */; };
@@ -200,19 +200,25 @@
 		7EC508131A782A3400E03E75 /* RequestsBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestsBuilder.h; sourceTree = "<group>"; };
 		7EC508141A782A3400E03E75 /* RequestsBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestsBuilder.m; sourceTree = "<group>"; };
 		7EC508171A782F4400E03E75 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		7ECE96921A8165300024C69B /* lastFeedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = lastFeedCell.xib; sourceTree = "<group>"; };
+		7ED5A2381A83854F00C34EAF /* AdminViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminViewController.h; sourceTree = "<group>"; };
+		7ED5A2391A83854F00C34EAF /* AdminViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdminViewController.m; sourceTree = "<group>"; };
+		7ED5A23A1A83854F00C34EAF /* AdminViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdminViewController.xib; sourceTree = "<group>"; };
+		7ED5A23E1A83875300C34EAF /* AdminUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminUserTableViewCell.h; sourceTree = "<group>"; };
+		7ED5A23F1A83875300C34EAF /* AdminUserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdminUserTableViewCell.m; sourceTree = "<group>"; };
+		7ED5A2401A83875300C34EAF /* AdminUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdminUserTableViewCell.xib; sourceTree = "<group>"; };
+		7EE2BA961A8A3E61000527E1 /* MyListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyListingViewController.h; sourceTree = "<group>"; };
+		7EE2BA971A8A3E61000527E1 /* MyListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyListingViewController.m; sourceTree = "<group>"; };
 		9AD8DA971A64592C001F8F2C /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
 		9AD8DA981A64592C001F8F2C /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialViewController.m; sourceTree = "<group>"; };
 		9AD8DA991A64592C001F8F2C /* TutorialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialViewController.xib; sourceTree = "<group>"; };
 		9AD8DA9C1A645BCF001F8F2C /* TutorialPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialPageView.h; sourceTree = "<group>"; };
 		9AD8DA9D1A645BCF001F8F2C /* TutorialPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialPageView.m; sourceTree = "<group>"; };
 		9AD8DA9F1A645BEE001F8F2C /* TutorialPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialPageView.xib; sourceTree = "<group>"; };
-		9AD8DAA41A645CAD001F8F2C /* -Tutorial1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "-Tutorial1.png"; sourceTree = "<group>"; };
-		9AD8DAA51A645CAD001F8F2C /* -Tutorial2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "-Tutorial2.png"; sourceTree = "<group>"; };
-		9AD8DAA61A645CAD001F8F2C /* -Tutorial3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "-Tutorial3.png"; sourceTree = "<group>"; };
 		CADD9CDB49CF1FD79BA7F002 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CD19A99C1A5F35960095163F /* Apartment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Apartment.h; sourceTree = "<group>"; };
 		CD19A99D1A5F35960095163F /* Apartment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Apartment.m; sourceTree = "<group>"; };
-		CD1BAFA41A48466F0012CBAA /* Rented.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rented.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD1BAFA41A48466F0012CBAA /* Flip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD1BAFA81A48466F0012CBAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD1BAFA91A48466F0012CBAA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CD1BAFAB1A48466F0012CBAA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -261,9 +267,6 @@
 		CD307AC41A48661C00D4BE2B /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
 		CD307AC51A48661C00D4BE2B /* FeedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedViewController.xib; sourceTree = "<group>"; };
 		CD3583421A71C323000D13CE /* FavoriteApartmentCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteApartmentCellProtocol.h; sourceTree = "<group>"; };
-		CD3583431A71D058000D13CE /* Tutorial1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial1.png; sourceTree = "<group>"; };
-		CD3583441A71D058000D13CE /* Tutorial2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial2.png; sourceTree = "<group>"; };
-		CD3583451A71D058000D13CE /* Tutorial3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tutorial3.png; sourceTree = "<group>"; };
 		CD35CCD51A498083007F12D0 /* logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = logger.h; sourceTree = "<group>"; };
 		CD35CCE51A49A7E3007F12D0 /* GothamRnd-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRnd-Bold.otf"; sourceTree = "<group>"; };
 		CD35CCE81A49ABCD007F12D0 /* GothamRnd-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRnd-Light.otf"; sourceTree = "<group>"; };
@@ -512,27 +515,42 @@
 			name = API;
 			sourceTree = "<group>";
 		};
+		7ECE96941A8169280024C69B /* LastFeedCell */ = {
+			isa = PBXGroup;
+			children = (
+				7ECE96921A8165300024C69B /* lastFeedCell.xib */,
+			);
+			name = LastFeedCell;
+			sourceTree = "<group>";
+		};
+		7ED5A2371A8384CB00C34EAF /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				7ED5A23D1A83871E00C34EAF /* AdminUserTableViewCell */,
+				7ED5A2381A83854F00C34EAF /* AdminViewController.h */,
+				7ED5A2391A83854F00C34EAF /* AdminViewController.m */,
+				7ED5A23A1A83854F00C34EAF /* AdminViewController.xib */,
+			);
+			name = Admin;
+			sourceTree = "<group>";
+		};
+		7ED5A23D1A83871E00C34EAF /* AdminUserTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				7ED5A23E1A83875300C34EAF /* AdminUserTableViewCell.h */,
+				7ED5A23F1A83875300C34EAF /* AdminUserTableViewCell.m */,
+				7ED5A2401A83875300C34EAF /* AdminUserTableViewCell.xib */,
+			);
+			name = AdminUserTableViewCell;
+			sourceTree = "<group>";
+		};
 		9AD8DA961A64590B001F8F2C /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
 				9AD8DAA21A645C1F001F8F2C /* Tutorial Controller */,
 				9AD8DAA31A645C33001F8F2C /* Tutorial Page */,
-				9AD8DAA11A645C17001F8F2C /* Tutorial Assets */,
 			);
 			name = Tutorial;
-			sourceTree = "<group>";
-		};
-		9AD8DAA11A645C17001F8F2C /* Tutorial Assets */ = {
-			isa = PBXGroup;
-			children = (
-				CD3583431A71D058000D13CE /* Tutorial1.png */,
-				CD3583441A71D058000D13CE /* Tutorial2.png */,
-				CD3583451A71D058000D13CE /* Tutorial3.png */,
-				9AD8DAA41A645CAD001F8F2C /* -Tutorial1.png */,
-				9AD8DAA51A645CAD001F8F2C /* -Tutorial2.png */,
-				9AD8DAA61A645CAD001F8F2C /* -Tutorial3.png */,
-			);
-			name = "Tutorial Assets";
 			sourceTree = "<group>";
 		};
 		9AD8DAA21A645C1F001F8F2C /* Tutorial Controller */ = {
@@ -580,7 +598,7 @@
 		CD1BAFA51A48466F0012CBAA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CD1BAFA41A48466F0012CBAA /* Rented.app */,
+				CD1BAFA41A48466F0012CBAA /* Flip.app */,
 				CD1BAFBD1A48466F0012CBAA /* RentedTests.xctest */,
 			);
 			name = Products;
@@ -649,6 +667,7 @@
 				CD2A8B091A5DEA8D0065299A /* Top Part */,
 				CD2A8B0A1A5DEA990065299A /* Details(owner) */,
 				126F9C3F1A6827150074AF72 /* Details(listing) */,
+				7ECE96941A8169280024C69B /* LastFeedCell */,
 			);
 			name = "Apartment Details";
 			sourceTree = "<group>";
@@ -701,6 +720,7 @@
 		CD307A961A48552F00D4BE2B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				7ED5A2371A8384CB00C34EAF /* Admin */,
 				CD42A8C81A707258000E7BD7 /* Get Confirmation Popup */,
 				CD42A8BF1A703608000E7BD7 /* Contact */,
 				9AD8DA961A64590B001F8F2C /* Tutorial */,
@@ -953,6 +973,8 @@
 				7EC507EF1A78204600E03E75 /* Add Apartment */,
 				CD5713171A597526003B4C2E /* Display Listing */,
 				CD57130C1A585618003B4C2E /* No Listing */,
+				7EE2BA961A8A3E61000527E1 /* MyListingViewController.h */,
+				7EE2BA971A8A3E61000527E1 /* MyListingViewController.m */,
 			);
 			name = "My place";
 			sourceTree = "<group>";
@@ -1008,7 +1030,7 @@
 			);
 			name = Rented;
 			productName = Rented;
-			productReference = CD1BAFA41A48466F0012CBAA /* Rented.app */;
+			productReference = CD1BAFA41A48466F0012CBAA /* Flip.app */;
 			productType = "com.apple.product-type.application";
 		};
 		CD1BAFBC1A48466F0012CBAA /* RentedTests */ = {
@@ -1073,13 +1095,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				126F9C441A6827A10074AF72 /* ApartmentDetailsOtherListingView.xib in Resources */,
+				7ED5A23C1A83854F00C34EAF /* AdminViewController.xib in Resources */,
 				CD50392D1A61978100A1320D /* slider-default7-trackCrossedOver.png in Resources */,
 				CD5039321A61978100A1320D /* slider-metal-handle@2x.png in Resources */,
 				CD35CCF11A49B0DC007F12D0 /* Gotham-Medium.otf in Resources */,
 				CD50391E1A61978100A1320D /* slider-default-handle-highlighted@2x.png in Resources */,
 				CD5039361A61978100A1320D /* slider-metal-trackBackground@2x.png in Resources */,
 				CD5039201A61978100A1320D /* slider-default-handle@2x.png in Resources */,
-				CD3583461A71D058000D13CE /* Tutorial1.png in Resources */,
 				9AD8DA9B1A64592C001F8F2C /* TutorialViewController.xib in Resources */,
 				CD5039221A61978100A1320D /* slider-default-track@2x.png in Resources */,
 				CD5039351A61978100A1320D /* slider-metal-trackBackground.png in Resources */,
@@ -1089,20 +1111,18 @@
 				CD50395B1A61F30700A1320D /* PreferencesSeparateView.xib in Resources */,
 				CD5713111A585651003B4C2E /* NoListingViewController.xib in Resources */,
 				CD2A8B021A5DE4920065299A /* TopApartmentView.xib in Resources */,
+				7ED5A2421A83875300C34EAF /* AdminUserTableViewCell.xib in Resources */,
 				CD35CCEF1A49B04C007F12D0 /* GothamRnd-Light.otf in Resources */,
 				CD50391F1A61978100A1320D /* slider-default-handle.png in Resources */,
 				9AD8DAA01A645BEE001F8F2C /* TutorialPageView.xib in Resources */,
-				9AD8DAA91A645CAD001F8F2C /* -Tutorial3.png in Resources */,
 				CD5039211A61978100A1320D /* slider-default-track.png in Resources */,
 				CD5039601A61F3B300A1320D /* PreferencesViewController.xib in Resources */,
 				CD35CCE71A49A89F007F12D0 /* GothamRnd-Bold.otf in Resources */,
 				CD39D6491A4A0A6C0006F7B7 /* DashboardViewController.xib in Resources */,
 				CD5039231A61978100A1320D /* slider-default-trackBackground.png in Resources */,
-				CD3583481A71D058000D13CE /* Tutorial3.png in Resources */,
 				CD5039251A61978100A1320D /* slider-default-trackCrossedOver@2x.png in Resources */,
-				9AD8DAA81A645CAD001F8F2C /* -Tutorial2.png in Resources */,
+				7ECE96931A8165300024C69B /* lastFeedCell.xib in Resources */,
 				CD5038ED1A61740B00A1320D /* FavoritesTableViewController.xib in Resources */,
-				CD3583471A71D058000D13CE /* Tutorial2.png in Resources */,
 				CD5039281A61978100A1320D /* slider-default7-handle@2x.png in Resources */,
 				CD50391D1A61978100A1320D /* slider-default-handle-highlighted.png in Resources */,
 				CD35CCE61A49A896007F12D0 /* LaunchScreen.xib in Resources */,
@@ -1119,7 +1139,6 @@
 				CD5038F31A61743600A1320D /* FavoriteApartmentTableViewCell.xib in Resources */,
 				CD5039291A61978100A1320D /* slider-default7-track.png in Resources */,
 				CD50392A1A61978100A1320D /* slider-default7-track@2x.png in Resources */,
-				9AD8DAA71A645CAD001F8F2C /* -Tutorial1.png in Resources */,
 				CD5039241A61978100A1320D /* slider-default-trackCrossedOver.png in Resources */,
 				CD2A8B081A5DE6F10065299A /* ApartmentTableViewCell.xib in Resources */,
 				CD2A8AE71A5DACB10065299A /* FullMapViewViewController.xib in Resources */,
@@ -1190,6 +1209,7 @@
 				CD5713101A585651003B4C2E /* NoListingViewController.m in Sources */,
 				7EC508121A78288700E03E75 /* TRTextFieldExtensions.m in Sources */,
 				120547601A5FF1110036BB75 /* UITableView+AnimationControl.m in Sources */,
+				7EE2BA981A8A3E61000527E1 /* MyListingViewController.m in Sources */,
 				CD1BAFAD1A48466F0012CBAA /* AppDelegate.m in Sources */,
 				CD42A8C31A703627000E7BD7 /* ContactViewController.m in Sources */,
 				CD48D2461A5B1E7800C85AA6 /* GalleryNavigationController.m in Sources */,
@@ -1209,6 +1229,7 @@
 				9AD8DA9A1A64592C001F8F2C /* TutorialViewController.m in Sources */,
 				CD2A8B071A5DE6F10065299A /* ApartmentTableViewCell.m in Sources */,
 				CD5039561A61EEC000A1320D /* PreferencesSeparateView.m in Sources */,
+				7ED5A2411A83875300C34EAF /* AdminUserTableViewCell.m in Sources */,
 				7EC5080D1A78288700E03E75 /* TRAutocompleteView.m in Sources */,
 				CD2A8AF11A5DB6AB0065299A /* ApartmentDetailsView.m in Sources */,
 				CD42A8C71A705787000E7BD7 /* UIView+MLScreenshot.m in Sources */,
@@ -1231,6 +1252,7 @@
 				CD307AC01A48657500D4BE2B /* AuthenticationViewController.m in Sources */,
 				CD307AC61A48661C00D4BE2B /* FeedViewController.m in Sources */,
 				CD5713141A585DAE003B4C2E /* UIViewController+JASidePanels.m in Sources */,
+				7ED5A23B1A83854F00C34EAF /* AdminViewController.m in Sources */,
 				CD5038EC1A61740B00A1320D /* FavoritesTableViewController.m in Sources */,
 				CD35CCEB1A49ACC4007F12D0 /* UIColor+ColorFromHexString.m in Sources */,
 				CD42A8D01A707466000E7BD7 /* ConfirmationView.m in Sources */,
@@ -1286,8 +1308,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Eugen Varzaru (4ASDXN337T)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eugen Varzaru (4ASDXN337T)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1308,7 +1330,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "c4d1c73c-1a10-4c4d-a386-f8e844594569";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1330,8 +1352,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Lease Flip Inc (4XS485J5BQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lease Flip Inc (4XS485J5BQ)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1345,7 +1367,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "fe593317-b9f0-4207-95e8-afc5bca8c248";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1357,14 +1379,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Eugen Varzaru (4ASDXN337T)";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Rented/Rented-Prefix.pch";
 				INFOPLIST_FILE = Rented/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = Rented;
-				PROVISIONING_PROFILE = "";
+				PRODUCT_NAME = Flip;
+				PROVISIONING_PROFILE = "c4d1c73c-1a10-4c4d-a386-f8e844594569";
 			};
 			name = Debug;
 		};
@@ -1374,15 +1396,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Lease Flip Inc (4XS485J5BQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lease Flip Inc (4XS485J5BQ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Rented/Rented-Prefix.pch";
 				INFOPLIST_FILE = Rented/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = Rented;
-				PROVISIONING_PROFILE = "";
+				PRODUCT_NAME = Flip;
+				PROVISIONING_PROFILE = "fe593317-b9f0-4207-95e8-afc5bca8c248";
 			};
 			name = Release;
 		};

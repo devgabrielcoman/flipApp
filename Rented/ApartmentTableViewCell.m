@@ -27,7 +27,6 @@
 - (void)setDelegate:(id<ApartmentCellProtocol>)delegate
 {
     _apartmentTopView.delegate = delegate;
-    _apartmentDetailsView.delegate = delegate;
 }
 
 - (void)setApartment:(PFObject *)apartment withImages:(NSArray *)images andCurrentUsersStatus:(BOOL)isOwner;
@@ -38,102 +37,33 @@
     
     if(_currentUserIsOwner)
     {
-        _apartmentDetailsView = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentDetailsView" owner:self options:nil] firstObject];
-        _apartmentDetailsView.connectedThroughLbl.text = @"";
-        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight+10, wScr, ApartmentDetailsViewHeight);
         
         _apartmentTopView.connectedThroughImgView.alpha = 0.0;
         _apartmentTopView.connectedThroughLbl.alpha = 0.0;
+        [_apartmentTopView.myListingBar setHidden:NO];
         
-        _apartmentDetailsView.connectedThroughImageView.alpha = 0.0;
-        _apartmentDetailsView.connectedThroughLbl.alpha = 0.0;
     }
     else
     {
-        _apartmentDetailsView = [[[NSBundle mainBundle] loadNibNamed:@"ApartmentDetailsOtherListingView" owner:self options:nil] firstObject];
-        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight, wScr, ApartmentDetailsOtherListingViewHeight);
-        
+  
         _apartmentTopView.connectedThroughImgView.alpha = 1.0;
-        _apartmentDetailsView.connectedThroughImageView.alpha = 1.0;
-        
-        PFUser *apartmentOwner = apartment[@"owner"];
-        [DEP.api.userApi getFacebookMutualFriendsWithFriend:apartmentOwner[@"facebookID"] completionHandler:^(NSArray *mutualFriends, BOOL succeeded) {
-            if(succeeded)
-            {
-                if(mutualFriends)
-                {
-                    if(mutualFriends.count == 0)
-                    {
-                        _apartmentTopView.connectedThroughLbl.text = @"0";
-                        _apartmentDetailsView.connectedThroughLbl.text = @"No Connections";
-                    }
-                    else
-                    {
-                        _apartmentTopView.connectedThroughLbl.text = [NSString stringWithFormat:@"%lu", (unsigned long)mutualFriends.count];
-                        _apartmentDetailsView.connectedThroughLbl.text = [GeneralUtils connectedThroughExtendedDescription:[[NSMutableArray alloc] initWithArray:mutualFriends]];
-                    }
-                }
-                else
-                {
-                    _apartmentTopView.connectedThroughLbl.text = @"0";
-                    _apartmentDetailsView.connectedThroughLbl.text = @"No Connections";
-                }
-            }
-            else
-            {
-                _apartmentTopView.connectedThroughLbl.text = @"0";
-                _apartmentDetailsView.connectedThroughLbl.text = @"No Connections";
-            }
-            
-            _apartmentTopView.connectedThroughLbl.alpha = 1.0;
-            _apartmentDetailsView.connectedThroughLbl.alpha = 1.0;
-        }];
+        NSArray* mutualFriends=[GeneralUtils mutableFriendsInArray1:apartment[@"owner"][@"facebookFriends"] andArray2:[PFUser currentUser][@"facebookFriends"]];
+        NSUInteger numberOfFriends=[mutualFriends count];
+        [_apartmentTopView.myListingBar setHidden:YES];
+        _apartmentTopView.connectedThroughLbl.text = [NSString stringWithFormat:@"%lu",(unsigned long)numberOfFriends];
+
+
     }
-    
-    _apartmentDetailsView.currentUserIsOwner = isOwner;
-    _apartmentDetailsView.isFromFavorites = _isFromFavorites;
-    [_apartmentDetailsView setApartmentDetails:apartment];
-    _apartmentDetailsView.isFromFavorites = _isFromFavorites;
+
     _apartmentTopView.apartment = apartment;
+
 }
 
 - (void)setApartmentIndex:(NSInteger)apartmentIndex
 {
     [_apartmentTopView setApartmentIndex:apartmentIndex];
-    _apartmentDetailsView.apartmentIndex = apartmentIndex;
     _index = apartmentIndex;
 }
 
-- (void)showApartmentDetails
-{
-    //check again
-    [_apartmentDetailsView updateFlipButtonStatus];
-    _apartmentTopView.frame = CGRectMake(0, 0, wScr, hScr-statusBarHeight);
-    [_apartmentTopView layoutIfNeeded];
-    
-    if(_currentUserIsOwner)
-        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight+10, wScr, ApartmentDetailsViewHeight);
-    else
-        _apartmentDetailsView.frame = CGRectMake(0, hScr-statusBarHeight+10, wScr, ApartmentDetailsOtherListingViewHeight);
-    
-    [self addSubview:_apartmentDetailsView];
-    _apartmentDetailsView.alpha = 1.0;
-    
-    [_apartmentTopView.displayMore setTitle:@"hide" forState:UIControlStateNormal];
-    
-}
-
-- (void)hideApartmentDetails
-{
-    //check again
-    [_apartmentDetailsView removeFromSuperview];
-    _apartmentTopView.frame = CGRectMake(0, 0, wScr, hScr-statusBarHeight);
-    
-    _apartmentDetailsView = nil;
-    
-    [_apartmentTopView layoutIfNeeded];
-    
-    [_apartmentTopView.displayMore setTitle:@"show more" forState:UIControlStateNormal];
-}
 
 @end

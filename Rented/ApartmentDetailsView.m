@@ -51,7 +51,7 @@
         if([vacancyType integerValue] == VacancyImmediate)
             [vacancy appendFormat:@"Immediate"];
         
-        if([vacancyType integerValue] == VacancyNegociable)
+        if([vacancyType integerValue] == VacancyFlexible)
             [vacancy appendFormat:@"Negociable"];
         
         if([vacancyType integerValue] == VacancyShortTerm)

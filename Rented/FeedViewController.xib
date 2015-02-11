@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeedViewController">
             <connections>
+                <outlet property="loadingLabel" destination="n4s-gd-4ye" id="O6e-qK-iJ8"/>
                 <outlet property="pageControl" destination="eZt-2f-wGv" id="wG1-es-4jU"/>
                 <outlet property="tableView" destination="PgH-iW-FHv" id="dAA-oH-a9U"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -17,12 +18,17 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="PgH-iW-FHv">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n4s-gd-4ye">
+                    <rect key="frame" x="161" y="355" width="92" height="26"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="PgH-iW-FHv">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
-                <pageControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="eZt-2f-wGv">
+                <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="eZt-2f-wGv">
                     <rect key="frame" x="375" y="349" width="39" height="37"/>
                     <color key="backgroundColor" white="0.79934210526315785" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
                     <color key="pageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -34,10 +40,14 @@
                 <constraint firstAttribute="trailing" secondItem="eZt-2f-wGv" secondAttribute="trailing" id="D3C-BR-Png"/>
                 <constraint firstItem="PgH-iW-FHv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="DUd-cO-PfV"/>
                 <constraint firstAttribute="centerY" secondItem="eZt-2f-wGv" secondAttribute="centerY" id="NfN-K4-IJT"/>
+                <constraint firstAttribute="centerY" secondItem="n4s-gd-4ye" secondAttribute="centerY" id="Y1v-3R-8Uy"/>
+                <constraint firstAttribute="centerX" secondItem="n4s-gd-4ye" secondAttribute="centerX" id="Yut-mc-1Rq"/>
                 <constraint firstItem="PgH-iW-FHv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eti-hg-m5R"/>
                 <constraint firstAttribute="bottom" secondItem="PgH-iW-FHv" secondAttribute="bottom" id="km9-in-FJl"/>
                 <constraint firstAttribute="trailing" secondItem="PgH-iW-FHv" secondAttribute="trailing" id="uBi-BZ-0dD"/>
             </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
             <variation key="default">
                 <mask key="constraints">
