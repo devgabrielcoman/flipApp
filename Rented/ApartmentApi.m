@@ -10,10 +10,15 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "Apartment.h"
 #import <MBProgressHUD.h>
+#import <AFNetworking.h>
+#import "GeneralUtils.h"
 
 
 @implementation ApartmentApi
 
+/*
+ Grab current user apartment
+ */
 - (void)userApartment:(void (^)(PFObject *apartment, NSArray *images, BOOL succeeded))completionHandler
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Apartment"];
@@ -49,7 +54,9 @@
     }];
 }
 
-
+/*
+ Get apartments for feed taking into account user preferences
+ */
 - (void)getFeedApartments:(void (^)(NSArray *apartments, BOOL succeeded))completionHandler
 {
     
@@ -194,7 +201,7 @@
     completionHandler(mutableArray, YES);
 }
 
-- (void)addApartmentToFavorites:(PFObject *)apartment completion:(void (^)(BOOL succeeded))completionHandler
+- (void)addApartmentToFavorites:(PFObject *)apartment withNotification:(BOOL)notification completion:(void (^)(BOOL))completionHandler
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Favorites"];
     [query whereKey:@"apartment" equalTo:apartment];
@@ -211,10 +218,95 @@
                 PFObject *favoriteApartment = [PFObject objectWithClassName:@"Favorites"];
                 favoriteApartment[@"apartment"] = apartment;
                 favoriteApartment[@"user"] = DEP.authenticatedUser;
+                favoriteApartment[@"timestamp"] = [NSNumber numberWithLong:(long)[[NSDate date] timeIntervalSince1970]];
                 
                 [favoriteApartment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     completionHandler(succeeded);
                 }];
+                
+                if (notification)
+                {
+                    PFPush* push = [PFPush new];
+
+                    [push setChannel:[(PFUser*)apartment[@"owner"] objectId]];
+                    
+                    NSArray * mutualFriendsFacebookIds=[GeneralUtils mutualFriendsInArray1:DEP.authenticatedUser[@"facebookFriends"] andArray2:apartment[@"owner"][@"facebookFriends"]];
+                    
+                    NSMutableArray* actualFriends =[NSMutableArray new];
+                    for (NSString* friend in mutualFriendsFacebookIds)
+                    {
+                        if ([DEP.facebookFriendsInfo objectForKey:friend])
+                        {
+                            [actualFriends addObject:friend];
+                        }
+                    }
+                    
+                    if (actualFriends.count>0 && ![DEP.authenticatedUser[@"facebookFriends"] containsObject:apartment[@"owner"][@"facebookID"]])
+                    {
+                        PFQuery* query = [PFUser query];
+                        
+    
+                        [query whereKey:@"facebookID" containedIn:actualFriends];
+
+                        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                           
+                            if (!error)
+                            {
+                                NSString* mutualFriendsString;
+                                
+                                for (int i =0;i<objects.count;i++)
+                                {
+                                    PFUser* user = [objects objectAtIndex:i];
+                                    if (i==0)
+                                    {
+                                        mutualFriendsString = user.username;
+                                    }
+                                    else
+                                    {
+                                        if (i==objects.count-1 || i == 2)
+                                        {
+                                            mutualFriendsString = [NSString stringWithFormat:@"%@ and %@",mutualFriendsString, user.username];
+                                            if (i==2)
+                                            {
+                                                break;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            mutualFriendsString = [NSString stringWithFormat:@"%@, %@",mutualFriendsString, user.username];
+                                        }
+                                    }
+                                }
+                                NSString* alertString = [NSString stringWithFormat:@"%@ (friends with %@) liked your place",DEP.authenticatedUser.username, mutualFriendsString];
+                                
+                                NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                     alertString, @"alert",
+                                                     @"Increment", @"badge",
+                                                     nil];
+                                [push setData:data];
+                                [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                    
+                                }];
+                            }
+
+                        }];
+                    }
+                    else
+                    {
+                        NSString* alertString = [NSString stringWithFormat:@"%@ liked your place",DEP.authenticatedUser.username];
+                        
+                        NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+                                              alertString, @"alert",
+                                              @"Increment", @"badge",
+                                              nil];
+                        [push setData:data];
+                        [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            
+                        }];
+                    }
+                    
+                    
+                }
             }
         }
         else
@@ -283,6 +375,31 @@
     request[@"user"] = DEP.authenticatedUser;
     
     [request saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded)
+        {
+            [self addApartmentToFavorites:apartment withNotification:NO completion:^(BOOL succeeded) {
+                
+            }];
+            
+
+            PFPush* push = [PFPush new];
+            
+            [push setChannel:[(PFUser*)apartment[@"owner"] objectId]];
+
+        
+            NSString* alertString = [NSString stringWithFormat:@"%@ requested your place",DEP.authenticatedUser.username];
+            
+            NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  alertString, @"alert",
+                                  @"Increment", @"badge",
+                                  nil];
+            [push setData:data];
+            [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                
+            }];
+            
+            
+        }
         completionHandler(succeeded);
     }];
 }
@@ -295,7 +412,10 @@
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error)
+        {
+
             completionHandler(objects, YES);
+        }
         else
             completionHandler(@[], NO);
     }];
@@ -352,6 +472,10 @@
     apartment[@"type"] = apartmentInfo[@"type"];
     apartment[@"rooms"] = apartmentInfo[@"rooms"];
     apartment[@"fee"] = apartmentInfo[@"fee"];
+    if (apartmentInfo[@"feeOther"])
+    {
+        apartment[@"feeOther"] = apartmentInfo[@"feeOther"];
+    }
     apartment[@"rentWillChange"] = apartmentInfo[@"rentWillChange"];
     apartment[@"vacancy"] = apartmentInfo[@"vacancy"];
     apartment[@"description"] = apartmentInfo[@"description"];
@@ -364,8 +488,12 @@
     apartment[@"city"] = apartmentInfo[@"city"];
     apartment[@"state"] = apartmentInfo[@"state"];
     apartment[@"zipcode"] = apartmentInfo[@"zipcode"];
+    apartment[@"directContact"] = apartmentInfo[@"directContact"];
+    apartment[@"requested"] = [NSNumber numberWithInteger:0];
+    apartment[@"bestContactHours"] = apartmentInfo[@"bestContactHours"];
+    apartment[@"bestContactDays"] = apartmentInfo[@"bestContactDays"];
 
-    
+
     apartment[@"owner"] = user;
     
     [apartment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -417,6 +545,63 @@
                     else
                     {
                         completionHandler(YES);
+                        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                        NSMutableDictionary *parameters = [NSMutableDictionary new];
+                        [parameters setValue:@"656809821111233|e3768c5fd6b066d1a3da09e57b000ab3" forKey:@"access_token"];
+                        NSString* nameString= [NSString stringWithFormat:@"%@'s apartment",[(PFUser*)apartment[@"owner"] username]];
+                        [parameters setValue:nameString forKey:@"name"];
+                        
+                        NSMutableDictionary * iosDict = [NSMutableDictionary new];
+                        
+                        NSString *urlString = [NSString stringWithFormat:@"fb656809821111233://flip/apartment/%@",apartment.objectId];
+                        [iosDict setValue:urlString forKey:@"url"];
+                        [iosDict setValue:@"Flip" forKey:@"app_name"];
+                        [iosDict setValue:[NSNumber numberWithInt:234]forKey:@"app_store_id" ];
+                        NSArray *iosArray = [[NSArray alloc]initWithObjects:iosDict, nil];
+                        
+                        NSError* error;
+                        NSData *iosDictData = [NSJSONSerialization dataWithJSONObject:iosArray options:NSJSONWritingPrettyPrinted error:&error];
+                        NSString* iosDictString;
+                        if (!error)
+                        {
+                            iosDictString = [[NSString alloc]initWithData:iosDictData encoding:NSUTF8StringEncoding];
+                        }
+                        
+                        [parameters setValue:iosDictString forKey:@"ios"];
+                        
+                        NSString* webString = @"{     \"should_fallback\" : false   }";
+                        
+                        [parameters setValue:webString forKey:@"web"];
+                        
+                        [manager POST:@"https://graph.facebook.com/app/app_link_hosts" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                            NSDictionary* responseDict = (NSDictionary*)responseObject;
+                            NSString* appLinkObjectId = [responseDict objectForKey:@"id"];
+                            
+                            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                            NSString* getUrlString = [NSString stringWithFormat:@"https://graph.facebook.com/%@",appLinkObjectId];
+                            NSMutableDictionary *parameters = [NSMutableDictionary new];
+                            [parameters setValue:@"656809821111233|e3768c5fd6b066d1a3da09e57b000ab3" forKey:@"access_token"];
+                            [parameters setValue:@"canonical_url" forKey:@"fields"];
+                            [parameters setValue:@"true" forKey:@"pretty"];
+                            
+                            [manager GET:getUrlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+
+                                NSDictionary* responseDict = (NSDictionary*)responseObject;
+                                NSString* shareUrl = [responseDict objectForKey:@"canonical_url"];
+                                
+                                apartment[@"shareUrl"]= shareUrl;
+                                
+                                [apartment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                    
+                                }];
+                            
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"Error: %@", error);
+                            }];
+                            
+                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                            NSLog(@"Error: %@", error);
+                        }];
                     }
                 }
                 else

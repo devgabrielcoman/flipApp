@@ -26,6 +26,9 @@
 @property PFUser *apartmentOwner;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollViewContainer;
 
+
+
 @property Apartment* apartment;
+@property UIImage* image;
 
 @end

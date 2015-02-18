@@ -11,6 +11,8 @@
 #import "GeneralUtils.h"
 #import "UIImage+imageWithColor.h"
 #import "UIImage+ProportionalFill.h"
+#import "CongratulationsViewController.h"
+#import "UnflipedViewController.h"
 
 @implementation ApartmentDetailsOtherListingView
 
@@ -76,11 +78,15 @@
         }
         if ([fee integerValue] == Fee6percent)
         {
-            _feeLbl.text = [NSString stringWithFormat:@"$%d",(int)(0.04*[apartment[@"rent"] integerValue])];
+            _feeLbl.text = [NSString stringWithFormat:@"$%d",(int)(0.06*[apartment[@"rent"] integerValue])];
         }
         if ([fee integerValue] == Fee9percent)
         {
-            _feeLbl.text = [NSString stringWithFormat:@"$%d",(int)(0.05*[apartment[@"rent"] integerValue])];
+            _feeLbl.text = [NSString stringWithFormat:@"$%d",(int)(0.09*[apartment[@"rent"] integerValue])];
+        }
+        if ([fee integerValue] == FeeOtherpercent)
+        {
+            _feeLbl.text = [NSString stringWithFormat:@"$%d",(int)([apartment[@"feeOther"] floatValue]*[apartment[@"rent"] integerValue])];
         }
     }
     
@@ -161,6 +167,16 @@
         [_moreBtn setHidden:YES];
     }
     
+    if([_apartment[@"requested"] integerValue] == 1)
+    {
+        [self.getButton setTitle:@"REQUESTED" forState:UIControlStateNormal];
+        [_getButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"CCCCCC"]] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.getButton setTitle:@"GET" forState:UIControlStateNormal];
+        [_getButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"47A0DB"]] forState:UIControlStateNormal];
+    }
 
     
 }
@@ -176,7 +192,7 @@
     else
     {
         [_likeBtn setSelected:!_likeBtn.selected];
-        [DEP.api.apartmentApi addApartmentToFavorites:_apartment completion:^(BOOL succeeded) {}];
+        [DEP.api.apartmentApi addApartmentToFavorites:_apartment withNotification:YES completion:^(BOOL succeeded) {}];
         [DEP.favorites addObject:_apartment.objectId];
     }
 
@@ -185,10 +201,72 @@
 - (void)updateFlipButtonStatus
 {
     
+    if (self.currentUserIsOwner)
+    {
+        [_getButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"47A0DB"]] forState:UIControlStateNormal];
+
+        if ([_apartment[@"visible"] integerValue]==1)
+        {
+            [self.getButton setTitle:@"UNFLIP" forState:UIControlStateNormal];
+        }
+        else
+        {
+            [self.getButton setTitle:@"FLIP" forState:UIControlStateNormal];
+            
+        }
+        return;
+    }
+ 
+    if([_apartment[@"requested"] integerValue] == 1)
+    {
+        [self.getButton setTitle:@"REQUESTED" forState:UIControlStateNormal];
+        [_getButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"CCCCCC"]] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.getButton setTitle:@"GET" forState:UIControlStateNormal];
+        [_getButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"47A0DB"]] forState:UIControlStateNormal];
+    }
+    
 }
 
 - (IBAction)getApartment:(id)sender
 {
+    if (self.currentUserIsOwner)
+    {
+
+        if(![_apartment[@"visible"] boolValue])
+        {
+            [DEP.api.apartmentApi makeApartmentLive:_apartment completion:^(BOOL succeeded) {
+                
+            }];
+            
+            
+            [[[UIAlertView alloc]initWithTitle:@"Your listing is now visible!" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+            
+            [self.getButton setTitle:@"UNFLIP" forState:UIControlStateNormal];
+            
+            
+        }
+        else
+        {
+            [DEP.api.apartmentApi hideLiveApartment:_apartment completion:^(BOOL succeeded) {
+                
+            }];
+            
+            [[[UIAlertView alloc]initWithTitle:@"OK! Your listing is hidden" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+
+                
+    
+            
+            
+            [self.getButton setTitle:@"FLIP" forState:UIControlStateNormal];
+            
+        }
+        
+        return;
+    }
+
     [_apartmentDetailsDelegate getApartmentAtIndex:_apartmentIndex];
 }
 
@@ -219,6 +297,44 @@
     [self.controller.navigationController pushViewController:descriptionVC animated:YES];
     
 
+}
+-(IBAction)pressedShareButton:(id)sender
+{
+    
+    NSString *textToShare = @"Check out this apartment!";
+    if ([textToShare isEqualToString:@""])
+    {
+        textToShare =@" ";
+    }
+
+    NSURL *url = [NSURL URLWithString:self.apartment[@"shareUrl"]];
+    UIImage* image = self.firstImageView.image;
+    
+    NSArray *objectsToShare;
+    
+    if (image)
+    {
+        objectsToShare = @[textToShare, url,image];
+    }
+    else
+    {
+        objectsToShare = @[textToShare, url,image];
+
+    }
+    
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+    
+    NSArray *excludeActivities = @[
+                                   UIActivityTypePrint,
+                                   UIActivityTypeAssignToContact,
+                                   UIActivityTypeAddToReadingList,
+                                   UIActivityTypePostToFlickr,
+                                   UIActivityTypePostToVimeo];
+    
+    activityVC.excludedActivityTypes = excludeActivities;
+    
+    [self.controller presentViewController:activityVC animated:YES completion:nil];
 }
 
 @end

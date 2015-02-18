@@ -34,6 +34,7 @@
 @property (weak, nonatomic) UIViewController *controller;
 
 @property PFObject *apartment;
+@property UIImageView *firstImageView;
 @property BOOL currentUserIsOwner;
 @property id<ApartmentCellProtocol> apartmentDetailsDelegate;
 @property NSInteger apartmentIndex;

@@ -94,6 +94,8 @@ typedef enum _JASidePanelState {
 // by default applies rounded corners to the panel. override in sublcass to change
 - (void)stylePanel:(UIView *)panel;
 
+- (void)_placeButtonForLeftPanel;
+
 #pragma mark - Animation
 
 // the minimum % of total screen width the centerPanel.view must move for panGesture to succeed
@@ -131,7 +133,7 @@ typedef enum _JASidePanelState {
 + (UIImage *)defaultImage;
 
 // Default button to place in gestureViewControllers top viewController. Override in sublcass to change look of default button
-- (UIBarButtonItem *)leftButtonForCenterPanel;
+@property (nonatomic, strong) UIBarButtonItem *leftButtonForCenterPanel;
 
 #pragma mark - Nuts & Bolts
 

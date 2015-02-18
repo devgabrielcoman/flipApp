@@ -13,6 +13,8 @@
                 <outlet property="likesBtn" destination="GV1-C5-20o" id="XF3-3M-RI3"/>
                 <outlet property="locationLbl" destination="Hau-uL-PRG" id="uXm-cn-gqo"/>
                 <outlet property="myPlaceBtn" destination="5XU-4b-rGK" id="atj-U7-hOs"/>
+                <outlet property="notificationCircle" destination="75m-XE-0NU" id="xsa-nv-cVL"/>
+                <outlet property="notificationLabel" destination="T6v-S7-Jax" id="eK8-vH-ctf"/>
                 <outlet property="otherPlacesBtn" destination="nAT-3n-Pqg" id="yj4-a7-PtO"/>
                 <outlet property="preferencesBtn" destination="rD0-Yl-Dk8" id="wm1-Cf-CQ3"/>
                 <outlet property="profileImgView" destination="kyS-2F-gWU" id="4FS-W6-r15"/>
@@ -29,16 +31,16 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P12-rz-z7t" userLabel="Container">
                     <rect key="frame" x="0.0" y="0.0" width="260" height="736"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile" translatesAutoresizingMaskIntoConstraints="NO" id="kyS-2F-gWU" userLabel="Profile Image View" customClass="AsyncImageView">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile" translatesAutoresizingMaskIntoConstraints="NO" id="kyS-2F-gWU" userLabel="Profile Image View" customClass="AsyncImageView">
                             <rect key="frame" x="90" y="42" width="80" height="80"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alexandra Jones" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ld8-gQ-pY3" userLabel="Username">
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alexandra Jones" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ld8-gQ-pY3" userLabel="Username">
                             <rect key="frame" x="8" y="130" width="244" height="30"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hau-uL-PRG">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hau-uL-PRG">
                             <rect key="frame" x="8" y="159" width="244" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="244" id="L0u-tq-Rss"/>
@@ -187,6 +189,18 @@
                                 <action selector="openAdminMenu:" destination="-1" eventType="touchUpInside" id="RZz-2Y-cPJ"/>
                             </connections>
                         </button>
+                        <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="75m-XE-0NU">
+                            <rect key="frame" x="140" y="215" width="16" height="16"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T6v-S7-Jax">
+                                    <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="8"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.81568627450980391" green="0.0078431372549019607" blue="0.10588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>

@@ -5,13 +5,18 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TutorialPageView">
+            <connections>
+                <outlet property="imageView" destination="YUF-Zv-3di" id="lru-eR-DTy"/>
+                <outlet property="view" destination="iN0-l3-epB" id="0NE-Gh-fWE"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TutorialPageView">
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YUF-Zv-3di">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YUF-Zv-3di">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
             </subviews>
@@ -23,9 +28,6 @@
                 <constraint firstAttribute="bottom" secondItem="YUF-Zv-3di" secondAttribute="bottom" id="suf-XX-a0p"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <connections>
-                <outlet property="imageView" destination="YUF-Zv-3di" id="dbw-rl-cM8"/>
-            </connections>
         </view>
     </objects>
 </document>

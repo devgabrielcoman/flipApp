@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+//Used for gallery, to override the default status of the used component
 @interface GalleryNavigationController : UINavigationController
 
 @end

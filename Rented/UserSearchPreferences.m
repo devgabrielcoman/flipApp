@@ -9,7 +9,7 @@
 #import "UserSearchPreferences.h"
 
 @implementation UserSearchPreferences
-
+//Keep search preferences of the user. Class must implement NSCoding interface because all preferences need to be serialized
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeInteger:self.minRenewalDays forKey:@"MinRenewalDays"];

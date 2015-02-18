@@ -23,8 +23,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *messageLbl;
 @property (weak, nonatomic) IBOutlet UIButton *addApartmentBtn;
-@property (weak, nonatomic) IBOutlet KAProgressLabel *plabel;
-
+@property (weak, nonatomic) IBOutlet UIImageView * avatarImageView;
 @end
 
 @implementation NoListingViewController
@@ -32,42 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    _messageLbl.font = [UIFont fontWithName:@"GothamRounded-Light" size:13.0];
-    _messageLbl.layer.shadowColor = [[UIColor blackColor] CGColor];
-    
-    _addApartmentBtn.backgroundColor = [UIColor colorFromHexString:@"3b5998"];
-    _addApartmentBtn.layer.cornerRadius = 2.0;
-    _addApartmentBtn.titleLabel.font = [UIFont fontWithName:@"Gotham-Medium" size:15.0];
-    
-    [self.plabel setBackBorderWidth:3.0];
-    [self.plabel setFrontBorderWidth:4];
-    [self.plabel setColorTable: @{
-                                  NSStringFromProgressLabelColorTableKey(ProgressLabelTrackColor):[UIColor lightGrayColor],
-                                  NSStringFromProgressLabelColorTableKey(ProgressLabelProgressColor):[UIColor colorFromHexString:@"3b5998"]
-                                  }];
-    
-    self.plabel.center = self.view.center;
-    self.plabel.userInteractionEnabled = YES;
 
-    
-    if([DEP.authenticatedUser[@"listingStatus"] integerValue] == ListingRequested)
-    {
-        _addApartmentBtn.alpha = 0.0f;
-        _messageLbl.text = @"Your request has been registered and apartment will be added as soon as possible.";
-        [self.plabel setProgress:0.5
-                          timing:TPPropertyAnimationTimingEaseOut
-                        duration:1.0
-                           delay:0.0];
-    }
-    else
-    {
-        [self.plabel setProgress:0.01
-                          timing:TPPropertyAnimationTimingEaseOut
-                        duration:1.0
-                           delay:0.0];
-    }
-    
 }
 
 -(void)addApartmentFinieshedWithChanges:(BOOL)changes
@@ -136,10 +100,6 @@
             _addApartmentBtn.alpha = 0.0f;
             _messageLbl.text = @"Your request has been registered and apartment will be added as soon as possible.";
             
-            [self.plabel setProgress:0.5
-                              timing:TPPropertyAnimationTimingEaseOut
-                            duration:1.0
-                               delay:0.0];
             
         }
     }
@@ -148,6 +108,16 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.avatarImageView.layer setCornerRadius:35];
+    [self.avatarImageView setClipsToBounds:YES];
+    if(self.avatar)
+    {
+        [self.avatarImageView setImage: self.avatar ];
+    }
 }
 
 @end

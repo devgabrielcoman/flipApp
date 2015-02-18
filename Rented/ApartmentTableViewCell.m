@@ -47,7 +47,7 @@
     {
   
         _apartmentTopView.connectedThroughImgView.alpha = 1.0;
-        NSArray* mutualFriends=[GeneralUtils mutableFriendsInArray1:apartment[@"owner"][@"facebookFriends"] andArray2:[PFUser currentUser][@"facebookFriends"]];
+        NSArray* mutualFriends=[GeneralUtils mutualFriendsInArray1:apartment[@"owner"][@"facebookFriends"] andArray2:[PFUser currentUser][@"facebookFriends"]];
         NSUInteger numberOfFriends=[mutualFriends count];
         [_apartmentTopView.myListingBar setHidden:YES];
         _apartmentTopView.connectedThroughLbl.text = [NSString stringWithFormat:@"%lu",(unsigned long)numberOfFriends];

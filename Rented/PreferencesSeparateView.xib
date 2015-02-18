@@ -118,8 +118,8 @@
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="vWy-1M-uZG"/>
                             <exclude reference="s5n-6k-CR8"/>
+                            <exclude reference="vWy-1M-uZG"/>
                         </mask>
                     </variation>
                 </label>

@@ -12,7 +12,7 @@
 #import "FeedViewController.h"
 #import "UIViewController+JASidePanels.h"
 #import <JASidePanelController.h>
-#import "TutorialViewController.h"
+#import "TutorialPageView.h"
 
 @interface AuthenticationViewController ()
 
@@ -65,6 +65,13 @@
 {
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
+-(void)viewDidAppear:(BOOL)animated
+{
+    if (self.navigationController.viewControllers.count>1)
+    {
+        [self.navigationController popToRootViewControllerAnimated:NO];
+    }
+}
 
 - (IBAction)loginWithFacebook:(id)sender
 {
@@ -77,9 +84,10 @@
 
 -(IBAction)showTutorial:(id)sender
 {
-    TutorialViewController *tutorial = [TutorialViewController new];
-    
-    [self presentViewController:tutorial animated:YES completion:nil];
+    TutorialPageView* page1 = [[TutorialPageView alloc] initWithNibName:@"TutorialPageView" bundle:nil];
+    page1.image = [UIImage imageNamed:@"1"];
+    page1.index = 1;
+    [self.navigationController pushViewController:page1 animated:YES];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle

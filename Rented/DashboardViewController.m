@@ -25,6 +25,9 @@
 #import "ApartmentTableViewCell.h"
 #import "GeneralUtils.h"
 #import "MyListingViewController.h"
+#import "AppDelegate.h"
+
+#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
 @interface DashboardViewController ()<MFMailComposeViewControllerDelegate>
 {
@@ -48,8 +51,11 @@
 
 @implementation DashboardViewController
 
-- (void)viewDidLoad {
+
+-(void)viewDidLoad
+{
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
     lastUserId = @"";
     
@@ -63,6 +69,110 @@
     {
         [self showAdminOptions:NO];
     }
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    
+    self.locationManager.delegate = self;
+    if(IS_OS_8_OR_LATER){
+        NSUInteger code = [CLLocationManager authorizationStatus];
+        if (code == kCLAuthorizationStatusNotDetermined && ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)] || [self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])) {
+            // choose one request according to your business.
+            if([[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"]){
+                [self.locationManager requestAlwaysAuthorization];
+            } else if([[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"]) {
+                [self.locationManager  requestWhenInUseAuthorization];
+            } else {
+                NSLog(@"Info.plist does not contain NSLocationAlwaysUsageDescription or NSLocationWhenInUseUsageDescription");
+            }
+        }
+    }
+//    [self.locationManager startUpdatingLocation];
+    
+    [self.notificationCircle.layer setCornerRadius:8];
+    [self.notificationCircle setClipsToBounds:YES];
+    
+    PFInstallation* installation =[PFInstallation currentInstallation];
+    if (installation)
+    {
+        [self updateNotificationBadgeTo:installation.badge];
+    }
+    else
+    {
+        [self updateNotificationBadgeTo:0];
+    }
+}
+
+-(void)updateNotificationBadgeTo:(NSInteger)badgeNumber
+{
+    if (badgeNumber ==0)
+    {
+        [self.notificationCircle setHidden:YES];
+        
+    }
+    else
+    {
+        [self.notificationCircle setHidden:NO];
+        [self.notificationLabel setText:[NSString stringWithFormat:@"%d",badgeNumber]];
+    }
+
+
+}
+
+#pragma mark - CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError: %@", error);
+
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    NSLog(@"didUpdateToLocation: %@", newLocation);
+    self.currentLocation = newLocation;
+    
+    
+    [[CLGeocoder new] reverseGeocodeLocation:self.currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        
+        NSString* city;
+        NSString* country;
+        NSString* state;
+        
+        
+        CLPlacemark* placemark = (CLPlacemark*) [placemarks firstObject];
+        
+
+        if (placemark.locality)
+        {
+            city = placemark.locality;
+        }
+        if (placemark.country)
+        {
+            country = placemark.country;
+        }
+        if (placemark.country && [placemark.country isEqualToString:@"United States"])
+        {
+            state = [GeneralUtils stateAbbreviationForState: placemark.administrativeArea];
+        }
+        if(state)
+        {
+            DEP.authenticatedUser[@"location"]= [NSString stringWithFormat:@"%@, %@", city, state];
+        }
+        else if(country)
+        {
+            DEP.authenticatedUser[@"location"]= [NSString stringWithFormat:@"%@, %@", city, country];
+
+        }
+        else
+        {
+            DEP.authenticatedUser[@"location"]=city;
+        }
+        [DEP.authenticatedUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [_locationLbl setHidden:NO];
+            [_locationLbl setTitle:DEP.authenticatedUser[@"location"] forState:UIControlStateNormal];
+        }];
+        [self.locationManager stopUpdatingLocation];
+    }];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -75,7 +185,9 @@
     if(![lastUserId isEqualToString:DEP.authenticatedUser[@"facebookID"]])
     {
         _usernameLbl.text = DEP.authenticatedUser.username;
+        [_usernameLbl setHidden:NO];
         [_locationLbl setTitle:DEP.authenticatedUser[@"location"] forState:UIControlStateNormal];
+        [_locationLbl setHidden:NO];
         
         _profileImgView.showActivityIndicator = YES;
         _profileImgView.image = nil;
@@ -84,6 +196,21 @@
         lastUserId = DEP.authenticatedUser[@"facebookID"];
     }
 }
+
+-(void)updateProfileData
+{
+    _usernameLbl.text = DEP.authenticatedUser.username;
+    [_usernameLbl setHidden:NO];
+    [_locationLbl setTitle:DEP.authenticatedUser[@"location"] forState:UIControlStateNormal];
+    [_locationLbl setHidden:NO];
+    
+    _profileImgView.showActivityIndicator = YES;
+    _profileImgView.image = nil;
+    _profileImgView.imageURL = [NSURL URLWithString:DEP.authenticatedUser[@"profilePictureUrl"]];
+    
+    lastUserId = DEP.authenticatedUser[@"facebookID"];
+}
+
 
 - (void)setVisualDetails
 {
@@ -133,6 +260,15 @@
         {
             if(apartment != nil && images !=nil)
             {
+                PFInstallation* installation = [PFInstallation currentInstallation];
+                installation.badge = 0;
+                [installation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    
+                    AppDelegate* delegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
+                    [delegate setNotificationBadgeTo:0];
+                    
+                }];
+                
                 Apartment *ap = [Apartment new];
                 
                 ap.apartment = apartment;
@@ -141,24 +277,70 @@
                 MyListingViewController* mylistingVC= [MyListingViewController new];
                 mylistingVC.apartment=ap;
                 ApartmentTableViewCell* topApartmentView = (ApartmentTableViewCell*)[[[NSBundle mainBundle] loadNibNamed:@"ApartmentTableViewCell" owner:nil options:nil] firstObject];
+                topApartmentView.apartmentTopView.disableSwipeGestures=YES;
+                mylistingVC.apartmentCell=topApartmentView;
                 topApartmentView.frame = CGRectMake(0,-44, wScr, hScr);
                 [topApartmentView.apartmentTopView.displayMore setHidden:YES];
 
                 [topApartmentView setApartment:ap.apartment withImages:ap.images andCurrentUsersStatus:YES];
                 [topApartmentView setDelegate:mylistingVC];
 
+                ApartmentDetailsOtherListingView* details = (ApartmentDetailsOtherListingView*)[[[NSBundle mainBundle] loadNibNamed:@"ApartmentDetailsOtherListingView" owner:nil options:nil] firstObject];
+                [details setApartmentDetailsDelegate:mylistingVC];
+                
+                CGFloat descriptionSize=0;
+                
+
+                if([apartment[@"description"] isEqualToString:@" "])
+                {
+                    descriptionSize = 140.0f;
+                }
+                
+                //set frame to compensate for the invisible navigation bar, fix this once bar is removed
+                details.frame = CGRectMake(0,hScr-44-50-descriptionSize, wScr, 612-100);
+                [details setBackgroundColor:[UIColor clearColor]];
+                details.controller = mylistingVC;
+                
+                topApartmentView.apartmentTopView.apartmentDetails=details;
+                
+                [details.connectedThroughImageView setHidden:YES];
+                [details.connectedThroughLbl setHidden:YES];
+                [details.likeBtn setHidden:YES];
+                [details.shareBtn setHidden:YES];
+                
+                [details.getButton setFrame:CGRectMake(details.getButton.frame.origin.x, details.getButton.frame.origin.y, details.getButton.frame.size.width, details.getButton.frame.size.height)];
+                
+                details.firstImageView = topApartmentView.apartmentTopView.apartmentImgView;
+                
+                //user is never the owner in the browse screen
+                details.currentUserIsOwner = YES;
+                details.isFromFavorites = NO;
+
+                [details setApartmentDetails:ap.apartment];
+                
+                [details updateFlipButtonStatus];
+   
+                
                 [mylistingVC.navigationController setNavigationBarHidden:YES];
                 [self setTitle:@" "];
                 mylistingVC.view=[[UIScrollView alloc] initWithFrame:self.view.frame];
+                [mylistingVC.view addSubview:details];
                 [mylistingVC.view addSubview:topApartmentView];
-                [(UIScrollView*)mylistingVC.view setContentSize:CGSizeMake(wScr, topApartmentView.frame.size.height-100)];
+                [(UIScrollView*)mylistingVC.view setContentSize:CGSizeMake(wScr, topApartmentView.frame.size.height+ details.frame.size.height-44-50-descriptionSize)];
                 [(UIScrollView*)mylistingVC.view setScrollEnabled:YES];
                 [mylistingVC.view setBackgroundColor:[UIColor whiteColor]];
+                
+                
                 self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:mylistingVC];
+                
+
             }
             else
             {
-                self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:[NoListingViewController new]];
+                NoListingViewController* nolistingVC = [NoListingViewController new];
+                nolistingVC.avatar =self.profileImgView.image;
+                
+                self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:nolistingVC];
             }
         }
         else
@@ -240,7 +422,7 @@
     [DEP.api.userApi logoutUser];
     DEP.authenticatedUser = nil;
     
-    [self presentViewController:[AuthenticationViewController new] animated:YES completion:^{
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[AuthenticationViewController new]]animated:YES completion:^{
         FeedViewController *feedVC = [FeedViewController new];
         self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:feedVC];
     }];

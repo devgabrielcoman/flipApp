@@ -16,6 +16,7 @@
 #import "AppDelegate.h"
 #import "RentedPanelController.h"
 #import "DashboardViewController.h"
+#import "LikesViewController.h"
 
 @interface MyListingViewController ()
 
@@ -70,7 +71,7 @@
     details.controller = moreVC;
     Apartment *apartment = self.apartment;
     
-    NSArray* mutualFriends=[GeneralUtils mutableFriendsInArray1:apartment.apartment[@"owner"][@"facebookFriends"] andArray2:[PFUser currentUser][@"facebookFriends"]];
+    NSArray* mutualFriends=[GeneralUtils mutualFriendsInArray1:apartment.apartment[@"owner"][@"facebookFriends"] andArray2:[PFUser currentUser][@"facebookFriends"]];
     
     details.connectedThroughLbl.text = [GeneralUtils connectedThroughExtendedDescription:[[NSMutableArray alloc] initWithArray:mutualFriends]];
     
@@ -81,7 +82,7 @@
     
     [details.connectedThroughImageView setHidden:YES];
     [details.connectedThroughLbl setHidden:YES];
-    
+    details.firstImageView=self.apartmentCell.apartmentTopView.apartmentImgView;
     [details updateFlipButtonStatus];
     
     [self setTitle:@" "];
@@ -116,9 +117,63 @@
 {
     AddApartmentViewController* editVC = [[AddApartmentViewController alloc] initWithNibName:@"AddApartmentViewController" bundle:nil];
     editVC.apartment=self.apartment;
+    editVC.image = self.apartmentCell.apartmentTopView.apartmentImgView.image;
+    editVC.delegate = self;
     [self presentViewController:editVC animated:YES completion:^{
         
     }];
+}
+
+-(void)showLikes
+{
+    if (self.likesArray && self.likesArray.count)
+    {
+        self.title =@" ";
+    
+        LikesViewController* likesVC = [[LikesViewController alloc] initWithNibName:@"LikesViewController" bundle:nil];
+        [likesVC setFavoritesArray:self.likesArray];
+        [self.navigationController pushViewController:likesVC animated:YES];
+            
+    }
+}
+
+-(void)shareApartment
+{
+    
+    NSString *textToShare = @"Check out this apartment!";
+    if ([textToShare isEqualToString:@""])
+    {
+        textToShare =@" ";
+    }
+    
+    NSURL *url = [NSURL URLWithString:_apartment.apartment[@"shareUrl"]];
+    UIImage* image = self.apartmentCell.apartmentTopView.apartmentImgView.image;
+    
+    NSArray *objectsToShare;
+    
+    if (image)
+    {
+        objectsToShare = @[textToShare, url,image];
+    }
+    else
+    {
+        objectsToShare = @[textToShare, url,image];
+        
+    }
+    
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+    
+    NSArray *excludeActivities = @[
+                                   UIActivityTypePrint,
+                                   UIActivityTypeAssignToContact,
+                                   UIActivityTypeAddToReadingList,
+                                   UIActivityTypePostToFlickr,
+                                   UIActivityTypePostToVimeo];
+    
+    activityVC.excludedActivityTypes = excludeActivities;
+    
+    [self presentViewController:activityVC animated:YES completion:nil];
 }
 
 #pragma mark - MWPhotoBrowser delegate
@@ -141,9 +196,47 @@
 
 #pragma mark - UIViewController methods
 
+
+- (void) navBarTapped: (UITapGestureRecognizer *)recognizer
+{
+    CGPoint tapPosition = [recognizer locationInView:self.navigationController.navigationBar];
+    [[self.apartmentCell  apartmentTopView] tappedAtPosition:tapPosition];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+//    if([self.navigationController.viewControllers count]==1)
+//    {
+//        UITapGestureRecognizer* navBarTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navBarTapped:)];
+//        [self.navigationController.navigationBar addGestureRecognizer:navBarTap];
+//    }
+    
+    PFQuery* query = [PFQuery queryWithClassName:@"Favorites"];
+    [query whereKey:@"apartment" equalTo:self.apartment.apartment];
+    [query includeKey:@"user"];
+    [query orderByDescending:@"timestamp"];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if([objects count]==1)
+        {
+            [self.apartmentCell.apartmentTopView.likesButton setTitle:[NSString stringWithFormat:@"%u like",[objects count]] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [self.apartmentCell.apartmentTopView.likesButton setTitle:[NSString stringWithFormat:@"%u likes",[objects count]] forState:UIControlStateNormal];
+        }
+        [self.apartmentCell.apartmentTopView.likesButton setHidden:NO];
+
+        self.likesArray = objects;
+        
+    }];
+        
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+
+
 }
 
 - (void)didReceiveMemoryWarning {

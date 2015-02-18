@@ -10,9 +10,15 @@
 #import "ApartmentCellProtocol.h"
 #import "Apartment.h"
 
-@interface SingleApartmentViewController : UITableViewController<ApartmentCellProtocol>
+@interface SingleApartmentViewController : UIViewController<ApartmentCellProtocol>
+
+@property (nonatomic, strong) IBOutlet UITableView* tableView;
+@property (nonatomic, strong) IBOutlet UILabel* loadingLabel;
+@property (nonatomic, strong) NSString* apartmentId;
 
 @property Apartment *apartment;
 @property BOOL isFromFavorites;
+
+@property BOOL userIsOwner;
 
 @end

@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TutorialPageView : UIView
+@interface TutorialPageView : UIViewController;
 
--(id)initWithImageName:(NSString *)imageName;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) UIImage* image;
+@property (nonatomic) NSInteger index;
 
 @end

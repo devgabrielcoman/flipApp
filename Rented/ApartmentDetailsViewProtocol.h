@@ -32,6 +32,7 @@
 
 - (void)setApartmentDetails:(PFObject *)apartment;
 - (void)updateFlipButtonStatus;
+- (void)pressedShareButton;
 
 @optional
 @property (weak, nonatomic) IBOutlet UILabel *cityLbl;

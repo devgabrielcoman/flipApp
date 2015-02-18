@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 DevRented. All rights reserved.
 //
 
+//custom error log implementation to ease comments removal when going to store
+
 #ifndef Rented_logger_h
 #define Rented_logger_h
 

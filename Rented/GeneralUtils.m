@@ -31,7 +31,7 @@
             [rooms appendFormat:@"3"];
         
         if([roomType integerValue] == Bedrooms4)
-            [rooms appendFormat:@"4"];
+            [rooms appendFormat:@"Over 3"];
     }
     
     NSString *finalString = @"";
@@ -58,13 +58,13 @@
             [rooms appendFormat:@"1 Bedroom"];
         
         if([roomType integerValue] == Bedrooms2)
-            [rooms appendFormat:@"2 Bedroom"];
+            [rooms appendFormat:@"2 Bedrooms"];
         
         if([roomType integerValue] == Bedrooms3)
-            [rooms appendFormat:@"3 Bedroom"];
+            [rooms appendFormat:@"3 Bedrooms"];
         
         if([roomType integerValue] == Bedrooms4)
-            [rooms appendFormat:@"4 Bedroom"];
+            [rooms appendFormat:@"Over 3 Bedrooms"];
     }
     
     NSString *finalString = @"";
@@ -77,7 +77,7 @@
     return finalString;
 }
 
-+(NSMutableArray*) mutableFriendsInArray1: (NSArray*)friends1 andArray2: (NSArray*)friends2
++(NSMutableArray*) mutualFriendsInArray1: (NSArray*)friends1 andArray2: (NSArray*)friends2
 {
     NSMutableArray* returnedArray = [NSMutableArray new];
     
@@ -111,27 +111,28 @@
     {
         if(actualFriends.count == 1)
         {
-            NSString* friendId =[mutalFriends firstObject];
+            NSString* friendId =[actualFriends firstObject];
             FacebookFriend *fr = [DEP.facebookFriendsInfo objectForKey:friendId];
             [description appendFormat:@"%@", fr.name];
-        } else if(mutalFriends.count == 2)
+        } else if(actualFriends.count == 2)
         {
-            NSString* friendId1 =[mutalFriends firstObject];
-            NSString* friendId2 =[mutalFriends objectAtIndex:1];
+            NSString* friendId1 =[actualFriends firstObject];
+            NSString* friendId2 =[actualFriends objectAtIndex:1];
 
             FacebookFriend *fr1 = [DEP.facebookFriendsInfo objectForKey:friendId1];
             FacebookFriend *fr2 = [DEP.facebookFriendsInfo objectForKey:friendId2];
             [description appendFormat:@"%@ and %@", fr1.name, fr2.name];
         }else{
-            NSString* friendId =[mutalFriends firstObject];
+            NSString* friendId =[actualFriends firstObject];
             FacebookFriend *fr = [DEP.facebookFriendsInfo objectForKey:friendId];
-            [mutalFriends removeObject:fr];
+            [actualFriends removeObject:fr];
             [description appendFormat:@"%@ and %lu others", fr.name, (unsigned long)mutalFriends.count];
         }
     }
     
     return description;
 }
+
 
 + (NSString *)getCityFromLocation:(NSString *)locationString
 {

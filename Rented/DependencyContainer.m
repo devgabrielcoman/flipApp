@@ -37,7 +37,7 @@ static DependencyContainer *_instance;
     else
     {
         DEP.userPreferences = [UserSearchPreferences new];
-        
+          //default preferences initialization
         DEP.userPreferences.minRenewalDays = 0;
         DEP.userPreferences.maxRenewalDays = 365;
         DEP.userPreferences.vacancyTypes = @[];

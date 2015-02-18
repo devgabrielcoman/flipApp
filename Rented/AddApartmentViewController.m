@@ -23,6 +23,8 @@
 #import "TRGoogleMapsAutocompletionCellFactory.h"
 #import "TRAutocompletionDelegate.h"
 #import "MapUtils.h"
+#import "CongratulationsViewController.h"
+#import "UnflipedViewController.h"
 
 
 
@@ -80,6 +82,8 @@
     NSMutableArray *rentWillChange;
     NSMutableArray *type;
     
+    NSInteger contactDirectly;
+    
     UIDatePicker* datePicker;
     
     MKPointAnnotation *currentAnnotation;
@@ -106,6 +110,13 @@
 @property (weak, nonatomic) IBOutlet UITextField *addressTextField;
 @property (weak, nonatomic) IBOutlet UIButton *monthButton;
 @property (weak, nonatomic) IBOutlet UIButton *dayButton;
+@property (weak, nonatomic) IBOutlet UISwitch *contactDirectlySwitch;
+@property (weak, nonatomic) IBOutlet UIPickerView *hourPicker;
+@property (weak, nonatomic) IBOutlet UIPickerView *dayPicker;
+@property (weak, nonatomic) IBOutlet UIButton *hoursButton;
+@property (weak, nonatomic) IBOutlet UIButton *daysButton;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 
 
@@ -209,14 +220,29 @@
     //instantiate and configure checkboxes
     [self addCheckboxes];
     
-    
+    contactDirectly=1;
+
     //using view controller in edit mode
     if(self.apartment)
     {
+        self.scrollViewContainer.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+        [self.saveButton setHidden:NO];
+        [self.deleteButton setHidden:NO];
         //customise fields using the apartment's data
         [self customiseViews];
     }
+    else
+    {
+        [self.saveButton setHidden:YES];
+        [self.deleteButton setHidden:YES];
 
+    }
+    
+    [self.secondScrollViewContainer bringSubviewToFront:_hourPicker];
+    [self.secondScrollViewContainer bringSubviewToFront:_dayPicker];
+    
+
+    
 }
 
 
@@ -609,7 +635,6 @@
     [self.scrollViewContainer setContentSize:CGSizeMake(wScr, 667)];
     [self.secondScrollViewContainer setContentSize:CGSizeMake(wScr, 450)];
     [super viewWillLayoutSubviews];
-    
 
 }
 
@@ -647,6 +672,8 @@
         [vacancyNegociable setCheckState:M13CheckboxStateChecked];
     }
     
+    vacancy = [_apartment.apartment[@"vacancy"] mutableCopy];
+    
     if ([_apartment.apartment[@"fee"] containsObject:[NSNumber numberWithInteger:0]])
     {
         [fee3percent setCheckState:M13CheckboxStateChecked];
@@ -659,10 +686,13 @@
     {
         [fee9percent setCheckState:M13CheckboxStateChecked];
     }
-    if ([_apartment.apartment[@"fee"] containsObject:[NSNumber numberWithInteger:3]] && [_apartment.apartment[@"feeOther"] floatValue]!=-1)
+    if ([_apartment.apartment[@"fee"] containsObject:[NSNumber numberWithInteger:3]] )
     {
-        self.otherAmountTextField.text = [NSString stringWithFormat:@"%f",[_apartment.apartment[@"feeOther"] floatValue]];
+        self.otherAmountTextField.text = [NSString stringWithFormat:@"%.3f",[_apartment.apartment[@"feeOther"] floatValue]];
     }
+    
+    fee = [_apartment.apartment[@"fee"] mutableCopy];
+    
     if ([_apartment.apartment[@"rooms"] containsObject:[NSNumber numberWithInteger:0]])
     {
         [studioRoom setCheckState:M13CheckboxStateChecked];
@@ -684,17 +714,22 @@
         [bedroom4 setCheckState:M13CheckboxStateChecked];
     }
     
+    rooms = [_apartment.apartment[@"rooms"] mutableCopy];
+    
     if ([_apartment.apartment[@"type"] integerValue]==0)
     {
         [typeEntirePlace setCheckState:M13CheckboxStateChecked];
+        type = [ @[@TypeEntirePlace] mutableCopy];
     }
     if ([_apartment.apartment[@"type"] integerValue]==1)
     {
         [typePrivateRoom setCheckState:M13CheckboxStateChecked];
+        type = [ @[@TypePrivateRoom] mutableCopy];
     }
      if ([_apartment.apartment[@"type"] integerValue]==2)
     {
         [typeRetailOrCommercial setCheckState:M13CheckboxStateChecked];
+        type = [ @[@TypeRetailOrCommercial] mutableCopy];
     }
     
     _rentTF.text = [NSString stringWithFormat:@"%d",[_apartment.apartment[@"rent"] integerValue]];
@@ -707,10 +742,25 @@
     else
     {
         [_addApartmentBtn setTitle:@"FLIP" forState:UIControlStateNormal];
+
     }
     
-
+    leaseExpirationDate = [NSDate dateWithTimeIntervalSince1970:[_apartment.apartment[@"renewalTimestamp"] integerValue]];
+    NSDateFormatter *monthFormatter = [[NSDateFormatter alloc] init];
+    [monthFormatter setDateFormat:@"MMMM"];
+    NSDateFormatter *dayFormatter = [[NSDateFormatter alloc] init];
+    [dayFormatter setDateFormat:@"d"];
     
+    [self.monthButton setTitle:[monthFormatter stringFromDate:leaseExpirationDate] forState:UIControlStateNormal] ;
+    [self.dayButton setTitle:[dayFormatter stringFromDate:leaseExpirationDate] forState:UIControlStateNormal];
+    
+    [self.contactDirectlySwitch setOn:[_apartment.apartment[@"directContact"] boolValue]];
+    contactDirectly=[_apartment.apartment[@"directContact"] integerValue];
+
+    [self.hoursButton setTitle:_apartment.apartment[@"bestContactHours"] forState:UIControlStateNormal];
+    [self.daysButton setTitle:_apartment.apartment[@"bestContactDays"] forState:UIControlStateNormal];
+    
+    _apartmentImages = _apartment.images;
 }
 
 #pragma mark - TRAutocomplete delegate method
@@ -926,25 +976,76 @@
 
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    return 1;
+    if(self.dayPicker == pickerView)
+    {
+        return 1;
+    }
+    if (self.hourPicker == pickerView)
+    {
+        return 2;
+    }
+    
+    return 0;
 }
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return apartmentTypes.count;
+    if(self.dayPicker == pickerView)
+    {
+        return 3;
+    }
+    if (self.hourPicker == pickerView)
+    {
+        return 24;
+    }
+    return 0;
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [apartmentTypes[row] displayName];
+    if(self.dayPicker == pickerView)
+    {
+        if (row==0)
+        {
+            return @"Weekdays";
+        }
+        if (row==1)
+        {
+            return @"Weekends";
+        }
+        if (row==2)
+        {
+            return @"Everyday";
+        }
+    }
+    if (self.hourPicker == pickerView)
+    {
+        if (row<12)
+        {
+            return [NSString stringWithFormat:@"%d AM",row+1];
+        }
+        else
+        {
+            return [NSString stringWithFormat:@"%d PM",row-11];
+        }
+    }
+    return nil;
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    PickerData *data = apartmentTypes[row];
-    _typeTF.text = data.displayName;
-    _apartmentType = [data.value integerValue];
-    [self.view endEditing:YES];
+    if (self.dayPicker == pickerView)
+    {
+        [self.daysButton setTitle:[self pickerView:pickerView titleForRow:row forComponent:component] forState:UIControlStateNormal];
+    }
+    if (self.hourPicker == pickerView)
+    {
+        NSString* firstHour= [self pickerView:self.hourPicker titleForRow:[self.hourPicker selectedRowInComponent:0] forComponent:0];
+        NSString* secordHour= [self pickerView:self.hourPicker titleForRow:[self.hourPicker selectedRowInComponent:1] forComponent:1];
+        NSString* hourString = [NSString stringWithFormat:@"%@ - %@",firstHour,secordHour];
+        [self.hoursButton setTitle:hourString forState:UIControlStateNormal];
+
+    }
 }
 
 #pragma mark - AssetsPicker Delegate
@@ -978,6 +1079,121 @@
 }
 
 #pragma mark - Buttons actions
+-(IBAction)deleteApartment:(id)sender
+{
+
+    if (self.apartment.apartment)
+    {
+        [self.apartment.apartment deleteInBackground];
+        [self dismissViewControllerAnimated:YES
+                                 completion:^{
+                                     [self.delegate addApartmentFinieshedWithChanges:YES];
+                                 }];
+    }
+    
+}
+
+-(IBAction)saveChanges:(id)sender
+{
+
+    if([self validateFields])
+    {
+
+        CLLocation* location = [[CLLocation alloc] initWithLatitude:_apartmentLocation.latitude longitude:_apartmentLocation.longitude];
+        [[CLGeocoder new] reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+            
+            NSString* neighborhood = @"";
+            NSString* city = @"";
+            NSString* state = @"";
+            NSString* zipCode = @"";
+            
+            
+            CLPlacemark* placemark = (CLPlacemark*) [placemarks firstObject];
+            
+            if (placemark.subLocality)
+            {
+                neighborhood = placemark.subLocality;
+            }
+            if (placemark.locality)
+            {
+                city = placemark.locality;
+            }
+            if (placemark.postalCode)
+            {
+                zipCode = placemark.postalCode;
+            }
+            if (placemark.country && [placemark.country isEqualToString:@"United States"])
+            {
+                state = [GeneralUtils stateAbbreviationForState: placemark.administrativeArea];
+            }
+            
+
+            _apartment.apartment[@"location"] = [NSString stringWithFormat:@"%f|%f", _apartmentLocation.latitude, _apartmentLocation.longitude];;
+            _apartment.apartment[@"locationName"] = _addressTextField.text;
+            _apartment.apartment[@"type"] = [NSNumber numberWithInteger:[[type firstObject] integerValue]];
+            _apartment.apartment[@"rooms"] = rooms;
+            _apartment.apartment[@"fee"] = fee;
+            if (![self.otherAmountTextField.text isEqualToString:@""])
+            {
+                if([self.otherAmountTextField.text containsString:@"%"])
+                {
+                    NSString* percentString = [[self.otherAmountTextField.text componentsSeparatedByString:@"%"] objectAtIndex:0];
+                    _apartment.apartment[@"feeOther"] = [NSNumber numberWithFloat:([percentString floatValue]/100.0)];
+                    _apartment.apartment[@"fee"] = @[@FeeOtherpercent];
+                }
+                else
+                {
+                    _apartment.apartment[@"feeOther"] = [NSNumber numberWithFloat:[self.otherAmountTextField.text floatValue]];
+                    _apartment.apartment[@"fee"] = @[@FeeOtherpercent];
+                }
+            }
+
+            _apartment.apartment[@"vacancy"] = vacancy;
+            _apartment.apartment[@"description"] = @"";
+            _apartment.apartment[@"area"] = [NSNumber numberWithInteger: [_areaTF.text integerValue]];
+            _apartment.apartment[@"rent"] = [NSNumber numberWithInteger: [_rentTF.text integerValue]];
+            _apartment.apartment[@"renewalTimestamp"] = [NSNumber numberWithLong:(long)[leaseExpirationDate timeIntervalSince1970]];
+            _apartment.apartment[@"neighborhood"] = neighborhood;
+            _apartment.apartment[@"city"] = city;
+            _apartment.apartment[@"state"] = state;
+            _apartment.apartment[@"zipcode"] = zipCode;
+            _apartment.apartment[@"directContact"] = [NSNumber numberWithInteger: contactDirectly];
+            _apartment.apartment[@"bestContactHours"] = self.hoursButton.titleLabel.text;
+            _apartment.apartment[@"bestContactDays"] = self.daysButton.titleLabel.text;
+            
+            [_apartment.apartment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                
+                if (!error)
+                {
+                    [UIAlertView showWithTitle:@""
+                                       message:@"Apartment has been saved!"
+                                         style:UIAlertViewStyleDefault
+                             cancelButtonTitle:nil otherButtonTitles:@[@"Ok"]
+                                      tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                          [self dismissViewControllerAnimated:YES completion:^{
+                                              [self.delegate addApartmentFinieshedWithChanges:YES];
+                                          }];
+                                      }];
+                }
+                
+            }];
+        }];
+    }
+}
+
+-(IBAction)daysDropDownTapped:(id)sender
+{
+
+    [self.dayPicker setHidden:!self.dayPicker.hidden];
+    
+    [self.hourPicker setHidden:YES];
+}
+-(IBAction)hoursDropDownTapped:(id)sender
+{
+    [self.hourPicker setHidden:!self.hourPicker.hidden];
+    
+    [self.dayPicker setHidden:YES];
+}
 
 -(IBAction)dateDropDownTapped:(id)sender
 {
@@ -1110,17 +1326,38 @@
     if (self.apartment)
     {
         if(![_apartment.apartment[@"visible"] boolValue])
+        {
             [DEP.api.apartmentApi makeApartmentLive:_apartment.apartment completion:^(BOOL succeeded) {
-                
-                [self.addApartmentBtn setTitle:@"UNFLIP" forState:UIControlStateNormal];
 
             }];
+        
+            
+            CongratulationsViewController* congratulationsVC = [[CongratulationsViewController alloc]initWithNibName:@"CongratulationsViewController" bundle:nil];
+            congratulationsVC.image = self.image;
+            congratulationsVC.apartment = self.apartment.apartment;
+            [self presentViewController:congratulationsVC animated:YES completion:^{
+                
+            }];
+            
+            [self.addApartmentBtn setTitle:@"UNFLIP" forState:UIControlStateNormal];
+
+        
+        }
         else
+        {
             [DEP.api.apartmentApi hideLiveApartment:_apartment.apartment completion:^(BOOL succeeded) {
-                
-                [self.addApartmentBtn setTitle:@"FLIP" forState:UIControlStateNormal];
-
+         
             }];
+            
+            UnflipedViewController* unflipedVC = [[UnflipedViewController alloc] initWithNibName:@"UnflipedViewController" bundle:nil];
+            [self presentViewController:unflipedVC animated:YES completion:^{
+                
+            }];
+            
+            
+            [self.addApartmentBtn setTitle:@"FLIP" forState:UIControlStateNormal];
+
+        }
         
         return;
     }
@@ -1160,12 +1397,22 @@
             
             NSMutableDictionary *apartmentInfo = [NSMutableDictionary new];
             apartmentInfo[@"location"] = [NSString stringWithFormat:@"%f|%f", _apartmentLocation.latitude, _apartmentLocation.longitude];
-            apartmentInfo[@"type"] = [NSNumber numberWithInteger:0];
+            apartmentInfo[@"type"] = [NSNumber numberWithInteger:[[type firstObject] integerValue]];
             apartmentInfo[@"rooms"] = rooms;
             apartmentInfo[@"fee"] = fee;
-            if ([fee containsObject:@FeeOtherpercent])
+            if (![self.otherAmountTextField.text isEqualToString:@""])
             {
-                apartmentInfo[@"feeOther"] = [NSNumber numberWithFloat:[self.otherAmountTextField.text floatValue]];
+                if([self.otherAmountTextField.text containsString:@"%"])
+                {
+                    NSString* percentString = [[self.otherAmountTextField.text componentsSeparatedByString:@"%"] objectAtIndex:0];
+                    apartmentInfo[@"feeOther"] = [NSNumber numberWithFloat:([percentString floatValue]/100.0)];
+                    apartmentInfo[@"fee"] = @[@FeeOtherpercent];
+                }
+                else
+                {
+                    apartmentInfo[@"feeOther"] = [NSNumber numberWithFloat:[self.otherAmountTextField.text floatValue]];
+                    apartmentInfo[@"fee"] = @[@FeeOtherpercent];
+                }
             }
             apartmentInfo[@"rentWillChange"] = rentWillChange;
             apartmentInfo[@"vacancy"] = vacancy;
@@ -1177,19 +1424,11 @@
             apartmentInfo[@"city"]=city;
             apartmentInfo[@"state"]=state;
             apartmentInfo[@"zipcode"]=zipCode;
+            apartmentInfo[@"directContact"]=[NSNumber numberWithInteger: contactDirectly];
+            apartmentInfo[@"bestContactHours"]=self.hoursButton.titleLabel.text;
+            apartmentInfo[@"bestContactDays"] =self.daysButton.titleLabel.text;
             
-            NSDate* renewaldate = [NSDate date];
-            NSDateComponents* days = [[NSDateComponents alloc] init];
-            NSDate* fromDate = [NSDate date];
-            NSDate* toDate = leaseExpirationDate;
-            
-            NSUInteger unitFlags = NSDayCalendarUnit;
-            NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-            days = [calendar components:unitFlags fromDate:fromDate toDate:toDate options:0];
-            
-            renewaldate = [[NSCalendar currentCalendar] dateByAddingComponents:days toDate:renewaldate options:0];
-            
-            apartmentInfo[@"renewalTimestamp"]=[NSNumber numberWithLong:(long)[renewaldate timeIntervalSince1970]];
+            apartmentInfo[@"renewalTimestamp"]=[NSNumber numberWithLong:(long)[leaseExpirationDate timeIntervalSince1970]];
             
             [DEP.api.apartmentApi saveApartment:apartmentInfo
                                          images:_apartmentImages
@@ -1227,6 +1466,12 @@
         [UIAlertView showWithTitle:@"" message:@"Select location!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
         return NO;
     }
+    if(!leaseExpirationDate)
+    {
+        [UIAlertView showWithTitle:@"" message:@"Select lease renewal date!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
+        return NO;
+    }
+    
     
 //    if(_apartmentType < 0)
 //    {
@@ -1309,6 +1554,19 @@
 -(void)dismissSelf
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (IBAction)contactDirectly:(id)sender
+{
+    if ([self.contactDirectlySwitch isOn])
+    {
+        contactDirectly =1;
+    }
+    else
+    {
+        contactDirectly =0;
+    }
 }
 
 #pragma mark - Checkbox handlers

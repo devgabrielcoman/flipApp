@@ -2,14 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>DVTPlugInCompatibilityUUIDs</key>
-	<string>C4A681B0-4A26-480E-93EC-1218098B9AA0</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Flip needs your current location to find places near you.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.devrented.Rented</string>
+	<string>com.flip</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -27,14 +27,18 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb750266711721168</string>
+				<string>fb656809821111233</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>3</string>
+	<key>DVTPlugInCompatibilityUUIDs</key>
+	<string>C4A681B0-4A26-480E-93EC-1218098B9AA0</string>
 	<key>FacebookAppID</key>
-	<string>750266711721168</string>
+	<string>656809821111233</string>
+	<key>FacebookDisplayName</key>
+	<string>Flip</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIAppFonts</key>

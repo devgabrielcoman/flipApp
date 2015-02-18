@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UnflipedViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zyS-tU-2IP">
+                    <rect key="frame" x="20" y="33" width="31" height="31"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="31" id="2OI-PF-jck"/>
+                        <constraint firstAttribute="width" constant="31" id="J9E-uN-x5m"/>
+                    </constraints>
+                    <state key="normal" image="backArrow">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="backButtonTapped:" destination="-1" eventType="touchUpInside" id="tnl-3c-vhS"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWd-p9-RkC">
+                    <rect key="frame" x="0.0" y="610" width="375" height="57"/>
+                    <color key="backgroundColor" red="0.2784313725" green="0.62745098040000002" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="57" id="D05-r5-RKe"/>
+                        <constraint firstAttribute="width" constant="296" id="Fao-Q4-nYn"/>
+                        <constraint firstAttribute="height" constant="57" id="Iij-cA-bsC"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="57" id="P2k-a3-gcO"/>
+                        <constraint firstAttribute="width" constant="296" id="gx3-f3-5OT"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="SHARE FLIP" image="whiteShareIcon">
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="D05-r5-RKe"/>
+                            <exclude reference="Fao-Q4-nYn"/>
+                            <exclude reference="P2k-a3-gcO"/>
+                            <exclude reference="gx3-f3-5OT"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <action selector="shareFlip" destination="-1" eventType="touchUpInside" id="sq1-Ts-zfv"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change your mind?  That’s cool. Your place is hidden from sight." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WyP-pd-ydg">
+                    <rect key="frame" x="70" y="213" width="234" height="242"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="242" id="sbc-ka-mxv"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                    <color key="textColor" red="0.3294117647" green="0.41176470590000003" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="WyP-pd-ydg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="70" id="2Cf-Dh-Flg"/>
+                <constraint firstAttribute="trailing" secondItem="lWd-p9-RkC" secondAttribute="trailing" id="DOy-Oc-acZ"/>
+                <constraint firstAttribute="trailing" secondItem="WyP-pd-ydg" secondAttribute="trailing" constant="71" id="GrK-yj-rA5"/>
+                <constraint firstAttribute="centerX" secondItem="WyP-pd-ydg" secondAttribute="centerX" id="MJV-xp-nOw"/>
+                <constraint firstItem="zyS-tU-2IP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="33" id="TEu-9R-Xog"/>
+                <constraint firstAttribute="centerX" secondItem="WyP-pd-ydg" secondAttribute="centerX" id="XZO-Ce-aUd"/>
+                <constraint firstItem="zyS-tU-2IP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="anc-t9-FNn"/>
+                <constraint firstAttribute="bottom" secondItem="lWd-p9-RkC" secondAttribute="bottom" id="dEp-sR-2fy"/>
+                <constraint firstItem="lWd-p9-RkC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gjx-ZJ-jAP"/>
+                <constraint firstAttribute="centerY" secondItem="WyP-pd-ydg" secondAttribute="centerY" id="vy6-Au-Drz"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="backArrow" width="31" height="31"/>
+        <image name="whiteShareIcon" width="17" height="12"/>
+    </resources>
+</document>

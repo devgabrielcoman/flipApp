@@ -11,11 +11,13 @@
 #import <MWPhotoBrowser.h>
 #import "Apartment.h"
 #import "AddApartmentViewController.h"
+#import "ApartmentTableViewCell.h"
 
 
 @interface MyListingViewController : UIViewController <ApartmentCellProtocol,MWPhotoBrowserDelegate,AddApartmentDelegate>
-
+@property (nonatomic,strong) ApartmentTableViewCell* apartmentCell;
 @property (nonatomic,strong) Apartment* apartment;
+@property (nonatomic,strong) NSArray* likesArray;
 @property (nonatomic,strong) NSMutableArray* apartmentGalleryPhotos;
 
 

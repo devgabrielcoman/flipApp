@@ -10,6 +10,10 @@
 #import <AsyncImageView.h>
 #import "FavoriteApartmentCellProtocol.h"
 
+/*
+ Custom cell for favorite apartment
+ */
+
 @interface FavoriteApartmentTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet AsyncImageView *apartmentImageView;

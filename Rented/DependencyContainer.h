@@ -10,6 +10,12 @@
 #import "RentedApi.h"
 #import "UserSearchPreferences.h"
 
+/*
+ 
+ Shared instance that keep the most used data within the app
+ Use mostly to avoid singletons
+ 
+ */
 #define DEP [DependencyContainer sharedInstance]
 
 @interface DependencyContainer : NSObject

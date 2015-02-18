@@ -15,5 +15,6 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) RentedPanelController *rootViewController;
 
+-(void)setNotificationBadgeTo:(NSInteger) badgeNumber;
 @end
 

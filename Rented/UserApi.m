@@ -25,7 +25,7 @@
 
 - (void)authenticateUserWithFacebook:(void (^)(BOOL authenticated))completionHandler
 {
-    NSArray *permissionsArray = @[@"user_about_me", @"user_location", @"user_friends", @"user_location", @"email"];
+    NSArray *permissionsArray = @[@"user_about_me", @"user_friends", @"email"];
     
     [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
         
@@ -38,6 +38,18 @@
                 [self loadRequiredUserData:^(BOOL success) {
                     completionHandler(YES);
                 }];
+                PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+                NSMutableArray* channels = [NSMutableArray new];
+                [channels addObject:@"global" ];
+                [channels addObject:user.objectId];
+                
+                currentInstallation.channels = channels;
+                
+                
+                [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    
+                }];
+                
             }
             
             [self getCurrentUsersFacebookFriends:^(NSArray *friends, BOOL succeeded) {
@@ -52,7 +64,7 @@
                     PFQuery *query = [PFUser query];
                     [query whereKey:@"facebookID" equalTo:friend];
                     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                        if(!error)
+                        if(!error && objects && objects.count>0)
                         {
                             PFUser *userFriend = (PFUser*)[objects objectAtIndex:0];
                             FacebookFriend *fr = [FacebookFriend new];
@@ -70,24 +82,8 @@
             }];
             
             
-            PFQuery * query = [PFQuery queryWithClassName:@"UserMetaData"];
-            [query whereKey:@"user"equalTo:DEP.authenticatedUser];
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-             {
-                 if ([objects count]==0)
-                 {
-                     PFObject* object = [PFObject objectWithClassName:@"UserMetaData"];
-                     object[@"user"] = DEP.authenticatedUser;
-                     object[@"isVerified"]= [NSNumber numberWithInt:0];
-                     [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
-                      {
-                          
-                      }];
-                 }
-                 
-                 
-             }];
-            
+
+
             if ([DEP.authenticatedUser[@"isAdmin"] integerValue]==1)
             {
                 [(DashboardViewController*)[(RentedPanelController*)[(AppDelegate*)[UIApplication sharedApplication].delegate rootViewController] leftPanel] showAdminOptions:YES] ;
@@ -101,7 +97,7 @@
         }
     }];
 }
-
+// Get all required information about logged user and set it to dependency container object
 - (void)loadRequiredUserData:(void (^)(BOOL success))completionHandler
 {
     FBRequest *request = [FBRequest requestForMe];
@@ -110,14 +106,24 @@
         {
             NSDictionary *userData = (NSDictionary *)result;
             
-            [DEP.authenticatedUser setObject:userData[@"email"] forKey:@"email"];
+            if (userData[@"email"])
+            {
+                [DEP.authenticatedUser setObject:userData[@"email"] forKey:@"email"];
+            }
             [DEP.authenticatedUser setObject:userData[@"id"] forKey:@"facebookID"];
+            [DEP.authenticatedUser setObject:userData[@"first_name"] forKey:@"firstName"];
+            [DEP.authenticatedUser setObject:userData[@"last_name"] forKey:@"lastName"];
             [DEP.authenticatedUser setObject:userData[@"name"] forKey:@"username"];
             if([[userData allKeys] containsObject:@"location"])
                 [DEP.authenticatedUser setObject:userData[@"location"][@"name"] forKey:@"location"];
             else
-                [DEP.authenticatedUser setObject:@"(currently not available)" forKey:@"location"];
-                
+            {
+                if (!DEP.authenticatedUser[@"location"])
+                {
+                    [DEP.authenticatedUser setObject:@"(currently not available)" forKey:@"location"];
+                }
+            }
+            
             [DEP.authenticatedUser setObject:userData[@"gender"] forKey:@"gender"];
             [DEP.authenticatedUser setObject:[NSNumber numberWithInt:0] forKey:@"isFacebookProfileHidden"];
             
@@ -126,7 +132,10 @@
             
             [DEP.authenticatedUser setObject:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", userData[@"id"]] forKey:@"profilePictureUrl"];
             
-            [DEP.authenticatedUser saveInBackground];
+            [DEP.authenticatedUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+                [(DashboardViewController*)delegate.rootViewController.leftPanel updateProfileData];
+            }];
             
             [self getCurrentUsersFacebookFriends:^(NSArray *friends, BOOL succeeded) {
                 
@@ -152,6 +161,7 @@
 {
     [[PFFacebookUtils session] closeAndClearTokenInformation];
     [[FBSession activeSession] closeAndClearTokenInformation];
+
     [FBSession setActiveSession:nil];
     [PFUser logOut];
 }

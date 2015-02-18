@@ -10,4 +10,6 @@
 
 @interface NoListingViewController : UIViewController
 
+@property (strong, nonatomic) UIImage *avatar;
+
 @end

@@ -21,6 +21,7 @@
 #import <AFNetworking.h>
 #import "NoInternetConnectionView.h"
 #import "FacebookFriend.h"
+#import "SingleApartmentViewController.h"
 
 @interface AppDelegate ()
 
@@ -31,6 +32,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
+    NSURL* launchURL = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
     
     [self setupDataConnectionNotifier];
     [self setupParse];
@@ -48,7 +51,38 @@
     _rootViewController.shouldDelegateAutorotateToVisiblePanel = NO;
     _rootViewController.leftFixedWidth = 260.0f;
     _rootViewController.leftPanel = [DashboardViewController new];
-    _rootViewController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:[FeedViewController new]];
+    
+    if (launchURL)
+    {
+        NSString* launchURLString = [NSString stringWithFormat:@"%@",launchURL];
+        NSArray* urlComponents = [launchURLString componentsSeparatedByString:@"//"];
+        if ([urlComponents count] ==2)
+        {
+            NSString* parametersString = [urlComponents objectAtIndex:1];
+            
+            NSArray* parameters = [parametersString componentsSeparatedByString:@"/"];
+            if ([parameters count] == 3)
+            {
+                NSString* type = [parameters objectAtIndex:1];
+                
+                if ([type isEqualToString:@"apartment"])
+                {
+                    NSString* param3 =[parameters objectAtIndex:2];
+                    NSArray* param3Array =[param3 componentsSeparatedByString:@"?"];
+                    NSString* apartmentId = [param3Array objectAtIndex:0];
+                    SingleApartmentViewController* singleApartmentVC = [SingleApartmentViewController new];
+                    singleApartmentVC.apartmentId = apartmentId;
+                    _rootViewController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:singleApartmentVC];
+                }
+            }
+            
+        }
+    }
+    else
+    {
+        _rootViewController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:[FeedViewController new]];
+    }
+
     _rootViewController.rightPanel = nil;
     
     self.window.rootViewController = _rootViewController;
@@ -71,7 +105,7 @@
                 PFQuery *query = [PFUser query];
                 [query whereKey:@"facebookID" equalTo:friend];
                 [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                    if(!error)
+                    if(!error && objects && objects.count)
                     {
                         PFUser *userFriend = (PFUser*)[objects objectAtIndex:0];
                         FacebookFriend *fr = [FacebookFriend new];
@@ -110,6 +144,29 @@
 
     }
 
+    
+    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+                                                    UIUserNotificationTypeBadge |
+                                                    UIUserNotificationTypeSound);
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                             categories:nil];
+    [application registerUserNotificationSettings:settings];
+    [application registerForRemoteNotifications];
+    
+    
+    if (application.applicationState != UIApplicationStateBackground) {
+        // Track an app open here if we launch with a push, unless
+        // "content_available" was used to trigger a background push (introduced
+        // in iOS 7). In that case, we skip tracking here to avoid double
+        // counting the app-open.
+        BOOL preBackgroundPush = ![application respondsToSelector:@selector(backgroundRefreshStatus)];
+        BOOL oldPushHandlerOnly = ![self respondsToSelector:@selector(application:didReceiveRemoteNotification:fetchCompletionHandler:)];
+        BOOL noPushPayload = ![launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        if (preBackgroundPush || oldPushHandlerOnly || noPushPayload) {
+            [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+        }
+    }
+    
     
     return YES;
 }
@@ -159,12 +216,40 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
+
+
 #pragma mark - Facebook Authentication Delegates
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
+    
+    if (url)
+    {
+        NSString* launchURLString = [NSString stringWithFormat:@"%@",url];
+        NSArray* urlComponents = [launchURLString componentsSeparatedByString:@"//"];
+        if ([urlComponents count] ==2)
+        {
+            NSString* parametersString = [urlComponents objectAtIndex:1];
+            
+            NSArray* parameters = [parametersString componentsSeparatedByString:@"/"];
+            if ([parameters count] == 3)
+            {
+                NSString* type = [parameters objectAtIndex:1];
+                
+                if ([type isEqualToString:@"apartment"])
+                {
+                    NSString* apartmentId = [parameters objectAtIndex:2];
+                    SingleApartmentViewController* singleApartmentVC = [SingleApartmentViewController new];
+                    singleApartmentVC.apartmentId = apartmentId;
+                    _rootViewController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:singleApartmentVC];
+                }
+            }
+            
+        }
+    }
+    
     return [FBAppCall handleOpenURL:url
                   sourceApplication:sourceApplication
                         withSession:[PFFacebookUtils session]];
@@ -176,6 +261,44 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     [[PFFacebookUtils session] close];
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // Store the deviceToken in the current installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    NSMutableArray* channels = [NSMutableArray new];
+    [channels addObject:@"global" ];
+    if (DEP.authenticatedUser)
+    {
+        [channels addObject:DEP.authenticatedUser.objectId];
+    }
+    currentInstallation.channels = channels;
+    
+    
+    [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+      
+    }];
+}
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [PFPush handlePush:userInfo];
+
+    [self setNotificationBadgeTo:[PFInstallation currentInstallation].badge];
+    
+    
+    if (application.applicationState == UIApplicationStateInactive) {
+        // The application was just brought from the background to the foreground,
+        // so we consider the app as having been "opened by a push notification."
+        [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
+    }
+}
+
+-(void)setNotificationBadgeTo:(NSInteger)badgeNumber
+{
+    [(DashboardViewController*)self.rootViewController.leftPanel updateNotificationBadgeTo:badgeNumber];
+    [self.rootViewController updateMenuButtonWithNumber:badgeNumber];
+
 }
 
 @end

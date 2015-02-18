@@ -20,6 +20,8 @@
 - (void)switchToNextApartmentFromIndex:(NSInteger)index;
 - (void)getApartmentAtIndex:(NSInteger)index;
 - (void)editApartment;
+-(void)shareApartment;
+-(void)showLikes;
 
 
 @end

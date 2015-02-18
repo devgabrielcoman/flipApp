@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import <AsyncImageView.h>
 #import "ApartmentCellProtocol.h"
+#import "ApartmentDetailsOtherListingView.h"
 
 @interface TopApartmentView : UIView<UIGestureRecognizerDelegate, MKMapViewDelegate>
 
@@ -24,20 +25,22 @@
 @property (weak, nonatomic) IBOutlet UILabel *connectedThroughLbl;
 @property (weak, nonatomic) IBOutlet UILabel *verifiedLabel;
 @property (weak, nonatomic) IBOutlet UIView *myListingBar;
-@property (weak, nonatomic) IBOutlet UILabel *likesLabel;
 @property (weak, nonatomic) IBOutlet UIButton *editButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UIButton *likesButton;
 
 
 
-@property BOOL enableSwipeGestures;
+
+@property BOOL disableSwipeGestures;
 @property id<ApartmentCellProtocol> delegate;
 @property NSInteger apartmentIndex;
 @property NSString *locationString;
 @property PFObject *apartment;
+@property ApartmentDetailsOtherListingView* apartmentDetails;
 
 - (void)setApartmentDetails:(PFObject *)apartment andImages:(NSArray *)images;
 - (void)updateMapView;
-
+- (void)tappedAtPosition:(CGPoint)point;
 
 @end

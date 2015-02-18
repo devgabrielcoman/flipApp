@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CongratulationsViewController">
+            <connections>
+                <outlet property="congratulationsLabel" destination="8vd-dj-wFF" id="HdT-wl-b93"/>
+                <outlet property="messageLabel" destination="X9X-Ic-GBN" id="7Ma-0e-uld"/>
+                <outlet property="shareButton" destination="t6W-nL-Sr9" id="uFQ-yK-vmD"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONGRATULATIONS!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vd-dj-wFF">
+                    <rect key="frame" x="65" y="135" width="244" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="244" id="5v0-Ce-QBe"/>
+                        <constraint firstAttribute="height" constant="21" id="bpu-al-KqQ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                    <color key="textColor" red="0.3294117647" green="0.41176470590000003" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X9X-Ic-GBN">
+                    <rect key="frame" x="71" y="172" width="232" height="90"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="90" id="gbW-oK-SHM"/>
+                        <constraint firstAttribute="width" constant="232" id="uo6-GK-WNe"/>
+                    </constraints>
+                    <string key="text">Your place is now published for all to see. 
+
+A Flipmate will message you with your first qualified replacement </string>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                    <color key="textColor" red="0.3294117647" green="0.41176470590000003" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t6W-nL-Sr9">
+                    <rect key="frame" x="0.0" y="307" width="375" height="57"/>
+                    <color key="backgroundColor" red="0.27843137254901962" green="0.62745098039215685" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="57" id="NgV-JT-mFt"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                    <inset key="imageEdgeInsets" minX="-14" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="SHARE WITH FRIENDS" image="whiteShareIcon">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="shareButtonTapped:" destination="-1" eventType="touchUpInside" id="MTp-jP-clK"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E2q-1F-ViR">
+                    <rect key="frame" x="20" y="33" width="31" height="31"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="31" id="dn0-wR-9xG"/>
+                        <constraint firstAttribute="width" constant="31" id="o4l-QP-eWO"/>
+                    </constraints>
+                    <state key="normal" image="backArrow">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="backButtonTapped:" destination="-1" eventType="touchUpInside" id="JYE-Lp-yCM"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="8vd-dj-wFF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="135" id="GcH-2e-scT"/>
+                <constraint firstAttribute="centerX" secondItem="8vd-dj-wFF" secondAttribute="centerX" id="KxK-TL-eJZ"/>
+                <constraint firstItem="t6W-nL-Sr9" firstAttribute="top" secondItem="X9X-Ic-GBN" secondAttribute="bottom" constant="45" id="Svb-XQ-kI4"/>
+                <constraint firstItem="E2q-1F-ViR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="33" id="Sx1-n3-S5Z"/>
+                <constraint firstItem="t6W-nL-Sr9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ef1-42-nTx"/>
+                <constraint firstItem="E2q-1F-ViR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="fh5-oZ-dDo"/>
+                <constraint firstItem="X9X-Ic-GBN" firstAttribute="top" secondItem="8vd-dj-wFF" secondAttribute="bottom" constant="16" id="n3U-tH-Za7"/>
+                <constraint firstAttribute="centerX" secondItem="X9X-Ic-GBN" secondAttribute="centerX" id="uac-iU-KNM"/>
+                <constraint firstAttribute="trailing" secondItem="t6W-nL-Sr9" secondAttribute="trailing" id="wgA-fR-ywq"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="369.5" y="311.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="backArrow" width="31" height="31"/>
+        <image name="whiteShareIcon" width="17" height="12"/>
+    </resources>
+</document>

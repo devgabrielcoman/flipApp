@@ -10,7 +10,7 @@
 #import "UIColor+ColorFromHexString.h"
 #import <UIAlertView+Blocks.h>
 #import "UIColor+ColorFromHexString.h"
-
+//Current view has all required fields for preferences. Height should be increased to contain all elements. This view will be embedded into a scroll view.
 @implementation PreferencesSeparateView
 
 - (void)awakeFromNib

@@ -7,32 +7,52 @@
 //
 
 #import "TutorialPageView.h"
+#import "AuthenticationViewController.h"
 
-@implementation TutorialPageView{
-    NSString *imgName;
-}
-
-
--(id)initWithImageName:(NSString *)imageName{
-    self = [[NSBundle mainBundle] loadNibNamed:@"TutorialPageView" owner:nil options:nil][0];
- 
-    imgName = imageName;
-    return self;
-}
+@implementation TutorialPageView
 
 
--(void)layoutSubviews{
-    [super layoutSubviews];
+-(void)viewDidLoad
+{
+    [self.imageView setImage:self.image];
+    UISwipeGestureRecognizer* swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goLeft)];
+    swipeRight.direction=UISwipeGestureRecognizerDirectionRight;
+    [self.imageView addGestureRecognizer:swipeRight];
     
-    [self.imageView setImage:[UIImage imageNamed:imgName]];
+    UISwipeGestureRecognizer* swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goRight)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.imageView addGestureRecognizer:swipeLeft];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+-(void)goLeft
+{
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
-*/
+
+-(void)goRight
+{
+    if (self.index==1)
+    {
+        TutorialPageView *page2 = [[TutorialPageView alloc] initWithNibName:@"TutorialPageView" bundle:nil];
+        page2.image= [UIImage imageNamed:@"2"];
+        page2.index=2;
+        
+        [self.navigationController pushViewController:page2 animated:YES];
+    }
+    if (self.index==2)
+    {
+        TutorialPageView *page3 = [[TutorialPageView alloc] initWithNibName:@"TutorialPageView" bundle:nil];
+        page3.image= [UIImage imageNamed:@"3"];
+        page3.index=3;
+        
+        [self.navigationController pushViewController:page3 animated:YES];
+    }
+    if (self.index==3)
+    {
+        AuthenticationViewController * authVC = [[AuthenticationViewController alloc] initWithNibName:@"AuthenticationViewController" bundle:nil];
+        [self.navigationController pushViewController:authVC animated:YES];
+    }
+}
 
 @end

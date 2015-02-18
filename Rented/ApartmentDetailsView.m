@@ -43,7 +43,7 @@
     _apartment = apartment;
     _descriptionTextView.text = apartment[@"description"];
     
-    NSMutableString *vacancy = [[NSMutableString alloc] initWithString:@"Vacancy:\n"];
+    NSMutableString *vacancy = [[NSMutableString alloc] initWithString:@"Vacancy: "];
     NSArray *vacancyArray = apartment[@"vacancy"];
     
     for (NSNumber *vacancyType in vacancyArray)
@@ -52,7 +52,7 @@
             [vacancy appendFormat:@"Immediate"];
         
         if([vacancyType integerValue] == VacancyFlexible)
-            [vacancy appendFormat:@"Negociable"];
+            [vacancy appendFormat:@"Flexible"];
         
         if([vacancyType integerValue] == VacancyShortTerm)
             [vacancy appendFormat:@"Short-Term"];

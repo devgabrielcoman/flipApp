@@ -18,6 +18,13 @@
 		12D87DDB1A63C76700A979A0 /* UIImage+imageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D87DDA1A63C76700A979A0 /* UIImage+imageWithColor.m */; };
 		12D87DDE1A63D68800A979A0 /* FacebookFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D87DDD1A63D68800A979A0 /* FacebookFriend.m */; };
 		374512C5BFA9503A8B6397D6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E5B27B64FD02829D64CDBC /* libPods.a */; };
+		7EA7A2F51A8E9131004B2F8D /* NothingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA7A2F31A8E9131004B2F8D /* NothingCell.m */; };
+		7EA7A2F81A8E91DF004B2F8D /* NothingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA7A2F71A8E91DF004B2F8D /* NothingCell.xib */; };
+		7EA7A2FD1A932495004B2F8D /* LikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA7A2FB1A932495004B2F8D /* LikesViewController.m */; };
+		7EA7A2FE1A932495004B2F8D /* LikesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA7A2FC1A932495004B2F8D /* LikesViewController.xib */; };
+		7EA7A3031A9324B9004B2F8D /* LikesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA7A3011A9324B9004B2F8D /* LikesTableViewCell.m */; };
+		7EA7A3041A9324B9004B2F8D /* LikesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA7A3021A9324B9004B2F8D /* LikesTableViewCell.xib */; };
+		7EA7A3071A93446C004B2F8D /* ShadowLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA7A3061A93446C004B2F8D /* ShadowLabel.m */; };
 		7EC507ED1A78203A00E03E75 /* AddApartmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC507EB1A78203A00E03E75 /* AddApartmentViewController.m */; };
 		7EC507EE1A78203A00E03E75 /* AddApartmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC507EC1A78203A00E03E75 /* AddApartmentViewController.xib */; };
 		7EC507F31A7821D500E03E75 /* SelectLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC507F11A7821D500E03E75 /* SelectLocationViewController.m */; };
@@ -31,14 +38,17 @@
 		7EC508111A78288700E03E75 /* TRStringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5080A1A78288700E03E75 /* TRStringExtensions.m */; };
 		7EC508121A78288700E03E75 /* TRTextFieldExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5080C1A78288700E03E75 /* TRTextFieldExtensions.m */; };
 		7EC508151A782A3400E03E75 /* RequestsBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC508141A782A3400E03E75 /* RequestsBuilder.m */; };
+		7EC69D051A8CC86C0017A5FE /* lastFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC69D041A8CC86C0017A5FE /* lastFeedCell.m */; };
+		7EC69D0A1A8D0DC00017A5FE /* CongratulationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC69D081A8D0DC00017A5FE /* CongratulationsViewController.m */; };
+		7EC69D0B1A8D0DC00017A5FE /* CongratulationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC69D091A8D0DC00017A5FE /* CongratulationsViewController.xib */; };
+		7EC69D101A8D16350017A5FE /* UnflipedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC69D0E1A8D16350017A5FE /* UnflipedViewController.m */; };
+		7EC69D111A8D16350017A5FE /* UnflipedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC69D0F1A8D16350017A5FE /* UnflipedViewController.xib */; };
 		7ECE96931A8165300024C69B /* lastFeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ECE96921A8165300024C69B /* lastFeedCell.xib */; };
 		7ED5A23B1A83854F00C34EAF /* AdminViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED5A2391A83854F00C34EAF /* AdminViewController.m */; };
 		7ED5A23C1A83854F00C34EAF /* AdminViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ED5A23A1A83854F00C34EAF /* AdminViewController.xib */; };
 		7ED5A2411A83875300C34EAF /* AdminUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED5A23F1A83875300C34EAF /* AdminUserTableViewCell.m */; };
 		7ED5A2421A83875300C34EAF /* AdminUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ED5A2401A83875300C34EAF /* AdminUserTableViewCell.xib */; };
 		7EE2BA981A8A3E61000527E1 /* MyListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2BA971A8A3E61000527E1 /* MyListingViewController.m */; };
-		9AD8DA9A1A64592C001F8F2C /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8DA981A64592C001F8F2C /* TutorialViewController.m */; };
-		9AD8DA9B1A64592C001F8F2C /* TutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DA991A64592C001F8F2C /* TutorialViewController.xib */; };
 		9AD8DA9E1A645BCF001F8F2C /* TutorialPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8DA9D1A645BCF001F8F2C /* TutorialPageView.m */; };
 		9AD8DAA01A645BEE001F8F2C /* TutorialPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DA9F1A645BEE001F8F2C /* TutorialPageView.xib */; };
 		CD19A99E1A5F35960095163F /* Apartment.m in Sources */ = {isa = PBXBuildFile; fileRef = CD19A99D1A5F35960095163F /* Apartment.m */; };
@@ -172,6 +182,17 @@
 		12D87DDA1A63C76700A979A0 /* UIImage+imageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+imageWithColor.m"; sourceTree = "<group>"; };
 		12D87DDC1A63D68800A979A0 /* FacebookFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookFriend.h; sourceTree = "<group>"; };
 		12D87DDD1A63D68800A979A0 /* FacebookFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookFriend.m; sourceTree = "<group>"; };
+		7EA7A2F21A8E9131004B2F8D /* NothingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NothingCell.h; sourceTree = "<group>"; };
+		7EA7A2F31A8E9131004B2F8D /* NothingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NothingCell.m; sourceTree = "<group>"; };
+		7EA7A2F71A8E91DF004B2F8D /* NothingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NothingCell.xib; sourceTree = "<group>"; };
+		7EA7A2FA1A932495004B2F8D /* LikesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikesViewController.h; sourceTree = "<group>"; };
+		7EA7A2FB1A932495004B2F8D /* LikesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikesViewController.m; sourceTree = "<group>"; };
+		7EA7A2FC1A932495004B2F8D /* LikesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LikesViewController.xib; sourceTree = "<group>"; };
+		7EA7A3001A9324B9004B2F8D /* LikesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikesTableViewCell.h; sourceTree = "<group>"; };
+		7EA7A3011A9324B9004B2F8D /* LikesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikesTableViewCell.m; sourceTree = "<group>"; };
+		7EA7A3021A9324B9004B2F8D /* LikesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LikesTableViewCell.xib; sourceTree = "<group>"; };
+		7EA7A3051A93446C004B2F8D /* ShadowLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadowLabel.h; sourceTree = "<group>"; };
+		7EA7A3061A93446C004B2F8D /* ShadowLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadowLabel.m; sourceTree = "<group>"; };
 		7EC507EA1A78203A00E03E75 /* AddApartmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddApartmentViewController.h; sourceTree = "<group>"; };
 		7EC507EB1A78203A00E03E75 /* AddApartmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddApartmentViewController.m; sourceTree = "<group>"; };
 		7EC507EC1A78203A00E03E75 /* AddApartmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddApartmentViewController.xib; sourceTree = "<group>"; };
@@ -200,6 +221,14 @@
 		7EC508131A782A3400E03E75 /* RequestsBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestsBuilder.h; sourceTree = "<group>"; };
 		7EC508141A782A3400E03E75 /* RequestsBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestsBuilder.m; sourceTree = "<group>"; };
 		7EC508171A782F4400E03E75 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		7EC69D031A8CC86C0017A5FE /* lastFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lastFeedCell.h; sourceTree = "<group>"; };
+		7EC69D041A8CC86C0017A5FE /* lastFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = lastFeedCell.m; sourceTree = "<group>"; };
+		7EC69D071A8D0DC00017A5FE /* CongratulationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CongratulationsViewController.h; sourceTree = "<group>"; };
+		7EC69D081A8D0DC00017A5FE /* CongratulationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CongratulationsViewController.m; sourceTree = "<group>"; };
+		7EC69D091A8D0DC00017A5FE /* CongratulationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CongratulationsViewController.xib; sourceTree = "<group>"; };
+		7EC69D0D1A8D16340017A5FE /* UnflipedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnflipedViewController.h; sourceTree = "<group>"; };
+		7EC69D0E1A8D16350017A5FE /* UnflipedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnflipedViewController.m; sourceTree = "<group>"; };
+		7EC69D0F1A8D16350017A5FE /* UnflipedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnflipedViewController.xib; sourceTree = "<group>"; };
 		7ECE96921A8165300024C69B /* lastFeedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = lastFeedCell.xib; sourceTree = "<group>"; };
 		7ED5A2381A83854F00C34EAF /* AdminViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminViewController.h; sourceTree = "<group>"; };
 		7ED5A2391A83854F00C34EAF /* AdminViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdminViewController.m; sourceTree = "<group>"; };
@@ -209,9 +238,6 @@
 		7ED5A2401A83875300C34EAF /* AdminUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdminUserTableViewCell.xib; sourceTree = "<group>"; };
 		7EE2BA961A8A3E61000527E1 /* MyListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyListingViewController.h; sourceTree = "<group>"; };
 		7EE2BA971A8A3E61000527E1 /* MyListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyListingViewController.m; sourceTree = "<group>"; };
-		9AD8DA971A64592C001F8F2C /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
-		9AD8DA981A64592C001F8F2C /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialViewController.m; sourceTree = "<group>"; };
-		9AD8DA991A64592C001F8F2C /* TutorialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialViewController.xib; sourceTree = "<group>"; };
 		9AD8DA9C1A645BCF001F8F2C /* TutorialPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialPageView.h; sourceTree = "<group>"; };
 		9AD8DA9D1A645BCF001F8F2C /* TutorialPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialPageView.m; sourceTree = "<group>"; };
 		9AD8DA9F1A645BEE001F8F2C /* TutorialPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialPageView.xib; sourceTree = "<group>"; };
@@ -450,6 +476,39 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7EA7A2F11A8E90FB004B2F8D /* NothingCell */ = {
+			isa = PBXGroup;
+			children = (
+				7EA7A2F21A8E9131004B2F8D /* NothingCell.h */,
+				7EA7A2F31A8E9131004B2F8D /* NothingCell.m */,
+				7EA7A2F71A8E91DF004B2F8D /* NothingCell.xib */,
+			);
+			name = NothingCell;
+			sourceTree = "<group>";
+		};
+		7EA7A2F91A932468004B2F8D /* LikesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7EA7A2FF1A93249B004B2F8D /* LikesTableViewCell */,
+				7EA7A2FA1A932495004B2F8D /* LikesViewController.h */,
+				7EA7A2FB1A932495004B2F8D /* LikesViewController.m */,
+				7EA7A2FC1A932495004B2F8D /* LikesViewController.xib */,
+				7EA7A3051A93446C004B2F8D /* ShadowLabel.h */,
+				7EA7A3061A93446C004B2F8D /* ShadowLabel.m */,
+			);
+			name = LikesViewController;
+			sourceTree = "<group>";
+		};
+		7EA7A2FF1A93249B004B2F8D /* LikesTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				7EA7A3001A9324B9004B2F8D /* LikesTableViewCell.h */,
+				7EA7A3011A9324B9004B2F8D /* LikesTableViewCell.m */,
+				7EA7A3021A9324B9004B2F8D /* LikesTableViewCell.xib */,
+			);
+			name = LikesTableViewCell;
+			sourceTree = "<group>";
+		};
 		7EC507EF1A78204600E03E75 /* Add Apartment */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,10 +574,32 @@
 			name = API;
 			sourceTree = "<group>";
 		};
+		7EC69D061A8D0D6E0017A5FE /* CongratulationsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7EC69D071A8D0DC00017A5FE /* CongratulationsViewController.h */,
+				7EC69D081A8D0DC00017A5FE /* CongratulationsViewController.m */,
+				7EC69D091A8D0DC00017A5FE /* CongratulationsViewController.xib */,
+			);
+			name = CongratulationsViewController;
+			sourceTree = "<group>";
+		};
+		7EC69D0C1A8D16120017A5FE /* UnflipedViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7EC69D0D1A8D16340017A5FE /* UnflipedViewController.h */,
+				7EC69D0E1A8D16350017A5FE /* UnflipedViewController.m */,
+				7EC69D0F1A8D16350017A5FE /* UnflipedViewController.xib */,
+			);
+			name = UnflipedViewController;
+			sourceTree = "<group>";
+		};
 		7ECE96941A8169280024C69B /* LastFeedCell */ = {
 			isa = PBXGroup;
 			children = (
 				7ECE96921A8165300024C69B /* lastFeedCell.xib */,
+				7EC69D031A8CC86C0017A5FE /* lastFeedCell.h */,
+				7EC69D041A8CC86C0017A5FE /* lastFeedCell.m */,
 			);
 			name = LastFeedCell;
 			sourceTree = "<group>";
@@ -547,20 +628,9 @@
 		9AD8DA961A64590B001F8F2C /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				9AD8DAA21A645C1F001F8F2C /* Tutorial Controller */,
 				9AD8DAA31A645C33001F8F2C /* Tutorial Page */,
 			);
 			name = Tutorial;
-			sourceTree = "<group>";
-		};
-		9AD8DAA21A645C1F001F8F2C /* Tutorial Controller */ = {
-			isa = PBXGroup;
-			children = (
-				9AD8DA971A64592C001F8F2C /* TutorialViewController.h */,
-				9AD8DA981A64592C001F8F2C /* TutorialViewController.m */,
-				9AD8DA991A64592C001F8F2C /* TutorialViewController.xib */,
-			);
-			name = "Tutorial Controller";
 			sourceTree = "<group>";
 		};
 		9AD8DAA31A645C33001F8F2C /* Tutorial Page */ = {
@@ -664,6 +734,7 @@
 		CD2A8AFD1A5DE2E00065299A /* Apartment Details */ = {
 			isa = PBXGroup;
 			children = (
+				7EA7A2F11A8E90FB004B2F8D /* NothingCell */,
 				CD2A8B091A5DEA8D0065299A /* Top Part */,
 				CD2A8B0A1A5DEA990065299A /* Details(owner) */,
 				126F9C3F1A6827150074AF72 /* Details(listing) */,
@@ -970,6 +1041,9 @@
 		CD57130B1A585603003B4C2E /* My place */ = {
 			isa = PBXGroup;
 			children = (
+				7EA7A2F91A932468004B2F8D /* LikesViewController */,
+				7EC69D0C1A8D16120017A5FE /* UnflipedViewController */,
+				7EC69D061A8D0D6E0017A5FE /* CongratulationsViewController */,
 				7EC507EF1A78204600E03E75 /* Add Apartment */,
 				CD5713171A597526003B4C2E /* Display Listing */,
 				CD57130C1A585618003B4C2E /* No Listing */,
@@ -1102,7 +1176,6 @@
 				CD50391E1A61978100A1320D /* slider-default-handle-highlighted@2x.png in Resources */,
 				CD5039361A61978100A1320D /* slider-metal-trackBackground@2x.png in Resources */,
 				CD5039201A61978100A1320D /* slider-default-handle@2x.png in Resources */,
-				9AD8DA9B1A64592C001F8F2C /* TutorialViewController.xib in Resources */,
 				CD5039221A61978100A1320D /* slider-default-track@2x.png in Resources */,
 				CD5039351A61978100A1320D /* slider-metal-trackBackground.png in Resources */,
 				7EC507EE1A78203A00E03E75 /* AddApartmentViewController.xib in Resources */,
@@ -1119,6 +1192,7 @@
 				CD5039601A61F3B300A1320D /* PreferencesViewController.xib in Resources */,
 				CD35CCE71A49A89F007F12D0 /* GothamRnd-Bold.otf in Resources */,
 				CD39D6491A4A0A6C0006F7B7 /* DashboardViewController.xib in Resources */,
+				7EA7A3041A9324B9004B2F8D /* LikesTableViewCell.xib in Resources */,
 				CD5039231A61978100A1320D /* slider-default-trackBackground.png in Resources */,
 				CD5039251A61978100A1320D /* slider-default-trackCrossedOver@2x.png in Resources */,
 				7ECE96931A8165300024C69B /* lastFeedCell.xib in Resources */,
@@ -1131,17 +1205,21 @@
 				CD42A8D21A707477000E7BD7 /* ConfirmationView.xib in Resources */,
 				CD50392F1A61978100A1320D /* slider-metal-handle-highlighted.png in Resources */,
 				CD307AC11A48657500D4BE2B /* AuthenticationViewController.xib in Resources */,
+				7EA7A2FE1A932495004B2F8D /* LikesViewController.xib in Resources */,
 				CD50392E1A61978100A1320D /* slider-default7-trackCrossedOver@2x.png in Resources */,
 				CD5039271A61978100A1320D /* slider-default7-handle.png in Resources */,
 				CD5039301A61978100A1320D /* slider-metal-handle-highlighted@2x.png in Resources */,
+				7EA7A2F81A8E91DF004B2F8D /* NothingCell.xib in Resources */,
 				CD1BAFB51A48466F0012CBAA /* Images.xcassets in Resources */,
 				CD50392C1A61978100A1320D /* slider-default7-trackBackground@2x.png in Resources */,
 				CD5038F31A61743600A1320D /* FavoriteApartmentTableViewCell.xib in Resources */,
 				CD5039291A61978100A1320D /* slider-default7-track.png in Resources */,
+				7EC69D0B1A8D0DC00017A5FE /* CongratulationsViewController.xib in Resources */,
 				CD50392A1A61978100A1320D /* slider-default7-track@2x.png in Resources */,
 				CD5039241A61978100A1320D /* slider-default-trackCrossedOver.png in Resources */,
 				CD2A8B081A5DE6F10065299A /* ApartmentTableViewCell.xib in Resources */,
 				CD2A8AE71A5DACB10065299A /* FullMapViewViewController.xib in Resources */,
+				7EC69D111A8D16350017A5FE /* UnflipedViewController.xib in Resources */,
 				CD5039341A61978100A1320D /* slider-metal-track@2x.png in Resources */,
 				CD5039261A61978100A1320D /* slider-default_trackBackground@2x.png in Resources */,
 				7EC507F41A7821D500E03E75 /* SelectLocationViewController.xib in Resources */,
@@ -1208,6 +1286,7 @@
 				126F9C4B1A68595F0074AF72 /* KAProgressLabel.m in Sources */,
 				CD5713101A585651003B4C2E /* NoListingViewController.m in Sources */,
 				7EC508121A78288700E03E75 /* TRTextFieldExtensions.m in Sources */,
+				7EC69D051A8CC86C0017A5FE /* lastFeedCell.m in Sources */,
 				120547601A5FF1110036BB75 /* UITableView+AnimationControl.m in Sources */,
 				7EE2BA981A8A3E61000527E1 /* MyListingViewController.m in Sources */,
 				CD1BAFAD1A48466F0012CBAA /* AppDelegate.m in Sources */,
@@ -1219,14 +1298,15 @@
 				CD1BAFAA1A48466F0012CBAA /* main.m in Sources */,
 				12BAD2031A5A959F00ABE909 /* LocationUtils.m in Sources */,
 				CD5038F21A61743600A1320D /* FavoriteApartmentTableViewCell.m in Sources */,
+				7EA7A3031A9324B9004B2F8D /* LikesTableViewCell.m in Sources */,
 				CD5038E71A6158D700A1320D /* LikedApartment.m in Sources */,
 				CD39D6401A4A09220006F7B7 /* RentedPanelController.m in Sources */,
 				CD42A8BE1A70355D000E7BD7 /* SnapshotUtils.m in Sources */,
 				CD2A8AE61A5DACB10065299A /* FullMapViewViewController.m in Sources */,
+				7EC69D101A8D16350017A5FE /* UnflipedViewController.m in Sources */,
 				7EC5080F1A78288700E03E75 /* TRGoogleMapsAutocompletionCellFactory.m in Sources */,
 				CD5039371A61978100A1320D /* NMRangeSlider.m in Sources */,
 				CD57131B1A59755A003B4C2E /* SingleApartmentViewController.m in Sources */,
-				9AD8DA9A1A64592C001F8F2C /* TutorialViewController.m in Sources */,
 				CD2A8B071A5DE6F10065299A /* ApartmentTableViewCell.m in Sources */,
 				CD5039561A61EEC000A1320D /* PreferencesSeparateView.m in Sources */,
 				7ED5A2411A83875300C34EAF /* AdminUserTableViewCell.m in Sources */,
@@ -1236,6 +1316,7 @@
 				CD307AA11A48561B00D4BE2B /* DependencyContainer.m in Sources */,
 				CD35CCEE1A49AE49007F12D0 /* UIImage+ProportionalFill.m in Sources */,
 				12BAD2001A5A824D00ABE909 /* ApartmentApi.m in Sources */,
+				7EA7A2FD1A932495004B2F8D /* LikesViewController.m in Sources */,
 				126F9C4C1A68595F0074AF72 /* TPPropertyAnimation.m in Sources */,
 				CDEE8E3C1A64496F0030A88E /* NoInternetConnectionView.m in Sources */,
 				7EC508101A78288700E03E75 /* TRGoogleMapsSuggestion.m in Sources */,
@@ -1247,8 +1328,10 @@
 				7EC508111A78288700E03E75 /* TRStringExtensions.m in Sources */,
 				126F9C421A68276C0074AF72 /* ApartmentDetailsOtherListingView.m in Sources */,
 				7EC5080E1A78288700E03E75 /* TRGoogleMapsAutocompleteItemsSource.m in Sources */,
+				7EA7A3071A93446C004B2F8D /* ShadowLabel.m in Sources */,
 				CD307A9E1A4855C000D4BE2B /* RentedApi.m in Sources */,
 				CD19A99E1A5F35960095163F /* Apartment.m in Sources */,
+				7EC69D0A1A8D0DC00017A5FE /* CongratulationsViewController.m in Sources */,
 				CD307AC01A48657500D4BE2B /* AuthenticationViewController.m in Sources */,
 				CD307AC61A48661C00D4BE2B /* FeedViewController.m in Sources */,
 				CD5713141A585DAE003B4C2E /* UIViewController+JASidePanels.m in Sources */,
@@ -1258,6 +1341,7 @@
 				CD42A8D01A707466000E7BD7 /* ConfirmationView.m in Sources */,
 				CD307AA41A4856D000D4BE2B /* UserApi.m in Sources */,
 				CD5039631A620ADE00A1320D /* UserSearchPreferences.m in Sources */,
+				7EA7A2F51A8E9131004B2F8D /* NothingCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1308,8 +1392,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Eugen Varzaru (4ASDXN337T)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eugen Varzaru (4ASDXN337T)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Susannah Vila (AVYTSNAP5Y)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Susannah Vila (AVYTSNAP5Y)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1330,7 +1414,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "c4d1c73c-1a10-4c4d-a386-f8e844594569";
+				PROVISIONING_PROFILE = "50aca1e2-7ed7-4a69-858e-3fbcecb8f829";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1367,7 +1451,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "fe593317-b9f0-4207-95e8-afc5bca8c248";
+				PROVISIONING_PROFILE = "0f4d7a76-d310-4005-a59c-cf786d0c7fad";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1379,14 +1463,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Eugen Varzaru (4ASDXN337T)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Susannah Vila (AVYTSNAP5Y)";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Rented/Rented-Prefix.pch";
 				INFOPLIST_FILE = Rented/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Flip;
-				PROVISIONING_PROFILE = "c4d1c73c-1a10-4c4d-a386-f8e844594569";
+				PROVISIONING_PROFILE = "50aca1e2-7ed7-4a69-858e-3fbcecb8f829";
 			};
 			name = Debug;
 		};
@@ -1404,7 +1488,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Flip;
-				PROVISIONING_PROFILE = "fe593317-b9f0-4207-95e8-afc5bca8c248";
+				PROVISIONING_PROFILE = "0f4d7a76-d310-4005-a59c-cf786d0c7fad";
 			};
 			name = Release;
 		};

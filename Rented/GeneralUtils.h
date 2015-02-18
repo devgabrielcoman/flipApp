@@ -14,6 +14,6 @@
 + (NSString *)roomsLongDescriptionForApartment:(PFObject *)apartment;
 + (NSString *)connectedThroughExtendedDescription:(NSMutableArray *)mutalFriends;
 + (NSString *)getCityFromLocation:(NSString *)locationString;
-+(NSMutableArray*) mutableFriendsInArray1: (NSArray*)friends1 andArray2: (NSArray*)friends2;
++(NSMutableArray*) mutualFriendsInArray1: (NSArray*)friends1 andArray2: (NSArray*)friends2;
 +(NSString*) stateAbbreviationForState:(NSString*) state;
 @end

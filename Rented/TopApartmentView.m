@@ -42,8 +42,6 @@
     _apartmentImgView.frame = apartmentImgViewFrame;
     [_apartmentImgView setContentMode:UIViewContentModeScaleAspectFill];
     
-    
-    
 
 
 }
@@ -113,7 +111,7 @@
     
     //_daysUntilRenewal.text = [NSString stringWithFormat:@"%li days\n until\n renewal", (long)[apartment[@"renewaldays"] integerValue]];
     
-    NSMutableString *vacancy = [[NSMutableString alloc] initWithString:@"Available:\n"];
+    NSMutableString *vacancy = [[NSMutableString alloc] initWithString:@"Available: "];
     NSArray *vacancyArray = apartment[@"vacancy"];
     
     for (NSNumber *vacancyType in vacancyArray)
@@ -122,7 +120,7 @@
             [vacancy appendFormat:@"Immediate"];
         
         if([vacancyType integerValue] == VacancyFlexible)
-            [vacancy appendFormat:@"Negociable"];
+            [vacancy appendFormat:@"Flexible"];
         
         if([vacancyType integerValue] == VacancyShortTerm)
             [vacancy appendFormat:@"Short-Term"];
@@ -175,6 +173,15 @@
     [_delegate displayMoreInfoForApartmentAtIndex:_apartmentIndex];
 }
 
+- (IBAction)shareApartment:(id)sender
+{
+    [_delegate shareApartment];
+}
+-(IBAction)likesButtonTapped:(id)sender
+{
+    [_delegate showLikes];
+}
+
 -(IBAction)editButtonTapped:(id)sender
 {
     [self.delegate editApartment];
@@ -184,8 +191,11 @@
 
 - (void)handleSwipeLeft:(id)gesture
 {
-    RTLog(@"swipe left on cell with index: %li", (long)_apartmentIndex);
-    [_delegate displayMoreInfoForApartmentAtIndex:_apartmentIndex];
+    
+    if (!self.disableSwipeGestures)
+    {
+        [_delegate displayMoreInfoForApartmentAtIndex:_apartmentIndex];
+    }
 
 }
 
@@ -210,6 +220,23 @@
     if ([_delegate respondsToSelector:@selector(switchToPreviousApartmentFromIndex:)])
     {
         [_delegate switchToPreviousApartmentFromIndex:_apartmentIndex];
+    }
+}
+
+-(void)tappedAtPosition:(CGPoint)point
+{
+    if ([self.myListingBar isHidden])
+    {
+        return;
+    }
+    
+    if(CGRectContainsPoint(self.editButton.frame, point))
+    {
+        [self editButtonTapped:nil];
+    }
+    if (CGRectContainsPoint(self.shareButton.frame, point))
+    {
+        [self shareApartment:nil];
     }
 }
 

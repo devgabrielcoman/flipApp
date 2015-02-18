@@ -439,9 +439,9 @@ static char ja_kvoContext;
                 buttonController = [nav.viewControllers objectAtIndex:0];
             }
         }
-        if (!buttonController.navigationItem.leftBarButtonItem) {   
+
             buttonController.navigationItem.leftBarButtonItem = [self leftButtonForCenterPanel];
-        }
+        
     }	
 }
 
@@ -953,6 +953,7 @@ static char ja_kvoContext;
 - (UIBarButtonItem *)leftButtonForCenterPanel {
     return [[UIBarButtonItem alloc] initWithImage:[[self class] defaultImage] style:UIBarButtonItemStylePlain target:self action:@selector(toggleLeftPanel:)];
 }
+
 
 - (void)showLeftPanel:(BOOL)animated {
     [self showLeftPanelAnimated:animated];

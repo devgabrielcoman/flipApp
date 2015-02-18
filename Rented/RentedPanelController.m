@@ -38,15 +38,34 @@
 }
 -(UIBarButtonItem *)leftButtonForCenterPanel
 {
-    return [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleLeftPanel:)];
+    PFInstallation* installation = [PFInstallation currentInstallation];
+    
+    if (installation.badge ==0 || !installation)
+    {
+        self.imageName = @"menu";
+    }
+    else
+    {
+        self.imageName = @"notificationMenu";
+    }
+    
+    UIImage *image = [UIImage imageNamed:self.imageName];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.bounds = CGRectMake( 0, 0, image.size.width, image.size.height );
+    [button setImage:image forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(toggleLeftPanel:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    return barButtonItem;
+
 }
 
-- (UIBarButtonItem *)getLeftButton
+
+-(void) updateMenuButtonWithNumber:(NSInteger)badgeNumber
 {
-    if(_hideLeftButton)
-        return [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleLeftPanel:)];
+
     
-    return [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleLeftPanel:)];
+    [self _placeButtonForLeftPanel];
 }
+
 
 @end

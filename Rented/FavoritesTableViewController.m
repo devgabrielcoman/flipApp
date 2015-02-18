@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
     [self.tableView registerNib:[UINib nibWithNibName:@"FavoriteApartmentTableViewCell" bundle:nil] forCellReuseIdentifier:@"FavoriteApartmentCell"];
     
     [DEP.api.apartmentApi getListOfFavoritesApartments:^(NSArray *favoriteApartments, BOOL succeeded) {
@@ -107,6 +107,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Apartment *ap = _favoriteApartments[indexPath.row];
+    self.title = @" ";
     SingleApartmentViewController *apartmentViewController = [SingleApartmentViewController new];
     apartmentViewController.apartment = ap;
     apartmentViewController.isFromFavorites = YES;
@@ -114,6 +115,15 @@
     [self.navigationController pushViewController:apartmentViewController animated:YES];
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [self removeFromApartmentFromFavorites:indexPath.row];
+    }
+}
 
 - (void)removeFromApartmentFromFavorites:(NSInteger)apartmentIndex
 {
