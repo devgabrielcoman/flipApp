@@ -476,7 +476,6 @@
     {
         apartment[@"feeOther"] = apartmentInfo[@"feeOther"];
     }
-    apartment[@"rentWillChange"] = apartmentInfo[@"rentWillChange"];
     apartment[@"vacancy"] = apartmentInfo[@"vacancy"];
     apartment[@"description"] = apartmentInfo[@"description"];
     apartment[@"area"] = [NSNumber numberWithInteger:[apartmentInfo[@"area"] integerValue]];
@@ -490,8 +489,7 @@
     apartment[@"zipcode"] = apartmentInfo[@"zipcode"];
     apartment[@"directContact"] = apartmentInfo[@"directContact"];
     apartment[@"requested"] = [NSNumber numberWithInteger:0];
-    apartment[@"bestContactHours"] = apartmentInfo[@"bestContactHours"];
-    apartment[@"bestContactDays"] = apartmentInfo[@"bestContactDays"];
+
 
 
     apartment[@"owner"] = user;

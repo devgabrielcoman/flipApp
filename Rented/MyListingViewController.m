@@ -119,9 +119,8 @@
     editVC.apartment=self.apartment;
     editVC.image = self.apartmentCell.apartmentTopView.apartmentImgView.image;
     editVC.delegate = self;
-    [self presentViewController:editVC animated:YES completion:^{
-        
-    }];
+    self.title = @" ";
+    [self.navigationController pushViewController:editVC animated:YES];
 }
 
 -(void)showLikes

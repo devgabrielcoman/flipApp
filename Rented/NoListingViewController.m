@@ -48,7 +48,8 @@
     
     AddApartmentViewController* addApartmentVC = [[AddApartmentViewController alloc] initWithNibName:@"AddApartmentViewController" bundle:nil];
     [addApartmentVC setDelegate:self];
-    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:addApartmentVC] animated:YES completion:^{}];
+    self.title = @" ";
+    [self.navigationController pushViewController:addApartmentVC animated:YES];
     
     
     // old version w/ email request

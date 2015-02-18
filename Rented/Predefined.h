@@ -36,8 +36,8 @@
 #define Bedrooms3 3
 #define Bedrooms4 4
 
-#define VacancyImmediate 0
-#define VacancyShortTerm 1
+#define VacancyShortTerm 0
+#define VacancyLongTerm 1
 #define VacancyFlexible 2
 
 #define Fee3percent 0

@@ -32,8 +32,8 @@
 //set left text field inset
 @implementation UITextField (custom)
 - (CGRect)textRectForBounds:(CGRect)bounds {
-    return CGRectMake(bounds.origin.x + 10, bounds.origin.y,
-                      bounds.size.width - 20, bounds.size.height);
+    return CGRectMake(bounds.origin.x + 8, bounds.origin.y,
+                      bounds.size.width - 16, bounds.size.height);
 }
 - (CGRect)editingRectForBounds:(CGRect)bounds {
     return [self textRectForBounds:bounds];
@@ -47,34 +47,13 @@
     UIPickerView *apartmentTypePicker;
     NSArray *apartmentTypes;
     
-    UITextField *activeField;
+    UIView *activeField;
     CGPoint lastScrollViewOffset;
     UIEdgeInsets lastScrollViewContentInset;
     UIEdgeInsets lastScrollViewScrollIndicator;
     
     NSDate* leaseExpirationDate;
 
-    M13Checkbox *studioRoom;
-    M13Checkbox *bedroom1;
-    M13Checkbox *bedroom2;
-    M13Checkbox *bedroom3;
-    M13Checkbox *bedroom4;
-    
-    M13Checkbox *vacancyImmediate;
-    M13Checkbox *vacancyShortTerm;
-    M13Checkbox *vacancyNegociable;
-    
-    M13Checkbox*    fee3percent;
-    M13Checkbox*    fee6percent;
-    M13Checkbox*    fee9percent;
-    
-    M13Checkbox*    typeEntirePlace;
-    M13Checkbox*    typePrivateRoom;
-    M13Checkbox*    typeRetailOrCommercial;
-    
-    M13Checkbox*    willRentChangeYes;
-    M13Checkbox*    willRentChangeNo;
-    M13Checkbox*    willRentChangeMaybe;
     
     NSMutableArray *rooms;
     NSMutableArray *vacancy;
@@ -91,6 +70,27 @@
 
 
 }
+@property (weak, nonatomic) IBOutlet UIButton *vacancyLongTerm;
+@property (weak, nonatomic) IBOutlet UIButton *vacancyShortTerm;
+@property (weak, nonatomic) IBOutlet UIButton *vacancyFlexible;
+
+@property (weak, nonatomic) IBOutlet UIButton *fee3percent;
+@property (weak, nonatomic) IBOutlet UIButton *fee6percent;
+@property (weak, nonatomic) IBOutlet UIButton *fee9percent;
+
+@property (weak, nonatomic) IBOutlet UIButton *typeEntirePlace;
+@property (weak, nonatomic) IBOutlet UIButton *typePrivateRoom;
+@property (weak, nonatomic) IBOutlet UIButton *typeRetailOrCommercial;
+
+@property (weak, nonatomic) IBOutlet UIButton *leaseRenewalButton;
+@property (weak, nonatomic) IBOutlet UIButton *numberOfBedroomsButton;
+
+@property (weak, nonatomic) IBOutlet UIView *leaseRenewalContainer;
+@property (weak, nonatomic) IBOutlet UIView *numberOfBedroomsContainer;
+
+@property (weak, nonatomic) IBOutlet UIPickerView *numberOfBedroomsPicker;
+@property (weak, nonatomic) IBOutlet UIDatePicker *leaseRenewalPicker;
+
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *otherAmountTextField;
@@ -132,68 +132,48 @@
     //configure views
     
     [self.addApartmentBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexString:@"47a0db"]] forState:UIControlStateNormal];
-    [self.addApartmentBtn.layer setCornerRadius:2.5];
-    [self.addApartmentBtn setClipsToBounds:YES];
-    
-    self.title = @"Add Apartment";
-    
-    _typeTF.delegate = self;
-    _areaTF.delegate = self;
-    _daysRenewalTF.delegate = self;
-    _rentTF.delegate = self;
-    
-    _roomsTextView.placeholder = @"Component rooms(Studio, 1 bedroom, 2 bedroom, etc)";
-    _roomsTextView.placeholderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5f];
-    _roomsTextView.layer.borderWidth = 0.5f;
-    _roomsTextView.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5f].CGColor;
-    _roomsTextView.layer.cornerRadius = 6.0f;
-    _roomsTextView.delegate = self;
-    _roomsTextView.returnKeyType = UIReturnKeyDone;
-    
-    _descriptionTextView.placeholder = @"Description";
-    _descriptionTextView.placeholderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5f];
-    _descriptionTextView.layer.borderWidth = 0.5f;
-    _descriptionTextView.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5f].CGColor;
-    _descriptionTextView.layer.cornerRadius = 4.0f;
-    _descriptionTextView.delegate = self;
-//    _descriptionTextView.returnKeyType = UIReturnKeyDone;
-    
-    _mapView.layer.borderWidth = 0.5f;
-    _mapView.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5f].CGColor;
-    _mapView.layer.cornerRadius = 6.0f;
-    
-    _addApartmentBtn.backgroundColor = [UIColor redColor];
 
-    _addApartmentBtn.titleLabel.font = [UIFont systemFontOfSize:13.0];
     
-    _addImagesButton.titleLabel.font = [UIFont systemFontOfSize:13.0];
-    _selectOwnerBtn.titleLabel.font = [UIFont systemFontOfSize:13.0];
+
     
+    _areaTF.delegate = self;
+    _rentTF.delegate = self;
+    _descriptionTextView.delegate = self;
+
+    
+    _descriptionTextView.placeholder = @"\nPlumbing issues? Amazing natural light?\nWrite a short description here.";
+    _descriptionTextView.placeholderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5f];
+
+    _descriptionTextView.delegate = self;
+    _descriptionTextView.returnKeyType = UIReturnKeyDefault;
+    
+    UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    [nextButton setTitle:@"Next" forState:UIControlStateNormal];
+    [nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [nextButton setBackgroundColor:[UIColor whiteColor]];
+    [nextButton addTarget:self action:@selector(enterRent) forControlEvents:UIControlEventTouchUpInside];
+    
+
+    _areaTF.inputAccessoryView = nextButton;
+
     UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     [doneButton setTitle:@"Done" forState:UIControlStateNormal];
     [doneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [doneButton setBackgroundColor:[UIColor whiteColor]];
     [doneButton addTarget:self action:@selector(dismissKeyboard) forControlEvents:UIControlEventTouchUpInside];
     
-    self.otherAmountTextField.inputAccessoryView = doneButton;
-    self.addressTextField.inputAccessoryView = doneButton;
-    _areaTF.inputAccessoryView = doneButton;
     _rentTF.inputAccessoryView = doneButton;
-    _daysRenewalTF.inputAccessoryView = doneButton;
-    
+    _descriptionTextView.inputAccessoryView = doneButton;
+
     UITapGestureRecognizer *dismissGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToDismiss)];
     dismissGesture.numberOfTapsRequired = 1;
     dismissGesture.numberOfTouchesRequired = 1;
     dismissGesture.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:dismissGesture];
     
-    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
-    [self.mapView addGestureRecognizer:longPressGesture];
     
     _apartmentLocation = kCLLocationCoordinate2DInvalid;
-    locationPin = [MKPointAnnotation new];
     
-
     apartmentTypePicker = [UIPickerView new];
     apartmentTypePicker.delegate = self;
     apartmentTypePicker.dataSource = self;
@@ -203,7 +183,6 @@
     
     _apartmentType = -1;
     
-
     
     rooms = [NSMutableArray new];
     
@@ -215,17 +194,12 @@
     
     _apartmentOwner=[PFUser currentUser];
     
-    [self.navigationController.navigationBar setHidden:YES];
-
-    //instantiate and configure checkboxes
-    [self addCheckboxes];
     
     contactDirectly=1;
 
     //using view controller in edit mode
     if(self.apartment)
     {
-        self.scrollViewContainer.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
         [self.saveButton setHidden:NO];
         [self.deleteButton setHidden:NO];
         //customise fields using the apartment's data
@@ -241,11 +215,15 @@
     [self.secondScrollViewContainer bringSubviewToFront:_hourPicker];
     [self.secondScrollViewContainer bringSubviewToFront:_dayPicker];
     
-
+    [self.scrollViewContainer setContentInset:UIEdgeInsetsMake(-44, 0, 0, 0)];
     
 }
 
-
+-(void)enterRent
+{
+    [_areaTF resignFirstResponder];
+    [_rentTF becomeFirstResponder];
+}
 -(void)handleLongPressGesture:(UIGestureRecognizer*)sender {
 
     //user wants to change pin location
@@ -349,273 +327,7 @@
     return pinView;
 }
 
-- (void)addCheckboxes
-{
 
-    studioRoom = [[M13Checkbox alloc] initWithTitle:@"Studio"];
-    studioRoom.frame = CGRectMake(self.bedroomsLabel.frame.origin.x-2, 97, 65, 20);
-    studioRoom.titleLabel.textColor = [UIColor colorWithRed:84/255.0 green:105/255.0 blue:121/255.0 alpha:1];
-    studioRoom.titleLabel.font = [UIFont systemFontOfSize:10.0f];
-    studioRoom.titleLabel.textAlignment = NSTextAlignmentRight;
-    studioRoom.checkState = M13CheckboxStateUnchecked;
-    [studioRoom addTarget:self action:@selector(checkStudio:) forControlEvents:UIControlEventValueChanged];
-    [studioRoom setStrokeColor:[UIColor colorWithRed:201/255.0 green:201/255.0 blue:201/255.0 alpha:1]];
-    [studioRoom setTintColor:[UIColor colorWithRed:223/255.0 green:223/255.0 blue:223/255.0 alpha:1]];
-    [studioRoom setUncheckedColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]];
-    [studioRoom setCheckColor:[UIColor colorWithRed:162/255.0 green:174/255.0 blue:182/255.0 alpha:1]];
-    
-    [_secondScrollViewContainer addSubview:studioRoom];
-    
-    bedroom1 = [[M13Checkbox alloc] initWithTitle:@"1"];
-    bedroom1.frame = CGRectMake(studioRoom.frame.origin.x + studioRoom.frame.size.width +4, 97, 45, 20);
-    bedroom1.titleLabel.textColor = [UIColor colorWithRed:84/255.0 green:105/255.0 blue:121/255.0 alpha:1];
-    bedroom1.titleLabel.font = [UIFont systemFontOfSize:10.0f];
-    bedroom1.titleLabel.textAlignment = NSTextAlignmentRight;
-    [bedroom1 addTarget:self action:@selector(check1Bedroom:) forControlEvents:UIControlEventValueChanged];
-    [bedroom1 setStrokeColor:[UIColor colorWithRed:201/255.0 green:201/255.0 blue:201/255.0 alpha:1]];
-    [bedroom1 setTintColor:[UIColor colorWithRed:223/255.0 green:223/255.0 blue:223/255.0 alpha:1]];
-    [bedroom1 setUncheckedColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]];
-    [bedroom1 setCheckColor:[UIColor colorWithRed:162/255.0 green:174/255.0 blue:182/255.0 alpha:1]];
-    
-    [_secondScrollViewContainer addSubview:bedroom1];
-    
-    bedroom2 = [[M13Checkbox alloc] initWithTitle:@"2"];
-    bedroom2.frame = CGRectMake(bedroom1.frame.origin.x + bedroom1.frame.size.width +4, 97, 45, 20);
-    bedroom2.titleLabel.textColor = [UIColor colorWithRed:84/255.0 green:105/255.0 blue:121/255.0 alpha:1];
-    bedroom2.titleLabel.font = [UIFont systemFontOfSize:10.0f];
-    bedroom2.titleLabel.textAlignment = NSTextAlignmentRight;
-    [bedroom2 addTarget:self action:@selector(check2Bedrooms:) forControlEvents:UIControlEventValueChanged];
-    [bedroom2 setStrokeColor:[UIColor colorWithRed:201/255.0 green:201/255.0 blue:201/255.0 alpha:1]];
-    [bedroom2 setTintColor:[UIColor colorWithRed:223/255.0 green:223/255.0 blue:223/255.0 alpha:1]];
-    [bedroom2 setUncheckedColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]];
-    [bedroom2 setCheckColor:[UIColor colorWithRed:162/255.0 green:174/255.0 blue:182/255.0 alpha:1]];
-    
-    [_secondScrollViewContainer addSubview:bedroom2];
-    
-    bedroom3 = [[M13Checkbox alloc] initWithTitle:@"3"];
-    bedroom3.frame = CGRectMake(bedroom2.frame.origin.x + bedroom2.frame.size.width +4, 97, 45, 20);
-    bedroom3.titleLabel.textColor = [UIColor colorWithRed:84/255.0 green:105/255.0 blue:121/255.0 alpha:1];
-    bedroom3.titleLabel.font = [UIFont systemFontOfSize:10.0f];
-    bedroom3.titleLabel.textAlignment = NSTextAlignmentRight;
-    [bedroom3 addTarget:self action:@selector(check3Bedrooms:) forControlEvents:UIControlEventValueChanged];
-    [bedroom3 setStrokeColor:[UIColor colorWithRed:201/255.0 green:201/255.0 blue:201/255.0 alpha:1]];
-    [bedroom3 setTintColor:[UIColor colorWithRed:223/255.0 green:223/255.0 blue:223/255.0 alpha:1]];
-    [bedroom3 setUncheckedColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]];
-    [bedroom3 setCheckColor:[UIColor colorWithRed:162/255.0 green:174/255.0 blue:182/255.0 alpha:1]];
-    
-    [_secondScrollViewContainer addSubview:bedroom3];
-    
-    bedroom4 = [[M13Checkbox alloc] initWithTitle:@"More"];
-    bedroom4.frame = CGRectMake(bedroom3.frame.origin.x + bedroom3.frame.size.width +4, 97, 60, 20);
-    bedroom4.titleLabel.textColor = [UIColor colorWithRed:84/255.0 green:105/255.0 blue:121/255.0 alpha:1];
-    bedroom4.titleLabel.font = [UIFont systemFontOfSize:10.0f];
-    bedroom4.titleLabel.textAlignment = NSTextAlignmentRight;
-    [bedroom4 addTarget:self action:@selector(check4Bedrooms:) forControlEvents:UIControlEventValueChanged];
-    [bedroom4 setStrokeColor:[UIColor colorWithRed:201/255.0 green:201/255.0 blue:201/255.0 alpha:1]];
-    [bedroom4 setTintColor:[UIColor colorWithRed:223/255.0 green:223/255.0 blue:223/255.0 alpha:1]];
-    [bedroom4 setUncheckedColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]];
-    [bedroom4 setCheckColor:[UIColor colorWithRed:162/255.0 green:174/255.0 blue:182/255.0 alpha:1]];
-    
-    [_secondScrollViewContainer addSubview:bedroom4];
-    
-    CGFloat widthLeft = wScr - 2 * self.vacancyLabel.frame.origin.x - self.vacancyLabel.frame.size.width;
-    CGFloat checkboxWidth = widthLeft /3.0;
-    
-    vacancyImmediate = [[M13Checkbox alloc] initWithTitle:@"Immediate"];
-    vacancyImmediate.frame = CGRectMake(self.vacancyLabel.frame.origin.x + self.vacancyLabel.frame.size.width + 4,
-                                        self.vacancyLabel.frame.origin.y,
-                                        checkboxWidth-4,
-                                        20);
-    vacancyImmediate.titleLabel.font = [UIFont systemFontOfSize:8];
-    vacancyImmediate.titleLabel.textColor = [UIColor colorWithRed:84/255.0 green:105/255.0 blue:121/255.0 alpha:1];
-    vacancyImmediate.titleLabel.textAlignment = NSTextAlignmentLeft;
-    vacancyImmediate.checkState = M13CheckboxStateUnchecked;
-    [vacancyImmediate addTarget:self action:@selector(checkVacancyImmediate:) forControlEvents:UIControlEventValueChanged];
-    [vacancyImmediate setStrokeColor:[UIColor colorWithRed:201/255.0 green:201/255.0 blue:201/255.0 alpha:1]];
-    [vacancyImmediate setTintColor:[UIColor colorWithRed:223/255.0 green:223/255.0 blue:223/255.0 alpha:1]];
-    [vacancyImmediate setUncheckedColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]];
-    [vacancyImmediate setCheckColor:[UIColor colorWithRed:162/255.0 green:174/255.0 blue:182/255.0 alpha:1]];
-    [vacancyImmediate setCheckAlignment:M13CheckboxAlignmentLeft];
-    [vacancyImmediate.titleLabel setMinimumScaleFactor:0.2];
-    [vacancyImmediate.titleLabel setAdjustsFontSizeToFitWidth:YES];
-
-    
-    [_scrollViewContainer addSubview:vacancyImmediate];
-    
-    vacancyShortTerm = [[M13Checkbox alloc] initWithTitle:@"Short Term"];
-    vacancyShortTerm.frame = CGRectMake(vacancyImmediate.frame.origin.x + vacancyImmediate.frame.size.width + 4,
-                                        vacancyImmediate.frame.origin.y,
-                                        checkboxWidth-4,
-                                        20);
-    vacancyShortTerm.titleLabel.font = [UIFont systemFontOfSize:8];
-    vacancyShortTerm.titleLabel.textColor = [UIColor colorWithRed:84/255.0 green:105/255.0 blue:121/255.0 alpha:1];
-    vacancyShortTerm.titleLabel.textAlignment = NSTextAlignmentLeft;
-    [vacancyShortTerm addTarget:self action:@selector(checkVacancyShortTerm:) forControlEvents:UIControlEventValueChanged];
-    [vacancyShortTerm setStrokeColor:[UIColor colorWithRed:201/255.0 green:201/255.0 blue:201/255.0 alpha:1]];
-    [vacancyShortTerm setTintColor:[UIColor colorWithRed:223/255.0 green:223/255.0 blue:223/255.0 alpha:1]];
-    [vacancyShortTerm setUncheckedColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]];
-    [vacancyShortTerm setCheckColor:[UIColor colorWithRed:162/255.0 green:174/255.0 blue:182/255.0 alpha:1]];
-    [vacancyShortTerm setCheckAlignment:M13CheckboxAlignmentLeft];
-    [vacancyShortTerm.titleLabel setMinimumScaleFactor:0.2];
-    [vacancyShortTerm.titleLabel setAdjustsFontSizeToFitWidth:YES];
-    
-    [_scrollViewContainer addSubview:vacancyShortTerm];
-    
-    vacancyNegociable = [[M13Checkbox alloc] initWithTitle:@"Flexible"];
-    vacancyNegociable.frame = CGRectMake(vacancyShortTerm.frame.origin.x + vacancyShortTerm.frame.size.width + 4,
-                                         vacancyShortTerm.frame.origin.y,
-                                         checkboxWidth-4,
-                                         20);
-    vacancyNegociable.titleLabel.font = [UIFont systemFontOfSize:8];
-    vacancyNegociable.titleLabel.textColor = [UIColor colorWithRed:84/255.0 green:105/255.0 blue:121/255.0 alpha:1];
-    vacancyNegociable.titleLabel.textAlignment = NSTextAlignmentRight;
-    [vacancyNegociable addTarget:self action:@selector(checkVacancyNegociable:) forControlEvents:UIControlEventValueChanged];
-    [vacancyNegociable setStrokeColor:[UIColor colorWithRed:201/255.0 green:201/255.0 blue:201/255.0 alpha:1]];
-    [vacancyNegociable setTintColor:[UIColor colorWithRed:223/255.0 green:223/255.0 blue:223/255.0 alpha:1]];
-    [vacancyNegociable setUncheckedColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]];
-    [vacancyNegociable setCheckColor:[UIColor colorWithRed:162/255.0 green:174/255.0 blue:182/255.0 alpha:1]];
-    [vacancyNegociable setCheckAlignment:M13CheckboxAlignmentLeft];
-    [vacancyNegociable.titleLabel setMinimumScaleFactor:0.2];
-    [vacancyNegociable.titleLabel setAdjustsFontSizeToFitWidth:YES];
-    
-    [_scrollViewContainer addSubview:vacancyNegociable];
-    
-    
-    fee3percent = [[M13Checkbox alloc] initWithTitle:@"3%"];
-    fee3percent.checkAlignment = M13CheckboxAlignmentLeft;
-    fee3percent.frame = CGRectMake(16,
-                                   self.otherAmountTextField.frame.origin.y-1,
-                                   51,
-                                   20);
-    fee3percent.titleLabel.font = [UIFont systemFontOfSize:10];
-    fee3percent.titleLabel.textColor = [UIColor colorWithRed:84/255.0 green:105/255.0 blue:121/255.0 alpha:1];
-    fee3percent.titleLabel.textAlignment = NSTextAlignmentRight;
-    fee3percent.checkState = M13CheckboxStateUnchecked;
-    [fee3percent addTarget:self action:@selector(checkFee3Percent:) forControlEvents:UIControlEventValueChanged];
-    [fee3percent setStrokeColor:[UIColor colorWithRed:201/255.0 green:201/255.0 blue:201/255.0 alpha:1]];
-    [fee3percent setTintColor:[UIColor colorWithRed:223/255.0 green:223/255.0 blue:223/255.0 alpha:1]];
-    [fee3percent setUncheckedColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]];
-    [fee3percent setCheckColor:[UIColor colorWithRed:162/255.0 green:174/255.0 blue:182/255.0 alpha:1]];
-    [fee3percent setCheckAlignment:M13CheckboxAlignmentRight];
-    
-    [_scrollViewContainer addSubview:fee3percent];
-    
-    fee6percent = [[M13Checkbox alloc] initWithTitle:@"6%"];
-    fee6percent.checkAlignment = NSTextAlignmentRight;
-    fee6percent.frame = CGRectMake(fee3percent.frame.origin.x+ fee3percent.frame.size.width + 12,
-                                   self.otherAmountTextField.frame.origin.y-1,
-                                   51,
-                                   20);
-    fee6percent.titleLabel.font = [UIFont systemFontOfSize:12.0f];
-    fee6percent.titleLabel.textColor = [UIColor colorWithRed:84/255.0 green:105/255.0 blue:121/255.0 alpha:1];
-    fee6percent.titleLabel.textAlignment = NSTextAlignmentLeft;
-    [fee6percent addTarget:self action:@selector(checkFee6Percent:) forControlEvents:UIControlEventValueChanged];
-    [fee6percent setStrokeColor:[UIColor colorWithRed:201/255.0 green:201/255.0 blue:201/255.0 alpha:1]];
-    [fee6percent setTintColor:[UIColor colorWithRed:223/255.0 green:223/255.0 blue:223/255.0 alpha:1]];
-    [fee6percent setUncheckedColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]];
-    [fee6percent setCheckColor:[UIColor colorWithRed:162/255.0 green:174/255.0 blue:182/255.0 alpha:1]];
-    [fee6percent setCheckAlignment:M13CheckboxAlignmentRight];
-    
-    [_scrollViewContainer addSubview:fee6percent];
-    
-    fee9percent = [[M13Checkbox alloc] initWithTitle:@"9%"];
-    fee9percent.checkAlignment = M13CheckboxAlignmentLeft;
-    fee9percent.frame = CGRectMake(fee6percent.frame.origin.x+ fee6percent.frame.size.width + 12,
-                                   self.otherAmountTextField.frame.origin.y -1,
-                                   51,
-                                   20);
-    fee9percent.titleLabel.font = [UIFont systemFontOfSize:12.0f];
-    fee9percent.titleLabel.textColor = [UIColor colorWithRed:84/255.0 green:105/255.0 blue:121/255.0 alpha:1];
-    fee9percent.titleLabel.textAlignment = NSTextAlignmentLeft;
-    [fee9percent addTarget:self action:@selector(checkFee9Percent:) forControlEvents:UIControlEventValueChanged];
-    [fee9percent setStrokeColor:[UIColor colorWithRed:201/255.0 green:201/255.0 blue:201/255.0 alpha:1]];
-    [fee9percent setTintColor:[UIColor colorWithRed:223/255.0 green:223/255.0 blue:223/255.0 alpha:1]];
-    [fee9percent setUncheckedColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]];
-    [fee9percent setCheckColor:[UIColor colorWithRed:162/255.0 green:174/255.0 blue:182/255.0 alpha:1]];
-    [fee9percent setCheckAlignment:M13CheckboxAlignmentRight];
-    
-    [_scrollViewContainer addSubview:fee9percent];
-    
-    
-    
-    typeEntirePlace = [[M13Checkbox alloc] initWithTitle:@"Entire Place"];
-    typeEntirePlace.frame = CGRectMake(self.typeLabel.frame.origin.x -2, 162, 90, 30);
-    typeEntirePlace.titleLabel.textColor = [UIColor colorWithRed:84/255.0 green:105/255.0 blue:121/255.0 alpha:1];
-    typeEntirePlace.titleLabel.font = [UIFont systemFontOfSize:10.0f];
-    typeEntirePlace.titleLabel.textAlignment = NSTextAlignmentRight;
-    typeEntirePlace.checkState = M13CheckboxStateUnchecked;
-    [typeEntirePlace addTarget:self action:@selector(checkEntirePlace:) forControlEvents:UIControlEventValueChanged];
-    [typeEntirePlace setStrokeColor:[UIColor colorWithRed:201/255.0 green:201/255.0 blue:201/255.0 alpha:1]];
-    [typeEntirePlace setTintColor:[UIColor colorWithRed:223/255.0 green:223/255.0 blue:223/255.0 alpha:1]];
-    [typeEntirePlace setUncheckedColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]];
-    [typeEntirePlace setCheckColor:[UIColor colorWithRed:162/255.0 green:174/255.0 blue:182/255.0 alpha:1]];
-    
-    [_secondScrollViewContainer addSubview:typeEntirePlace];
-    
-    
-    typePrivateRoom = [[M13Checkbox alloc] initWithTitle:@"Private Room"];
-    typePrivateRoom.frame = CGRectMake(typeEntirePlace.frame.origin.x + typeEntirePlace.frame.size.width +4, 162, 95, 30);
-    typePrivateRoom.titleLabel.textColor = [UIColor colorWithRed:84/255.0 green:105/255.0 blue:121/255.0 alpha:1];
-    typePrivateRoom.titleLabel.font = [UIFont systemFontOfSize:10.0f];
-    typePrivateRoom.titleLabel.textAlignment = NSTextAlignmentRight;
-    typePrivateRoom.checkState = M13CheckboxStateUnchecked;
-    [typePrivateRoom addTarget:self action:@selector(checkPrivateRoom:) forControlEvents:UIControlEventValueChanged];
-    [typePrivateRoom setStrokeColor:[UIColor colorWithRed:201/255.0 green:201/255.0 blue:201/255.0 alpha:1]];
-    [typePrivateRoom setTintColor:[UIColor colorWithRed:223/255.0 green:223/255.0 blue:223/255.0 alpha:1]];
-    [typePrivateRoom setUncheckedColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]];
-    [typePrivateRoom setCheckColor:[UIColor colorWithRed:162/255.0 green:174/255.0 blue:182/255.0 alpha:1]];
-    
-    [_secondScrollViewContainer addSubview:typePrivateRoom];
-    
-    
-    typeRetailOrCommercial = [[M13Checkbox alloc] initWithTitle:@"Retail or\nCommercial"];
-    typeRetailOrCommercial.frame = CGRectMake(typePrivateRoom.frame.origin.x + typePrivateRoom.frame.size.width +4, 162, 88, 30);
-    [typeRetailOrCommercial.titleLabel setFrame:CGRectMake(typeRetailOrCommercial.titleLabel.frame.origin.x-10, typeRetailOrCommercial.titleLabel.frame.origin.y, typeRetailOrCommercial.titleLabel.frame.size.width, 40)];
-    typeRetailOrCommercial.titleLabel.textColor = [UIColor colorWithRed:84/255.0 green:105/255.0 blue:121/255.0 alpha:1];
-    typeRetailOrCommercial.titleLabel.font = [UIFont systemFontOfSize:10.0f];
-    typeRetailOrCommercial.titleLabel.textAlignment = NSTextAlignmentLeft;
-    typeRetailOrCommercial.titleLabel.numberOfLines = 2;
-    typeRetailOrCommercial.checkState = M13CheckboxStateUnchecked;
-    [typeRetailOrCommercial addTarget:self action:@selector(checkRetailOrCommercial:) forControlEvents:UIControlEventValueChanged];
-    [typeRetailOrCommercial setStrokeColor:[UIColor colorWithRed:201/255.0 green:201/255.0 blue:201/255.0 alpha:1]];
-    [typeRetailOrCommercial setTintColor:[UIColor colorWithRed:223/255.0 green:223/255.0 blue:223/255.0 alpha:1]];
-    [typeRetailOrCommercial setUncheckedColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]];
-    [typeRetailOrCommercial setCheckColor:[UIColor colorWithRed:162/255.0 green:174/255.0 blue:182/255.0 alpha:1]];
-    
-    [_secondScrollViewContainer addSubview:typeRetailOrCommercial];
-    
-//    willRentChangeLabel = [[UILabel alloc]initWithFrame:CGRectMake(14, 660, 200, 30)];
-//    willRentChangeLabel.text = @"Will your rent change?:";
-//    willRentChangeLabel.font = [UIFont systemFontOfSize:12.0f];
-//    [_scrollViewContainer addSubview:willRentChangeLabel];
-//    
-//    willRentChangeYes = [[M13Checkbox alloc] initWithTitle:@"Yes"];
-//    willRentChangeYes.checkAlignment = M13CheckboxAlignmentLeft;
-//    willRentChangeYes.frame = CGRectMake(160, 660, 150, 30);
-//    willRentChangeYes.titleLabel.font = [UIFont systemFontOfSize:12.0f];
-//    willRentChangeYes.titleLabel.textAlignment = NSTextAlignmentLeft;
-//    willRentChangeYes.checkState = M13CheckboxStateChecked;
-//    [willRentChangeYes addTarget:self action:@selector(checkWillRentChangeYes:) forControlEvents:UIControlEventValueChanged];
-//    [_scrollViewContainer addSubview:willRentChangeYes];
-//    
-//    willRentChangeNo = [[M13Checkbox alloc] initWithTitle:@"No"];
-//    willRentChangeNo.checkAlignment = M13CheckboxAlignmentLeft;
-//    willRentChangeNo.frame = CGRectMake(160, 660 + 30 + 4, 150, 30);
-//    willRentChangeNo.titleLabel.font = [UIFont systemFontOfSize:12.0f];
-//    willRentChangeNo.titleLabel.textAlignment = NSTextAlignmentLeft;
-//    [willRentChangeNo addTarget:self action:@selector(checkWillRentChangeNO:) forControlEvents:UIControlEventValueChanged];
-//    [_scrollViewContainer addSubview:willRentChangeNo];
-//    
-//    willRentChangeMaybe = [[M13Checkbox alloc] initWithTitle:@"Maybe"];
-//    willRentChangeMaybe.checkAlignment = M13CheckboxAlignmentLeft;
-//    willRentChangeMaybe.frame = CGRectMake(160, 660 + 60 + 8, 150, 30);
-//    willRentChangeMaybe.titleLabel.font = [UIFont systemFontOfSize:12.0f];
-//    willRentChangeMaybe.titleLabel.textAlignment = NSTextAlignmentLeft;
-//    [willRentChangeMaybe addTarget:self action:@selector(checkWillRentChangeMaybe:) forControlEvents:UIControlEventValueChanged];
-//    [_scrollViewContainer addSubview:willRentChangeMaybe];
-    
-
-}
 
 - (void)registerForKeyboardNotifications
 {
@@ -632,8 +344,6 @@
 -(void)viewWillLayoutSubviews
 {
 
-    [self.scrollViewContainer setContentSize:CGSizeMake(wScr, 667)];
-    [self.secondScrollViewContainer setContentSize:CGSizeMake(wScr, 450)];
     [super viewWillLayoutSubviews];
 
 }
@@ -659,78 +369,78 @@
     [_addImagesButton setTitle:selectedText forState:UIControlStateNormal];
     
     
-    if ([_apartment.apartment[@"vacancy"] containsObject:[NSNumber numberWithInteger:0]])
-    {
-        [vacancyImmediate setCheckState:M13CheckboxStateChecked];
-    }
-    if ([_apartment.apartment[@"vacancy"] containsObject:[NSNumber numberWithInteger:1]])
-    {
-        [vacancyShortTerm setCheckState:M13CheckboxStateChecked];
-    }
-    if ([_apartment.apartment[@"vacancy"] containsObject:[NSNumber numberWithInteger:2]])
-    {
-        [vacancyNegociable setCheckState:M13CheckboxStateChecked];
-    }
-    
-    vacancy = [_apartment.apartment[@"vacancy"] mutableCopy];
-    
-    if ([_apartment.apartment[@"fee"] containsObject:[NSNumber numberWithInteger:0]])
-    {
-        [fee3percent setCheckState:M13CheckboxStateChecked];
-    }
-    if ([_apartment.apartment[@"fee"] containsObject:[NSNumber numberWithInteger:1]])
-    {
-        [fee6percent setCheckState:M13CheckboxStateChecked];
-    }
-    if ([_apartment.apartment[@"fee"] containsObject:[NSNumber numberWithInteger:2]])
-    {
-        [fee9percent setCheckState:M13CheckboxStateChecked];
-    }
-    if ([_apartment.apartment[@"fee"] containsObject:[NSNumber numberWithInteger:3]] )
-    {
-        self.otherAmountTextField.text = [NSString stringWithFormat:@"%.3f",[_apartment.apartment[@"feeOther"] floatValue]];
-    }
-    
-    fee = [_apartment.apartment[@"fee"] mutableCopy];
-    
-    if ([_apartment.apartment[@"rooms"] containsObject:[NSNumber numberWithInteger:0]])
-    {
-        [studioRoom setCheckState:M13CheckboxStateChecked];
-    }
-    if ([_apartment.apartment[@"rooms"] containsObject:[NSNumber numberWithInteger:1]])
-    {
-        [bedroom1 setCheckState:M13CheckboxStateChecked];
-    }
-    if ([_apartment.apartment[@"rooms"] containsObject:[NSNumber numberWithInteger:2]])
-    {
-        [bedroom2 setCheckState:M13CheckboxStateChecked];
-    }
-    if ([_apartment.apartment[@"rooms"] containsObject:[NSNumber numberWithInteger:3]])
-    {
-        [bedroom3 setCheckState:M13CheckboxStateChecked];
-    }
-    if ([_apartment.apartment[@"rooms"] containsObject:[NSNumber numberWithInteger:4]])
-    {
-        [bedroom4 setCheckState:M13CheckboxStateChecked];
-    }
-    
-    rooms = [_apartment.apartment[@"rooms"] mutableCopy];
-    
-    if ([_apartment.apartment[@"type"] integerValue]==0)
-    {
-        [typeEntirePlace setCheckState:M13CheckboxStateChecked];
-        type = [ @[@TypeEntirePlace] mutableCopy];
-    }
-    if ([_apartment.apartment[@"type"] integerValue]==1)
-    {
-        [typePrivateRoom setCheckState:M13CheckboxStateChecked];
-        type = [ @[@TypePrivateRoom] mutableCopy];
-    }
-     if ([_apartment.apartment[@"type"] integerValue]==2)
-    {
-        [typeRetailOrCommercial setCheckState:M13CheckboxStateChecked];
-        type = [ @[@TypeRetailOrCommercial] mutableCopy];
-    }
+//    if ([_apartment.apartment[@"vacancy"] containsObject:[NSNumber numberWithInteger:0]])
+//    {
+//        [vacancyImmediate setCheckState:M13CheckboxStateChecked];
+//    }
+//    if ([_apartment.apartment[@"vacancy"] containsObject:[NSNumber numberWithInteger:1]])
+//    {
+//        [vacancyShortTerm setCheckState:M13CheckboxStateChecked];
+//    }
+//    if ([_apartment.apartment[@"vacancy"] containsObject:[NSNumber numberWithInteger:2]])
+//    {
+//        [vacancyNegociable setCheckState:M13CheckboxStateChecked];
+//    }
+//    
+//    vacancy = [_apartment.apartment[@"vacancy"] mutableCopy];
+//    
+//    if ([_apartment.apartment[@"fee"] containsObject:[NSNumber numberWithInteger:0]])
+//    {
+//        [fee3percent setCheckState:M13CheckboxStateChecked];
+//    }
+//    if ([_apartment.apartment[@"fee"] containsObject:[NSNumber numberWithInteger:1]])
+//    {
+//        [fee6percent setCheckState:M13CheckboxStateChecked];
+//    }
+//    if ([_apartment.apartment[@"fee"] containsObject:[NSNumber numberWithInteger:2]])
+//    {
+//        [fee9percent setCheckState:M13CheckboxStateChecked];
+//    }
+//    if ([_apartment.apartment[@"fee"] containsObject:[NSNumber numberWithInteger:3]] )
+//    {
+//        self.otherAmountTextField.text = [NSString stringWithFormat:@"%.3f",[_apartment.apartment[@"feeOther"] floatValue]];
+//    }
+//    
+//    fee = [_apartment.apartment[@"fee"] mutableCopy];
+//    
+//    if ([_apartment.apartment[@"rooms"] containsObject:[NSNumber numberWithInteger:0]])
+//    {
+//        [studioRoom setCheckState:M13CheckboxStateChecked];
+//    }
+//    if ([_apartment.apartment[@"rooms"] containsObject:[NSNumber numberWithInteger:1]])
+//    {
+//        [bedroom1 setCheckState:M13CheckboxStateChecked];
+//    }
+//    if ([_apartment.apartment[@"rooms"] containsObject:[NSNumber numberWithInteger:2]])
+//    {
+//        [bedroom2 setCheckState:M13CheckboxStateChecked];
+//    }
+//    if ([_apartment.apartment[@"rooms"] containsObject:[NSNumber numberWithInteger:3]])
+//    {
+//        [bedroom3 setCheckState:M13CheckboxStateChecked];
+//    }
+//    if ([_apartment.apartment[@"rooms"] containsObject:[NSNumber numberWithInteger:4]])
+//    {
+//        [bedroom4 setCheckState:M13CheckboxStateChecked];
+//    }
+//    
+//    rooms = [_apartment.apartment[@"rooms"] mutableCopy];
+//    
+//    if ([_apartment.apartment[@"type"] integerValue]==0)
+//    {
+//        [typeEntirePlace setCheckState:M13CheckboxStateChecked];
+//        type = [ @[@TypeEntirePlace] mutableCopy];
+//    }
+//    if ([_apartment.apartment[@"type"] integerValue]==1)
+//    {
+//        [typePrivateRoom setCheckState:M13CheckboxStateChecked];
+//        type = [ @[@TypePrivateRoom] mutableCopy];
+//    }
+//     if ([_apartment.apartment[@"type"] integerValue]==2)
+//    {
+//        [typeRetailOrCommercial setCheckState:M13CheckboxStateChecked];
+//        type = [ @[@TypeRetailOrCommercial] mutableCopy];
+//    }
     
     _rentTF.text = [NSString stringWithFormat:@"%d",[_apartment.apartment[@"rent"] integerValue]];
     _areaTF.text = [NSString stringWithFormat:@"%d",[_apartment.apartment[@"area"] integerValue]];
@@ -778,18 +488,6 @@
             [self.mapView removeAnnotation:currentAnnotation];
         }
         
-
-        MKPointAnnotation *dropPin = [[MKPointAnnotation alloc] init];
-        dropPin.coordinate = _apartmentLocation;
-        
-        
-        currentAnnotation= dropPin;
-        [self.mapView addAnnotation:dropPin];
-
-        [MapUtils zoomToFitMarkersOnMap:_mapView];
-
-        
-        
     }
 }
 
@@ -812,84 +510,20 @@
 
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
-    //used to resize scroll views when the keboard has finished animating in screen
-    
-    if (activeField == _otherAmountTextField)
-    {
-        //uncheck any checked fee checkboxes
-        
-        if (fee3percent.checkState == M13CheckboxStateChecked)
-        {
-            [self checkFee3Percent:fee3percent];
-            [fee3percent setCheckState:M13CheckboxStateUnchecked];
-        }
-        if (fee6percent.checkState == M13CheckboxStateChecked)
-        {
-            [self checkFee6Percent:fee6percent];
-            [fee6percent setCheckState:M13CheckboxStateUnchecked];
-        }
-        if (fee9percent.checkState == M13CheckboxStateChecked)
-        {
-            [self checkFee9Percent:fee9percent];
-            [fee9percent setCheckState:M13CheckboxStateUnchecked];
-        }
-        
-        //set content offset to make sure text field is visible
-        
-        NSDictionary* info = [aNotification userInfo];
-        CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-        
-        lastScrollViewOffset = _scrollViewContainer.contentOffset;
-        lastScrollViewContentInset = _scrollViewContainer.contentInset;
-        lastScrollViewScrollIndicator = _scrollViewContainer.scrollIndicatorInsets;
-        UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
-        _scrollViewContainer.contentInset = contentInsets;
-        _scrollViewContainer.scrollIndicatorInsets = contentInsets;
-        
-        CGRect aRect = self.view.frame;
-        aRect.size.height -= kbSize.height;
-        if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
-            [_scrollViewContainer scrollRectToVisible:activeField.frame animated:YES];
-        }
-    }
-    else
-    {
-        if (activeField == _addressTextField)
-        {
-            //set content offset for address text field to make sure there is enought space on screen for suggestion table
-            
-            NSDictionary* info = [aNotification userInfo];
-            CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-            
-            lastScrollViewOffset = _scrollViewContainer.contentOffset;
-            lastScrollViewContentInset = _scrollViewContainer.contentInset;
-            lastScrollViewScrollIndicator = _scrollViewContainer.scrollIndicatorInsets;
-            UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height +120, 0.0);
-            _scrollViewContainer.contentInset = contentInsets;
-            _scrollViewContainer.scrollIndicatorInsets = contentInsets;
-            
 
-            
-        }
-        else
-        {
-            //setting content offset for the second scroll view
-            NSDictionary* info = [aNotification userInfo];
-            CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-            
-            lastScrollViewOffset = _secondScrollViewContainer.contentOffset;
-            lastScrollViewContentInset = _secondScrollViewContainer.contentInset;
-            lastScrollViewScrollIndicator = _secondScrollViewContainer.scrollIndicatorInsets;
-            UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
-            _secondScrollViewContainer.contentInset = contentInsets;
-            _secondScrollViewContainer.scrollIndicatorInsets = contentInsets;
-            
-            CGRect aRect = self.view.frame;
-            aRect.size.height -= kbSize.height;
-            if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
-                [_secondScrollViewContainer scrollRectToVisible:activeField.frame animated:YES];
-            }
-        }
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    lastScrollViewOffset = _scrollViewContainer.contentOffset;
+
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(20.0, 0.0, kbSize.height, 0.0);
+    _scrollViewContainer.contentInset = contentInsets;
+    _scrollViewContainer.scrollIndicatorInsets = contentInsets;
+    
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+        [_scrollViewContainer scrollRectToVisible:activeField.frame animated:YES];
     }
 
 }
@@ -897,21 +531,13 @@
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
     //reset the content offset to the correct scrollview
+
+    _scrollViewContainer.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+    _scrollViewContainer.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, 0, 0);
     
-    if (self.scrollViewContainer.frame.origin.x==0)
-    {
-        _scrollViewContainer.contentInset = lastScrollViewContentInset;
-        _scrollViewContainer.scrollIndicatorInsets = lastScrollViewScrollIndicator;
-        
-        [_scrollViewContainer setContentOffset:lastScrollViewOffset animated:YES];
-    }
-    else
-    {
-        _secondScrollViewContainer.contentInset = lastScrollViewContentInset;
-        _secondScrollViewContainer.scrollIndicatorInsets = lastScrollViewScrollIndicator;
-        
-        [_secondScrollViewContainer setContentOffset:lastScrollViewOffset animated:YES];
-    }
+    [_scrollViewContainer setContentOffset:lastScrollViewOffset animated:YES];
+    
+
 }
 
 -(void)tapToDismiss
@@ -965,7 +591,12 @@
 }
 
 #pragma mark - UITextView delegate methods
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
 
+    activeField = textView;
+    
+}
 - (BOOL)textView:(UITextView *)txtView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
 //    [self dismissKeyboard];
@@ -976,76 +607,111 @@
 
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    if(self.dayPicker == pickerView)
-    {
-        return 1;
-    }
-    if (self.hourPicker == pickerView)
-    {
-        return 2;
-    }
-    
-    return 0;
+    return 1;
 }
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    if(self.dayPicker == pickerView)
-    {
-        return 3;
-    }
-    if (self.hourPicker == pickerView)
-    {
-        return 24;
-    }
-    return 0;
+    return 6;
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    if(self.dayPicker == pickerView)
-    {
-        if (row==0)
-        {
-            return @"Weekdays";
-        }
-        if (row==1)
-        {
-            return @"Weekends";
-        }
-        if (row==2)
-        {
-            return @"Everyday";
-        }
-    }
-    if (self.hourPicker == pickerView)
-    {
-        if (row<12)
-        {
-            return [NSString stringWithFormat:@"%d AM",row+1];
-        }
-        else
-        {
-            return [NSString stringWithFormat:@"%d PM",row-11];
-        }
+    switch (row) {
+        case 0:
+                return @" ";
+            break;
+        case 1:
+                return @"Studio";
+            break;
+        case 2:
+                return @"1 Bedroom";
+            break;
+        case 3:
+                return @"2 Bedrooms";
+            break;
+        case 4:
+                return @"3 Bedrooms";
+            break;
+        case 5:
+                return @"4 Bedrooms";
+            break;
+        default:
+            break;
     }
     return nil;
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    if (self.dayPicker == pickerView)
-    {
-        [self.daysButton setTitle:[self pickerView:pickerView titleForRow:row forComponent:component] forState:UIControlStateNormal];
+    switch (row) {
+        case 0:
+                [self.numberOfBedroomsButton setTitle:@"# Bedrooms" forState:UIControlStateNormal];
+            break;
+        case 1:
+                [self.numberOfBedroomsButton setTitle:@"Studio" forState:UIControlStateNormal];
+            break;
+        case 2:
+                [self.numberOfBedroomsButton setTitle:@"1 Bedroom" forState:UIControlStateNormal];
+            break;
+        case 3:
+                [self.numberOfBedroomsButton setTitle:@"2 Bedrooms" forState:UIControlStateNormal];
+            break;
+        case 4:
+                [self.numberOfBedroomsButton setTitle:@"3 Bedrooms" forState:UIControlStateNormal];
+            break;
+        case 5:
+                [self.numberOfBedroomsButton setTitle:@"4 Bedrooms" forState:UIControlStateNormal];
+            break;
+        default:
+            break;
     }
-    if (self.hourPicker == pickerView)
-    {
-        NSString* firstHour= [self pickerView:self.hourPicker titleForRow:[self.hourPicker selectedRowInComponent:0] forComponent:0];
-        NSString* secordHour= [self pickerView:self.hourPicker titleForRow:[self.hourPicker selectedRowInComponent:1] forComponent:1];
-        NSString* hourString = [NSString stringWithFormat:@"%@ - %@",firstHour,secordHour];
-        [self.hoursButton setTitle:hourString forState:UIControlStateNormal];
+}
 
+#pragma mark - picker methods
+
+-(IBAction)leaseRenewalButonTapped:(id)sender
+{
+    if([self.leaseRenewalContainer isHidden])
+    {
+        [self showLeaseRenewalContainer];
     }
+    else
+    {
+        [self hideLeaseRenewalContainer];
+    }
+}
+-(IBAction)numberOfBedroomsTapped:(id)sender
+{
+    if([self.numberOfBedroomsContainer isHidden])
+    {
+        [self showNumberOfBedroomsContainer];
+    }
+    else
+    {
+        [self hideNumberOfBedroomsContainer];
+    }
+}
+
+-(IBAction)showLeaseRenewalContainer
+{
+    [self.numberOfBedroomsContainer setHidden:YES];
+    [self.leaseRenewalContainer setHidden:NO];
+}
+-(IBAction)hideLeaseRenewalContainer
+{
+    [self.numberOfBedroomsContainer setHidden:YES];
+    [self.leaseRenewalContainer setHidden:YES];
+}
+-(IBAction)showNumberOfBedroomsContainer
+{
+    [self.numberOfBedroomsContainer setHidden:NO];
+    [self.leaseRenewalContainer setHidden:YES];
+}
+-(IBAction)hideNumberOfBedroomsContainer
+{
+    [self.numberOfBedroomsContainer setHidden:YES];
+    [self.leaseRenewalContainer setHidden:YES];
 }
 
 #pragma mark - AssetsPicker Delegate
@@ -1067,15 +733,17 @@
 #pragma mark - datepicker
 -(IBAction)dateIsChanged:(id)sender
 {
-    leaseExpirationDate=datePicker.date;
+    leaseExpirationDate=self.leaseRenewalPicker.date;
     
     NSDateFormatter *monthFormatter = [[NSDateFormatter alloc] init];
     [monthFormatter setDateFormat:@"MMMM"];
     NSDateFormatter *dayFormatter = [[NSDateFormatter alloc] init];
     [dayFormatter setDateFormat:@"d"];
     
-    [self.monthButton setTitle:[monthFormatter stringFromDate:datePicker.date] forState:UIControlStateNormal] ;
-    [self.dayButton setTitle:[dayFormatter stringFromDate:datePicker.date] forState:UIControlStateNormal];
+    
+    NSString* monthString=[monthFormatter stringFromDate:self.leaseRenewalPicker.date];
+    NSString* dayString=[dayFormatter stringFromDate:self.leaseRenewalPicker.date];
+    [self.leaseRenewalButton setTitle:[NSString stringWithFormat:@"%@/%@",monthString,dayString] forState:UIControlStateNormal] ;
 }
 
 #pragma mark - Buttons actions
@@ -1370,7 +1038,7 @@
         CLLocation* location = [[CLLocation alloc] initWithLatitude:_apartmentLocation.latitude longitude:_apartmentLocation.longitude];
         [[CLGeocoder new] reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
            
-            NSString* neighborhood = @"";
+            NSString* neighborhood = [[self.addressTextField.text componentsSeparatedByString:@","] objectAtIndex:0];
             NSString* city = @"";
             NSString* state = @"";
             NSString* zipCode = @"";
@@ -1378,10 +1046,6 @@
             
             CLPlacemark* placemark = (CLPlacemark*) [placemarks firstObject];
             
-            if (placemark.subLocality)
-            {
-                neighborhood = placemark.subLocality;
-            }
             if (placemark.locality)
             {
                 city = placemark.locality;
@@ -1397,26 +1061,70 @@
             
             NSMutableDictionary *apartmentInfo = [NSMutableDictionary new];
             apartmentInfo[@"location"] = [NSString stringWithFormat:@"%f|%f", _apartmentLocation.latitude, _apartmentLocation.longitude];
-            apartmentInfo[@"type"] = [NSNumber numberWithInteger:[[type firstObject] integerValue]];
-            apartmentInfo[@"rooms"] = rooms;
-            apartmentInfo[@"fee"] = fee;
-            if (![self.otherAmountTextField.text isEqualToString:@""])
+            if (self.typeEntirePlace.selected)
             {
-                if([self.otherAmountTextField.text containsString:@"%"])
-                {
-                    NSString* percentString = [[self.otherAmountTextField.text componentsSeparatedByString:@"%"] objectAtIndex:0];
-                    apartmentInfo[@"feeOther"] = [NSNumber numberWithFloat:([percentString floatValue]/100.0)];
-                    apartmentInfo[@"fee"] = @[@FeeOtherpercent];
-                }
-                else
-                {
-                    apartmentInfo[@"feeOther"] = [NSNumber numberWithFloat:[self.otherAmountTextField.text floatValue]];
-                    apartmentInfo[@"fee"] = @[@FeeOtherpercent];
-                }
+                apartmentInfo[@"type"] = @TypeEntirePlace;
             }
-            apartmentInfo[@"rentWillChange"] = rentWillChange;
-            apartmentInfo[@"vacancy"] = vacancy;
-            apartmentInfo[@"description"] = @" ";
+            if (self.typePrivateRoom.selected)
+            {
+                apartmentInfo[@"type"] = @TypePrivateRoom;
+            }
+            if (self.typeRetailOrCommercial.selected)
+            {
+                apartmentInfo[@"type"] = @TypeRetailOrCommercial;
+            }
+            
+            switch ([self.numberOfBedroomsPicker selectedRowInComponent:0])
+            {
+                case 0:
+                    break;
+                case 1:
+                    apartmentInfo[@"rooms"] = [NSArray arrayWithObject:@Studio];
+                    break;
+                case 2:
+                    apartmentInfo[@"rooms"] = [NSArray arrayWithObject:@Bedroom1];
+                    break;
+                case 3:
+                    apartmentInfo[@"rooms"] = [NSArray arrayWithObject:@Bedrooms2];
+                    break;
+                case 4:
+                    apartmentInfo[@"rooms"] = [NSArray arrayWithObject:@Bedrooms3];
+                    break;
+                case 5:
+                    apartmentInfo[@"rooms"] = [NSArray arrayWithObject:@Bedrooms4];
+                    break;
+                    
+                default:
+                    break;
+            }
+            
+            if (self.fee3percent.selected)
+            {
+                apartmentInfo[@"fee"] = [NSArray arrayWithObject:@Fee3percent];
+            }
+            if (self.fee6percent.selected)
+            {
+                apartmentInfo[@"fee"] = [NSArray arrayWithObject:@Fee6percent];
+            }
+            if (self.fee9percent.selected)
+            {
+                apartmentInfo[@"fee"] = [NSArray arrayWithObject:@Fee9percent];
+            }
+            
+            if (self.vacancyShortTerm.selected)
+            {
+                apartmentInfo[@"vacancy"] = [NSArray arrayWithObject:@VacancyShortTerm];
+            }
+            if (self.vacancyLongTerm.selected)
+            {
+                apartmentInfo[@"vacancy"] = [NSArray arrayWithObject:@VacancyLongTerm];
+            }
+            if (self.vacancyFlexible.selected)
+            {
+                apartmentInfo[@"vacancy"] = [NSArray arrayWithObject:@VacancyFlexible];
+            }
+            
+            apartmentInfo[@"description"] = self.descriptionTextView.text;
             apartmentInfo[@"area"] = _areaTF.text;
             apartmentInfo[@"rent"] = _rentTF.text;
             apartmentInfo[@"locationName"] = _addressTextField.text;
@@ -1425,8 +1133,6 @@
             apartmentInfo[@"state"]=state;
             apartmentInfo[@"zipcode"]=zipCode;
             apartmentInfo[@"directContact"]=[NSNumber numberWithInteger: contactDirectly];
-            apartmentInfo[@"bestContactHours"]=self.hoursButton.titleLabel.text;
-            apartmentInfo[@"bestContactDays"] =self.daysButton.titleLabel.text;
             
             apartmentInfo[@"renewalTimestamp"]=[NSNumber numberWithLong:(long)[leaseExpirationDate timeIntervalSince1970]];
             
@@ -1443,9 +1149,9 @@
                                                                   style:UIAlertViewStyleDefault
                                                       cancelButtonTitle:nil otherButtonTitles:@[@"Ok"]
                                                                tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                                                                   [self dismissViewControllerAnimated:YES completion:^{
-                                                                       [self.delegate addApartmentFinieshedWithChanges:YES];
-                                                                   }];
+                                                                   [self.navigationController popViewControllerAnimated:YES];
+                                                                   [self.delegate addApartmentFinieshedWithChanges:YES];
+
                                                                }];
                                              
                                          }
@@ -1466,87 +1172,72 @@
         [UIAlertView showWithTitle:@"" message:@"Select location!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
         return NO;
     }
+    if(!self.vacancyShortTerm.selected && !self.vacancyLongTerm.selected && !self.vacancyFlexible.selected)
+    {
+        [UIAlertView showWithTitle:@"" message:@"Select vacancy!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
+        return NO;
+    }
+    if(!self.fee3percent.selected && !self.fee6percent.selected && !self.fee9percent.selected)
+    {
+        [UIAlertView showWithTitle:@"" message:@"Select your fee!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
+        return NO;
+    }
+    
+    if(!self.typeEntirePlace.selected && !self.typePrivateRoom.selected && !self.typeRetailOrCommercial.selected)
+    {
+        [UIAlertView showWithTitle:@"" message:@"Select type!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
+        return NO;
+    }
+    
     if(!leaseExpirationDate)
     {
         [UIAlertView showWithTitle:@"" message:@"Select lease renewal date!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
         return NO;
     }
-    
-    
-//    if(_apartmentType < 0)
-//    {
-//        [UIAlertView showWithTitle:@"" message:@"Select type!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
-//        return NO;
-//    }
-    
+
 //    if(_roomsTextView.text.length == 0)
 //    {
 //        [UIAlertView showWithTitle:@"" message:@"Enter rooms description!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
 //        return NO;
 //    }
     
-//    if(type.count == 0)
-//    {
-//        [UIAlertView showWithTitle:@"" message:@"Select type!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
-//        return NO;
-//    }
     
-    if(rooms.count == 0)
+    if([self.numberOfBedroomsPicker selectedRowInComponent:0]==0)
     {
-        [UIAlertView showWithTitle:@"" message:@"Select your room components!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
+        [UIAlertView showWithTitle:@"" message:@"Select number of bedrooms!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
         return NO;
     }
-    
-    if(fee.count == 0 && [self.otherAmountTextField.text isEqualToString:@""])
-    {
-        [UIAlertView showWithTitle:@"" message:@"Select your fee!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
-        return NO;
-    }
-    
-//    if(rentWillChange.count == 0)
-//    {
-//        [UIAlertView showWithTitle:@"" message:@"Select whether or not your rent will change!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
-//        return NO;
-//    }
-    
-    if(vacancy.count == 0)
-    {
-        [UIAlertView showWithTitle:@"" message:@"Select vacancy!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
-        return NO;
-    }
-    
-//    if(_descriptionTextView.text.length == 0)
-//    {
-//        [UIAlertView showWithTitle:@"" message:@"Enter apartment's description!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
-//        return NO;
-//    }
-    
+
     if(_areaTF.text.length == 0)
     {
         [UIAlertView showWithTitle:@"" message:@"Enter apartment's area!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
         return NO;
     }
-    
-//    if(_daysRenewalTF.text.length == 0)
-//    {
-//        [UIAlertView showWithTitle:@"" message:@"You must specify the remaining days until renewal!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
-//        return NO;
-//    }
-    
     if(_rentTF.text.length == 0)
     {
         [UIAlertView showWithTitle:@"" message:@"You must specify the rent value for the apartment!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
         return NO;
     }
-    
     if(_apartmentImages.count == 0)
     {
         [UIAlertView showWithTitle:@"" message:@"You must upload at least one image!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
         return NO;
     }
+//    if(rentWillChange.count == 0)
+//    {
+//        [UIAlertView showWithTitle:@"" message:@"Select whether or not your rent will change!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
+//        return NO;
+//    }
+
     
+    if(_descriptionTextView.text.length == 0)
+    {
+        [UIAlertView showWithTitle:@"" message:@"Enter apartment's description!" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
+        return NO;
+    }
     
-    
+
+
     
     return YES;
 }
@@ -1571,320 +1262,445 @@
 
 #pragma mark - Checkbox handlers
 
-- (void)checkStudio:(M13Checkbox *)checkbox
+-(IBAction)tappedCheckBox:(UIButton*) button
 {
-    bedroom1.checkState = M13CheckboxStateUnchecked;
-    bedroom2.checkState = M13CheckboxStateUnchecked;
-    bedroom3.checkState = M13CheckboxStateUnchecked;
-    bedroom4.checkState = M13CheckboxStateUnchecked;
-    
-    [rooms removeObject:@Bedroom1];
-    [rooms removeObject:@Bedrooms2];
-    [rooms removeObject:@Bedrooms3];
-    [rooms removeObject:@Bedrooms4];
-    
-    if(checkbox.checkState == M13CheckboxStateChecked)
+
+    if (button== self.fee3percent)
     {
-        if (![rooms containsObject:@Studio])
-            [rooms addObject:@Studio];
+        if ([button isSelected])
+        {
+            [button setSelected:NO];
+        }
+        else
+        {
+            [button setSelected:YES];
+            [self.fee6percent setSelected:NO];
+            [self.fee9percent setSelected:NO];
+        }
     }
-    else
-        [rooms removeObject:@Studio];
+    if (button== self.fee6percent)
+    {
+        if ([button isSelected])
+        {
+            [button setSelected:NO];
+        }
+        else
+        {
+            [button setSelected:YES];
+            [self.fee3percent setSelected:NO];
+            [self.fee9percent setSelected:NO];
+        }
+    }
+    if (button== self.fee9percent)
+    {
+        if ([button isSelected])
+        {
+            [button setSelected:NO];
+        }
+        else
+        {
+            [button setSelected:YES];
+            [self.fee3percent setSelected:NO];
+            [self.fee6percent setSelected:NO];
+        }
+    }
+    
+    if (button== self.vacancyShortTerm)
+    {
+        if ([button isSelected])
+        {
+            [button setSelected:NO];
+        }
+        else
+        {
+            [button setSelected:YES];
+            [self.vacancyLongTerm setSelected:NO];
+            [self.vacancyFlexible setSelected:NO];
+        }
+    }
+    if (button== self.vacancyLongTerm)
+    {
+        if ([button isSelected])
+        {
+            [button setSelected:NO];
+        }
+        else
+        {
+            [button setSelected:YES];
+            [self.vacancyShortTerm setSelected:NO];
+            [self.vacancyFlexible setSelected:NO];
+        }
+    }
+    if (button== self.vacancyFlexible)
+    {
+        if ([button isSelected])
+        {
+            [button setSelected:NO];
+        }
+        else
+        {
+            [button setSelected:YES];
+            [self.vacancyShortTerm setSelected:NO];
+            [self.vacancyLongTerm setSelected:NO];
+        }
+    }
+    
+    if (button== self.typeEntirePlace)
+    {
+        if ([button isSelected])
+        {
+            [button setSelected:NO];
+        }
+        else
+        {
+            [button setSelected:YES];
+            [self.typePrivateRoom setSelected:NO];
+            [self.typeRetailOrCommercial setSelected:NO];
+        }
+    }
+    if (button== self.typePrivateRoom)
+    {
+        if ([button isSelected])
+        {
+            [button setSelected:NO];
+        }
+        else
+        {
+            [button setSelected:YES];
+            [self.typeEntirePlace setSelected:NO];
+            [self.typeRetailOrCommercial setSelected:NO];
+        }
+    }
+    if (button== self.typeRetailOrCommercial)
+    {
+        if ([button isSelected])
+        {
+            [button setSelected:NO];
+        }
+        else
+        {
+            [button setSelected:YES];
+            [self.typeEntirePlace setSelected:NO];
+            [self.typePrivateRoom setSelected:NO];
+        }
+    }
 }
 
-- (void)check1Bedroom:(M13Checkbox *)checkbox
-{
-    studioRoom.checkState = M13CheckboxStateUnchecked;
-    bedroom2.checkState = M13CheckboxStateUnchecked;
-    bedroom3.checkState = M13CheckboxStateUnchecked;
-    bedroom4.checkState = M13CheckboxStateUnchecked;
-    
-    [rooms removeObject:@Studio];
-    [rooms removeObject:@Bedrooms2];
-    [rooms removeObject:@Bedrooms3];
-    [rooms removeObject:@Bedrooms4];
-    
-    if(bedroom1.checkState == M13CheckboxStateChecked)
-    {
-        if (![rooms containsObject:@Bedroom1])
-            [rooms addObject:@Bedroom1];
-    }
-    else
-        [rooms removeObject:@Bedroom1];
-}
-
-- (void)check2Bedrooms:(M13Checkbox *)checkbox
-{
-    studioRoom.checkState = M13CheckboxStateUnchecked;
-    bedroom1.checkState = M13CheckboxStateUnchecked;
-    bedroom3.checkState = M13CheckboxStateUnchecked;
-    bedroom4.checkState = M13CheckboxStateUnchecked;
-    
-    [rooms removeObject:@Studio];
-    [rooms removeObject:@Bedroom1];
-    [rooms removeObject:@Bedrooms3];
-    [rooms removeObject:@Bedrooms4];
-    
-    if(bedroom2.checkState == M13CheckboxStateChecked)
-    {
-        if (![rooms containsObject:@Bedrooms2])
-            [rooms addObject:@Bedrooms2];
-    }
-    else
-        [rooms removeObject:@Bedrooms2];
-}
-
-- (void)check3Bedrooms:(M13Checkbox *)checkbox
-{
-    studioRoom.checkState = M13CheckboxStateUnchecked;
-    bedroom1.checkState = M13CheckboxStateUnchecked;
-    bedroom2.checkState = M13CheckboxStateUnchecked;
-    bedroom4.checkState = M13CheckboxStateUnchecked;
-    
-    [rooms removeObject:@Studio];
-    [rooms removeObject:@Bedroom1];
-    [rooms removeObject:@Bedrooms2];
-    [rooms removeObject:@Bedrooms4];
-    
-    if(bedroom3.checkState == M13CheckboxStateChecked)
-    {
-        if (![rooms containsObject:@Bedrooms3])
-            [rooms addObject:@Bedrooms3];
-    }
-    else
-        [rooms removeObject:@Bedrooms3];
-}
-
-- (void)check4Bedrooms:(M13Checkbox *)checkbox
-{
-    studioRoom.checkState = M13CheckboxStateUnchecked;
-    bedroom1.checkState = M13CheckboxStateUnchecked;
-    bedroom3.checkState = M13CheckboxStateUnchecked;
-    bedroom2.checkState = M13CheckboxStateUnchecked;
-    
-    [rooms removeObject:@Studio];
-    [rooms removeObject:@Bedroom1];
-    [rooms removeObject:@Bedrooms3];
-    [rooms removeObject:@Bedrooms2];
-    
-    if(bedroom4.checkState == M13CheckboxStateChecked)
-    {
-        if (![rooms containsObject:@Bedrooms4])
-            [rooms addObject:@Bedrooms4];
-    }
-    else
-        [rooms removeObject:@Bedrooms4];
-}
-
-- (void)checkVacancyImmediate:(M13Checkbox *)checkbox
-{
-    vacancyNegociable.checkState = M13CheckboxStateUnchecked;
-    vacancyShortTerm.checkState = M13CheckboxStateUnchecked;
-    
-    [vacancy removeObject:@VacancyShortTerm];
-    [vacancy removeObject:@VacancyFlexible];
-    
-    if(vacancyImmediate.checkState == M13CheckboxStateChecked)
-    {
-        if (![vacancy containsObject:@VacancyImmediate])
-            [vacancy addObject:@VacancyImmediate];
-    }
-    else
-        [vacancy removeObject:@VacancyImmediate];
-}
-
-- (void)checkVacancyShortTerm:(M13Checkbox *)checkbox
-{
-    vacancyNegociable.checkState = M13CheckboxStateUnchecked;
-    vacancyImmediate.checkState = M13CheckboxStateUnchecked;
-    
-    [vacancy removeObject:@VacancyImmediate];
-    [vacancy removeObject:@VacancyFlexible];
-    
-    if(vacancyShortTerm.checkState == M13CheckboxStateChecked)
-    {
-        if (![vacancy containsObject:@VacancyShortTerm])
-            [vacancy addObject:@VacancyShortTerm];
-    }
-    else
-        [vacancy removeObject:@VacancyShortTerm];
-    
-}
-
-- (void)checkVacancyNegociable:(M13Checkbox *)checkbox
-{
-    vacancyShortTerm.checkState = M13CheckboxStateUnchecked;
-    vacancyImmediate.checkState = M13CheckboxStateUnchecked;
-    
-    [vacancy removeObject:@VacancyImmediate];
-    [vacancy removeObject:@VacancyShortTerm];
-    
-    if(vacancyNegociable.checkState == M13CheckboxStateChecked)
-    {
-        if (![vacancy containsObject:@VacancyFlexible])
-            [vacancy addObject:@VacancyFlexible];
-    }
-    else
-        [vacancy removeObject:@VacancyFlexible];
-}
-- (void)checkFee3Percent:(M13Checkbox *)checkbox
-{
-    fee6percent.checkState = M13CheckboxStateUnchecked;
-    fee9percent.checkState = M13CheckboxStateUnchecked;
-    self.otherAmountTextField.text =@"";
-    
-    [fee removeObject:@Fee6percent];
-    [fee removeObject:@Fee9percent];
-    [fee removeObject:@FeeOtherpercent];
-    
-    if(fee3percent.checkState == M13CheckboxStateChecked)
-    {
-        if (![fee containsObject:@Fee3percent])
-            [fee addObject:@Fee3percent];
-    }
-    else
-        [fee removeObject:@Fee9percent];
-}
-- (void)checkFee6Percent:(M13Checkbox *)checkbox
-{
-    fee3percent.checkState = M13CheckboxStateUnchecked;
-    fee9percent.checkState = M13CheckboxStateUnchecked;
-    self.otherAmountTextField.text =@"";
-
-    [fee removeObject:@Fee3percent];
-    [fee removeObject:@Fee9percent];
-    [fee removeObject:@FeeOtherpercent];
-    
-    if(fee6percent.checkState == M13CheckboxStateChecked)
-    {
-        if (![fee containsObject:@Fee6percent])
-            [fee addObject:@Fee6percent];
-    }
-    else
-        [fee removeObject:@Fee6percent];
-}
-- (void)checkFee9Percent:(M13Checkbox *)checkbox
-{
-    fee6percent.checkState = M13CheckboxStateUnchecked;
-    fee3percent.checkState = M13CheckboxStateUnchecked;
-    self.otherAmountTextField.text =@"";
-    
-    [fee removeObject:@Fee6percent];
-    [fee removeObject:@Fee3percent];
-    [fee removeObject:@FeeOtherpercent];
-    
-    if(fee9percent.checkState == M13CheckboxStateChecked)
-    {
-        if (![fee containsObject:@Fee9percent])
-            [fee addObject:@Fee9percent];
-    }
-    else
-        [fee removeObject:@Fee9percent];
-}
-- (void)checkWillRentChangeYes:(M13Checkbox *)checkbox
-{
-    willRentChangeNo.checkState = M13CheckboxStateUnchecked;
-    willRentChangeMaybe.checkState = M13CheckboxStateUnchecked;
-    
-    [rentWillChange removeObject:@RentWillChangeNO];
-    [rentWillChange removeObject:@RentWillChangeMaybe];
-    
-    if(willRentChangeYes.checkState == M13CheckboxStateChecked)
-    {
-        if (![rentWillChange containsObject:@RentWillChangeYES])
-            [rentWillChange addObject:@RentWillChangeYES];
-    }
-    else
-        [rentWillChange removeObject:@RentWillChangeYES];
-}
-- (void)checkWillRentChangeNO:(M13Checkbox *)checkbox
-{
-    willRentChangeYes.checkState = M13CheckboxStateUnchecked;
-    willRentChangeMaybe.checkState = M13CheckboxStateUnchecked;
-    
-    [rentWillChange removeObject:@RentWillChangeYES];
-    [rentWillChange removeObject:@RentWillChangeMaybe];
-    
-    if(willRentChangeNo.checkState == M13CheckboxStateChecked)
-    {
-        if (![rentWillChange containsObject:@RentWillChangeNO])
-            [rentWillChange addObject:@RentWillChangeNO];
-    }
-    else
-        [rentWillChange removeObject:@RentWillChangeNO];
-}
-- (void)checkWillRentChangeMaybe:(M13Checkbox *)checkbox
-{
-    willRentChangeNo.checkState = M13CheckboxStateUnchecked;
-    willRentChangeYes.checkState = M13CheckboxStateUnchecked;
-    
-    [rentWillChange removeObject:@RentWillChangeNO];
-    [rentWillChange removeObject:@RentWillChangeYES];
-    
-    if(willRentChangeMaybe.checkState == M13CheckboxStateChecked)
-    {
-        if (![rentWillChange containsObject:@RentWillChangeMaybe])
-            [rentWillChange addObject:@RentWillChangeMaybe];
-    }
-    else
-        [rentWillChange removeObject:@RentWillChangeMaybe];
-}
-
-- (void)checkEntirePlace:(M13Checkbox *)checkbox
-{
-    typePrivateRoom.checkState = M13CheckboxStateUnchecked;
-    typeRetailOrCommercial.checkState = M13CheckboxStateUnchecked;
-    
-    [type removeObject:@TypePrivateRoom];
-    [type removeObject:@TypeRetailOrCommercial];
-    
-    if(typeEntirePlace.checkState == M13CheckboxStateChecked)
-    {
-        if (![type containsObject:@TypeEntirePlace])
-            [type addObject:@TypeEntirePlace];
-    }
-    else
-        [type removeObject:@TypeEntirePlace];
-}
-
-- (void)checkPrivateRoom:(M13Checkbox *)checkbox
-{
-    typeEntirePlace.checkState = M13CheckboxStateUnchecked;
-    typeRetailOrCommercial.checkState = M13CheckboxStateUnchecked;
-    
-    [type removeObject:@TypeEntirePlace];
-    [type removeObject:@TypeRetailOrCommercial];
-    
-    if(typePrivateRoom.checkState == M13CheckboxStateChecked)
-    {
-        if (![type containsObject:@TypePrivateRoom])
-            [type addObject:@TypePrivateRoom];
-    }
-    else
-        [type removeObject:@TypePrivateRoom];
-}
-
-- (void)checkRetailOrCommercial:(M13Checkbox *)checkbox
-{
-    typeEntirePlace.checkState = M13CheckboxStateUnchecked;
-    typePrivateRoom.checkState = M13CheckboxStateUnchecked;
-    
-    [type removeObject:@TypeEntirePlace];
-    [type removeObject:@TypePrivateRoom];
-    
-    if(typeRetailOrCommercial.checkState == M13CheckboxStateChecked)
-    {
-        if (![type containsObject:@TypeRetailOrCommercial])
-            [type addObject:@TypeRetailOrCommercial];
-    }
-    else
-        [type removeObject:@TypeRetailOrCommercial];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+//
+//- (void)checkStudio:(M13Checkbox *)checkbox
+//{
+//    bedroom1.checkState = M13CheckboxStateUnchecked;
+//    bedroom2.checkState = M13CheckboxStateUnchecked;
+//    bedroom3.checkState = M13CheckboxStateUnchecked;
+//    bedroom4.checkState = M13CheckboxStateUnchecked;
+//    
+//    [rooms removeObject:@Bedroom1];
+//    [rooms removeObject:@Bedrooms2];
+//    [rooms removeObject:@Bedrooms3];
+//    [rooms removeObject:@Bedrooms4];
+//    
+//    if(checkbox.checkState == M13CheckboxStateChecked)
+//    {
+//        if (![rooms containsObject:@Studio])
+//            [rooms addObject:@Studio];
+//    }
+//    else
+//        [rooms removeObject:@Studio];
+//}
+//
+//- (void)check1Bedroom:(M13Checkbox *)checkbox
+//{
+//    studioRoom.checkState = M13CheckboxStateUnchecked;
+//    bedroom2.checkState = M13CheckboxStateUnchecked;
+//    bedroom3.checkState = M13CheckboxStateUnchecked;
+//    bedroom4.checkState = M13CheckboxStateUnchecked;
+//    
+//    [rooms removeObject:@Studio];
+//    [rooms removeObject:@Bedrooms2];
+//    [rooms removeObject:@Bedrooms3];
+//    [rooms removeObject:@Bedrooms4];
+//    
+//    if(bedroom1.checkState == M13CheckboxStateChecked)
+//    {
+//        if (![rooms containsObject:@Bedroom1])
+//            [rooms addObject:@Bedroom1];
+//    }
+//    else
+//        [rooms removeObject:@Bedroom1];
+//}
+//
+//- (void)check2Bedrooms:(M13Checkbox *)checkbox
+//{
+//    studioRoom.checkState = M13CheckboxStateUnchecked;
+//    bedroom1.checkState = M13CheckboxStateUnchecked;
+//    bedroom3.checkState = M13CheckboxStateUnchecked;
+//    bedroom4.checkState = M13CheckboxStateUnchecked;
+//    
+//    [rooms removeObject:@Studio];
+//    [rooms removeObject:@Bedroom1];
+//    [rooms removeObject:@Bedrooms3];
+//    [rooms removeObject:@Bedrooms4];
+//    
+//    if(bedroom2.checkState == M13CheckboxStateChecked)
+//    {
+//        if (![rooms containsObject:@Bedrooms2])
+//            [rooms addObject:@Bedrooms2];
+//    }
+//    else
+//        [rooms removeObject:@Bedrooms2];
+//}
+//
+//- (void)check3Bedrooms:(M13Checkbox *)checkbox
+//{
+//    studioRoom.checkState = M13CheckboxStateUnchecked;
+//    bedroom1.checkState = M13CheckboxStateUnchecked;
+//    bedroom2.checkState = M13CheckboxStateUnchecked;
+//    bedroom4.checkState = M13CheckboxStateUnchecked;
+//    
+//    [rooms removeObject:@Studio];
+//    [rooms removeObject:@Bedroom1];
+//    [rooms removeObject:@Bedrooms2];
+//    [rooms removeObject:@Bedrooms4];
+//    
+//    if(bedroom3.checkState == M13CheckboxStateChecked)
+//    {
+//        if (![rooms containsObject:@Bedrooms3])
+//            [rooms addObject:@Bedrooms3];
+//    }
+//    else
+//        [rooms removeObject:@Bedrooms3];
+//}
+//
+//- (void)check4Bedrooms:(M13Checkbox *)checkbox
+//{
+//    studioRoom.checkState = M13CheckboxStateUnchecked;
+//    bedroom1.checkState = M13CheckboxStateUnchecked;
+//    bedroom3.checkState = M13CheckboxStateUnchecked;
+//    bedroom2.checkState = M13CheckboxStateUnchecked;
+//    
+//    [rooms removeObject:@Studio];
+//    [rooms removeObject:@Bedroom1];
+//    [rooms removeObject:@Bedrooms3];
+//    [rooms removeObject:@Bedrooms2];
+//    
+//    if(bedroom4.checkState == M13CheckboxStateChecked)
+//    {
+//        if (![rooms containsObject:@Bedrooms4])
+//            [rooms addObject:@Bedrooms4];
+//    }
+//    else
+//        [rooms removeObject:@Bedrooms4];
+//}
+//
+//- (void)checkVacancyImmediate:(M13Checkbox *)checkbox
+//{
+//    vacancyNegociable.checkState = M13CheckboxStateUnchecked;
+//    vacancyShortTerm.checkState = M13CheckboxStateUnchecked;
+//    
+//    [vacancy removeObject:@VacancyShortTerm];
+//    [vacancy removeObject:@VacancyFlexible];
+//    
+//    if(vacancyImmediate.checkState == M13CheckboxStateChecked)
+//    {
+//        if (![vacancy containsObject:@VacancyImmediate])
+//            [vacancy addObject:@VacancyImmediate];
+//    }
+//    else
+//        [vacancy removeObject:@VacancyImmediate];
+//}
+//
+//- (void)checkVacancyShortTerm:(M13Checkbox *)checkbox
+//{
+//    vacancyNegociable.checkState = M13CheckboxStateUnchecked;
+//    vacancyImmediate.checkState = M13CheckboxStateUnchecked;
+//    
+//    [vacancy removeObject:@VacancyImmediate];
+//    [vacancy removeObject:@VacancyFlexible];
+//    
+//    if(vacancyShortTerm.checkState == M13CheckboxStateChecked)
+//    {
+//        if (![vacancy containsObject:@VacancyShortTerm])
+//            [vacancy addObject:@VacancyShortTerm];
+//    }
+//    else
+//        [vacancy removeObject:@VacancyShortTerm];
+//    
+//}
+//
+//- (void)checkVacancyNegociable:(M13Checkbox *)checkbox
+//{
+//    vacancyShortTerm.checkState = M13CheckboxStateUnchecked;
+//    vacancyImmediate.checkState = M13CheckboxStateUnchecked;
+//    
+//    [vacancy removeObject:@VacancyImmediate];
+//    [vacancy removeObject:@VacancyShortTerm];
+//    
+//    if(vacancyNegociable.checkState == M13CheckboxStateChecked)
+//    {
+//        if (![vacancy containsObject:@VacancyFlexible])
+//            [vacancy addObject:@VacancyFlexible];
+//    }
+//    else
+//        [vacancy removeObject:@VacancyFlexible];
+//}
+//- (void)checkFee3Percent:(M13Checkbox *)checkbox
+//{
+//    fee6percent.checkState = M13CheckboxStateUnchecked;
+//    fee9percent.checkState = M13CheckboxStateUnchecked;
+//    self.otherAmountTextField.text =@"";
+//    
+//    [fee removeObject:@Fee6percent];
+//    [fee removeObject:@Fee9percent];
+//    [fee removeObject:@FeeOtherpercent];
+//    
+//    if(fee3percent.checkState == M13CheckboxStateChecked)
+//    {
+//        if (![fee containsObject:@Fee3percent])
+//            [fee addObject:@Fee3percent];
+//    }
+//    else
+//        [fee removeObject:@Fee9percent];
+//}
+//- (void)checkFee6Percent:(M13Checkbox *)checkbox
+//{
+//    fee3percent.checkState = M13CheckboxStateUnchecked;
+//    fee9percent.checkState = M13CheckboxStateUnchecked;
+//    self.otherAmountTextField.text =@"";
+//
+//    [fee removeObject:@Fee3percent];
+//    [fee removeObject:@Fee9percent];
+//    [fee removeObject:@FeeOtherpercent];
+//    
+//    if(fee6percent.checkState == M13CheckboxStateChecked)
+//    {
+//        if (![fee containsObject:@Fee6percent])
+//            [fee addObject:@Fee6percent];
+//    }
+//    else
+//        [fee removeObject:@Fee6percent];
+//}
+//- (void)checkFee9Percent:(M13Checkbox *)checkbox
+//{
+//    fee6percent.checkState = M13CheckboxStateUnchecked;
+//    fee3percent.checkState = M13CheckboxStateUnchecked;
+//    self.otherAmountTextField.text =@"";
+//    
+//    [fee removeObject:@Fee6percent];
+//    [fee removeObject:@Fee3percent];
+//    [fee removeObject:@FeeOtherpercent];
+//    
+//    if(fee9percent.checkState == M13CheckboxStateChecked)
+//    {
+//        if (![fee containsObject:@Fee9percent])
+//            [fee addObject:@Fee9percent];
+//    }
+//    else
+//        [fee removeObject:@Fee9percent];
+//}
+//- (void)checkWillRentChangeYes:(M13Checkbox *)checkbox
+//{
+//    willRentChangeNo.checkState = M13CheckboxStateUnchecked;
+//    willRentChangeMaybe.checkState = M13CheckboxStateUnchecked;
+//    
+//    [rentWillChange removeObject:@RentWillChangeNO];
+//    [rentWillChange removeObject:@RentWillChangeMaybe];
+//    
+//    if(willRentChangeYes.checkState == M13CheckboxStateChecked)
+//    {
+//        if (![rentWillChange containsObject:@RentWillChangeYES])
+//            [rentWillChange addObject:@RentWillChangeYES];
+//    }
+//    else
+//        [rentWillChange removeObject:@RentWillChangeYES];
+//}
+//- (void)checkWillRentChangeNO:(M13Checkbox *)checkbox
+//{
+//    willRentChangeYes.checkState = M13CheckboxStateUnchecked;
+//    willRentChangeMaybe.checkState = M13CheckboxStateUnchecked;
+//    
+//    [rentWillChange removeObject:@RentWillChangeYES];
+//    [rentWillChange removeObject:@RentWillChangeMaybe];
+//    
+//    if(willRentChangeNo.checkState == M13CheckboxStateChecked)
+//    {
+//        if (![rentWillChange containsObject:@RentWillChangeNO])
+//            [rentWillChange addObject:@RentWillChangeNO];
+//    }
+//    else
+//        [rentWillChange removeObject:@RentWillChangeNO];
+//}
+//- (void)checkWillRentChangeMaybe:(M13Checkbox *)checkbox
+//{
+//    willRentChangeNo.checkState = M13CheckboxStateUnchecked;
+//    willRentChangeYes.checkState = M13CheckboxStateUnchecked;
+//    
+//    [rentWillChange removeObject:@RentWillChangeNO];
+//    [rentWillChange removeObject:@RentWillChangeYES];
+//    
+//    if(willRentChangeMaybe.checkState == M13CheckboxStateChecked)
+//    {
+//        if (![rentWillChange containsObject:@RentWillChangeMaybe])
+//            [rentWillChange addObject:@RentWillChangeMaybe];
+//    }
+//    else
+//        [rentWillChange removeObject:@RentWillChangeMaybe];
+//}
+//
+//- (void)checkEntirePlace:(M13Checkbox *)checkbox
+//{
+//    typePrivateRoom.checkState = M13CheckboxStateUnchecked;
+//    typeRetailOrCommercial.checkState = M13CheckboxStateUnchecked;
+//    
+//    [type removeObject:@TypePrivateRoom];
+//    [type removeObject:@TypeRetailOrCommercial];
+//    
+//    if(typeEntirePlace.checkState == M13CheckboxStateChecked)
+//    {
+//        if (![type containsObject:@TypeEntirePlace])
+//            [type addObject:@TypeEntirePlace];
+//    }
+//    else
+//        [type removeObject:@TypeEntirePlace];
+//}
+//
+//- (void)checkPrivateRoom:(M13Checkbox *)checkbox
+//{
+//    typeEntirePlace.checkState = M13CheckboxStateUnchecked;
+//    typeRetailOrCommercial.checkState = M13CheckboxStateUnchecked;
+//    
+//    [type removeObject:@TypeEntirePlace];
+//    [type removeObject:@TypeRetailOrCommercial];
+//    
+//    if(typePrivateRoom.checkState == M13CheckboxStateChecked)
+//    {
+//        if (![type containsObject:@TypePrivateRoom])
+//            [type addObject:@TypePrivateRoom];
+//    }
+//    else
+//        [type removeObject:@TypePrivateRoom];
+//}
+//
+//- (void)checkRetailOrCommercial:(M13Checkbox *)checkbox
+//{
+//    typeEntirePlace.checkState = M13CheckboxStateUnchecked;
+//    typePrivateRoom.checkState = M13CheckboxStateUnchecked;
+//    
+//    [type removeObject:@TypeEntirePlace];
+//    [type removeObject:@TypePrivateRoom];
+//    
+//    if(typeRetailOrCommercial.checkState == M13CheckboxStateChecked)
+//    {
+//        if (![type containsObject:@TypeRetailOrCommercial])
+//            [type addObject:@TypeRetailOrCommercial];
+//    }
+//    else
+//        [type removeObject:@TypeRetailOrCommercial];
+//}
+//
+//- (void)didReceiveMemoryWarning {
+//    [super didReceiveMemoryWarning];
+//    // Dispose of any resources that can be recreated.
+//}
 
 
 @end

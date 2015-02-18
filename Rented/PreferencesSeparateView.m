@@ -112,10 +112,10 @@
     {
         vacancyTypes = [[NSMutableArray alloc] initWithArray:DEP.userPreferences.vacancyTypes];
         
-        if([vacancyTypes containsObject:@VacancyImmediate])
+        if([vacancyTypes containsObject:@VacancyShortTerm])
             vacancyImmediate.checkState = M13CheckboxStateChecked;
         
-        if([vacancyTypes containsObject:@VacancyShortTerm])
+        if([vacancyTypes containsObject:@VacancyLongTerm])
             vacancyShortTerm.checkState = M13CheckboxStateChecked;
         
         if([vacancyTypes containsObject:@VacancyFlexible])
@@ -489,11 +489,11 @@
 {
     if(vacancyImmediate.checkState == M13CheckboxStateChecked)
     {
-        if (![vacancyTypes containsObject:@VacancyImmediate])
-            [vacancyTypes addObject:@VacancyImmediate];
+        if (![vacancyTypes containsObject:@VacancyShortTerm])
+            [vacancyTypes addObject:@VacancyShortTerm];
     }
     else
-        [vacancyTypes removeObject:@VacancyImmediate];
+        [vacancyTypes removeObject:@VacancyShortTerm];
     
     DEP.userPreferences.vacancyTypes = vacancyTypes;
     [DEP saveUserPreferences];
@@ -503,11 +503,11 @@
 {
     if(vacancyShortTerm.checkState == M13CheckboxStateChecked)
     {
-        if (![vacancyTypes containsObject:@VacancyShortTerm])
-            [vacancyTypes addObject:@VacancyShortTerm];
+        if (![vacancyTypes containsObject:@VacancyLongTerm])
+            [vacancyTypes addObject:@VacancyLongTerm];
     }
     else
-        [vacancyTypes removeObject:@VacancyShortTerm];
+        [vacancyTypes removeObject:@VacancyLongTerm];
     
     DEP.userPreferences.vacancyTypes = vacancyTypes;
     [DEP saveUserPreferences];

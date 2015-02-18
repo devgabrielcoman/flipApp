@@ -45,8 +45,8 @@
     
     for (NSNumber *vacancyType in vacancyArray)
     {
-        if([vacancyType integerValue] == VacancyImmediate)
-            [vacancy appendFormat:@"Immediate"];
+        if([vacancyType integerValue] == VacancyLongTerm)
+            [vacancy appendFormat:@"Long-Term"];
         
         if([vacancyType integerValue] == VacancyFlexible)
             [vacancy appendFormat:@"Flexible"];

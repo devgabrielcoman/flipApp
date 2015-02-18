@@ -142,7 +142,7 @@
     self.frame = CGRectMake(_queryTextField.frame.origin.x,
                             _queryTextField.frame.origin.y + _queryTextField.frame.size.height,
                             _queryTextField.frame.size.width,
-                            120);
+                            200);
     _table.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
 }
 
