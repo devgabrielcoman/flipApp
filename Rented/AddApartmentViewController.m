@@ -228,8 +228,7 @@
     [self.secondScrollViewContainer bringSubviewToFront:_hourPicker];
     [self.secondScrollViewContainer bringSubviewToFront:_dayPicker];
     
-    [self.scrollViewContainer setContentInset:UIEdgeInsetsMake(-44, 0, 0, 0)];
-    
+
 }
 
 -(void)enterRent
