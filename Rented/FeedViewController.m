@@ -250,8 +250,10 @@
 
 -(void)shareFlip
 {
-    NSString* textToShare = @"Check out Flip!!";
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://appstore.com/%@",@"Flip"]];
+    NSString *textToShare = @" Check out Flip - it's a marketplace for lease breaks and lease takeovers ";
+    
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://appstore.com/%@",@"Flip"]];
+    NSURL *url = [NSURL URLWithString:@"http://www.hiflip.com/"];
     
     NSArray *objectsToShare=@[url,textToShare];
     

@@ -8,12 +8,16 @@
 
 #import "TutorialPageView.h"
 #import "AuthenticationViewController.h"
+#import "RentedPanelController.h"
+#import "AppDelegate.h"
 
 @implementation TutorialPageView
 
 
 -(void)viewDidLoad
 {
+    [self setTitle:@" "];
+    
     [self.imageView setImage:self.image];
     UISwipeGestureRecognizer* swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goLeft)];
     swipeRight.direction=UISwipeGestureRecognizerDirectionRight;
@@ -26,7 +30,15 @@
 
 -(void)goLeft
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    if([[self.navigationController.viewControllers objectAtIndex:0] isKindOfClass:[AuthenticationViewController class]] || self.index>1)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        AppDelegate* appDelegate =(AppDelegate*)[UIApplication sharedApplication].delegate;
+        [appDelegate.rootViewController showLeftPanelAnimated:YES];
+    }
 
 }
 
@@ -50,8 +62,16 @@
     }
     if (self.index==3)
     {
-        AuthenticationViewController * authVC = [[AuthenticationViewController alloc] initWithNibName:@"AuthenticationViewController" bundle:nil];
-        [self.navigationController pushViewController:authVC animated:YES];
+        if([[self.navigationController.viewControllers objectAtIndex:0] isKindOfClass:[AuthenticationViewController class]])
+        {
+            AuthenticationViewController * authVC = [[AuthenticationViewController alloc] initWithNibName:@"AuthenticationViewController" bundle:nil];
+            [self.navigationController pushViewController:authVC animated:YES];
+        }
+        else
+        {
+            AppDelegate* appDelegate =(AppDelegate*)[UIApplication sharedApplication].delegate;
+            [appDelegate.rootViewController showLeftPanelAnimated:YES];
+        }
     }
 }
 

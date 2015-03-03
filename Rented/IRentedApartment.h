@@ -28,4 +28,5 @@
 - (void)saveApartment:(NSDictionary *)apartmentInfo images:(NSArray *)images forUser:(PFUser *)user completion:(void (^)(BOOL succes))completionHandler;
 
 - (void)completeListOfApartmentsForFeed:(NSArray *)apartments filterOnlyFromNetwork:(BOOL)shouldFilter completion:(void (^)(NSArray *apartments, BOOL succeeded))completionHandler;
+- (void)uploadImages:(NSArray *)images forApartment:(PFObject *)apartment completion:(void (^)(BOOL succes))completionHandler;
 @end

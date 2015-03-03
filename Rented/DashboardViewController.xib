@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="adminBtn" destination="cJm-F6-qzJ" id="TXv-Ka-2er"/>
                 <outlet property="adminSeparatorView" destination="WH3-Bm-ASF" id="44U-KK-EXP"/>
+                <outlet property="howItWorksButton" destination="zHJ-eN-6kS" id="NLl-VB-Er5"/>
                 <outlet property="likesBtn" destination="GV1-C5-20o" id="XF3-3M-RI3"/>
                 <outlet property="locationLbl" destination="Hau-uL-PRG" id="uXm-cn-gqo"/>
                 <outlet property="myPlaceBtn" destination="5XU-4b-rGK" id="atj-U7-hOs"/>
@@ -58,7 +59,7 @@
                                 </mask>
                             </variation>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rD0-Yl-Dk8">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rD0-Yl-Dk8">
                             <rect key="frame" x="8" y="678" width="122" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="Loj-51-jCH"/>
@@ -102,7 +103,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <inset key="titleEdgeInsets" minX="15" minY="3" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="MY PLACE" image="map-marker-icon">
+                            <state key="normal" title="LEAVING" image="map-marker-icon">
                                 <color key="titleColor" red="0.14901960784313725" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -122,7 +123,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <inset key="titleEdgeInsets" minX="15" minY="3" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="BROWSE" image="compass-icon">
+                            <state key="normal" title="LOOKING" image="compass-icon">
                                 <color key="titleColor" red="0.14901960780000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -201,10 +202,38 @@
                             </subviews>
                             <color key="backgroundColor" red="0.81568627450980391" green="0.0078431372549019607" blue="0.10588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zHJ-eN-6kS" userLabel="how it works">
+                            <rect key="frame" x="8" y="678" width="122" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="T2F-Ak-Hon"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="YwE-f2-RgH"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="122" id="k56-fL-3MA"/>
+                                <constraint firstAttribute="width" constant="122" id="kcB-O3-6Wc"/>
+                                <constraint firstAttribute="height" constant="50" id="mwt-gS-muO"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <inset key="titleEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="-20"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="-20" maxX="-65" maxY="0.0"/>
+                            <state key="normal" title="How It Works" image="info-icon">
+                                <color key="titleColor" red="0.14901960780000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="T2F-Ak-Hon"/>
+                                    <exclude reference="YwE-f2-RgH"/>
+                                    <exclude reference="k56-fL-3MA"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="howItWorksButtonTapped:" destination="-1" eventType="touchUpInside" id="yd5-VE-nJs"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="pCJ-2D-WaR" firstAttribute="centerX" secondItem="nAT-3n-Pqg" secondAttribute="centerX" id="2cz-VV-t9g"/>
+                        <constraint firstAttribute="bottom" secondItem="zHJ-eN-6kS" secondAttribute="bottom" constant="8" id="33k-bc-5wW"/>
                         <constraint firstItem="nAT-3n-Pqg" firstAttribute="top" secondItem="5XU-4b-rGK" secondAttribute="bottom" constant="8" symbolic="YES" id="37r-TW-kRb"/>
                         <constraint firstItem="rD0-Yl-Dk8" firstAttribute="bottom" secondItem="P12-rz-z7t" secondAttribute="bottomMargin" id="4vX-U4-4Zu"/>
                         <constraint firstAttribute="trailing" secondItem="pCJ-2D-WaR" secondAttribute="trailing" constant="13" id="7OG-Dw-HUD"/>
@@ -228,6 +257,7 @@
                         <constraint firstItem="Hau-uL-PRG" firstAttribute="top" secondItem="P12-rz-z7t" secondAttribute="top" constant="159" id="II4-1x-kw9"/>
                         <constraint firstItem="Hau-uL-PRG" firstAttribute="leading" secondItem="rD0-Yl-Dk8" secondAttribute="leading" id="Jwn-Tw-xpf"/>
                         <constraint firstItem="pCJ-2D-WaR" firstAttribute="centerX" secondItem="P12-rz-z7t" secondAttribute="centerX" id="KGU-sH-YI6"/>
+                        <constraint firstItem="zHJ-eN-6kS" firstAttribute="leading" secondItem="P12-rz-z7t" secondAttribute="leading" constant="8" id="MjB-Yh-7oE"/>
                         <constraint firstItem="Hau-uL-PRG" firstAttribute="leading" secondItem="P12-rz-z7t" secondAttribute="leading" constant="8" id="Pnd-ix-gYx"/>
                         <constraint firstItem="Ld8-gQ-pY3" firstAttribute="trailing" secondItem="Hau-uL-PRG" secondAttribute="trailing" id="Pvw-yP-pBN"/>
                         <constraint firstItem="8eC-Fu-3p6" firstAttribute="leading" secondItem="rD0-Yl-Dk8" secondAttribute="trailing" id="RLw-7s-klF"/>
@@ -302,6 +332,7 @@
         <image name="envelope-icon" width="20" height="20"/>
         <image name="gear-icon" width="20" height="20"/>
         <image name="heart-icon" width="20" height="20"/>
+        <image name="info-icon" width="20" height="20"/>
         <image name="map-marker-icon" width="20" height="20"/>
         <image name="map-marker-small-icon" width="10" height="10"/>
         <image name="power-off" width="20" height="20"/>

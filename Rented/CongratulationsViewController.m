@@ -27,9 +27,10 @@
 
 -(void)shareButtonTapped:(id)sender
 {
-    NSString *textToShare = @"Check out this apartment!";
+    NSString *textToShare = @" Check out Flip - it's a marketplace for lease breaks and lease takeovers ";
     
-    NSURL *url = self.apartment[@"shareUrl"];
+    //    NSURL *url = [NSURL URLWithString:self.apartment[@"shareUrl"]];
+    NSURL *url = [NSURL URLWithString:@"http://www.hiflip.com/"];
     UIImage* image = self.image;
     
     NSArray *objectsToShare;

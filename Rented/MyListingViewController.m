@@ -139,13 +139,10 @@
 -(void)shareApartment
 {
     
-    NSString *textToShare = @"Check out this apartment!";
-    if ([textToShare isEqualToString:@""])
-    {
-        textToShare =@" ";
-    }
+    NSString *textToShare = @" Check out Flip - it's a marketplace for lease breaks and lease takeovers ";
     
-    NSURL *url = [NSURL URLWithString:_apartment.apartment[@"shareUrl"]];
+    //    NSURL *url = [NSURL URLWithString:self.apartment[@"shareUrl"]];
+    NSURL *url = [NSURL URLWithString:@"http://www.hiflip.com/"];
     UIImage* image = self.apartmentCell.apartmentTopView.apartmentImgView.image;
     
     NSArray *objectsToShare;

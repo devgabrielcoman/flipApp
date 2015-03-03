@@ -26,6 +26,7 @@
 #import "GeneralUtils.h"
 #import "MyListingViewController.h"
 #import "AppDelegate.h"
+#import "TutorialPageView.h"
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
@@ -41,6 +42,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *likesBtn;
 @property (weak, nonatomic) IBOutlet UIButton *locationLbl;
 @property (weak, nonatomic) IBOutlet UIButton *preferencesBtn;
+@property (weak, nonatomic) IBOutlet UIButton *howItWorksButton;
 @property (weak, nonatomic) IBOutlet UIButton *saySomethingBtn;
 @property (weak, nonatomic) IBOutlet UIButton *logoutBtn;
 
@@ -70,22 +72,22 @@
         [self showAdminOptions:NO];
     }
     
-    self.locationManager = [[CLLocationManager alloc] init];
-    
-    self.locationManager.delegate = self;
-    if(IS_OS_8_OR_LATER){
-        NSUInteger code = [CLLocationManager authorizationStatus];
-        if (code == kCLAuthorizationStatusNotDetermined && ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)] || [self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])) {
-            // choose one request according to your business.
-            if([[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"]){
-                [self.locationManager requestAlwaysAuthorization];
-            } else if([[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"]) {
-                [self.locationManager  requestWhenInUseAuthorization];
-            } else {
-                NSLog(@"Info.plist does not contain NSLocationAlwaysUsageDescription or NSLocationWhenInUseUsageDescription");
-            }
-        }
-    }
+//    self.locationManager = [[CLLocationManager alloc] init];
+//    
+//    self.locationManager.delegate = self;
+//    if(IS_OS_8_OR_LATER){
+//        NSUInteger code = [CLLocationManager authorizationStatus];
+//        if (code == kCLAuthorizationStatusNotDetermined && ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)] || [self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])) {
+//            // choose one request according to your business.
+//            if([[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"]){
+//                [self.locationManager requestAlwaysAuthorization];
+//            } else if([[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"]) {
+//                [self.locationManager  requestWhenInUseAuthorization];
+//            } else {
+//                NSLog(@"Info.plist does not contain NSLocationAlwaysUsageDescription or NSLocationWhenInUseUsageDescription");
+//            }
+//        }
+//    }
 //    [self.locationManager startUpdatingLocation];
     
     [self.notificationCircle.layer setCornerRadius:8];
@@ -167,8 +169,8 @@
             DEP.authenticatedUser[@"location"]=city;
         }
         [DEP.authenticatedUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            [_locationLbl setHidden:NO];
-            [_locationLbl setTitle:DEP.authenticatedUser[@"location"] forState:UIControlStateNormal];
+//            [_locationLbl setHidden:NO];
+//            [_locationLbl setTitle:DEP.authenticatedUser[@"location"] forState:UIControlStateNormal];
         }];
         [self.locationManager stopUpdatingLocation];
     }];
@@ -186,8 +188,8 @@
     {
         _usernameLbl.text = DEP.authenticatedUser.username;
         [_usernameLbl setHidden:NO];
-        [_locationLbl setTitle:DEP.authenticatedUser[@"location"] forState:UIControlStateNormal];
-        [_locationLbl setHidden:NO];
+//        [_locationLbl setTitle:DEP.authenticatedUser[@"location"] forState:UIControlStateNormal];
+//        [_locationLbl setHidden:NO];
         
         _profileImgView.showActivityIndicator = YES;
         _profileImgView.image = nil;
@@ -201,8 +203,8 @@
 {
     _usernameLbl.text = DEP.authenticatedUser.username;
     [_usernameLbl setHidden:NO];
-    [_locationLbl setTitle:DEP.authenticatedUser[@"location"] forState:UIControlStateNormal];
-    [_locationLbl setHidden:NO];
+//    [_locationLbl setTitle:DEP.authenticatedUser[@"location"] forState:UIControlStateNormal];
+//    [_locationLbl setHidden:NO];
     
     _profileImgView.showActivityIndicator = YES;
     _profileImgView.image = nil;
@@ -235,7 +237,7 @@
     
     [self.view.layer addSublayer:shadowContainerLayer];
     
-    [_locationLbl setImage:[[UIImage imageNamed:@"map-marker-icon"] imageScaledToFitSize:CGSizeMake(12, 12)] forState:UIControlStateNormal];
+//    [_locationLbl setImage:[[UIImage imageNamed:@"map-marker-icon"] imageScaledToFitSize:CGSizeMake(12, 12)] forState:UIControlStateNormal];
 }
 
 -(void)showAdminOptions:(BOOL)visible
@@ -376,6 +378,16 @@
     AdminViewController *adminVC = [[AdminViewController alloc] initWithNibName:@"AdminViewController" bundle:nil];
     
     self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:adminVC];
+}
+
+- (IBAction)howItWorksButtonTapped:(id)sender
+{
+    [self setTitle:@" "];
+    TutorialPageView* page1 = [[TutorialPageView alloc] initWithNibName:@"TutorialPageView" bundle:nil];
+    page1.image = [UIImage imageNamed:@"1"];
+    page1.index = 1;
+    self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:page1];
+
 }
 
 - (IBAction)showPreferences:(id)sender

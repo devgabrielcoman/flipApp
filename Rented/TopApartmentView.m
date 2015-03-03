@@ -111,7 +111,7 @@
     
     //_daysUntilRenewal.text = [NSString stringWithFormat:@"%li days\n until\n renewal", (long)[apartment[@"renewaldays"] integerValue]];
     
-    NSMutableString *vacancy = [[NSMutableString alloc] initWithString:@"Available: "];
+    NSMutableString *vacancy = [[NSMutableString alloc] initWithString:@"Moving out: "];
     NSArray *vacancyArray = apartment[@"vacancy"];
     
     for (NSNumber *vacancyType in vacancyArray)
@@ -184,7 +184,6 @@
 
 -(IBAction)editButtonTapped:(id)sender
 {
-    return;
     [self.delegate editApartment];
 }
 

@@ -33,7 +33,7 @@
                 PFObject *apartment = [objects firstObject];
                 
                 PFQuery *imgQuery = [PFQuery queryWithClassName:@"ApartmentPhotos"];
-                imgQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
+                imgQuery.cachePolicy = kPFCachePolicyIgnoreCache;
                 [imgQuery whereKey:@"apartment" equalTo:apartment];
                 [imgQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                     if(!error)
@@ -110,9 +110,9 @@
     [query whereKey:@"owner" notEqualTo:DEP.authenticatedUser];
     [query whereKey:@"visible" equalTo:@1];
     
-    //include user preferences in search clauses
-    [query whereKey:@"renewaldays" greaterThanOrEqualTo:[NSNumber numberWithInteger:DEP.userPreferences.minRenewalDays]];
-    [query whereKey:@"renewaldays" lessThanOrEqualTo:[NSNumber numberWithInteger:DEP.userPreferences.maxRenewalDays]];
+//    //include user preferences in search clauses
+//    [query whereKey:@"renewaldays" greaterThanOrEqualTo:[NSNumber numberWithInteger:DEP.userPreferences.minRenewalDays]];
+//    [query whereKey:@"renewaldays" lessThanOrEqualTo:[NSNumber numberWithInteger:DEP.userPreferences.maxRenewalDays]];
     
     if (DEP.userPreferences.vacancyTypes && DEP.userPreferences.vacancyTypes.count)
         [query whereKey:@"vacancy" containedIn:DEP.userPreferences.vacancyTypes];
