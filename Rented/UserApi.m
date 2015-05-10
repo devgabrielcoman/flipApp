@@ -30,12 +30,26 @@
     [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
         
         if (!user)
+        {
             completionHandler(NO);
+        }
         else
         {
             if (user.isNew)
             {
                 [self loadRequiredUserData:^(BOOL success) {
+                    [[Mixpanel sharedInstance] track:@"New User" properties:@{@"facebook_id":[PFUser currentUser][@"facebookID"]}];
+                    [[Mixpanel sharedInstance] identify:[PFUser currentUser][@"facebookID"]];
+                    if ([PFUser currentUser].email)
+                    {
+                        [[Mixpanel sharedInstance].people set:@{@"$email":[PFUser currentUser].email}];
+
+                    }
+                    [[Mixpanel sharedInstance].people set:@{@"$name":[PFUser currentUser].username}];
+                    [[Mixpanel sharedInstance].people set:@{@"$first_name":[PFUser currentUser][@"firstName"]}];
+                    [[Mixpanel sharedInstance].people set:@{@"$last_name":[PFUser currentUser][@"lastName"]}];
+
+                    [[Mixpanel sharedInstance] setNameTag:[PFUser currentUser].username];
                     completionHandler(YES);
                 }];
                 PFInstallation *currentInstallation = [PFInstallation currentInstallation];
@@ -49,13 +63,28 @@
                 [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     
                 }];
-                
+
             }
+            else
+            {
+                [[Mixpanel sharedInstance] identify:[PFUser currentUser][@"facebookID"]];
+                if ([PFUser currentUser].email)
+                {
+                    [[Mixpanel sharedInstance].people set:@{@"$email":[PFUser currentUser].email}];
+                }
+                [[Mixpanel sharedInstance].people set:@{@"$name":[PFUser currentUser].username}];
+                [[Mixpanel sharedInstance].people set:@{@"$first_name":[PFUser currentUser][@"firstName"]}];
+                [[Mixpanel sharedInstance].people set:@{@"$last_name":[PFUser currentUser][@"lastName"]}];
+
+                [[Mixpanel sharedInstance] setNameTag:[PFUser currentUser].username];
+            }
+            
             
             [self getCurrentUsersFacebookFriends:^(NSArray *friends, BOOL succeeded) {
                
                 [[PFUser currentUser] setObject:friends forKey:@"facebookFriends"];
                 [[PFUser currentUser] saveInBackground];
+               
                 
                 DEP.facebookFriendsInfo = [NSMutableDictionary new];
                 for (NSString *friend in friends)
@@ -69,7 +98,7 @@
                             PFUser *userFriend = (PFUser*)[objects objectAtIndex:0];
                             FacebookFriend *fr = [FacebookFriend new];
                             fr.userId = friend;
-                            fr.name = userFriend[@"username"];
+                            fr.name = userFriend[@"firstName"];
                             fr.profilePictureUrl = userFriend[@"profilePictureUrl"];
                             
                             [DEP.facebookFriendsInfo setValue:fr forKey:friend];
@@ -152,6 +181,8 @@
             [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 
             }];
+            
+            completionHandler(YES);
             
         }
     }];

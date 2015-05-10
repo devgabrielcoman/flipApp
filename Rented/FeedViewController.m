@@ -49,6 +49,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @" ";
     // Do any additional setup after loading the view from its nib.
     
     self.view.frame = CGRectMake(0, 0, wScr, hScr);
@@ -82,6 +83,22 @@
 
     
     indexForGetRequest = -1;
+    
+    if ([PFUser currentUser])
+    {
+        [[Mixpanel sharedInstance] identify:[PFUser currentUser][@"facebookID"]];
+        if ([PFUser currentUser].email)
+        {
+            [[Mixpanel sharedInstance].people set:@{@"$email":[PFUser currentUser].email}];
+            
+        }
+        [[Mixpanel sharedInstance].people set:@{@"$name":[PFUser currentUser].username}];
+        [[Mixpanel sharedInstance].people set:@{@"$first_name":[PFUser currentUser][@"firstName"]}];
+        [[Mixpanel sharedInstance].people set:@{@"$last_name":[PFUser currentUser][@"lastName"]}];
+        
+        [[Mixpanel sharedInstance] setNameTag:[PFUser currentUser].username];
+
+    }
 }
 
 
@@ -115,7 +132,7 @@
                 self.apartments = apartments;
                 indexOfShownApartment = 0;
  
-                _pageControl.hidden = NO;
+//                _pageControl.hidden = NO;
                 _pageControl.numberOfPages = apartments.count;
         
                 [self layoutPageControl];
@@ -134,6 +151,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [self.navigationController.interactivePopGestureRecognizer setEnabled:NO];
     if(![DEP.api.userApi userIsAuthenticated])
     {
         UIViewController *rootViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
@@ -230,6 +248,31 @@
     
     return cell;
 }
+#pragma mark - UIAlertView delegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+
+    if (buttonIndex ==1)
+    {
+        
+        Apartment *ap = _apartments[indexForGetRequest];
+        
+        ap.apartment[@"requested"] =[NSNumber numberWithInt:0];
+        [ap.apartment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        }];
+        
+        [[(ApartmentTableViewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexForGetRequest inSection:0] ] apartmentTopView].apartmentDetails updateFlipButtonStatus];
+        
+        [DEP.api.apartmentApi removeApartmentRequest:ap.apartment completion:^(BOOL succeeded) {
+            
+                    [[(ApartmentTableViewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexForGetRequest inSection:0] ] apartmentTopView].apartmentDetails updateFlipButtonStatus];
+            
+        } ];
+        
+    }
+
+}
 
 #pragma mark - Table view delegate
 
@@ -250,10 +293,13 @@
 
 -(void)shareFlip
 {
-    NSString *textToShare = @" Check out Flip - it's a marketplace for lease breaks and lease takeovers ";
+    [[Mixpanel sharedInstance] track:@"Pressed Share Flip"];
     
+    NSString *textToShare = @" Check out Flip - it's a marketplace for lease breaks and lease takeovers ";
+
+    NSURL *url = [NSURL URLWithString:@"http://itunes.apple.com/app/id970184178"];
 //    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://appstore.com/%@",@"Flip"]];
-    NSURL *url = [NSURL URLWithString:@"http://www.hiflip.com/"];
+//    NSURL *url = [NSURL URLWithString:@"http://www.hiflip.com/"];
     
     NSArray *objectsToShare=@[url,textToShare];
     
@@ -273,7 +319,8 @@
 
 - (void)displayGalleryForApartmentAtIndex:(NSInteger)index
 {
-    [self createGalleryPhotosArray:index];
+    [self createGalleryPhotosArray:index];                                            
+
     
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
     
@@ -294,6 +341,7 @@
 
 - (void)displayFullMapViewForApartmentAtIndex:(NSInteger)index
 {
+    self.title = @" ";
     FullMapViewViewController *fullMapView = [FullMapViewViewController new];
     MKPointAnnotation *locationPin = [MKPointAnnotation new];
     Apartment *ap = _apartments[index];
@@ -313,16 +361,23 @@
     [details setApartmentDetailsDelegate:self];
     
     //set frame to compensate for the invisible navigation bar, fix this once bar is removed
-    details.frame = CGRectMake(0,-64, wScr, 612);
+    details.frame = CGRectMake(0,-44, wScr, 1318);
     details.controller = moreVC;
     Apartment *apartment = _apartments[index];
-
+    details.apartmentImages = apartment.images;
     [(ApartmentTableViewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]] apartmentTopView].apartmentDetails = details;
     
     //configure mutual friends label
-    NSArray* mutualFriends=[GeneralUtils mutualFriendsInArray1:apartment.apartment[@"owner"][@"facebookFriends"] andArray2:[PFUser currentUser][@"facebookFriends"]];
-     details.connectedThroughLbl.text = [GeneralUtils connectedThroughExtendedDescription:[[NSMutableArray alloc] initWithArray:mutualFriends]];
-
+    if ([apartment.apartment[@"hideFacebookProfile"] integerValue]==1)
+    {
+        [details.connectedThroughLbl setHidden:YES];
+        [details.connectedThroughImageView setHidden:YES];
+    }
+    else
+    {
+        NSArray* mutualFriends=[GeneralUtils mutualFriendsInArray1:apartment.apartment[@"owner"][@"facebookFriends"] andArray2:[PFUser currentUser][@"facebookFriends"]];
+         details.connectedThroughLbl.text = [GeneralUtils connectedThroughExtendedDescription:[[NSMutableArray alloc] initWithArray:mutualFriends]];
+    }
     //user is never the owner in the browse screen
     details.currentUserIsOwner = NO;
     details.isFromFavorites = NO;
@@ -330,15 +385,20 @@
     [details setApartmentDetails:apartment.apartment];
 
     details.firstImageView = [(ApartmentTableViewCell*)[self.tableView cellForRowAtIndexPath:   [NSIndexPath indexPathForRow:index inSection:0]] apartmentTopView].apartmentImgView;
+    details.apartmentImages = apartment.images;
     
     [details updateFlipButtonStatus];
     
     [self setTitle:@" "];
     moreVC.view=[[UIScrollView alloc] initWithFrame:self.view.frame];
     [moreVC.view addSubview:details];
-    [(UIScrollView*)moreVC.view setContentSize:CGSizeMake(wScr, details.frame.size.height -64) ];
+    [(UIScrollView*)moreVC.view setContentSize:CGSizeMake(wScr, details.frame.size.height -44) ];
     [(UIScrollView*)moreVC.view setScrollEnabled:YES];
     [moreVC.view setBackgroundColor:[UIColor whiteColor]];
+    
+    [[Mixpanel sharedInstance] track:@"Opened Listing" properties:@{@"apartment_id":apartment.apartment.objectId}];
+    
+    
     [self.navigationController pushViewController:moreVC animated:YES];
     
   
@@ -435,30 +495,58 @@
 {
 
     Apartment *ap = _apartments[index];
-    if ([ap.apartment[@"requested"] integerValue] ==1)
-    {
-        return;
-    }
     PFUser *owner = ap.apartment[@"owner"];
     indexForGetRequest=index;
+    
+    [[Mixpanel sharedInstance] track:@"Pressed Get Listing" properties:@{@"apartment_id":ap.apartment.objectId}];
     
     //get all the requests a user has made
     [DEP.api.apartmentApi userHasRequestForApartment:ap.apartment completion:^(NSArray *objects, BOOL succeeded) {
         if(succeeded && objects.count == 1)
         {
-            //if the user has already made a request
-            //don't let him make another one
+            NSString* ownerName = ap.apartment[@"owner"][@"firstName"];
+            NSString* apartmentType;
+            if ([ap.apartment[@"bedrooms"] integerValue]==0)
+            {
+                apartmentType = @"Studio";
+            }
+            if ([ap.apartment[@"bedrooms"] integerValue]==1)
+            {
+                apartmentType = @"One Bedroom";
+            }
+            if ([ap.apartment[@"bedrooms"] integerValue]==2)
+            {
+                apartmentType = @"Two Bedrooms";
+            }
+            if ([ap.apartment[@"bedrooms"] integerValue]==3)
+            {
+                apartmentType = @"Three Bedrooms";
+            }
+            if ([ap.apartment[@"bedrooms"] integerValue]==4)
+            {
+                apartmentType = @"Four Bedrooms";
+            }
+            if ([ap.apartment[@"bedrooms"] integerValue]==5)
+            {
+                apartmentType = @"Five Bedrooms";
+            }
+            if (apartmentType == nil)
+            {
+                apartmentType = @"Apartment";
+            }
+            NSString* neighborhood = ap.apartment[@"neighborhood"];
+            NSString* message;
+            if ([ap.apartment[@"hideFacebookProfile"] integerValue]==1)
+            {
+                message= [NSString stringWithFormat:@"Are you sure you aren't interested in Annonymous User's %@ in %@ anymore?",apartmentType,neighborhood];
+            }
+            else
+            {
+                message= [NSString stringWithFormat:@"Are you sure you aren't interested in %@'s %@ in %@ anymore?",ownerName,apartmentType,neighborhood];
+            }
             
-            ApartmentTableViewCell *cell = (ApartmentTableViewCell *) [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
-            
-            ContactViewController *contactVC = [[ContactViewController alloc] init];
-            
-            contactVC.apartmentSnapshot = [cell.apartmentTopView screenshot];
-            contactVC.message = [NSString stringWithFormat:@"Hold tight, %@! Your flipmate is going to work things out between you and %@'s %@.", DEP.authenticatedUser[@"username"], owner[@"username"], [GeneralUtils roomsDescriptionForApartment:ap.apartment]];
-            
-            contactVC.apartment = ap.apartment;
-            
-            [self.navigationController presentViewController:contactVC animated:YES completion:nil];
+            UIAlertView* unrequestAlertView =[[UIAlertView alloc]initWithTitle:nil message:message delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
+            [unrequestAlertView show];
         }
         else
         {
@@ -487,8 +575,10 @@
                 }
 
                 
-                if(email.length)
+                if(!email || email.length==0)
                 {
+                    email = @"hello@hiflip.com";
+                }
                     
                     
                     //email found
@@ -500,25 +590,33 @@
                     mail.mailComposeDelegate = self;
                     
                     NSString* apartmentType;
-                    if ([ap.apartment[@"rooms"] containsObject:[NSNumber numberWithInt:0]])
+                    if ([ap.apartment[@"bedrooms"] integerValue]==0)
                     {
                         apartmentType = @"Studio";
                     }
-                    if ([ap.apartment[@"rooms"] containsObject:[NSNumber numberWithInt:1]])
+                    if ([ap.apartment[@"bedrooms"] integerValue]==1)
                     {
                         apartmentType = @"One Bedroom";
                     }
-                    if ([ap.apartment[@"rooms"] containsObject:[NSNumber numberWithInt:2]])
+                    if ([ap.apartment[@"bedrooms"] integerValue]==2)
                     {
                         apartmentType = @"Two Bedrooms";
                     }
-                    if ([ap.apartment[@"rooms"] containsObject:[NSNumber numberWithInt:3]])
+                    if ([ap.apartment[@"bedrooms"] integerValue]==3)
                     {
                         apartmentType = @"Three Bedrooms";
                     }
-                    if ([ap.apartment[@"rooms"] containsObject:[NSNumber numberWithInt:4]])
+                    if ([ap.apartment[@"bedrooms"] integerValue]==4)
                     {
-                        apartmentType = @"Three plus Bedrooms";
+                        apartmentType = @"Four Bedrooms";
+                    }
+                    if ([ap.apartment[@"bedrooms"] integerValue]==5)
+                    {
+                        apartmentType = @"Five Bedrooms";
+                    }
+                    if (apartmentType == nil)
+                    {
+                        apartmentType = @"Apartment";
                     }
                     NSString* neighborHood;
                     
@@ -540,11 +638,11 @@
                     
                     if ([ap.apartment[@"directContact"] integerValue]==0)
                     {
-                        [mail setSubject:[NSString stringWithFormat:@"%@ wants %@'s %@ in %@",DEP.authenticatedUser.username, owner.username,apartmentType, neighborHood]];
+                        [mail setSubject:[NSString stringWithFormat:@"[Flip]%@ wants %@'s %@ in %@",DEP.authenticatedUser[@"firstName"], owner[@"firstName"],apartmentType, neighborHood]];
                     }
                     else
                     {
-                        [mail setSubject:[NSString stringWithFormat:@"Can I come see your %@ in %@",apartmentType,neighborHood]];
+                        [mail setSubject:[NSString stringWithFormat:@"[Flip]Can I come see your %@ in %@",apartmentType,neighborHood]];
                     }
                     
                     
@@ -560,7 +658,7 @@
                     
                     if ([ap.apartment[@"directContact"] integerValue]==1)
                     {
-                        emailBody = [NSString stringWithFormat: @"Hi %@,<br><br> I really like your apartment and I would like to come see it. Please let me know how I should arrange that.<br><br>Hope you're having a good day!<br><br>Best, %@",owner.username,DEP.authenticatedUser.username];
+                        emailBody = [NSString stringWithFormat: @"Hi %@,<br><br> I really like your apartment and I would like to come see it. Please let me know how I should arrange that.<br><br>Hope you're having a good day!<br><br>Best, %@",owner[@"firstName"],DEP.authenticatedUser[@"firstName"]];
                     }
                     else
                     {
@@ -571,18 +669,9 @@
                     
                     [self presentViewController:mail animated:YES completion:NULL];
                 }
-                else
-                {
-                    //user doesn't have an email address
-                    
-                    [UIAlertView showWithTitle:@""
-                                       message:@"You flip mate doesn't have an email address..."
-                             cancelButtonTitle:@"Dismiss"
-                             otherButtonTitles:nil
-                                      tapBlock:nil];
-                }
+
                 
-            }
+            
         }
     }];
 }
@@ -613,7 +702,7 @@
         [DEP.api.apartmentApi addApartmentToGetRequests:ap.apartment completion:^(BOOL succeeded) {
             if(succeeded)
             {
-                [[[UIAlertView alloc] initWithTitle:@"Got it!" message:[NSString stringWithFormat:@"%@'s %@ in %@ will be saved to your likes!",ap.apartment[@"owner"][@"username"],[GeneralUtils roomsLongDescriptionForApartment:ap.apartment],ap.apartment[@"neighborhood"]] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+                [[[UIAlertView alloc] initWithTitle:@"Got it!" message:[NSString stringWithFormat:@"%@'s %@ in %@ will be saved to your likes!",ap.apartment[@"owner"][@"firstName"],[GeneralUtils roomsLongDescriptionForApartment:ap.apartment],ap.apartment[@"neighborhood"]] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
             }
         }];
     }

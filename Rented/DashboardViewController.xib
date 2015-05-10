@@ -37,8 +37,8 @@
                         </imageView>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alexandra Jones" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ld8-gQ-pY3" userLabel="Username">
                             <rect key="frame" x="8" y="130" width="244" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                            <color key="textColor" red="0.0039215686269999999" green="0.1529411765" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hau-uL-PRG">
@@ -84,12 +84,12 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8eC-Fu-3p6">
                             <rect key="frame" x="130" y="678" width="122" height="50"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                             <inset key="titleEdgeInsets" minX="-20" minY="20" maxX="0.0" maxY="0.0"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="-20" maxX="-80" maxY="0.0"/>
-                            <state key="normal" title="Say Something" image="envelope-icon">
-                                <color key="titleColor" red="0.14901960780000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            <inset key="imageEdgeInsets" minX="-4" minY="-20" maxX="-51" maxY="0.0"/>
+                            <state key="normal" title="Feedback" image="envelope-icon">
+                                <color key="titleColor" red="0.0039215686269999999" green="0.1529411765" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="sendEmail:" destination="-1" eventType="touchUpInside" id="RcR-zD-sqD"/>
@@ -101,10 +101,11 @@
                                 <constraint firstAttribute="height" constant="60" id="Cma-Xh-ln3"/>
                                 <constraint firstAttribute="height" constant="60" id="YWA-Bf-ewo"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <inset key="titleEdgeInsets" minX="15" minY="3" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="LEAVING" image="map-marker-icon">
-                                <color key="titleColor" red="0.14901960784313725" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                            <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="-2" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="Leaving" image="map-marker-icon">
+                                <color key="titleColor" red="0.0039215686269999999" green="0.1529411765" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <variation key="default">
@@ -121,10 +122,11 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="NDN-XX-s2o"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <inset key="titleEdgeInsets" minX="15" minY="3" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="LOOKING" image="compass-icon">
-                                <color key="titleColor" red="0.14901960780000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                            <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="-1" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="Looking" image="compass-icon">
+                                <color key="titleColor" red="0.0039215686269999999" green="0.1529411765" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -136,10 +138,11 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="H2G-K4-gnO"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <inset key="titleEdgeInsets" minX="15" minY="3" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="LIKES" image="heart-icon">
-                                <color key="titleColor" red="0.14901960780000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                            <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="-1" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="Likes" image="heart-icon">
+                                <color key="titleColor" red="0.0039215686269999999" green="0.1529411765" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -158,7 +161,7 @@
                             <rect key="frame" x="13" y="392" width="234" height="2"/>
                             <color key="backgroundColor" red="0.75294117650000003" green="0.75686274509999996" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uVF-I1-Ecm">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uVF-I1-Ecm">
                             <rect key="frame" x="8" y="20" width="30" height="32"/>
                             <state key="normal" image="power-off">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -190,8 +193,8 @@
                                 <action selector="openAdminMenu:" destination="-1" eventType="touchUpInside" id="RZz-2Y-cPJ"/>
                             </connections>
                         </button>
-                        <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="75m-XE-0NU">
-                            <rect key="frame" x="140" y="215" width="16" height="16"/>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="75m-XE-0NU">
+                            <rect key="frame" x="106" y="350" width="16" height="16"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T6v-S7-Jax">
                                     <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
@@ -201,6 +204,10 @@
                                 </label>
                             </subviews>
                             <color key="backgroundColor" red="0.81568627450980391" green="0.0078431372549019607" blue="0.10588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="16" id="0zu-rE-BUL"/>
+                                <constraint firstAttribute="height" constant="16" id="6EI-Vg-94O"/>
+                            </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zHJ-eN-6kS" userLabel="how it works">
                             <rect key="frame" x="8" y="678" width="122" height="50"/>
@@ -211,12 +218,12 @@
                                 <constraint firstAttribute="width" constant="122" id="kcB-O3-6Wc"/>
                                 <constraint firstAttribute="height" constant="50" id="mwt-gS-muO"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                            <inset key="titleEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="-20"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="-20" maxX="-65" maxY="0.0"/>
-                            <state key="normal" title="How It Works" image="info-icon">
-                                <color key="titleColor" red="0.14901960780000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                            <inset key="titleEdgeInsets" minX="-23" minY="0.0" maxX="0.0" maxY="-20"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="-20" maxX="-27" maxY="0.0"/>
+                            <state key="normal" title="About" image="info-icon">
+                                <color key="titleColor" red="0.0039215686269999999" green="0.1529411765" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </state>
                             <variation key="default">
                                 <mask key="constraints">
@@ -232,6 +239,7 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="75m-XE-0NU" firstAttribute="leading" secondItem="P12-rz-z7t" secondAttribute="leading" constant="106" id="2Cy-ok-p6l"/>
                         <constraint firstItem="pCJ-2D-WaR" firstAttribute="centerX" secondItem="nAT-3n-Pqg" secondAttribute="centerX" id="2cz-VV-t9g"/>
                         <constraint firstAttribute="bottom" secondItem="zHJ-eN-6kS" secondAttribute="bottom" constant="8" id="33k-bc-5wW"/>
                         <constraint firstItem="nAT-3n-Pqg" firstAttribute="top" secondItem="5XU-4b-rGK" secondAttribute="bottom" constant="8" symbolic="YES" id="37r-TW-kRb"/>
@@ -263,6 +271,7 @@
                         <constraint firstItem="8eC-Fu-3p6" firstAttribute="leading" secondItem="rD0-Yl-Dk8" secondAttribute="trailing" id="RLw-7s-klF"/>
                         <constraint firstItem="Hau-uL-PRG" firstAttribute="centerX" secondItem="nAT-3n-Pqg" secondAttribute="centerX" id="RVi-tM-csQ"/>
                         <constraint firstItem="Ld8-gQ-pY3" firstAttribute="top" secondItem="kyS-2F-gWU" secondAttribute="bottom" constant="8" symbolic="YES" id="RuF-pu-DWQ"/>
+                        <constraint firstItem="GV1-C5-20o" firstAttribute="centerY" secondItem="75m-XE-0NU" secondAttribute="centerY" id="T0Z-wa-A4Z"/>
                         <constraint firstItem="cJm-F6-qzJ" firstAttribute="centerX" secondItem="kyS-2F-gWU" secondAttribute="centerX" id="V8i-CL-bky"/>
                         <constraint firstItem="8eC-Fu-3p6" firstAttribute="trailing" secondItem="Hau-uL-PRG" secondAttribute="trailing" id="Vg5-GS-6cV"/>
                         <constraint firstItem="5XU-4b-rGK" firstAttribute="top" secondItem="P12-rz-z7t" secondAttribute="top" constant="192" id="Wbx-Vm-uBx"/>

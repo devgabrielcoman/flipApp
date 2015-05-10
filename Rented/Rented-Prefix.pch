@@ -16,5 +16,8 @@
 #import "DependencyContainer.h"
 #import "logger.h"
 #import "RentedNavigationController.h"
+#import "Mixpanel.h"
+
+
 
 #endif

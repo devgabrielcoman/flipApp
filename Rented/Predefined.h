@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 
 #pragma mark - Required keys and Ids
-#define ParseApplicationID @"NfeWASdJkljLxheftuqxxdktFxgY0bFItX6TNTT9"
-#define ParseCliendKey @"bQk3rMiqrzuYSDzJbYjfI3iMuF8NfP6bnIlpYEAj"
+#define MixpanelKey @"353feb40be7efb23e3dbaed0732e52f1" //dev
+#define ParseApplicationID @"VMdXjz2Ap3XWhyuQ68x9AnTz5gH288hnExnZMWv7"//dev
+#define ParseCliendKey @"sUIGwWjMDHjqMODk8XcbC1rY5rV8UoKsfxRTNRSy"//dev
+//#define MixpanelKey @"d99817f969beb90f1844938aacd31f45" //prod
+//#define ParseApplicationID @"NfeWASdJkljLxheftuqxxdktFxgY0bFItX6TNTT9"//prod
+//#define ParseCliendKey @"bQk3rMiqrzuYSDzJbYjfI3iMuF8NfP6bnIlpYEAj"//prod
 #define GoogleMapsApiKey @"AIzaSyCO8K6YKBSF9lmZYKB6FzrkQ0lkq7HuOv4"
 
 
@@ -36,6 +40,10 @@
 #define Bedrooms3 3
 #define Bedrooms4 4
 
+#define MoveOutImmediately  0
+#define MoveOutFlexible     1
+#define MoveOutExactDate    2
+
 #define VacancyShortTerm 0
 #define VacancyLongTerm 1
 #define VacancyFlexible 2
@@ -55,7 +63,9 @@
 
 #define TypeEntirePlace 0
 #define TypePrivateRoom 1
-#define TypeRetailOrCommercial 2
+
+#define TypeApartment   0
+#define TypeHouse       1
 
 #pragma mark - User listing status
 #define ListingNotRequested 0

@@ -140,7 +140,7 @@
     calculatedHeight += _contextController.tabBarController.tabBar.frame.size.height; //keyboard is shown over it, need to compensate
 
     self.frame = CGRectMake(_queryTextField.frame.origin.x,
-                            _queryTextField.frame.origin.y + _queryTextField.frame.size.height,
+                            64,
                             _queryTextField.frame.size.width,
                             200);
     _table.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
@@ -172,7 +172,7 @@
 
                                                                     if (self.suggestions.count > 0 && !_visible)
                                                                     {
-                                                                        [[(AddApartmentViewController*)_contextController scrollViewContainer] addSubview:self];
+                                                                        [_contextController.view addSubview:self];
                                                                         _visible = YES;
                                                                     }
                                                                 }

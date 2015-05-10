@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "FavoriteApartmentCellProtocol.h"
+#import "ApartmentCellProtocol.h"
+#import <MessageUI/MFMailComposeViewController.h>
+#import "ApartmentDetailsOtherListingView.h"
 
-@interface FavoritesTableViewController : UITableViewController<FavoriteApartmentCellProtocol>
+@interface FavoritesTableViewController : UITableViewController<FavoriteApartmentCellProtocol,ApartmentCellProtocol>
 
 @property NSMutableArray *favoriteApartments;
+@property NSInteger indexForGetRequest;
 
+@property ApartmentDetailsOtherListingView* details;
 @end

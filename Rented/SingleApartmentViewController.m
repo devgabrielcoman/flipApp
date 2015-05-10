@@ -166,6 +166,7 @@
 
 - (void)displayFullMapViewForApartmentAtIndex:(NSInteger)index
 {
+    self.title = @" ";
     FullMapViewViewController *fullMapView = [FullMapViewViewController new];
     MKPointAnnotation *locationPin = [MKPointAnnotation new];
     [locationPin setCoordinate:[LocationUtils locationFromPoint:_apartment.apartment[@"location"]]];
@@ -368,7 +369,7 @@
                         }
                     }
                     
-                    [mail setSubject:[NSString stringWithFormat:@"%@'s %@ in %@",owner.username,apartmentType,neighborHood]];
+                    [mail setSubject:[NSString stringWithFormat:@"%@'s %@ in %@",owner[@"firstName"],apartmentType,neighborHood]];
                     
                     NSArray *toRecipients = [NSArray arrayWithObject:email];
                     NSArray *ccRecipients = @[];
@@ -382,7 +383,7 @@
                     
                     if ([ap.apartment[@"directContact"] integerValue]==1)
                     {
-                        emailBody = [NSString stringWithFormat: @"Hi %@,<br><br> I really like your apartment and I would like to come see it. Please let me know how I should arrange that.<br><br>Hope you're having a good day!<br><br>Best, %@",owner.username,DEP.authenticatedUser.username];
+                        emailBody = [NSString stringWithFormat: @"Hi %@,<br><br> I really like your apartment and I would like to come see it. Please let me know how I should arrange that.<br><br>Hope you're having a good day!<br><br>Best, %@",owner[@"firstName"],DEP.authenticatedUser[@"firstName"]];
                     }
                     else
                     {

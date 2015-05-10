@@ -25,7 +25,6 @@
     
     _ownerImgView.layer.cornerRadius = _ownerImgView.frame.size.width/2;
     _ownerImgView.layer.masksToBounds = YES;
-    
 
     
     _locationString = @"";
@@ -65,12 +64,20 @@
     //set owner details
     _ownerImgView.crossfadeDuration =0;
     _ownerImgView.image = nil;
-    _ownerImgView.showActivityIndicator = YES;
+    _ownerImgView.image = [UIImage imageNamed:@"default_profile"];
     PFUser *owner = apartment[@"owner"];
     
-    _ownerImgView.imageURL = [NSURL URLWithString:owner[@"profilePictureUrl"]];
-    _ownerNameLbl.text = owner[@"username"];
-
+    if ([apartment[@"hideFacebookProfile"] integerValue]== 1)
+    {
+        [_ownerImgView setImage:[UIImage imageNamed:@"default-profile"]];
+        _ownerNameLbl.text = @"Annonymous User";
+    }
+    else
+    {
+        _ownerImgView.showActivityIndicator = YES;
+        _ownerImgView.imageURL = [NSURL URLWithString:owner[@"profilePictureUrl"]];
+        _ownerNameLbl.text = owner[@"firstName"];
+    }
     
 
     
@@ -111,22 +118,25 @@
     
     //_daysUntilRenewal.text = [NSString stringWithFormat:@"%li days\n until\n renewal", (long)[apartment[@"renewaldays"] integerValue]];
     
-    NSMutableString *vacancy = [[NSMutableString alloc] initWithString:@"Moving out: "];
-    NSArray *vacancyArray = apartment[@"vacancy"];
+
     
-    for (NSNumber *vacancyType in vacancyArray)
+    NSInteger vacancyOption= [apartment[@"moveOutOption"] integerValue];
+    if (vacancyOption == 0)
     {
-        if([vacancyType integerValue] == VacancyLongTerm)
-            [vacancy appendFormat:@"Long-Term"];
-        
-        if([vacancyType integerValue] == VacancyFlexible)
-            [vacancy appendFormat:@"Flexible"];
-        
-        if([vacancyType integerValue] == VacancyShortTerm)
-            [vacancy appendFormat:@"Short-Term"];
+        _daysUntilRenewal.text = @"Moving out: Immediately";
     }
-    _daysUntilRenewal.text = vacancy;
-    
+    if (vacancyOption == 1)
+    {
+        _daysUntilRenewal.text = @"Moving out: Flexible";
+    }
+    if (vacancyOption == 2)
+    {
+        NSDateFormatter* formatter = [NSDateFormatter new];
+        [formatter setDateFormat:@"MMM d, YYYY"];
+        _daysUntilRenewal.text = [NSString stringWithFormat:@"Moving out:\r%@",[formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:[apartment[@"moveOutTimestamp"]longValue]]]];
+    }
+
+
     if (apartment[@"neighborhood"])
     {
         _neighborhoodLabel.text = apartment[@"neighborhood"];
@@ -160,7 +170,8 @@
 
 - (void)shouldOpenFullGallery
 {
-    [_delegate displayGalleryForApartmentAtIndex:_apartmentIndex];
+//    [_delegate displayGalleryForApartmentAtIndex:_apartmentIndex];
+    [_delegate displayMoreInfoForApartmentAtIndex:_apartmentIndex];
 }
 
 - (void)tapOnMap

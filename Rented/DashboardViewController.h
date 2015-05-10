@@ -21,5 +21,5 @@
 -(void)updateNotificationBadgeTo:(NSInteger) badgeNumber;
 
 -(void)updateProfileData;
-
+- (IBAction)logoutUser:(id)sender;
 @end

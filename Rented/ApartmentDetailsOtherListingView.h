@@ -9,9 +9,35 @@
 #import <UIKit/UIKit.h>
 #import "ApartmentCellProtocol.h"
 #import "ApartmentDetailsViewProtocol.h"
+#import <AsyncImageView.h>
+#import "iCarousel.h"
+#import <MapKit/MapKit.h>
 
-@interface ApartmentDetailsOtherListingView : UIView<ApartmentDetailsViewProtocol>
+@interface ApartmentDetailsOtherListingView : UIView<ApartmentDetailsViewProtocol,iCarouselDataSource,iCarouselDelegate>
 
+@property (weak, nonatomic) IBOutlet AsyncImageView*    profileImageView;
+@property (weak, nonatomic) IBOutlet UILabel*           ownerLabel;
+@property (weak, nonatomic) IBOutlet MKMapView*         mapView;
+@property (weak, nonatomic) IBOutlet UILabel*           addressLabel;
+@property (weak, nonatomic) IBOutlet iCarousel *        carousel;
+@property (weak, nonatomic) IBOutlet UIPageControl*     pageControl;
+
+@property NSArray *apartmentImages;
+
+
+
+@property (weak, nonatomic) IBOutlet UILabel *leaseEndsTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *availabilityTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *currentRentTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bedroomsTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bathroomsTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *neighborhoodTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cityTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *flippersFeeTitleLabel;
+
+
+@property (weak, nonatomic) IBOutlet UILabel *listingTypeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *propertyTypeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *feeLbl;
 @property (weak, nonatomic) IBOutlet UILabel *rentIncreaseLbl;
 @property (weak, nonatomic) IBOutlet UILabel *vacancyLbl;

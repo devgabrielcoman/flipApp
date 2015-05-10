@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ApartmentCellProtocol.h"
 
-@interface FeedViewController : UIViewController
+@interface FeedViewController : UIViewController <UIAlertViewDelegate>
 
 @property NSArray *apartments;
 

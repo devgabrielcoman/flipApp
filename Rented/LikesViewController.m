@@ -19,7 +19,28 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.tableView registerNib:[UINib nibWithNibName:@"LikesTableViewCell" bundle:nil] forCellReuseIdentifier:@"LikesTableViewCell"];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    
+    [DEP.api.apartmentApi userApartment:^(PFObject *apartment, NSArray *images, BOOL succeeded) {
+        
+        if(succeeded)
+        {
+            
+            PFQuery* query = [PFQuery queryWithClassName:@"Favorites"];
+            [query whereKey:@"apartment" equalTo:apartment];
+            [query includeKey:@"user"];
+            [query orderByDescending:@"timestamp"];
+            
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+            {
+                self.favoritesArray = objects;
+                [self.tableView reloadData];
+            }
+             ];
+        }
+    }];
+  
+    
 }
 
 - (void)didReceiveMemoryWarning {

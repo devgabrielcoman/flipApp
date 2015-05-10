@@ -41,9 +41,9 @@
     self.favorite = object;
     PFUser *user= object[@"user"];
     
-    self.usernameLabel.text = user.username;
+    self.usernameLabel.text = user[@"firstName"];
     self.profilePictureImageView.showActivityIndicator = YES;
-    self.profilePictureImageView.image = nil;
+    self.profilePictureImageView.image = [UIImage imageNamed:@"default-profile"];
     self.profilePictureImageView.imageURL = [NSURL URLWithString:user[@"profilePictureUrl"]];
     
     NSDate* favoriteDate = [NSDate dateWithTimeIntervalSince1970:[object[@"timestamp"] doubleValue]];

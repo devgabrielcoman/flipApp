@@ -18,6 +18,15 @@
 		12D87DDB1A63C76700A979A0 /* UIImage+imageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D87DDA1A63C76700A979A0 /* UIImage+imageWithColor.m */; };
 		12D87DDE1A63D68800A979A0 /* FacebookFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D87DDD1A63D68800A979A0 /* FacebookFriend.m */; };
 		374512C5BFA9503A8B6397D6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E5B27B64FD02829D64CDBC /* libPods.a */; };
+		7E220D6C1ABCB64400DE4A7C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E220D6A1ABCB64300DE4A7C /* Crashlytics.framework */; };
+		7E220D6D1ABCB64400DE4A7C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E220D6B1ABCB64400DE4A7C /* Fabric.framework */; };
+		7E7D1A401AA7CCBD00387B6C /* EnterAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7D1A3E1AA7CCBD00387B6C /* EnterAddressViewController.m */; };
+		7E7D1A411AA7CCBD00387B6C /* EnterAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E7D1A3F1AA7CCBD00387B6C /* EnterAddressViewController.xib */; };
+		7E7D1A461AA7E92000387B6C /* EnterLeaseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7D1A441AA7E92000387B6C /* EnterLeaseDetailsViewController.m */; };
+		7E7D1A471AA7E92000387B6C /* EnterLeaseDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E7D1A451AA7E92000387B6C /* EnterLeaseDetailsViewController.xib */; };
+		7E7D1A4A1AAB0C0400387B6C /* SearchTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7D1A491AAB0C0400387B6C /* SearchTextField.m */; };
+		7E7D1A4F1AAB3E5C00387B6C /* SelectListingPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7D1A4D1AAB3E5C00387B6C /* SelectListingPhotosViewController.m */; };
+		7E7D1A501AAB3E5C00387B6C /* SelectListingPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E7D1A4E1AAB3E5C00387B6C /* SelectListingPhotosViewController.xib */; };
 		7EA7A2F51A8E9131004B2F8D /* NothingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA7A2F31A8E9131004B2F8D /* NothingCell.m */; };
 		7EA7A2F81A8E91DF004B2F8D /* NothingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA7A2F71A8E91DF004B2F8D /* NothingCell.xib */; };
 		7EA7A2FD1A932495004B2F8D /* LikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA7A2FB1A932495004B2F8D /* LikesViewController.m */; };
@@ -38,6 +47,18 @@
 		7EC508111A78288700E03E75 /* TRStringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5080A1A78288700E03E75 /* TRStringExtensions.m */; };
 		7EC508121A78288700E03E75 /* TRTextFieldExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5080C1A78288700E03E75 /* TRTextFieldExtensions.m */; };
 		7EC508151A782A3400E03E75 /* RequestsBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC508141A782A3400E03E75 /* RequestsBuilder.m */; };
+		7EC628891AB5AEFC00C05DA1 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC628881AB5AEFC00C05DA1 /* UIImage+Alpha.m */; };
+		7EC6288E1AB5BE1A00C05DA1 /* TermsOfServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC6288C1AB5BE1A00C05DA1 /* TermsOfServiceViewController.m */; };
+		7EC6288F1AB5BE1A00C05DA1 /* TermsOfServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC6288D1AB5BE1A00C05DA1 /* TermsOfServiceViewController.xib */; };
+		7EC628941AB8AF9200C05DA1 /* TermsOfService2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC628921AB8AF9200C05DA1 /* TermsOfService2ViewController.m */; };
+		7EC628951AB8AF9200C05DA1 /* TermsOfService2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC628931AB8AF9200C05DA1 /* TermsOfService2ViewController.xib */; };
+		7EC628A51AB8AF9200C05DA1 /* faqViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC628A31AB8AF9200C05DA1 /* faqViewController.m */; };
+		7EC628A61AB8AF9200C05DA1 /* faqViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC628A41AB8AF9200C05DA1 /* faqViewController.xib */; };
+		7EC628AA1ABB552800C05DA1 /* tos.html in Resources */ = {isa = PBXBuildFile; fileRef = 7EC628A71ABB552800C05DA1 /* tos.html */; };
+		7EC628AB1ABB552800C05DA1 /* privacy.html in Resources */ = {isa = PBXBuildFile; fileRef = 7EC628A81ABB552800C05DA1 /* privacy.html */; };
+		7EC628AC1ABB552800C05DA1 /* faq.html in Resources */ = {isa = PBXBuildFile; fileRef = 7EC628A91ABB552800C05DA1 /* faq.html */; };
+		7EC628B11ABB56EF00C05DA1 /* PrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC628AF1ABB56EF00C05DA1 /* PrivacyPolicyViewController.m */; };
+		7EC628B21ABB56EF00C05DA1 /* PrivacyPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC628B01ABB56EF00C05DA1 /* PrivacyPolicyViewController.xib */; };
 		7EC69D051A8CC86C0017A5FE /* lastFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC69D041A8CC86C0017A5FE /* lastFeedCell.m */; };
 		7EC69D0A1A8D0DC00017A5FE /* CongratulationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC69D081A8D0DC00017A5FE /* CongratulationsViewController.m */; };
 		7EC69D0B1A8D0DC00017A5FE /* CongratulationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EC69D091A8D0DC00017A5FE /* CongratulationsViewController.xib */; };
@@ -48,7 +69,10 @@
 		7ED5A23C1A83854F00C34EAF /* AdminViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ED5A23A1A83854F00C34EAF /* AdminViewController.xib */; };
 		7ED5A2411A83875300C34EAF /* AdminUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED5A23F1A83875300C34EAF /* AdminUserTableViewCell.m */; };
 		7ED5A2421A83875300C34EAF /* AdminUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ED5A2401A83875300C34EAF /* AdminUserTableViewCell.xib */; };
+		7EDD03CB1AD308C800F37032 /* CustomActivityItemProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDD03CA1AD308C800F37032 /* CustomActivityItemProvider.m */; };
 		7EE2BA981A8A3E61000527E1 /* MyListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2BA971A8A3E61000527E1 /* MyListingViewController.m */; };
+		7EEFCC481AA6296B00D265FE /* EnterDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EEFCC461AA6296B00D265FE /* EnterDetailsViewController.m */; };
+		7EEFCC491AA6296B00D265FE /* EnterDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EEFCC471AA6296B00D265FE /* EnterDetailsViewController.xib */; };
 		9AD8DA9E1A645BCF001F8F2C /* TutorialPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8DA9D1A645BCF001F8F2C /* TutorialPageView.m */; };
 		9AD8DAA01A645BEE001F8F2C /* TutorialPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD8DA9F1A645BEE001F8F2C /* TutorialPageView.xib */; };
 		CD19A99E1A5F35960095163F /* Apartment.m in Sources */ = {isa = PBXBuildFile; fileRef = CD19A99D1A5F35960095163F /* Apartment.m */; };
@@ -182,6 +206,19 @@
 		12D87DDA1A63C76700A979A0 /* UIImage+imageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+imageWithColor.m"; sourceTree = "<group>"; };
 		12D87DDC1A63D68800A979A0 /* FacebookFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookFriend.h; sourceTree = "<group>"; };
 		12D87DDD1A63D68800A979A0 /* FacebookFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookFriend.m; sourceTree = "<group>"; };
+		7E220D6A1ABCB64300DE4A7C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		7E220D6B1ABCB64400DE4A7C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		7E7D1A3D1AA7CCBD00387B6C /* EnterAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnterAddressViewController.h; sourceTree = "<group>"; };
+		7E7D1A3E1AA7CCBD00387B6C /* EnterAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnterAddressViewController.m; sourceTree = "<group>"; };
+		7E7D1A3F1AA7CCBD00387B6C /* EnterAddressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnterAddressViewController.xib; sourceTree = "<group>"; };
+		7E7D1A431AA7E92000387B6C /* EnterLeaseDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnterLeaseDetailsViewController.h; sourceTree = "<group>"; };
+		7E7D1A441AA7E92000387B6C /* EnterLeaseDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnterLeaseDetailsViewController.m; sourceTree = "<group>"; };
+		7E7D1A451AA7E92000387B6C /* EnterLeaseDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnterLeaseDetailsViewController.xib; sourceTree = "<group>"; };
+		7E7D1A481AAB0C0400387B6C /* SearchTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTextField.h; sourceTree = "<group>"; };
+		7E7D1A491AAB0C0400387B6C /* SearchTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTextField.m; sourceTree = "<group>"; };
+		7E7D1A4C1AAB3E5B00387B6C /* SelectListingPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectListingPhotosViewController.h; sourceTree = "<group>"; };
+		7E7D1A4D1AAB3E5C00387B6C /* SelectListingPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectListingPhotosViewController.m; sourceTree = "<group>"; };
+		7E7D1A4E1AAB3E5C00387B6C /* SelectListingPhotosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectListingPhotosViewController.xib; sourceTree = "<group>"; };
 		7EA7A2F21A8E9131004B2F8D /* NothingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NothingCell.h; sourceTree = "<group>"; };
 		7EA7A2F31A8E9131004B2F8D /* NothingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NothingCell.m; sourceTree = "<group>"; };
 		7EA7A2F71A8E91DF004B2F8D /* NothingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NothingCell.xib; sourceTree = "<group>"; };
@@ -221,6 +258,23 @@
 		7EC508131A782A3400E03E75 /* RequestsBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestsBuilder.h; sourceTree = "<group>"; };
 		7EC508141A782A3400E03E75 /* RequestsBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestsBuilder.m; sourceTree = "<group>"; };
 		7EC508171A782F4400E03E75 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		7EC628871AB5AED100C05DA1 /* UIImage+Alpha.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		7EC628881AB5AEFC00C05DA1 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		7EC6288B1AB5BE1A00C05DA1 /* TermsOfServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsOfServiceViewController.h; sourceTree = "<group>"; };
+		7EC6288C1AB5BE1A00C05DA1 /* TermsOfServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsOfServiceViewController.m; sourceTree = "<group>"; };
+		7EC6288D1AB5BE1A00C05DA1 /* TermsOfServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsOfServiceViewController.xib; sourceTree = "<group>"; };
+		7EC628911AB8AF9200C05DA1 /* TermsOfService2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsOfService2ViewController.h; sourceTree = "<group>"; };
+		7EC628921AB8AF9200C05DA1 /* TermsOfService2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsOfService2ViewController.m; sourceTree = "<group>"; };
+		7EC628931AB8AF9200C05DA1 /* TermsOfService2ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsOfService2ViewController.xib; sourceTree = "<group>"; };
+		7EC628A21AB8AF9200C05DA1 /* faqViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = faqViewController.h; sourceTree = "<group>"; };
+		7EC628A31AB8AF9200C05DA1 /* faqViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = faqViewController.m; sourceTree = "<group>"; };
+		7EC628A41AB8AF9200C05DA1 /* faqViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = faqViewController.xib; sourceTree = "<group>"; };
+		7EC628A71ABB552800C05DA1 /* tos.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = tos.html; sourceTree = "<group>"; };
+		7EC628A81ABB552800C05DA1 /* privacy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = privacy.html; sourceTree = "<group>"; };
+		7EC628A91ABB552800C05DA1 /* faq.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = faq.html; sourceTree = "<group>"; };
+		7EC628AE1ABB56EE00C05DA1 /* PrivacyPolicyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivacyPolicyViewController.h; sourceTree = "<group>"; };
+		7EC628AF1ABB56EF00C05DA1 /* PrivacyPolicyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivacyPolicyViewController.m; sourceTree = "<group>"; };
+		7EC628B01ABB56EF00C05DA1 /* PrivacyPolicyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivacyPolicyViewController.xib; sourceTree = "<group>"; };
 		7EC69D031A8CC86C0017A5FE /* lastFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lastFeedCell.h; sourceTree = "<group>"; };
 		7EC69D041A8CC86C0017A5FE /* lastFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = lastFeedCell.m; sourceTree = "<group>"; };
 		7EC69D071A8D0DC00017A5FE /* CongratulationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CongratulationsViewController.h; sourceTree = "<group>"; };
@@ -236,8 +290,13 @@
 		7ED5A23E1A83875300C34EAF /* AdminUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminUserTableViewCell.h; sourceTree = "<group>"; };
 		7ED5A23F1A83875300C34EAF /* AdminUserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdminUserTableViewCell.m; sourceTree = "<group>"; };
 		7ED5A2401A83875300C34EAF /* AdminUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdminUserTableViewCell.xib; sourceTree = "<group>"; };
+		7EDD03C91AD308C700F37032 /* CustomActivityItemProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomActivityItemProvider.h; sourceTree = "<group>"; };
+		7EDD03CA1AD308C800F37032 /* CustomActivityItemProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomActivityItemProvider.m; sourceTree = "<group>"; };
 		7EE2BA961A8A3E61000527E1 /* MyListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyListingViewController.h; sourceTree = "<group>"; };
 		7EE2BA971A8A3E61000527E1 /* MyListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyListingViewController.m; sourceTree = "<group>"; };
+		7EEFCC451AA6296B00D265FE /* EnterDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnterDetailsViewController.h; sourceTree = "<group>"; };
+		7EEFCC461AA6296B00D265FE /* EnterDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnterDetailsViewController.m; sourceTree = "<group>"; };
+		7EEFCC471AA6296B00D265FE /* EnterDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnterDetailsViewController.xib; sourceTree = "<group>"; };
 		9AD8DA9C1A645BCF001F8F2C /* TutorialPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialPageView.h; sourceTree = "<group>"; };
 		9AD8DA9D1A645BCF001F8F2C /* TutorialPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialPageView.m; sourceTree = "<group>"; };
 		9AD8DA9F1A645BEE001F8F2C /* TutorialPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialPageView.xib; sourceTree = "<group>"; };
@@ -398,9 +457,11 @@
 				CD5713161A586751003B4C2E /* MessageUI.framework in Frameworks */,
 				CD5BBEE21A4A32250058E79B /* CoreText.framework in Frameworks */,
 				CD307ABB1A485E3400D4BE2B /* libsqlite3.dylib in Frameworks */,
+				7E220D6D1ABCB64400DE4A7C /* Fabric.framework in Frameworks */,
 				CD307AB91A485E2800D4BE2B /* libz.dylib in Frameworks */,
 				CD307AB71A485E2000D4BE2B /* SystemConfiguration.framework in Frameworks */,
 				CD307AB51A485E1500D4BE2B /* StoreKit.framework in Frameworks */,
+				7E220D6C1ABCB64400DE4A7C /* Crashlytics.framework in Frameworks */,
 				CD307AB31A485E0D00D4BE2B /* Security.framework in Frameworks */,
 				CD307AB11A485DF900D4BE2B /* QuartzCore.framework in Frameworks */,
 				CD307AAF1A485DF000D4BE2B /* MobileCoreServices.framework in Frameworks */,
@@ -455,6 +516,8 @@
 		76483CDB66ACFC63E3E7263A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E220D6A1ABCB64300DE4A7C /* Crashlytics.framework */,
+				7E220D6B1ABCB64400DE4A7C /* Fabric.framework */,
 				7EC508171A782F4400E03E75 /* AssetsLibrary.framework */,
 				CD5039641A62B3F900A1320D /* Social.framework */,
 				CD5713231A597C73003B4C2E /* MapKit.framework */,
@@ -474,6 +537,38 @@
 				E9E5B27B64FD02829D64CDBC /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7E7D1A3C1AA7CC3C00387B6C /* EnterAddressViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7E7D1A3D1AA7CCBD00387B6C /* EnterAddressViewController.h */,
+				7E7D1A3E1AA7CCBD00387B6C /* EnterAddressViewController.m */,
+				7E7D1A3F1AA7CCBD00387B6C /* EnterAddressViewController.xib */,
+				7E7D1A481AAB0C0400387B6C /* SearchTextField.h */,
+				7E7D1A491AAB0C0400387B6C /* SearchTextField.m */,
+			);
+			name = EnterAddressViewController;
+			sourceTree = "<group>";
+		};
+		7E7D1A421AA7E8DB00387B6C /* EnterLeaseDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7E7D1A431AA7E92000387B6C /* EnterLeaseDetailsViewController.h */,
+				7E7D1A441AA7E92000387B6C /* EnterLeaseDetailsViewController.m */,
+				7E7D1A451AA7E92000387B6C /* EnterLeaseDetailsViewController.xib */,
+			);
+			name = EnterLeaseDetailsViewController;
+			sourceTree = "<group>";
+		};
+		7E7D1A4B1AAB39E100387B6C /* SelectListingPhotosViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7E7D1A4C1AAB3E5B00387B6C /* SelectListingPhotosViewController.h */,
+				7E7D1A4D1AAB3E5C00387B6C /* SelectListingPhotosViewController.m */,
+				7E7D1A4E1AAB3E5C00387B6C /* SelectListingPhotosViewController.xib */,
+			);
+			name = SelectListingPhotosViewController;
 			sourceTree = "<group>";
 		};
 		7EA7A2F11A8E90FB004B2F8D /* NothingCell */ = {
@@ -574,6 +669,49 @@
 			name = API;
 			sourceTree = "<group>";
 		};
+		7EC6288A1AB5BDF200C05DA1 /* TermsOfService */ = {
+			isa = PBXGroup;
+			children = (
+				7EC628AD1ABB569600C05DA1 /* PrivacyPolicyViewController */,
+				7EC628A11AB8AF9200C05DA1 /* faqVIewController */,
+				7EC628901AB8AE4C00C05DA1 /* TermsOfService2ViewController */,
+				7EC6288B1AB5BE1A00C05DA1 /* TermsOfServiceViewController.h */,
+				7EC6288C1AB5BE1A00C05DA1 /* TermsOfServiceViewController.m */,
+				7EC6288D1AB5BE1A00C05DA1 /* TermsOfServiceViewController.xib */,
+			);
+			name = TermsOfService;
+			sourceTree = "<group>";
+		};
+		7EC628901AB8AE4C00C05DA1 /* TermsOfService2ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7EC628911AB8AF9200C05DA1 /* TermsOfService2ViewController.h */,
+				7EC628921AB8AF9200C05DA1 /* TermsOfService2ViewController.m */,
+				7EC628931AB8AF9200C05DA1 /* TermsOfService2ViewController.xib */,
+			);
+			name = TermsOfService2ViewController;
+			sourceTree = "<group>";
+		};
+		7EC628A11AB8AF9200C05DA1 /* faqVIewController */ = {
+			isa = PBXGroup;
+			children = (
+				7EC628A21AB8AF9200C05DA1 /* faqViewController.h */,
+				7EC628A31AB8AF9200C05DA1 /* faqViewController.m */,
+				7EC628A41AB8AF9200C05DA1 /* faqViewController.xib */,
+			);
+			name = faqVIewController;
+			sourceTree = "<group>";
+		};
+		7EC628AD1ABB569600C05DA1 /* PrivacyPolicyViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7EC628AE1ABB56EE00C05DA1 /* PrivacyPolicyViewController.h */,
+				7EC628AF1ABB56EF00C05DA1 /* PrivacyPolicyViewController.m */,
+				7EC628B01ABB56EF00C05DA1 /* PrivacyPolicyViewController.xib */,
+			);
+			name = PrivacyPolicyViewController;
+			sourceTree = "<group>";
+		};
 		7EC69D061A8D0D6E0017A5FE /* CongratulationsViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -623,6 +761,16 @@
 				7ED5A2401A83875300C34EAF /* AdminUserTableViewCell.xib */,
 			);
 			name = AdminUserTableViewCell;
+			sourceTree = "<group>";
+		};
+		7EEFCC441AA6290500D265FE /* EnterDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7EEFCC451AA6296B00D265FE /* EnterDetailsViewController.h */,
+				7EEFCC461AA6296B00D265FE /* EnterDetailsViewController.m */,
+				7EEFCC471AA6296B00D265FE /* EnterDetailsViewController.xib */,
+			);
+			name = EnterDetailsViewController;
 			sourceTree = "<group>";
 		};
 		9AD8DA961A64590B001F8F2C /* Tutorial */ = {
@@ -697,6 +845,9 @@
 		CD1BAFA71A48466F0012CBAA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7EC628A71ABB552800C05DA1 /* tos.html */,
+				7EC628A81ABB552800C05DA1 /* privacy.html */,
+				7EC628A91ABB552800C05DA1 /* faq.html */,
 				CD1BAFA81A48466F0012CBAA /* Info.plist */,
 				CD1BAFA91A48466F0012CBAA /* main.m */,
 				CD307AA51A48576900D4BE2B /* Rented-Prefix.pch */,
@@ -791,6 +942,7 @@
 		CD307A961A48552F00D4BE2B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				7EC6288A1AB5BDF200C05DA1 /* TermsOfService */,
 				7ED5A2371A8384CB00C34EAF /* Admin */,
 				CD42A8C81A707258000E7BD7 /* Get Confirmation Popup */,
 				CD42A8BF1A703608000E7BD7 /* Contact */,
@@ -811,6 +963,8 @@
 		CD307A971A48554200D4BE2B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				7EC628881AB5AEFC00C05DA1 /* UIImage+Alpha.m */,
+				7EC628871AB5AED100C05DA1 /* UIImage+Alpha.h */,
 				7EC507FD1A78288600E03E75 /* TRAutocomplete */,
 				126F9C461A68595F0074AF72 /* KAProgressLabel */,
 				CDEE8E3A1A64496F0030A88E /* NoInternetConnectionView.h */,
@@ -836,6 +990,8 @@
 				CD42A8C61A705787000E7BD7 /* UIView+MLScreenshot.m */,
 				CD42A8BC1A70355D000E7BD7 /* SnapshotUtils.h */,
 				CD42A8BD1A70355D000E7BD7 /* SnapshotUtils.m */,
+				7EDD03C91AD308C700F37032 /* CustomActivityItemProvider.h */,
+				7EDD03CA1AD308C800F37032 /* CustomActivityItemProvider.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1041,6 +1197,10 @@
 		CD57130B1A585603003B4C2E /* My place */ = {
 			isa = PBXGroup;
 			children = (
+				7E7D1A4B1AAB39E100387B6C /* SelectListingPhotosViewController */,
+				7E7D1A421AA7E8DB00387B6C /* EnterLeaseDetailsViewController */,
+				7E7D1A3C1AA7CC3C00387B6C /* EnterAddressViewController */,
+				7EEFCC441AA6290500D265FE /* EnterDetailsViewController */,
 				7EA7A2F91A932468004B2F8D /* LikesViewController */,
 				7EC69D0C1A8D16120017A5FE /* UnflipedViewController */,
 				7EC69D061A8D0D6E0017A5FE /* CongratulationsViewController */,
@@ -1097,6 +1257,7 @@
 				CD1BAFA11A48466F0012CBAA /* Frameworks */,
 				CD1BAFA21A48466F0012CBAA /* Resources */,
 				6B69ED431DC4FD9AA7516157 /* Copy Pods Resources */,
+				7E220D691ABCB14800DE4A7C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1136,10 +1297,11 @@
 				TargetAttributes = {
 					CD1BAFA31A48466F0012CBAA = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 4XS485J5BQ;
 					};
 					CD1BAFBC1A48466F0012CBAA = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = ABU94CMK73;
+						DevelopmentTeam = 4XS485J5BQ;
 						TestTargetID = CD1BAFA31A48466F0012CBAA;
 					};
 				};
@@ -1171,12 +1333,15 @@
 				126F9C441A6827A10074AF72 /* ApartmentDetailsOtherListingView.xib in Resources */,
 				7ED5A23C1A83854F00C34EAF /* AdminViewController.xib in Resources */,
 				CD50392D1A61978100A1320D /* slider-default7-trackCrossedOver.png in Resources */,
+				7EC628AC1ABB552800C05DA1 /* faq.html in Resources */,
 				CD5039321A61978100A1320D /* slider-metal-handle@2x.png in Resources */,
 				CD35CCF11A49B0DC007F12D0 /* Gotham-Medium.otf in Resources */,
 				CD50391E1A61978100A1320D /* slider-default-handle-highlighted@2x.png in Resources */,
 				CD5039361A61978100A1320D /* slider-metal-trackBackground@2x.png in Resources */,
 				CD5039201A61978100A1320D /* slider-default-handle@2x.png in Resources */,
 				CD5039221A61978100A1320D /* slider-default-track@2x.png in Resources */,
+				7EC628A61AB8AF9200C05DA1 /* faqViewController.xib in Resources */,
+				7EC628B21ABB56EF00C05DA1 /* PrivacyPolicyViewController.xib in Resources */,
 				CD5039351A61978100A1320D /* slider-metal-trackBackground.png in Resources */,
 				7EC507EE1A78203A00E03E75 /* AddApartmentViewController.xib in Resources */,
 				CD42A8C41A703627000E7BD7 /* ContactViewController.xib in Resources */,
@@ -1196,6 +1361,7 @@
 				CD5039231A61978100A1320D /* slider-default-trackBackground.png in Resources */,
 				CD5039251A61978100A1320D /* slider-default-trackCrossedOver@2x.png in Resources */,
 				7ECE96931A8165300024C69B /* lastFeedCell.xib in Resources */,
+				7EC628AA1ABB552800C05DA1 /* tos.html in Resources */,
 				CD5038ED1A61740B00A1320D /* FavoritesTableViewController.xib in Resources */,
 				CD5039281A61978100A1320D /* slider-default7-handle@2x.png in Resources */,
 				CD50391D1A61978100A1320D /* slider-default-handle-highlighted.png in Resources */,
@@ -1203,12 +1369,15 @@
 				CD5039311A61978100A1320D /* slider-metal-handle.png in Resources */,
 				CD5039331A61978100A1320D /* slider-metal-track.png in Resources */,
 				CD42A8D21A707477000E7BD7 /* ConfirmationView.xib in Resources */,
+				7E7D1A471AA7E92000387B6C /* EnterLeaseDetailsViewController.xib in Resources */,
 				CD50392F1A61978100A1320D /* slider-metal-handle-highlighted.png in Resources */,
 				CD307AC11A48657500D4BE2B /* AuthenticationViewController.xib in Resources */,
 				7EA7A2FE1A932495004B2F8D /* LikesViewController.xib in Resources */,
+				7EEFCC491AA6296B00D265FE /* EnterDetailsViewController.xib in Resources */,
 				CD50392E1A61978100A1320D /* slider-default7-trackCrossedOver@2x.png in Resources */,
 				CD5039271A61978100A1320D /* slider-default7-handle.png in Resources */,
 				CD5039301A61978100A1320D /* slider-metal-handle-highlighted@2x.png in Resources */,
+				7E7D1A411AA7CCBD00387B6C /* EnterAddressViewController.xib in Resources */,
 				7EA7A2F81A8E91DF004B2F8D /* NothingCell.xib in Resources */,
 				CD1BAFB51A48466F0012CBAA /* Images.xcassets in Resources */,
 				CD50392C1A61978100A1320D /* slider-default7-trackBackground@2x.png in Resources */,
@@ -1217,14 +1386,18 @@
 				7EC69D0B1A8D0DC00017A5FE /* CongratulationsViewController.xib in Resources */,
 				CD50392A1A61978100A1320D /* slider-default7-track@2x.png in Resources */,
 				CD5039241A61978100A1320D /* slider-default-trackCrossedOver.png in Resources */,
+				7E7D1A501AAB3E5C00387B6C /* SelectListingPhotosViewController.xib in Resources */,
 				CD2A8B081A5DE6F10065299A /* ApartmentTableViewCell.xib in Resources */,
 				CD2A8AE71A5DACB10065299A /* FullMapViewViewController.xib in Resources */,
+				7EC628AB1ABB552800C05DA1 /* privacy.html in Resources */,
 				7EC69D111A8D16350017A5FE /* UnflipedViewController.xib in Resources */,
 				CD5039341A61978100A1320D /* slider-metal-track@2x.png in Resources */,
 				CD5039261A61978100A1320D /* slider-default_trackBackground@2x.png in Resources */,
 				7EC507F41A7821D500E03E75 /* SelectLocationViewController.xib in Resources */,
 				CD2A8AF31A5DB6D20065299A /* ApartmentDetailsView.xib in Resources */,
+				7EC628951AB8AF9200C05DA1 /* TermsOfService2ViewController.xib in Resources */,
 				CD57131C1A59755A003B4C2E /* SingleApartmentViewController.xib in Resources */,
+				7EC6288F1AB5BE1A00C05DA1 /* TermsOfServiceViewController.xib in Resources */,
 				CD307AC71A48661C00D4BE2B /* FeedViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1254,6 +1427,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7E220D691ABCB14800DE4A7C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run df8550fea1f4fe64a50ef561263c6b4c683e987f 81e95f7c5d3eeeabf85d027de5b739dfbae52d6bb438d51d4cc8db6fbd1f8f41";
+		};
 		EF3099996972DB696A6CED8B /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1280,20 +1466,25 @@
 				7EC507ED1A78203A00E03E75 /* AddApartmentViewController.m in Sources */,
 				CD50395F1A61F3B300A1320D /* PreferencesViewController.m in Sources */,
 				7EC507F81A78262300E03E75 /* GCPlaceholderTextView.m in Sources */,
+				7EC628941AB8AF9200C05DA1 /* TermsOfService2ViewController.m in Sources */,
 				12D87DDE1A63D68800A979A0 /* FacebookFriend.m in Sources */,
 				CD50393A1A61E09000A1320D /* M13Checkbox.m in Sources */,
 				12BAD2061A5A95E100ABE909 /* MapUtils.m in Sources */,
 				126F9C4B1A68595F0074AF72 /* KAProgressLabel.m in Sources */,
 				CD5713101A585651003B4C2E /* NoListingViewController.m in Sources */,
 				7EC508121A78288700E03E75 /* TRTextFieldExtensions.m in Sources */,
+				7E7D1A401AA7CCBD00387B6C /* EnterAddressViewController.m in Sources */,
 				7EC69D051A8CC86C0017A5FE /* lastFeedCell.m in Sources */,
+				7EC628B11ABB56EF00C05DA1 /* PrivacyPolicyViewController.m in Sources */,
 				120547601A5FF1110036BB75 /* UITableView+AnimationControl.m in Sources */,
 				7EE2BA981A8A3E61000527E1 /* MyListingViewController.m in Sources */,
 				CD1BAFAD1A48466F0012CBAA /* AppDelegate.m in Sources */,
 				CD42A8C31A703627000E7BD7 /* ContactViewController.m in Sources */,
 				CD48D2461A5B1E7800C85AA6 /* GalleryNavigationController.m in Sources */,
+				7E7D1A461AA7E92000387B6C /* EnterLeaseDetailsViewController.m in Sources */,
 				7EC507FC1A78264A00E03E75 /* PickerData.m in Sources */,
 				12D87DDB1A63C76700A979A0 /* UIImage+imageWithColor.m in Sources */,
+				7EC628891AB5AEFC00C05DA1 /* UIImage+Alpha.m in Sources */,
 				CD2A8B001A5DE47E0065299A /* TopApartmentView.m in Sources */,
 				CD1BAFAA1A48466F0012CBAA /* main.m in Sources */,
 				12BAD2031A5A959F00ABE909 /* LocationUtils.m in Sources */,
@@ -1312,6 +1503,7 @@
 				7ED5A2411A83875300C34EAF /* AdminUserTableViewCell.m in Sources */,
 				7EC5080D1A78288700E03E75 /* TRAutocompleteView.m in Sources */,
 				CD2A8AF11A5DB6AB0065299A /* ApartmentDetailsView.m in Sources */,
+				7EC628A51AB8AF9200C05DA1 /* faqViewController.m in Sources */,
 				CD42A8C71A705787000E7BD7 /* UIView+MLScreenshot.m in Sources */,
 				CD307AA11A48561B00D4BE2B /* DependencyContainer.m in Sources */,
 				CD35CCEE1A49AE49007F12D0 /* UIImage+ProportionalFill.m in Sources */,
@@ -1319,6 +1511,7 @@
 				7EA7A2FD1A932495004B2F8D /* LikesViewController.m in Sources */,
 				126F9C4C1A68595F0074AF72 /* TPPropertyAnimation.m in Sources */,
 				CDEE8E3C1A64496F0030A88E /* NoInternetConnectionView.m in Sources */,
+				7EC6288E1AB5BE1A00C05DA1 /* TermsOfServiceViewController.m in Sources */,
 				7EC508101A78288700E03E75 /* TRGoogleMapsSuggestion.m in Sources */,
 				7EC507F31A7821D500E03E75 /* SelectLocationViewController.m in Sources */,
 				CD39D64C1A4A0C580006F7B7 /* RentedNavigationController.m in Sources */,
@@ -1326,6 +1519,7 @@
 				7EC508151A782A3400E03E75 /* RequestsBuilder.m in Sources */,
 				CD5038F61A617EC800A1320D /* GeneralUtils.m in Sources */,
 				7EC508111A78288700E03E75 /* TRStringExtensions.m in Sources */,
+				7E7D1A4F1AAB3E5C00387B6C /* SelectListingPhotosViewController.m in Sources */,
 				126F9C421A68276C0074AF72 /* ApartmentDetailsOtherListingView.m in Sources */,
 				7EC5080E1A78288700E03E75 /* TRGoogleMapsAutocompleteItemsSource.m in Sources */,
 				7EA7A3071A93446C004B2F8D /* ShadowLabel.m in Sources */,
@@ -1333,15 +1527,18 @@
 				CD19A99E1A5F35960095163F /* Apartment.m in Sources */,
 				7EC69D0A1A8D0DC00017A5FE /* CongratulationsViewController.m in Sources */,
 				CD307AC01A48657500D4BE2B /* AuthenticationViewController.m in Sources */,
+				7EDD03CB1AD308C800F37032 /* CustomActivityItemProvider.m in Sources */,
 				CD307AC61A48661C00D4BE2B /* FeedViewController.m in Sources */,
 				CD5713141A585DAE003B4C2E /* UIViewController+JASidePanels.m in Sources */,
 				7ED5A23B1A83854F00C34EAF /* AdminViewController.m in Sources */,
 				CD5038EC1A61740B00A1320D /* FavoritesTableViewController.m in Sources */,
 				CD35CCEB1A49ACC4007F12D0 /* UIColor+ColorFromHexString.m in Sources */,
 				CD42A8D01A707466000E7BD7 /* ConfirmationView.m in Sources */,
+				7EEFCC481AA6296B00D265FE /* EnterDetailsViewController.m in Sources */,
 				CD307AA41A4856D000D4BE2B /* UserApi.m in Sources */,
 				CD5039631A620ADE00A1320D /* UserSearchPreferences.m in Sources */,
 				7EA7A2F51A8E9131004B2F8D /* NothingCell.m in Sources */,
+				7E7D1A4A1AAB0C0400387B6C /* SearchTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1414,7 +1611,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "50aca1e2-7ed7-4a69-858e-3fbcecb8f829";
+				PROVISIONING_PROFILE = "a35be472-2fa8-4c6f-a077-80b18a79b6f6";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1463,14 +1660,25 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Susannah Vila (AVYTSNAP5Y)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Susannah Vila (AVYTSNAP5Y)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Rented/Rented-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"MIXPANEL_DEBUG=1",
+					"MIXPANEL_ERROR=1",
+				);
 				INFOPLIST_FILE = Rented/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Flip;
-				PROVISIONING_PROFILE = "50aca1e2-7ed7-4a69-858e-3fbcecb8f829";
+				PROVISIONING_PROFILE = "a35be472-2fa8-4c6f-a077-80b18a79b6f6";
 			};
 			name = Debug;
 		};
@@ -1482,6 +1690,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Lease Flip Inc (4XS485J5BQ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lease Flip Inc (4XS485J5BQ)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Rented/Rented-Prefix.pch";
 				INFOPLIST_FILE = Rented/Info.plist;

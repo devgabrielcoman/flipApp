@@ -47,25 +47,7 @@ install_resource()
       ;;
   esac
 }
-          install_resource "CTAssetsPickerController/CTAssetsPickerController/CTAssetsPicker.xcassets/CTAssetsPickerChecked.imageset/CTAssetsPickerChecked.png"
-                    install_resource "CTAssetsPickerController/CTAssetsPickerController/CTAssetsPicker.xcassets/CTAssetsPickerChecked.imageset/CTAssetsPickerChecked@2x.png"
-                    install_resource "CTAssetsPickerController/CTAssetsPickerController/CTAssetsPicker.xcassets/CTAssetsPickerChecked.imageset/CTAssetsPickerChecked@3x.png"
-                    install_resource "CTAssetsPickerController/CTAssetsPickerController/CTAssetsPicker.xcassets/CTAssetsPickerEmptyAsset.imageset/CTAssetsPickerEmptyAsset.png"
-                    install_resource "CTAssetsPickerController/CTAssetsPickerController/CTAssetsPicker.xcassets/CTAssetsPickerEmptyAsset.imageset/CTAssetsPickerEmptyAsset@2x.png"
-                    install_resource "CTAssetsPickerController/CTAssetsPickerController/CTAssetsPicker.xcassets/CTAssetsPickerEmptyAsset.imageset/CTAssetsPickerEmptyAsset@3x.png"
-                    install_resource "CTAssetsPickerController/CTAssetsPickerController/CTAssetsPicker.xcassets/CTAssetsPickerEmptyCell.imageset/CTAssetsPickerEmptyCell.png"
-                    install_resource "CTAssetsPickerController/CTAssetsPickerController/CTAssetsPicker.xcassets/CTAssetsPickerEmptyCell.imageset/CTAssetsPickerEmptyCell@2x.png"
-                    install_resource "CTAssetsPickerController/CTAssetsPickerController/CTAssetsPicker.xcassets/CTAssetsPickerEmptyCell.imageset/CTAssetsPickerEmptyCell@3x.png"
-                    install_resource "CTAssetsPickerController/CTAssetsPickerController/CTAssetsPicker.xcassets/CTAssetsPickerLocked.imageset/UIAccessDeniedViewLock.png"
-                    install_resource "CTAssetsPickerController/CTAssetsPickerController/CTAssetsPicker.xcassets/CTAssetsPickerLocked.imageset/UIAccessDeniedViewLock@2x.png"
-                    install_resource "CTAssetsPickerController/CTAssetsPickerController/CTAssetsPicker.xcassets/CTAssetsPickerLocked.imageset/UIAccessDeniedViewLock@3x.png"
-                    install_resource "CTAssetsPickerController/CTAssetsPickerController/CTAssetsPicker.xcassets/CTAssetsPickerPlay.imageset/CTAssetsPickerPlay.png"
-                    install_resource "CTAssetsPickerController/CTAssetsPickerController/CTAssetsPicker.xcassets/CTAssetsPickerPlay.imageset/CTAssetsPickerPlay@2x.png"
-                    install_resource "CTAssetsPickerController/CTAssetsPickerController/CTAssetsPicker.xcassets/CTAssetsPickerPlay.imageset/CTAssetsPickerPlay@3x.png"
-                    install_resource "CTAssetsPickerController/CTAssetsPickerController/CTAssetsPicker.xcassets/CTAssetsPickerVideo.imageset/CTAssetsPickerVideo.png"
-                    install_resource "CTAssetsPickerController/CTAssetsPickerController/CTAssetsPicker.xcassets/CTAssetsPickerVideo.imageset/CTAssetsPickerVideo@2x.png"
-                    install_resource "CTAssetsPickerController/CTAssetsPickerController/CTAssetsPicker.xcassets/CTAssetsPickerVideo.imageset/CTAssetsPickerVideo@3x.png"
-                    install_resource "MWPhotoBrowser/MWPhotoBrowser/MWPhotoBrowser.bundle"
+          install_resource "MWPhotoBrowser/MWPhotoBrowser/MWPhotoBrowser.bundle"
                     install_resource "Mixpanel/Mixpanel/Media.xcassets/MPArrowLeft.imageset/MPArrowLeft.png"
                     install_resource "Mixpanel/Mixpanel/Media.xcassets/MPArrowLeft.imageset/MPArrowLeft@2x.png"
                     install_resource "Mixpanel/Mixpanel/Media.xcassets/MPArrowRight.imageset/MPArrowRight.png"
@@ -82,6 +64,7 @@ install_resource()
                     install_resource "Mixpanel/Mixpanel/MPCloseBtn@2x.png"
                     install_resource "Mixpanel/Mixpanel/MPNotification.storyboard"
                     install_resource "Mixpanel/Mixpanel/MPSurvey.storyboard"
+                    install_resource "${BUILT_PRODUCTS_DIR}/CTAssetsPickerController.bundle"
           
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 if [[ "${ACTION}" == "install" ]]; then

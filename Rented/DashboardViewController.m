@@ -27,6 +27,8 @@
 #import "MyListingViewController.h"
 #import "AppDelegate.h"
 #import "TutorialPageView.h"
+#import "LikesViewController.h"
+#import "TermsOfServiceViewController.h"
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
@@ -186,7 +188,7 @@
 {
     if(![lastUserId isEqualToString:DEP.authenticatedUser[@"facebookID"]])
     {
-        _usernameLbl.text = DEP.authenticatedUser.username;
+        _usernameLbl.text = DEP.authenticatedUser[@"firstName"];
         [_usernameLbl setHidden:NO];
 //        [_locationLbl setTitle:DEP.authenticatedUser[@"location"] forState:UIControlStateNormal];
 //        [_locationLbl setHidden:NO];
@@ -201,7 +203,7 @@
 
 -(void)updateProfileData
 {
-    _usernameLbl.text = DEP.authenticatedUser.username;
+    _usernameLbl.text = DEP.authenticatedUser[@"firstName"];
     [_usernameLbl setHidden:NO];
 //    [_locationLbl setTitle:DEP.authenticatedUser[@"location"] forState:UIControlStateNormal];
 //    [_locationLbl setHidden:NO];
@@ -262,87 +264,80 @@
         {
             if(apartment != nil && images !=nil)
             {
-                PFInstallation* installation = [PFInstallation currentInstallation];
-                installation.badge = 0;
-                [installation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    
-                    AppDelegate* delegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
-                    [delegate setNotificationBadgeTo:0];
-                    
-                }];
+
                 
                 Apartment *ap = [Apartment new];
                 
                 ap.apartment = apartment;
                 ap.images = images;
                 
-                MyListingViewController* mylistingVC= [MyListingViewController new];
-                mylistingVC.apartment=ap;
-                ApartmentTableViewCell* topApartmentView = (ApartmentTableViewCell*)[[[NSBundle mainBundle] loadNibNamed:@"ApartmentTableViewCell" owner:nil options:nil] firstObject];
-                topApartmentView.apartmentTopView.disableSwipeGestures=YES;
-                mylistingVC.apartmentCell=topApartmentView;
-                topApartmentView.frame = CGRectMake(0,-44, wScr, hScr);
-                [topApartmentView.apartmentTopView.displayMore setHidden:YES];
-
-                [topApartmentView setApartment:ap.apartment withImages:ap.images andCurrentUsersStatus:YES];
-                [topApartmentView setDelegate:mylistingVC];
-
-                ApartmentDetailsOtherListingView* details = (ApartmentDetailsOtherListingView*)[[[NSBundle mainBundle] loadNibNamed:@"ApartmentDetailsOtherListingView" owner:nil options:nil] firstObject];
-                [details setApartmentDetailsDelegate:mylistingVC];
+//                MyListingViewController* mylistingVC= [MyListingViewController new];
+//                mylistingVC.apartment=ap;
+//                ApartmentTableViewCell* topApartmentView = (ApartmentTableViewCell*)[[[NSBundle mainBundle] loadNibNamed:@"ApartmentTableViewCell" owner:nil options:nil] firstObject];
+//                topApartmentView.apartmentTopView.disableSwipeGestures=YES;
+//                mylistingVC.apartmentCell=topApartmentView;
+//                topApartmentView.frame = CGRectMake(0,-44, wScr, hScr);
+//                [topApartmentView.apartmentTopView.displayMore setHidden:YES];
+//
+//                [topApartmentView setApartment:ap.apartment withImages:ap.images andCurrentUsersStatus:YES];
+//                [topApartmentView setDelegate:mylistingVC];
+//
+//                ApartmentDetailsOtherListingView* details = (ApartmentDetailsOtherListingView*)[[[NSBundle mainBundle] loadNibNamed:@"ApartmentDetailsOtherListingView" owner:nil options:nil] firstObject];
+//                [details setApartmentDetailsDelegate:mylistingVC];
+//                
+//                CGFloat descriptionSize=0;
+//                
+//
+//                if([apartment[@"description"] isEqualToString:@" "])
+//                {
+//                    descriptionSize = 140.0f;
+//                }
+//                
+//                //set frame to compensate for the invisible navigation bar, fix this once bar is removed
+//                details.frame = CGRectMake(0,hScr-44-50-descriptionSize, wScr, 612-100);
+//                [details setBackgroundColor:[UIColor clearColor]];
+//                details.controller = mylistingVC;
+//                
+//                topApartmentView.apartmentTopView.apartmentDetails=details;
+//                
+//                [details.connectedThroughImageView setHidden:YES];
+//                [details.connectedThroughLbl setHidden:YES];
+//                [details.likeBtn setHidden:YES];
+//                [details.shareBtn setHidden:YES];
+//                
+//                [details.getButton setFrame:CGRectMake(details.getButton.frame.origin.x, details.getButton.frame.origin.y, details.getButton.frame.size.width, details.getButton.frame.size.height)];
+//                
+//                details.firstImageView = topApartmentView.apartmentTopView.apartmentImgView;
+//                
+//                //user is never the owner in the browse screen
+//                details.currentUserIsOwner = YES;
+//                details.isFromFavorites = NO;
+//
+//                [details setApartmentDetails:ap.apartment];
+//                
+//                [details updateFlipButtonStatus];
+//   
+//                
+//                [mylistingVC.navigationController setNavigationBarHidden:YES];
+//                [self setTitle:@" "];
+//                mylistingVC.view=[[UIScrollView alloc] initWithFrame:self.view.frame];
+//                [mylistingVC.view addSubview:details];
+//                [mylistingVC.view addSubview:topApartmentView];
+//                [(UIScrollView*)mylistingVC.view setContentSize:CGSizeMake(wScr, topApartmentView.frame.size.height+ details.frame.size.height-44-50-descriptionSize)];
+//                [(UIScrollView*)mylistingVC.view setScrollEnabled:YES];
+//                [mylistingVC.view setBackgroundColor:[UIColor whiteColor]];
                 
-                CGFloat descriptionSize=0;
                 
-
-                if([apartment[@"description"] isEqualToString:@" "])
-                {
-                    descriptionSize = 140.0f;
-                }
-                
-                //set frame to compensate for the invisible navigation bar, fix this once bar is removed
-                details.frame = CGRectMake(0,hScr-44-50-descriptionSize, wScr, 612-100);
-                [details setBackgroundColor:[UIColor clearColor]];
-                details.controller = mylistingVC;
-                
-                topApartmentView.apartmentTopView.apartmentDetails=details;
-                
-                [details.connectedThroughImageView setHidden:YES];
-                [details.connectedThroughLbl setHidden:YES];
-                [details.likeBtn setHidden:YES];
-                [details.shareBtn setHidden:YES];
-                
-                [details.getButton setFrame:CGRectMake(details.getButton.frame.origin.x, details.getButton.frame.origin.y, details.getButton.frame.size.width, details.getButton.frame.size.height)];
-                
-                details.firstImageView = topApartmentView.apartmentTopView.apartmentImgView;
-                
-                //user is never the owner in the browse screen
-                details.currentUserIsOwner = YES;
-                details.isFromFavorites = NO;
-
-                [details setApartmentDetails:ap.apartment];
-                
-                [details updateFlipButtonStatus];
-   
-                
-                [mylistingVC.navigationController setNavigationBarHidden:YES];
-                [self setTitle:@" "];
-                mylistingVC.view=[[UIScrollView alloc] initWithFrame:self.view.frame];
-                [mylistingVC.view addSubview:details];
-                [mylistingVC.view addSubview:topApartmentView];
-                [(UIScrollView*)mylistingVC.view setContentSize:CGSizeMake(wScr, topApartmentView.frame.size.height+ details.frame.size.height-44-50-descriptionSize)];
-                [(UIScrollView*)mylistingVC.view setScrollEnabled:YES];
-                [mylistingVC.view setBackgroundColor:[UIColor whiteColor]];
-                
-                
-                self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:mylistingVC];
-                
+                AddApartmentViewController* addApartmentVC = [[AddApartmentViewController alloc] initWithNibName:@"AddApartmentViewController" bundle:nil];
+                [addApartmentVC setApartment:ap];
+                self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:addApartmentVC];
 
             }
             else
             {
-                NoListingViewController* nolistingVC = [NoListingViewController new];
-                nolistingVC.avatar =self.profileImgView.image;
+                AddApartmentViewController* addApartmentVC = [[AddApartmentViewController alloc] initWithNibName:@"AddApartmentViewController" bundle:nil];
+                self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:addApartmentVC];
                 
-                self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:nolistingVC];
             }
         }
         else
@@ -368,9 +363,57 @@
 
 - (IBAction)openMyLikes:(id)sender
 {
-    FavoritesTableViewController *favoritesVC = [FavoritesTableViewController new];
+    PFInstallation* installation = [PFInstallation currentInstallation];
+    installation.badge = 0;
+    [installation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+        AppDelegate* delegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
+        [delegate setNotificationBadgeTo:0];
+        
+    }];
+
     
-    self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:favoritesVC];
+    FavoritesTableViewController *favoritesVC = [FavoritesTableViewController new];
+    favoritesVC.tabBarItem.title=@"You Like";
+    [favoritesVC.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                   [UIFont fontWithName:@"HelveticaNeue" size:17.0f], UITextAttributeFont,
+                                                   [UIColor colorWithRed:154/255.0 green:154/255.0 blue:154/255.0 alpha:1], UITextAttributeTextColor,
+                                                    [UIColor clearColor], UITextAttributeTextShadowColor,
+                                                   [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 15.0f)], UITextAttributeTextShadowOffset,
+                                                    nil] forState:UIControlStateNormal];
+    [favoritesVC.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                    [UIFont fontWithName:@"HelveticaNeue" size:17.0f], UITextAttributeFont,
+                                                    [UIColor colorWithRed:55/255.0 green:153/255.0 blue:255/255.0 alpha:1], UITextAttributeTextColor,
+                                                    [UIColor clearColor], UITextAttributeTextShadowColor,
+                                                    [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 15.0f)], UITextAttributeTextShadowOffset,
+                                                    nil] forState:UIControlStateSelected];
+    LikesViewController* likesVC = [[LikesViewController alloc] initWithNibName:@"LikesViewController" bundle:nil];
+    likesVC.tabBarItem.title=@"Likes You";
+    [likesVC.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                    [UIFont fontWithName:@"HelveticaNeue" size:17.0f], UITextAttributeFont,
+                                                    [UIColor colorWithRed:154/255.0 green:154/255.0 blue:154/255.0 alpha:1], UITextAttributeTextColor,
+                                                    [UIColor clearColor], UITextAttributeTextShadowColor,
+                                                    [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 15.0f)], UITextAttributeTextShadowOffset,
+                                                    nil] forState:UIControlStateNormal];
+    [likesVC.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                    [UIFont fontWithName:@"HelveticaNeue" size:17.0f], UITextAttributeFont,
+                                                    [UIColor colorWithRed:55/255.0 green:153/255.0 blue:255/255.0 alpha:1], UITextAttributeTextColor,
+                                                    [UIColor clearColor], UITextAttributeTextShadowColor,
+                                                    [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 15.0f)], UITextAttributeTextShadowOffset,
+                                                    nil] forState:UIControlStateSelected];
+    
+    [[UITabBar appearance] setShadowImage:[UIImage new]];
+    [[UITabBar appearance] setBackgroundImage:[UIImage new]];
+    
+    UITabBarController* tabBarController = [[UITabBarController alloc]init];
+    
+
+    
+    [tabBarController setViewControllers:@[favoritesVC,likesVC]];
+    
+    self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:tabBarController];
+    
+    
 }
 
 - (IBAction)openAdminMenu:(id)sender
@@ -383,11 +426,14 @@
 - (IBAction)howItWorksButtonTapped:(id)sender
 {
     [self setTitle:@" "];
-    TutorialPageView* page1 = [[TutorialPageView alloc] initWithNibName:@"TutorialPageView" bundle:nil];
-    page1.image = [UIImage imageNamed:@"1"];
-    page1.index = 1;
-    self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:page1];
+//    TutorialPageView* page1 = [[TutorialPageView alloc] initWithNibName:@"TutorialPageView" bundle:nil];
+//    page1.image = [UIImage imageNamed:@"1"];
+//    page1.index = 1;
+//    self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:page1];
 
+    TermsOfServiceViewController* tosVC = [[TermsOfServiceViewController alloc]init];
+    tosVC.dashboardVC = self;
+    self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:tosVC];
 }
 
 - (IBAction)showPreferences:(id)sender
@@ -398,6 +444,9 @@
 
 - (IBAction)sendEmail:(id)sender
 {
+    [[Mixpanel sharedInstance] track:@"Pressed Feedback"];
+
+    
     if (![MFMailComposeViewController canSendMail])
     {
         [UIAlertView showWithTitle:@""
@@ -433,10 +482,12 @@
 {
     [DEP.api.userApi logoutUser];
     DEP.authenticatedUser = nil;
-    
+    lastUserId=0;
+    [self.usernameLbl setHidden:YES];
     [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[AuthenticationViewController new]]animated:YES completion:^{
         FeedViewController *feedVC = [FeedViewController new];
         self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:feedVC];
+        [self.sidePanelController showLeftPanelAnimated:NO];
     }];
 }
 

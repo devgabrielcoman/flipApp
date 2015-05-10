@@ -22,6 +22,9 @@
 #import "NoInternetConnectionView.h"
 #import "FacebookFriend.h"
 #import "SingleApartmentViewController.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 
 @interface AppDelegate ()
 
@@ -33,11 +36,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
+    [Mixpanel sharedInstanceWithToken:MixpanelKey];
+
+    
+    [[UINavigationBar appearance]setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setShadowImage:[UIImage new]];
+    [[UINavigationBar appearance] setTranslucent:YES];
+    
     NSURL* launchURL = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
     
     [self setupDataConnectionNotifier];
     [self setupParse];
     
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor colorWithRed:1/255.0 green:39/255.0 blue:124/255.0 alpha:1.0], NSForegroundColorAttributeName,
+                                                          [UIFont fontWithName:@"HelveticaNeue-Medium" size:17.0], NSFontAttributeName, nil]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -89,6 +102,8 @@
     
     [self.window makeKeyAndVisible];
     
+    [_rootViewController showLeftPanelAnimated:NO];
+    
     //check if the user is loggedin
     if([DEP.api.userApi userIsAuthenticated])
     {
@@ -110,7 +125,7 @@
                         PFUser *userFriend = (PFUser*)[objects objectAtIndex:0];
                         FacebookFriend *fr = [FacebookFriend new];
                         fr.userId = friend;
-                        fr.name = userFriend[@"username"];
+                        fr.name = userFriend[@"firstName"];
                         fr.profilePictureUrl = userFriend[@"profilePictureUrl"];
                         
                         [DEP.facebookFriendsInfo setValue:fr forKey:friend];
@@ -145,13 +160,17 @@
     }
 
     
-    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
-                                                    UIUserNotificationTypeBadge |
-                                                    UIUserNotificationTypeSound);
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
-                                                                             categories:nil];
-    [application registerUserNotificationSettings:settings];
-    [application registerForRemoteNotifications];
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+#ifdef __IPHONE_8_0
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge
+                                                                                             |UIRemoteNotificationTypeSound
+                                                                                             |UIRemoteNotificationTypeAlert) categories:nil];
+        [application registerUserNotificationSettings:settings];
+#endif
+    } else {
+        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+        [application registerForRemoteNotificationTypes:myTypes];
+    }
     
     
     if (application.applicationState != UIApplicationStateBackground) {
@@ -167,6 +186,10 @@
         }
     }
     
+    [Fabric with:@[CrashlyticsKit]];
+    
+    [[Mixpanel sharedInstance] track:@"App Opened"];
+
     
     return YES;
 }
@@ -263,10 +286,36 @@
     [[PFFacebookUtils session] close];
 }
 
+#ifdef __IPHONE_8_0
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    //register to receive notifications
+    [application registerForRemoteNotifications];
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler
+{
+    //handle the actions
+    if ([identifier isEqualToString:@"declineAction"]){
+    }
+    else if ([identifier isEqualToString:@"answerAction"]){
+    }
+}
+#endif
+-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+
+}
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // Store the deviceToken in the current installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
+    
+    if ([[Mixpanel sharedInstance]distinctId])
+    {
+        [[Mixpanel sharedInstance].people addPushDeviceToken:deviceToken];
+    }
+    
     NSMutableArray* channels = [NSMutableArray new];
     [channels addObject:@"global" ];
     if (DEP.authenticatedUser)

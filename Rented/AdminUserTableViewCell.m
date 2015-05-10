@@ -31,7 +31,7 @@
     [self.profilePictureImageView setImage:nil];
     [self.profilePictureImageView setShowActivityIndicator:YES];
     [self.profilePictureImageView setImageURL:[NSURL URLWithString:user[@"profilePictureUrl"]]];
-    [self.usernameLabel setText:user[@"username"]];
+    [self.usernameLabel setText:user[@"firstName"]];
     if ([user[@"isVerified"] integerValue] == 0)
     {
         [self.verifiedSwitch setOn:NO];

@@ -46,35 +46,24 @@
 
 + (NSString *)roomsLongDescriptionForApartment:(PFObject *)apartment
 {
-    NSMutableString *rooms = [NSMutableString new];
-    NSArray *roomsArray = apartment[@"rooms"];
+    NSInteger roomType =[apartment[@"bedrooms"] integerValue];
     
-    for (NSNumber *roomType in roomsArray)
-    {
-        if([roomType integerValue] == Studio)
-            [rooms appendFormat:@"Studio"];
-        
-        if([roomType integerValue] == Bedroom1)
-            [rooms appendFormat:@"1 Bedroom"];
-        
-        if([roomType integerValue] == Bedrooms2)
-            [rooms appendFormat:@"2 Bedrooms"];
-        
-        if([roomType integerValue] == Bedrooms3)
-            [rooms appendFormat:@"3 Bedrooms"];
-        
-        if([roomType integerValue] == Bedrooms4)
-            [rooms appendFormat:@"Over 3 Bedrooms"];
-    }
+    if(roomType == 0)
+        return @"Studio";
     
-    NSString *finalString = @"";
+    if(roomType == 1)
+        return @"1 Bedroom";
     
-    if(rooms.length > 1 && [[rooms substringToIndex:1] isEqualToString:@","])
-        finalString = [rooms substringFromIndex:1];
-    else
-        finalString = rooms;
-    
-    return finalString;
+    if(roomType == 2)
+        return @"2 Bedrooms";
+    if(roomType == 3)
+        return @"3 Bedrooms";
+    if(roomType == 4)
+        return @"4 Bedrooms";
+    if(roomType == 5)
+        return @"5 Bedrooms";
+
+    return @"";
 }
 
 +(NSMutableArray*) mutualFriendsInArray1: (NSArray*)friends1 andArray2: (NSArray*)friends2
@@ -105,7 +94,7 @@
     }
     if(actualFriends.count == 0)
     {
-        description=[@"No Connections" mutableCopy];
+        description=[@"No Friends In Common" mutableCopy];
     }
     else
     {
