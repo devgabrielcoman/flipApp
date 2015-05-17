@@ -8,6 +8,7 @@
 
 #import "UserApi.h"
 
+#import <AFNetworking/AFNetworking.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <FacebookSDK.h>
 #import "FacebookFriend.h"
@@ -38,6 +39,8 @@
             if (user.isNew)
             {
                 [self loadRequiredUserData:^(BOOL success) {
+                    
+                    sleep(2);
                     [[Mixpanel sharedInstance] track:@"New User" properties:@{@"facebook_id":[PFUser currentUser][@"facebookID"]}];
                     [[Mixpanel sharedInstance] identify:[PFUser currentUser][@"facebookID"]];
                     if ([PFUser currentUser].email)
@@ -50,7 +53,19 @@
                     [[Mixpanel sharedInstance].people set:@{@"$last_name":[PFUser currentUser][@"lastName"]}];
 
                     [[Mixpanel sharedInstance] setNameTag:[PFUser currentUser].username];
-                    completionHandler(YES);
+                    
+                    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kHostString]];
+                    NSDictionary *params = @{@"userId": [PFUser currentUser].objectId,
+                                             @"email": [PFUser currentUser].email};
+
+                    AFHTTPRequestOperation *op = [manager POST:@"invite/check" parameters:params  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        completionHandler(YES);
+                        NSLog(@"JSON: %@", responseObject);
+                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        completionHandler(YES);
+                        NSLog(@"Error: %@", error);
+                    }];
+                    [op start];
                 }];
                 PFInstallation *currentInstallation = [PFInstallation currentInstallation];
                 NSMutableArray* channels = [NSMutableArray new];
@@ -178,11 +193,13 @@
             PFObject* object = [PFObject objectWithClassName:@"UserMetaData"];
             object[@"user"] = DEP.authenticatedUser;
             object[@"isVerified"]= [NSNumber numberWithInt:0];
+            object[@"acceptedInvitesCount"]= [NSNumber numberWithInt:0];
+            object[@"hasAccess"]= [NSNumber numberWithBool:NO];
             [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                
+                    completionHandler(YES);
+            
             }];
             
-            completionHandler(YES);
             
         }
     }];

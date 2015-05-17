@@ -18,6 +18,9 @@
 #define GoogleMapsApiKey @"AIzaSyCO8K6YKBSF9lmZYKB6FzrkQ0lkq7HuOv4"
 
 
+#define kHostString @"http://54.69.166.166:3000"
+#define kImageHostString @"http://s3.amazonaws.com"
+
 #pragma mark - General usage functions
 #define hScr            [[UIScreen mainScreen] bounds].size.height
 #define wScr            [[UIScreen mainScreen] bounds].size.width

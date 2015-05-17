@@ -84,12 +84,52 @@
     //apartment image
     if(images && images.count > 0)
     {
-        PFObject *firstImage = [images firstObject];
-        PFFile *imageFile = firstImage[@"image"];
         _apartmentImgView.crossfadeDuration =0;
         _apartmentImgView.image = nil;
         _apartmentImgView.showActivityIndicator = YES;
-        _apartmentImgView.imageURL = [NSURL URLWithString:imageFile.url];
+        
+        PFObject *firstImage = [images firstObject];
+        
+        
+        if (!firstImage[@"fileName"] || !firstImage[@"type"])
+        {
+            PFFile *imageFile = firstImage[@"image"];
+            _apartmentImgView.imageURL = [NSURL URLWithString:imageFile.url];
+        }
+        else
+        {
+            NSInteger fileSize;
+            
+            if(wScr == 320)
+            {
+                if( ! IS_IPHONE_5 )
+                {
+                    fileSize = 1;
+                }
+                else
+                {
+                    fileSize = 2;
+                }
+            }
+            else
+            {
+                if(wScr == 375)
+                {
+                    fileSize = 3;
+                }
+                else
+                {
+                    fileSize = 4;
+                }
+            }
+            NSString* fileName = firstImage[@"fileName"];
+            NSString* imageURL = [NSString stringWithFormat:@"%@/leaseflip/apt-img/%@/%@_%d",kImageHostString,[fileName substringToIndex:1],fileName,fileSize];
+            _apartmentImgView.imageURL = [NSURL URLWithString:imageURL];
+            
+        }
+
+
+
         
         UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shouldOpenFullGallery)];
         tapped.numberOfTapsRequired = 1;

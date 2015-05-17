@@ -12,5 +12,6 @@
 @interface FeedViewController : UIViewController <UIAlertViewDelegate>
 
 @property NSArray *apartments;
+@property (nonatomic) BOOL doneScreenHasBeenPresented;
 
 @end

@@ -29,6 +29,7 @@
 #import "TutorialPageView.h"
 #import "LikesViewController.h"
 #import "TermsOfServiceViewController.h"
+#import "AuthenticationDoneViewController.h"
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
@@ -484,11 +485,24 @@
     DEP.authenticatedUser = nil;
     lastUserId=0;
     [self.usernameLbl setHidden:YES];
-    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[AuthenticationViewController new]]animated:YES completion:^{
+    
+    
+    UIViewController *rootViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    
+    AuthenticationDoneViewController* doneVC = [AuthenticationDoneViewController new];
+    UINavigationController* doneNavVC = [[UINavigationController alloc]initWithRootViewController:doneVC];
+    
+    [rootViewController presentViewController:doneNavVC animated:NO completion:nil];
+    
+    UINavigationController* authNavVC = [[UINavigationController alloc]initWithRootViewController:[AuthenticationViewController new]];
+    [doneVC presentViewController:authNavVC animated:YES completion:^{
         FeedViewController *feedVC = [FeedViewController new];
-        self.sidePanelController.centerPanel = [[RentedNavigationController alloc] initWithRootViewController:feedVC];
+        self.sidePanelController.centerPanel = [[RentedNavigationController alloc]
+                                                initWithRootViewController:feedVC];
+        feedVC.doneScreenHasBeenPresented = YES;
         [self.sidePanelController showLeftPanelAnimated:NO];
     }];
+
 }
 
 #pragma mark - MailComposer delegate methods

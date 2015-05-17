@@ -481,7 +481,7 @@
     apartment[@"description"] = apartmentInfo[@"description"];
 //    apartment[@"area"] = [NSNumber numberWithInteger:[apartmentInfo[@"area"] integerValue]];
 //    apartment[@"renewaldays"] = [NSNumber numberWithInteger:[apartmentInfo[@"renewaldays"] integerValue]];
-    apartment[@"visible"] = apartmentInfo[@"directContact"];
+    apartment[@"visible"] = apartmentInfo[@"visible"];
 
     apartment[@"neighborhood"] = apartmentInfo[@"neighborhood"];
     apartment[@"city"] = apartmentInfo[@"city"];
@@ -492,11 +492,17 @@
 
 
 
+
     apartment[@"owner"] = user;
     
     [apartment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if(!error)
         {
+            
+            NSString *urlString = [NSString stringWithFormat:@"fb656809821111233://flip/apartment/%@",apartment.objectId];
+            apartment[@"shareUrl"]= urlString;
+            [apartment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {}];
+            
             //apartment has been saved
             [hud hide:YES];
             [self uploadImages:images forApartment:apartment completion:completionHandler];
@@ -509,126 +515,36 @@
 - (void)uploadImages:(NSArray *)images forApartment:(PFObject *)apartment completion:(void (^)(BOOL succes))completionHandler
 {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = [NSString stringWithFormat:@"Uploading images"];
     [hud show:YES];
-    id object = [images firstObject];
     
-    UIImage *image;
-    if([[images firstObject]isMemberOfClass:[UIImage class]])
-    {
-        image= [images firstObject];
-    }
-    else
-    {
-        PFFile* imageFile =(PFFile*)[images firstObject][@"image"];
-        image = [UIImage imageWithData:[imageFile getData]];
-    }
-    
-    PFFile *imageFile = [PFFile fileWithName:[NSString stringWithFormat:@"image-%lld.jpg", [@(floor([[NSDate new] timeIntervalSince1970] * 1000)) longLongValue]] data:UIImagePNGRepresentation(image) ];
-    
-    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (!error)
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kHostString]];
+    NSDictionary *parameters = @{@"apartmentId": apartment.objectId};
+    AFHTTPRequestOperation *op = [manager POST:@"apartment/image/add" parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+
+        for(int i = 0; i<images.count; i++)
         {
-            PFObject *apartmentPhoto = [PFObject objectWithClassName:@"ApartmentPhotos"];
-            apartmentPhoto[@"image"] = imageFile;
-            apartmentPhoto[@"apartment"] = apartment;
             
-            [apartmentPhoto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if(!error)
-                {
-                    //apartment[@"images"] = apartmentPhoto;
-                    
-                    NSMutableArray *remainedImages = [NSMutableArray arrayWithArray:images];
-                    [remainedImages removeObject:object];
-                    
-                    [hud hide:YES];
-                    
-                    if(remainedImages.count>0)
-                        [self uploadImages:remainedImages forApartment:apartment completion:completionHandler];
-                    else
-                    {
-                        completionHandler(YES);
-//                        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//                        NSMutableDictionary *parameters = [NSMutableDictionary new];
-//                        [parameters setValue:@"656809821111233|e3768c5fd6b066d1a3da09e57b000ab3" forKey:@"access_token"];
-//                        NSString* nameString= [NSString stringWithFormat:@"%@'s apartment",apartment[@"owner"][@"firstName"]];
-//                        [parameters setValue:nameString forKey:@"name"];
-                        
-//                        NSMutableDictionary * iosDict = [NSMutableDictionary new];
-                        
-                        NSString *urlString = [NSString stringWithFormat:@"fb656809821111233://flip/apartment/%@",apartment.objectId];
-                        apartment[@"shareUrl"]= urlString;
-                        [apartment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            NSData *imageData = UIImageJPEGRepresentation(images[i], 0.8);
+            NSString* fileName = [NSString stringWithFormat:@"image%d.jpeg",i];
 
-                        }];
+            [formData appendPartWithFileData:imageData name:@"image" fileName:fileName mimeType:@"image/jpeg"];
+        }
 
-//                        [iosDict setValue:urlString forKey:@"url"];
-//                        [iosDict setValue:@"Flip" forKey:@"app_name"];
-//                        [iosDict setValue:[NSNumber numberWithInt:234]forKey:@"app_store_id" ];
-//                        NSArray *iosArray = [[NSArray alloc]initWithObjects:iosDict, nil];
-//                        
-//                        NSError* error;
-//                        NSData *iosDictData = [NSJSONSerialization dataWithJSONObject:iosArray options:NSJSONWritingPrettyPrinted error:&error];
-//                        NSString* iosDictString;
-//                        if (!error)
-//                        {
-//                            iosDictString = [[NSString alloc]initWithData:iosDictData encoding:NSUTF8StringEncoding];
-//                        }
-//                        
-//                        [parameters setValue:iosDictString forKey:@"ios"];
-//                        
-//                        NSString* webString = @"{     \"should_fallback\" : false   }";
-//                        
-//                        [parameters setValue:webString forKey:@"web"];
-//                        
-//                        [manager POST:@"https://graph.facebook.com/app/app_link_hosts" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                            NSDictionary* responseDict = (NSDictionary*)responseObject;
-//                            NSString* appLinkObjectId = [responseDict objectForKey:@"id"];
-//                            
-//                            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//                            NSString* getUrlString = [NSString stringWithFormat:@"https://graph.facebook.com/%@",appLinkObjectId];
-//                            NSMutableDictionary *parameters = [NSMutableDictionary new];
-//                            [parameters setValue:@"656809821111233|e3768c5fd6b066d1a3da09e57b000ab3" forKey:@"access_token"];
-//                            [parameters setValue:@"canonical_url" forKey:@"fields"];
-//                            [parameters setValue:@"true" forKey:@"pretty"];
-//                            
-//                            [manager GET:getUrlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//
-//                                NSDictionary* responseDict = (NSDictionary*)responseObject;
-//                                NSString* shareUrl = [responseDict objectForKey:@"canonical_url"];
-//                                
-//                                apartment[@"shareUrl"]= shareUrl;
-//                                
-//                                [apartment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//                                    
-//                                }];
-//                            
-//                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                                NSLog(@"Error: %@", error);
-//                            }];
-//                            
-//                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                            NSLog(@"Error: %@", error);
-//                        }];
-                    }
-                }
-                else
-                {
-                    [hud hide:YES];
-                    completionHandler(NO);
-                }
-            }];
-        }
-        else
-        {
-            [hud hide:YES];
-            RTLog(@"Error uploading file: %@ %@", error, [error userInfo]);
-            completionHandler(NO);
-        }
-    } progressBlock:^(int percentDone) {
-        hud.progress = (float)percentDone/100;
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success: %@ ***** %@", operation.responseString, responseObject);
+        [hud hide:YES];
+        completionHandler(YES);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@ ***** %@", operation.responseString, error);
+        [hud hide:YES];
+        RTLog(@"Error uploading file: %@ %@", error, [error userInfo]);
+        completionHandler(NO);
     }];
+    [op start];
+    
+
 }
 
 

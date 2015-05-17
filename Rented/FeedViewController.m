@@ -26,6 +26,7 @@
 #import "ApartmentDetailsOtherListingView.h"
 #import "lastFeedCell.h"
 #import "NothingCell.h"
+#import "AuthenticationDoneViewController.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -152,15 +153,37 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [self.navigationController.interactivePopGestureRecognizer setEnabled:NO];
+    
+
+    
     if(![DEP.api.userApi userIsAuthenticated])
     {
+       
         UIViewController *rootViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+        
+        AuthenticationDoneViewController* doneVC = [AuthenticationDoneViewController new];
+        UINavigationController* doneNavVC = [[UINavigationController alloc]initWithRootViewController:doneVC];
+
+        [rootViewController presentViewController:doneNavVC animated:NO completion:nil];
+        
         UINavigationController* authNavVC = [[UINavigationController alloc]initWithRootViewController:[AuthenticationViewController new]];
-        [rootViewController presentViewController:authNavVC animated:NO completion:nil];
+        [doneVC presentViewController:authNavVC animated:NO completion:nil];
+        
+        
+        self.doneScreenHasBeenPresented =YES;
     }
     else
     {
+        if(!self.doneScreenHasBeenPresented)
+        {
+            UIViewController *rootViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+        
+            AuthenticationDoneViewController* doneVC = [AuthenticationDoneViewController new];
+            UINavigationController* doneNavVC = [[UINavigationController alloc]initWithRootViewController:doneVC];
+            [rootViewController presentViewController:doneNavVC animated:NO completion:nil];
+            self.doneScreenHasBeenPresented =YES;
 
+        }
     }
 }
 

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TutorialPage1ViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dot_offX2" translatesAutoresizingMaskIntoConstraints="NO" id="8VT-Ow-W2i">
+                    <rect key="frame" x="154" y="39" width="7" height="7"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="7" id="buj-ue-Dxf"/>
+                        <constraint firstAttribute="height" constant="7" id="uto-pw-B6o"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dot_onX2" translatesAutoresizingMaskIntoConstraints="NO" id="ePh-tM-kIE">
+                    <rect key="frame" x="174" y="39" width="7" height="7"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="7" id="FHF-wp-jCH"/>
+                        <constraint firstAttribute="width" constant="7" id="xpe-25-6C9"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dot_offX2" translatesAutoresizingMaskIntoConstraints="NO" id="nVb-Bs-Rtz">
+                    <rect key="frame" x="194" y="39" width="7" height="7"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="7" id="UpT-Bm-cnC"/>
+                        <constraint firstAttribute="width" constant="7" id="cfb-4Y-RFR"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dot_offX2" translatesAutoresizingMaskIntoConstraints="NO" id="jzL-cG-spe">
+                    <rect key="frame" x="214" y="39" width="7" height="7"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="7" id="bU2-8Y-VHv"/>
+                        <constraint firstAttribute="height" constant="7" id="gQU-mA-1kb"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Take over someone's lease or break yours without penalties" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hv0-x7-GwB">
+                    <rect key="frame" x="27" y="65" width="321" height="65"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="65" id="meH-Al-rsv"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1cX2" translatesAutoresizingMaskIntoConstraints="NO" id="dL4-ro-GEB">
+                    <rect key="frame" x="110" y="379" width="155" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="dL4-ro-GEB" secondAttribute="height" multiplier="31:16" id="czR-XG-JGC"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1bX2" translatesAutoresizingMaskIntoConstraints="NO" id="O5x-OA-0mn">
+                    <rect key="frame" x="110" y="273" width="155" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="O5x-OA-0mn" secondAttribute="height" multiplier="31:16" id="34o-Qo-aAs"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyP-We-DMf">
+                    <rect key="frame" x="161" y="530" width="55" height="55"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="55" id="0BD-sB-FWV"/>
+                        <constraint firstAttribute="height" constant="55" id="hiF-kh-lMg"/>
+                    </constraints>
+                    <state key="normal" image="NextX2">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="nextButtonTapped:" destination="-1" eventType="touchUpInside" id="npS-rN-pgs"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uqt-kS-pWZ">
+                    <rect key="frame" x="175" y="610" width="27" height="27"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="27" id="84Z-eF-s4s"/>
+                        <constraint firstAttribute="width" constant="27" id="9Lj-CP-hyw"/>
+                    </constraints>
+                    <state key="normal" image="CloseX2">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="cancelButtonTapped:" destination="-1" eventType="touchUpInside" id="UJi-tT-7F2"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1aX2" translatesAutoresizingMaskIntoConstraints="NO" id="sAO-rA-Ig1">
+                    <rect key="frame" x="110" y="167" width="155" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="sAO-rA-Ig1" secondAttribute="height" multiplier="31:16" id="K6f-Hw-ysL"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="hv0-x7-GwB" firstAttribute="top" secondItem="jzL-cG-spe" secondAttribute="bottom" constant="19" id="3Z5-vw-tGC"/>
+                <constraint firstAttribute="trailing" secondItem="hv0-x7-GwB" secondAttribute="trailing" constant="27" id="3eQ-Li-BOr"/>
+                <constraint firstAttribute="centerX" secondItem="sAO-rA-Ig1" secondAttribute="centerX" id="7S6-0b-Kj8"/>
+                <constraint firstItem="O5x-OA-0mn" firstAttribute="height" secondItem="dL4-ro-GEB" secondAttribute="height" id="80Z-5I-ww2"/>
+                <constraint firstItem="hv0-x7-GwB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="27" id="CQg-c8-UMm"/>
+                <constraint firstAttribute="centerX" secondItem="vyP-We-DMf" secondAttribute="centerX" constant="-1" id="GEq-O8-n4K"/>
+                <constraint firstItem="uqt-kS-pWZ" firstAttribute="top" secondItem="vyP-We-DMf" secondAttribute="bottom" constant="25" id="IAP-P3-Z1s"/>
+                <constraint firstAttribute="centerX" secondItem="nVb-Bs-Rtz" secondAttribute="centerX" constant="-10" id="KGu-l1-cAI"/>
+                <constraint firstItem="dL4-ro-GEB" firstAttribute="top" secondItem="O5x-OA-0mn" secondAttribute="bottom" constant="26" id="M5U-MK-44F"/>
+                <constraint firstAttribute="centerX" secondItem="jzL-cG-spe" secondAttribute="centerX" constant="-30" id="MdX-r1-L6g"/>
+                <constraint firstAttribute="centerX" secondItem="O5x-OA-0mn" secondAttribute="centerX" id="OA3-8y-bcH"/>
+                <constraint firstItem="ePh-tM-kIE" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="39" id="P91-zj-Fvl"/>
+                <constraint firstItem="jzL-cG-spe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="39" id="Y6C-Vv-nGI"/>
+                <constraint firstAttribute="centerX" secondItem="ePh-tM-kIE" secondAttribute="centerX" constant="10" id="YuV-xc-5YT"/>
+                <constraint firstItem="O5x-OA-0mn" firstAttribute="height" secondItem="sAO-rA-Ig1" secondAttribute="height" id="ZEg-Uy-7BV"/>
+                <constraint firstAttribute="centerX" secondItem="uqt-kS-pWZ" secondAttribute="centerX" constant="-1" id="Zao-Bp-kBO"/>
+                <constraint firstAttribute="bottom" secondItem="uqt-kS-pWZ" secondAttribute="bottom" constant="30" id="a2v-Y8-7eT"/>
+                <constraint firstItem="vyP-We-DMf" firstAttribute="top" secondItem="dL4-ro-GEB" secondAttribute="bottom" constant="71" id="e7l-Uh-cbS"/>
+                <constraint firstItem="O5x-OA-0mn" firstAttribute="top" secondItem="sAO-rA-Ig1" secondAttribute="bottom" constant="26" id="f06-WK-eph"/>
+                <constraint firstItem="sAO-rA-Ig1" firstAttribute="top" secondItem="hv0-x7-GwB" secondAttribute="bottom" constant="37" id="h2B-OL-0PX"/>
+                <constraint firstAttribute="centerX" secondItem="8VT-Ow-W2i" secondAttribute="centerX" constant="30" id="n6s-VH-VXV"/>
+                <constraint firstItem="nVb-Bs-Rtz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="39" id="qmb-Pf-a2Y"/>
+                <constraint firstItem="8VT-Ow-W2i" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="39" id="ugS-sM-LS9"/>
+                <constraint firstAttribute="centerX" secondItem="dL4-ro-GEB" secondAttribute="centerX" id="zuj-1G-QPh"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="286.5" y="401.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="1aX2" width="154" height="80"/>
+        <image name="1bX2" width="154" height="80"/>
+        <image name="1cX2" width="154" height="80"/>
+        <image name="CloseX2" width="27" height="27"/>
+        <image name="Dot_onX2" width="7" height="7"/>
+        <image name="NextX2" width="55" height="55"/>
+        <image name="dot_offX2" width="7" height="7"/>
+    </resources>
+</document>

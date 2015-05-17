@@ -16,6 +16,7 @@
 #import "LocationUtils.h"
 #import <AFNetworking.h>
 #import "CustomActivityItemProvider.h"
+#import "PrettyMessageHelper.h"
 
 @implementation ApartmentDetailsOtherListingView
 
@@ -567,7 +568,8 @@
 
 -(void)showActivityViewControllerWithFBURL:(NSURL*)fburl
 {
-    NSString *textToShare = @" Check out Flip - it's a marketplace for lease breaks and lease takeovers";
+    NSString *textToShare = [PrettyMessageHelper shareApartmentMessageForApartment:self.apartment];
+    
     CustomActivityItemProvider* urlItem = [[CustomActivityItemProvider alloc] initWithDefaultUrl:[NSURL URLWithString:self.apartment[@"shareUrl"]] andFBURL:fburl];
     
 //    NSURL *url = [NSURL URLWithString:self.apartment[@"shareUrl"]];
@@ -660,9 +662,46 @@
     }
     else
     {
-        PFObject *firstImage = [self.apartmentImages objectAtIndex:index];
-        PFFile *imageFile = firstImage[@"image"];
-        image.imageURL = [NSURL URLWithString:imageFile.url];
+        PFObject *imageObject = [self.apartmentImages objectAtIndex:index];
+        
+        
+        if (!imageObject[@"fileName"] || !imageObject[@"type"])
+        {
+            PFFile *imageFile = imageObject[@"image"];
+            image.imageURL = [NSURL URLWithString:imageFile.url];
+        }
+        else
+        {
+            NSInteger fileSize;
+            
+            if(wScr == 320)
+            {
+                if( ! IS_IPHONE_5 )
+                {
+                    fileSize = 1;
+                }
+                else
+                {
+                    fileSize = 2;
+                }
+            }
+            else
+            {
+                if(wScr == 375)
+                {
+                    fileSize = 3;
+                }
+                else
+                {
+                    fileSize = 4;
+                }
+            }
+            NSString* fileName = imageObject[@"fileName"];
+            NSString* imageURL = [NSString stringWithFormat:@"%@/leaseflip/apt-img/%@/%@_%d",kImageHostString,[fileName substringToIndex:1],fileName,fileSize];
+            image.imageURL = [NSURL URLWithString:imageURL];
+            
+        }
+
     }
     
     

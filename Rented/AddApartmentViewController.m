@@ -1998,11 +1998,55 @@
                                          {
                                              [[Mixpanel sharedInstance].people set:@{@"Apartment Posted":@"1"}];
                                              [[Mixpanel sharedInstance] track:@"New Apartment Posted" properties:@{@"facebook_id":[PFUser currentUser][@"facebookID"]}];
-                                             self.createdApartment;
                                              
                                              if (visible == 1)
                                              {
                                                  [[Mixpanel sharedInstance].people set:@{@"Apartment is visible":@"1"}];
+                                                 
+                                                 PFPush* push = [PFPush new];
+                                                 
+                                                 [push setChannel:@"global"];
+                                                 
+                                                 NSString* apartmentType;
+                                                 if ([apartmentInfo[@"bedrooms"] integerValue]==0)
+                                                 {
+                                                     apartmentType = @"Studio";
+                                                 }
+                                                 if ([apartmentInfo[@"bedrooms"] integerValue]==1)
+                                                 {
+                                                     apartmentType = @"One Bedroom";
+                                                 }
+                                                 if ([apartmentInfo[@"bedrooms"] integerValue]==2)
+                                                 {
+                                                     apartmentType = @"Two Bedrooms";
+                                                 }
+                                                 if ([apartmentInfo[@"bedrooms"] integerValue]==3)
+                                                 {
+                                                     apartmentType = @"Three Bedrooms";
+                                                 }
+                                                 if ([apartmentInfo[@"bedrooms"] integerValue]==4)
+                                                 {
+                                                     apartmentType = @"Four Bedrooms";
+                                                 }
+                                                 if ([apartmentInfo[@"bedrooms"] integerValue]==5)
+                                                 {
+                                                     apartmentType = @"Five Bedrooms";
+                                                 }
+                                                 if (apartmentType == nil)
+                                                 {
+                                                     apartmentType = @"Apartment";
+                                                 }
+                                                 
+                                                 NSString* alertString =[NSString stringWithFormat:@"There was a new %@ added in %@", apartmentType,apartmentInfo[@"neighborhood"] ];
+                                                 NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                                       alertString, @"alert",
+                                                                       @"Increment", @"badge",
+                                                                       nil];
+                                                 [push setData:data];
+//                                                 [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//                                                     
+//                                                 }];
+                                                 
                                              }
                                              else
                                              {
@@ -2209,9 +2253,46 @@
     }
     else
     {
-        PFObject *firstImage = [self.imagesArray objectAtIndex:index];
-        PFFile *imageFile = firstImage[@"image"];
-        image.imageURL = [NSURL URLWithString:imageFile.url];
+        PFObject *imageObject = [self.imagesArray objectAtIndex:index];
+
+        
+        if (!imageObject[@"fileName"] || !imageObject[@"type"])
+        {
+            PFFile *imageFile = imageObject[@"image"];
+            image.imageURL = [NSURL URLWithString:imageFile.url];
+        }
+        else
+        {
+            NSInteger fileSize;
+            
+            if(wScr == 320)
+            {
+                if( ! IS_IPHONE_5 )
+                {
+                    fileSize = 1;
+                }
+                else
+                {
+                    fileSize = 2;
+                }
+            }
+            else
+            {
+                if(wScr == 375)
+                {
+                    fileSize = 3;
+                }
+                else
+                {
+                    fileSize = 4;
+                }
+            }
+            
+            NSString* fileName = imageObject[@"fileName"];
+            NSString* imageURL = [NSString stringWithFormat:@"%@/leaseflip/apt-img/%@/%@_%d",kImageHostString,[fileName substringToIndex:1],fileName,fileSize];
+            image.imageURL = [NSURL URLWithString:imageURL];
+            
+        }
     }
     
 

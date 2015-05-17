@@ -95,26 +95,18 @@
     float actualHeight = chosenImage.size.height;
     float actualWidth = chosenImage.size.width;
     float imgRatio = actualWidth/actualHeight;
-    float maxHeight=2.5*[UIScreen mainScreen].bounds.size.height;
-    float maxWidth=2.5*[UIScreen mainScreen].bounds.size.width;
+    float maxHeight=1712;
+    float maxWidth=1080;
     
-    if(actualHeight>actualWidth)
+    if(imgRatio<0.63)
     {
-        if (actualHeight>maxHeight)
-        {
-            actualHeight = maxHeight;
-            actualWidth = actualHeight*imgRatio;
-        }
-
+        actualWidth = maxWidth;
+        actualHeight = actualWidth/imgRatio;
     }
     else
     {
-        if(actualWidth > maxWidth)
-        {
-            actualWidth = maxWidth;
-            actualHeight = actualWidth/imgRatio;
-        }
-
+        actualHeight = maxHeight;
+        actualWidth = actualHeight*imgRatio;
     }
     
 
@@ -339,11 +331,52 @@
         }
         else
         {
+            
             PFObject *firstImage = [self.imageArray objectAtIndex:i];
-            PFFile *imageFile = firstImage[@"image"];
-            [imageView setShowActivityIndicator:YES];
-            [imageView setCrossfadeDuration:0];
-            imageView.imageURL = [NSURL URLWithString:imageFile.url];
+            
+            
+            if (!firstImage[@"fileName"] || !firstImage[@"type"])
+            {
+                PFFile *imageFile = firstImage[@"image"];
+                [imageView setShowActivityIndicator:YES];
+                [imageView setCrossfadeDuration:0];
+                imageView.imageURL = [NSURL URLWithString:imageFile.url];
+            }
+            else
+            {
+                [imageView setShowActivityIndicator:YES];
+                [imageView setCrossfadeDuration:0];
+                NSInteger fileSize;
+                
+                if(wScr == 320)
+                {
+                    if( ! IS_IPHONE_5 )
+                    {
+                        fileSize = 1;
+                    }
+                    else
+                    {
+                        fileSize = 2;
+                    }
+                }
+                else
+                {
+                    if(wScr == 375)
+                    {
+                        fileSize = 3;
+                    }
+                    else
+                    {
+                        fileSize = 4;
+                    }
+                }
+                NSString* fileName = firstImage[@"fileName"];
+                NSString* imageURL = [NSString stringWithFormat:@"%@/leaseflip/apt-img/%@/%@_%d",kImageHostString,[fileName substringToIndex:1],fileName,fileSize];
+                imageView.imageURL = [NSURL URLWithString:imageURL];
+                
+            }
+            
+            
         }
 
     }
