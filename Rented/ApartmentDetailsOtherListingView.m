@@ -188,7 +188,7 @@
     NSString* propertyTypeText;
     if ([apartment[@"propertyType"] integerValue] == 0)
     {
-        propertyTypeText=@"Appartment";
+        propertyTypeText=@"Apartment";
     }
     else
     {

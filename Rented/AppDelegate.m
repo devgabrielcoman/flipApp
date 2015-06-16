@@ -320,7 +320,7 @@
     [channels addObject:@"global" ];
     if (DEP.authenticatedUser)
     {
-        [channels addObject:DEP.authenticatedUser.objectId];
+        [channels addObject:[NSString stringWithFormat:@"id%@",DEP.authenticatedUser.objectId]];
     }
     currentInstallation.channels = channels;
     

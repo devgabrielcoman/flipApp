@@ -38,6 +38,8 @@
         {
             if (user.isNew)
             {
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isNewUser"];
+
                 [self loadRequiredUserData:^(BOOL success) {
                     
                     sleep(2);
@@ -54,23 +56,12 @@
 
                     [[Mixpanel sharedInstance] setNameTag:[PFUser currentUser].username];
                     
-                    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kHostString]];
-                    NSDictionary *params = @{@"userId": [PFUser currentUser].objectId,
-                                             @"email": [PFUser currentUser].email};
-
-                    AFHTTPRequestOperation *op = [manager POST:@"invite/check" parameters:params  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                        completionHandler(YES);
-                        NSLog(@"JSON: %@", responseObject);
-                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                        completionHandler(YES);
-                        NSLog(@"Error: %@", error);
-                    }];
-                    [op start];
+                    completionHandler(YES);
                 }];
                 PFInstallation *currentInstallation = [PFInstallation currentInstallation];
                 NSMutableArray* channels = [NSMutableArray new];
                 [channels addObject:@"global" ];
-                [channels addObject:user.objectId];
+                [channels addObject:[NSString stringWithFormat:@"id%@",user.objectId ]];
                 
                 currentInstallation.channels = channels;
                 
@@ -82,6 +73,9 @@
             }
             else
             {
+                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isNewUser"];
+
+                
                 [[Mixpanel sharedInstance] identify:[PFUser currentUser][@"facebookID"]];
                 if ([PFUser currentUser].email)
                 {

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
-@interface AuthenticationDoneViewController : UIViewController
+@interface AuthenticationDoneViewController : UIViewController <MFMailComposeViewControllerDelegate>
 
+@property (nonatomic, weak) IBOutlet UIView *noLocationContainer;
 @property (nonatomic, weak) IBOutlet UIView *listContainer;
 @property (nonatomic, weak) IBOutlet UIView *cityContainer;
 

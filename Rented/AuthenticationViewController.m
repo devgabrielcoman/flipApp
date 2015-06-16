@@ -15,6 +15,8 @@
 #import "TutorialPageView.h"
 #import "TermsOfServiceViewController.h"
 #import "TutorialPage1ViewController.h"
+#import <AFNetworking.h>
+#import "MBProgressHUD.h"
 
 #define kDotOff @"dot_offX2"
 #define kDotOn @"Dot_onX2"
@@ -90,17 +92,26 @@
 
 - (IBAction)loginWithFacebook:(id)sender
 {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     [DEP.api.userApi authenticateUserWithFacebook:^(BOOL authenticated) {
         if (authenticated)
         {
             [[Mixpanel sharedInstance] track:@"Successful FB Login"];
 
-            [self dismissViewControllerAnimated:YES completion:^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadFeedData" object:nil];
-            }];
+            self.locationManager = [[CLLocationManager alloc]init];
+            [self.locationManager setDelegate:self];
+            
+            if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+                [self.locationManager requestWhenInUseAuthorization];
+            }
+            [self.locationManager startUpdatingLocation];
+            
+
         }
         else
         {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             [[[UIAlertView alloc]initWithTitle:nil message:@"There was a problem loging in. Please allow Flip to access your Facebook profile." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
         }
     }];
@@ -143,9 +154,13 @@
         [self.dotPage3 setImage:[UIImage imageNamed:kDotOn]];
         
         //labels
-        [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             
             [self.tutorial2Label setAlpha:0];
+        } completion:^(BOOL finished) {
+            
+        }];
+        [UIView animateWithDuration:0.5 delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [self.tutorial3Label setAlpha:1];
             
         } completion:^(BOOL finished) {
@@ -192,7 +207,7 @@
         
         [UIView animateWithDuration:0.75
                               delay:0
-             usingSpringWithDamping:0.5
+             usingSpringWithDamping:1
               initialSpringVelocity:0
                             options:0
                          animations:^{
@@ -216,14 +231,21 @@
         [self.dotPage2 setImage:[UIImage imageNamed:kDotOn]];
         
         //labels
-        [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             
             [self.tutorial1Label setAlpha:0];
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        [UIView animateWithDuration:0.5 delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [self.tutorial2Label setAlpha:1];
             
         } completion:^(BOOL finished) {
             
         }];
+
         
         //icons
         
@@ -266,9 +288,15 @@
         [self.dotPage1 setImage:[UIImage imageNamed:kDotOn]];
         
         //labels
-        [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
 
             [self.loginLabel setAlpha:0];
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        [UIView animateWithDuration:0.5 delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [self.tutorial1Label setAlpha:1];
             
         } completion:^(BOOL finished) {
@@ -317,7 +345,7 @@
         
         [UIView animateWithDuration:0.75
                               delay:0
-             usingSpringWithDamping:0.5
+             usingSpringWithDamping:1
               initialSpringVelocity:0
                             options:0
                          animations:^{
@@ -353,17 +381,24 @@
         
         
         //labels
-        [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             
             [self.tutorial1Label setAlpha:0];
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+
+    
+        [UIView animateWithDuration:0.5 delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [self.loginLabel setAlpha:1];
             
         } completion:^(BOOL finished) {
             
         }];
-        
+    
         //icons
-        
+    
         self.loginIcon1CenteredConstraint.constant = - wScr;
         self.loginIcon2CenteredConstraint.constant =   wScr;
         
@@ -404,7 +439,7 @@
         
         [UIView animateWithDuration:0.75
                               delay:0
-             usingSpringWithDamping:0.5
+             usingSpringWithDamping:1
               initialSpringVelocity:0
                             options:0
                          animations:^{
@@ -430,9 +465,14 @@
         
         
         //labels
-        [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             
             [self.tutorial2Label setAlpha:0];
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+        [UIView animateWithDuration:0.5 delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [self.tutorial1Label setAlpha:1];
             
         } completion:^(BOOL finished) {
@@ -481,13 +521,18 @@
         [self.dotPage2 setImage:[UIImage imageNamed:kDotOn]];
         
         //labels
-        [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             
             [self.tutorial3Label setAlpha:0];
-            [self.tutorial2Label setAlpha:1];
             
         } completion:^(BOOL finished) {
         
+        }];
+        [UIView animateWithDuration:0.5 delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [self.tutorial2Label setAlpha:1];
+            
+        } completion:^(BOOL finished) {
+            
         }];
         
         //icons
@@ -530,7 +575,7 @@
         
         [UIView animateWithDuration:0.75
                               delay:0
-             usingSpringWithDamping:0.5
+             usingSpringWithDamping:1
               initialSpringVelocity:0
                             options:0
                          animations:^{
@@ -681,7 +726,7 @@
         
         [UIView animateWithDuration:0.75
                               delay:0
-             usingSpringWithDamping:0.5
+             usingSpringWithDamping:1
               initialSpringVelocity:0
                             options:0
                          animations:^{
@@ -754,7 +799,7 @@
         
         [UIView animateWithDuration:0.75
                               delay:0
-             usingSpringWithDamping:0.5
+             usingSpringWithDamping:1
               initialSpringVelocity:0
                             options:0
                          animations:^{
@@ -767,6 +812,84 @@
         
         self.pageNumber =0;
     }
+}
+
+#pragma mark - CLLocationMagager delegate methods
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    
+    CLGeocoder *geocoder = [CLGeocoder new];
+    
+    [geocoder reverseGeocodeLocation:[locations lastObject] completionHandler:^(NSArray *placemarks, NSError *error) {
+       
+        CLPlacemark* placemark = [placemarks firstObject];
+        
+        NSString *city = placemark.locality;
+        [[NSUserDefaults standardUserDefaults] setObject:city forKey:@"currentCity"];
+        
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isNewUser"])
+        {
+            AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kHostString]];
+            NSDictionary *params = @{@"userId": [PFUser currentUser].objectId,
+                                     @"email": [PFUser currentUser].email};
+            
+            AFHTTPRequestOperation *op = [manager POST:@"invite/check" parameters:params  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadFeedData" object:nil];
+                }];
+                
+                NSLog(@"JSON: %@", responseObject);
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error: %@", error);
+            }];
+            [op start];
+        }
+        else
+        {
+            [self dismissViewControllerAnimated:YES completion:^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadFeedData" object:nil];
+            }];
+        }
+
+        
+    }];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSString *city = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentCity"];
+    if (!city || [city isEqualToString:@""])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"currentCity"];   
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isNewUser"])
+    {
+        AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kHostString]];
+        NSDictionary *params = @{@"userId": [PFUser currentUser].objectId,
+                                 @"email": [PFUser currentUser].email};
+        
+        AFHTTPRequestOperation *op = [manager POST:@"invite/check" parameters:params  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            [self dismissViewControllerAnimated:YES completion:^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadFeedData" object:nil];
+            }];
+            
+            NSLog(@"JSON: %@", responseObject);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
+        [op start];
+    }
+    else
+    {
+        [self dismissViewControllerAnimated:YES completion:^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadFeedData" object:nil];
+        }];
+    }
+
 }
 
 @end

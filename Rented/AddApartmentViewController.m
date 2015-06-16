@@ -31,7 +31,7 @@
 #import "DashboardViewController.h"
 #import "ApartmentDetailsOtherListingView.h"
 #import "FullMapViewViewController.h"
-
+#import <AFNetworking/AFNetworking.h>
 
 
 //set left text field inset
@@ -1628,35 +1628,49 @@
                             [object delete];
                         }
                         
-                        [_apartment.apartment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                            [hud hide:YES];
+                        AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kHostString]];
+                        NSDictionary *params = @{@"apartmentId": _apartment.apartment};
+                        
+                        AFHTTPRequestOperation *op = [manager POST:@"apartment/image/delete/all" parameters:params  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                            NSLog(@"JSON: %@", responseObject);
                             
-                            [DEP.api.apartmentApi uploadImages: self.imagesArray forApartment:_apartment.apartment completion:^(BOOL succes) {
-                               
-                                NSString* message;
+                            
+                            [_apartment.apartment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                [hud hide:YES];
                                 
-                                if (visible)
-                                {
-                                    message=@"Apartment has been saved!";
-                                }
-                                else
-                                {
-                                    message=@"Your apartment is saved...but not published! Toggle visibility to \"on\" if you want people to see it";
-                                }
+                                [DEP.api.apartmentApi uploadImages: self.imagesArray forApartment:_apartment.apartment completion:^(BOOL succes) {
+                                    
+                                    NSString* message;
+                                    
+                                    if (visible)
+                                    {
+                                        message=@"Apartment has been saved!";
+                                    }
+                                    else
+                                    {
+                                        message=@"Your apartment is saved...but not published! Toggle visibility to \"on\" if you want people to see it";
+                                    }
+                                    
+                                    [UIAlertView showWithTitle:@""
+                                                       message:message
+                                                         style:UIAlertViewStyleDefault
+                                             cancelButtonTitle:nil otherButtonTitles:@[@"Ok"]
+                                                      tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                                          AppDelegate* appDelegate= (AppDelegate*)[UIApplication sharedApplication].delegate;
+                                                          [(DashboardViewController*)[(RentedPanelController*)appDelegate.rootViewController leftPanel] openMyPlace:nil];
+                                                      }];
+                                    
+                                }];
                                 
-                                [UIAlertView showWithTitle:@""
-                                                   message:message
-                                                     style:UIAlertViewStyleDefault
-                                         cancelButtonTitle:nil otherButtonTitles:@[@"Ok"]
-                                                  tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                                                      AppDelegate* appDelegate= (AppDelegate*)[UIApplication sharedApplication].delegate;
-                                                      [(DashboardViewController*)[(RentedPanelController*)appDelegate.rootViewController leftPanel] openMyPlace:nil];
-                                                  }];
                                 
                             }];
-  
+
                             
+                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                            NSLog(@"Error: %@", error);
                         }];
+                        [op start];
+                        
                         
                         
                         
@@ -2043,9 +2057,9 @@
                                                                        @"Increment", @"badge",
                                                                        nil];
                                                  [push setData:data];
-//                                                 [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//                                                     
-//                                                 }];
+                                                 [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                                     
+                                                 }];
                                                  
                                              }
                                              else

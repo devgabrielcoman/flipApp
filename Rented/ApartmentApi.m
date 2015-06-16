@@ -228,7 +228,7 @@
                 {
                     PFPush* push = [PFPush new];
 
-                    [push setChannel:[(PFUser*)apartment[@"owner"] objectId]];
+                    [push setChannel:[NSString stringWithFormat:@"id%@",[(PFUser*)apartment[@"owner"] objectId]]];
                     
                     NSArray * mutualFriendsFacebookIds=[GeneralUtils mutualFriendsInArray1:DEP.authenticatedUser[@"facebookFriends"] andArray2:apartment[@"owner"][@"facebookFriends"]];
                     
@@ -384,7 +384,7 @@
 
             PFPush* push = [PFPush new];
             
-            [push setChannel:[(PFUser*)apartment[@"owner"] objectId]];
+            [push setChannel:[NSString stringWithFormat:@"id%@",[(PFUser*)apartment[@"owner"] objectId]]];
 
         
             NSString* alertString = [NSString stringWithFormat:@"%@ requested your place",DEP.authenticatedUser[@"firstName"]];

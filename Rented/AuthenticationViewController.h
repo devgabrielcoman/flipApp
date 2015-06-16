@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface AuthenticationViewController : UIViewController
+@interface AuthenticationViewController : UIViewController <CLLocationManagerDelegate>
 
 @property (nonatomic, weak) IBOutlet    UILabel*    smallWhyFacebookLoginLabel;
 @property (nonatomic, weak) IBOutlet    UILabel*    whyFacebookLoginLabel;
@@ -76,6 +77,6 @@
 
 
 @property (nonatomic)   NSInteger   pageNumber;
-
+@property (nonatomic, strong)   CLLocationManager* locationManager;
 
 @end

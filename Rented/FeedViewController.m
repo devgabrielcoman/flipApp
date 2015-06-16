@@ -27,6 +27,7 @@
 #import "lastFeedCell.h"
 #import "NothingCell.h"
 #import "AuthenticationDoneViewController.h"
+#import <AFNetworking/AFNetworking.h>
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -726,6 +727,17 @@
             if(succeeded)
             {
                 [[[UIAlertView alloc] initWithTitle:@"Got it!" message:[NSString stringWithFormat:@"%@'s %@ in %@ will be saved to your likes!",ap.apartment[@"owner"][@"firstName"],[GeneralUtils roomsLongDescriptionForApartment:ap.apartment],ap.apartment[@"neighborhood"]] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+                
+                AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kHostString]];
+                NSDictionary *params = @{@"userId": [PFUser currentUser].objectId,
+                                         @"apartmentId": ap.apartment.objectId};
+                
+                AFHTTPRequestOperation *op = [manager POST:@"/apartment/request" parameters:params  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSLog(@"JSON: %@", responseObject);
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    NSLog(@"Error: %@", error);
+                }];
+                [op start];
             }
         }];
     }

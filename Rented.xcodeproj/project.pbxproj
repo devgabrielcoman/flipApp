@@ -27,6 +27,7 @@
 		7E15217F1B0072A600F38A66 /* AuthenticationDoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E15217D1B0072A600F38A66 /* AuthenticationDoneViewController.m */; };
 		7E1521801B0072A600F38A66 /* AuthenticationDoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E15217E1B0072A600F38A66 /* AuthenticationDoneViewController.xib */; };
 		7E1521831B07058400F38A66 /* PrettyMessageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1521821B07058400F38A66 /* PrettyMessageHelper.m */; };
+		7E1521861B0A684E00F38A66 /* CustomActivityItemProvider2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1521851B0A684E00F38A66 /* CustomActivityItemProvider2.m */; };
 		7E220D6C1ABCB64400DE4A7C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E220D6A1ABCB64300DE4A7C /* Crashlytics.framework */; };
 		7E220D6D1ABCB64400DE4A7C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E220D6B1ABCB64400DE4A7C /* Fabric.framework */; };
 		7E7D1A401AA7CCBD00387B6C /* EnterAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7D1A3E1AA7CCBD00387B6C /* EnterAddressViewController.m */; };
@@ -229,6 +230,8 @@
 		7E15217E1B0072A600F38A66 /* AuthenticationDoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthenticationDoneViewController.xib; sourceTree = "<group>"; };
 		7E1521811B07058400F38A66 /* PrettyMessageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrettyMessageHelper.h; sourceTree = "<group>"; };
 		7E1521821B07058400F38A66 /* PrettyMessageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrettyMessageHelper.m; sourceTree = "<group>"; };
+		7E1521841B0A684E00F38A66 /* CustomActivityItemProvider2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomActivityItemProvider2.h; sourceTree = "<group>"; };
+		7E1521851B0A684E00F38A66 /* CustomActivityItemProvider2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomActivityItemProvider2.m; sourceTree = "<group>"; };
 		7E220D6A1ABCB64300DE4A7C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		7E220D6B1ABCB64400DE4A7C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		7E7D1A3D1AA7CCBD00387B6C /* EnterAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnterAddressViewController.h; sourceTree = "<group>"; };
@@ -475,6 +478,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD307AAD1A485DE800D4BE2B /* CoreLocation.framework in Frameworks */,
 				CD5039651A62B3FA00A1320D /* Social.framework in Frameworks */,
 				CD5713241A597C73003B4C2E /* MapKit.framework in Frameworks */,
 				CD5713161A586751003B4C2E /* MessageUI.framework in Frameworks */,
@@ -488,7 +492,6 @@
 				CD307AB31A485E0D00D4BE2B /* Security.framework in Frameworks */,
 				CD307AB11A485DF900D4BE2B /* QuartzCore.framework in Frameworks */,
 				CD307AAF1A485DF000D4BE2B /* MobileCoreServices.framework in Frameworks */,
-				CD307AAD1A485DE800D4BE2B /* CoreLocation.framework in Frameworks */,
 				CD307AAB1A485DE000D4BE2B /* CoreGraphics.framework in Frameworks */,
 				CD307AA91A485DD800D4BE2B /* CFNetwork.framework in Frameworks */,
 				CD307AA71A485DD100D4BE2B /* AudioToolbox.framework in Frameworks */,
@@ -1017,6 +1020,8 @@
 				7EDD03CA1AD308C800F37032 /* CustomActivityItemProvider.m */,
 				7E1521811B07058400F38A66 /* PrettyMessageHelper.h */,
 				7E1521821B07058400F38A66 /* PrettyMessageHelper.m */,
+				7E1521841B0A684E00F38A66 /* CustomActivityItemProvider2.h */,
+				7E1521851B0A684E00F38A66 /* CustomActivityItemProvider2.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1533,6 +1538,7 @@
 				CD5038F21A61743600A1320D /* FavoriteApartmentTableViewCell.m in Sources */,
 				7EA7A3031A9324B9004B2F8D /* LikesTableViewCell.m in Sources */,
 				CD5038E71A6158D700A1320D /* LikedApartment.m in Sources */,
+				7E1521861B0A684E00F38A66 /* CustomActivityItemProvider2.m in Sources */,
 				7E15217F1B0072A600F38A66 /* AuthenticationDoneViewController.m in Sources */,
 				CD39D6401A4A09220006F7B7 /* RentedPanelController.m in Sources */,
 				CD42A8BE1A70355D000E7BD7 /* SnapshotUtils.m in Sources */,
